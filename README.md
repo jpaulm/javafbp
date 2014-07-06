@@ -1,4 +1,4 @@
-javafbp
+JavaFBP
 =======
 
 Java Implementation of Flow-Based Programming (FBP)
