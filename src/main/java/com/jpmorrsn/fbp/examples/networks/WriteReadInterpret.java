@@ -2,12 +2,12 @@
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  * Contributed by Bob Corrick - Feb., 2012 - for the AppKatas exercise on the FBP Google Group
  */
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.Interpret;
-import com.jpmorrsn.fbp.test.components.WriteReadConsole;
+import com.jpmorrsn.fbp.examples.components.Interpret;
+import com.jpmorrsn.fbp.examples.components.WriteReadConsole;
 
 
 /* Written by Bob Corrick - Feb. 2012, for the AppKatas exercise 

@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import com.jpmorrsn.fbp.engine.InPort;
@@ -6,7 +6,7 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.SubIn;
 import com.jpmorrsn.fbp.engine.SubNet;
 import com.jpmorrsn.fbp.engine.SubOut;
-import com.jpmorrsn.fbp.test.components.Dlpio8ChsManifold;
+import com.jpmorrsn.fbp.examples.components.Dlpio8ChsManifold;
 
 
 //Test for Ernesto's Subnet "weird" problem!

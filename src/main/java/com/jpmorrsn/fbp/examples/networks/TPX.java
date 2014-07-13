@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import java.io.File;
@@ -7,7 +7,7 @@ import com.jpmorrsn.fbp.components.ReadFile;
 import com.jpmorrsn.fbp.components.RegExReplace;
 import com.jpmorrsn.fbp.components.WriteFile;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.BuildBlob;
+import com.jpmorrsn.fbp.examples.components.BuildBlob;
 
 
 /* This test tests RegExReplace

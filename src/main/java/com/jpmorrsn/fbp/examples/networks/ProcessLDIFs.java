@@ -1,13 +1,13 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  */
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 import com.jpmorrsn.fbp.components.ReadFile;
 import com.jpmorrsn.fbp.components.Sort;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.LDIFScan;
+import com.jpmorrsn.fbp.examples.components.LDIFScan;
 
 public class ProcessLDIFs extends Network {
 

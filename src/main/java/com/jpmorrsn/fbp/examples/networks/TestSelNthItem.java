@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import java.io.File;

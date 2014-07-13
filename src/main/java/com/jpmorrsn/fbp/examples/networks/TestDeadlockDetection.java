@@ -1,10 +1,10 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import com.jpmorrsn.fbp.components.DispIPCounts;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenerateSlowly;
+import com.jpmorrsn.fbp.examples.components.GenerateSlowly;
 
 
 /* This test should not report a deadlock - before Sven's changes to the

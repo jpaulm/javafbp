@@ -1,16 +1,16 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  */
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import java.io.File;
 
 import com.jpmorrsn.fbp.components.Inject;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.FileReadLines;
-import com.jpmorrsn.fbp.test.components.Interpret;
-import com.jpmorrsn.fbp.test.components.WriteReadConsole;
+import com.jpmorrsn.fbp.examples.components.FileReadLines;
+import com.jpmorrsn.fbp.examples.components.Interpret;
+import com.jpmorrsn.fbp.examples.components.WriteReadConsole;
 
 
 public class FileViewer extends Network {

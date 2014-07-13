@@ -1,9 +1,9 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.components.Copy;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.CopySSt;
+import com.jpmorrsn.fbp.examples.components.CopySSt;
 
 
 public class TestSelfStarting extends Network {

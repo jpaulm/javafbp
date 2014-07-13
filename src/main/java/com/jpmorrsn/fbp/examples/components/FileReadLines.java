@@ -1,7 +1,7 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  */
-package com.jpmorrsn.fbp.test.components;
+package com.jpmorrsn.fbp.examples.components;
 
 
 import java.io.RandomAccessFile;

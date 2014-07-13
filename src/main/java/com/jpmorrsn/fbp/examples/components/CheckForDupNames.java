@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.components;
+package com.jpmorrsn.fbp.examples.components;
 
 
 import java.util.HashMap;

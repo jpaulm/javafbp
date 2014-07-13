@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
@@ -10,7 +10,7 @@ public class TestInfiniteQueue extends Network {
 
   @Override
   protected void define() {
-    component("__ Generate", com.jpmorrsn.fbp.test.components.GenerateTestData.class);
+    component("__ Generate", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
     component("_ Infinite_  Queue", com.jpmorrsn.fbp.subnets.InfiniteQueue.class);
     component("__  Display", com.jpmorrsn.fbp.components.WriteToConsole.class);
     connect(component("_ Infinite_  Queue"), port("OUT"), component("__  Display"), port("IN"));

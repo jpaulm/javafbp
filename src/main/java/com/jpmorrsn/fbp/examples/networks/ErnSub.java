@@ -1,10 +1,10 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.SubNet;
 import com.jpmorrsn.fbp.engine.SubOut;
-import com.jpmorrsn.fbp.test.components.Ern2;
+import com.jpmorrsn.fbp.examples.components.Ern2;
 
 
 //Test for Ernesto's Subnet array ports

@@ -1,11 +1,11 @@
 /* Sven Steinseifer - 2010 */
 
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.components.Discard;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenSS;
+import com.jpmorrsn.fbp.examples.components.GenSS;
 
 
 public class TestLocks {

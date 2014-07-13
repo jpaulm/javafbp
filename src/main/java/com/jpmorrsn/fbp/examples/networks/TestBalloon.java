@@ -1,8 +1,8 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenerateTestData;
+import com.jpmorrsn.fbp.examples.components.GenerateTestData;
 
 
 public class TestBalloon extends Network {
@@ -20,7 +20,7 @@ public class TestBalloon extends Network {
         component("Balloon", com.jpmorrsn.fbp.engine.Balloon.class), port("IN"));
 
     connect(component("Balloon"), port("OUT"),
-        component("Check", com.jpmorrsn.fbp.test.components.CheckBallooning.class), port("IN"), 1);
+        component("Check", com.jpmorrsn.fbp.examples.components.CheckBallooning.class), port("IN"), 1);
 
     initialize("200", component("Gene\\ra\"te"), port("COUNT"));
 

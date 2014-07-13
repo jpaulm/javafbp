@@ -1,10 +1,10 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import com.jpmorrsn.fbp.components.Discard;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenSS;
+import com.jpmorrsn.fbp.examples.components.GenSS;
 
 
 /* This test tests a subnet with stream-sensitive ports, and all the IPs going through the

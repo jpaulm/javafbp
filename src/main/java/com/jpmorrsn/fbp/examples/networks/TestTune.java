@@ -1,10 +1,10 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import java.io.File;
 
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.Text2IntArray;
+import com.jpmorrsn.fbp.examples.components.Text2IntArray;
 
 
 public class TestTune extends Network {

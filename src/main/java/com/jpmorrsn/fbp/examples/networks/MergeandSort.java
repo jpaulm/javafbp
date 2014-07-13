@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
@@ -13,8 +13,8 @@ public class MergeandSort extends Network {
     //component("_Discard", com.jpmorrsn.fbp.components.Discard.class);
     component("_Write_text_to_pane", com.jpmorrsn.fbp.components.ShowText.class);
     component("_Sort", com.jpmorrsn.fbp.components.Sort.class);
-    component("_Generate_1st_group", com.jpmorrsn.fbp.test.components.GenerateTestData.class);
-    component("_Generate_2nd_group", com.jpmorrsn.fbp.test.components.GenerateTestData.class);
+    component("_Generate_1st_group", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
+    component("_Generate_2nd_group", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
     initialize("100 ", component("_Generate_1st_group"), port("COUNT"));
     connect(component("_Generate_2nd_group"), port("OUT"), component("_Sort"), port("IN"));
     connect(component("_Generate_1st_group"), port("OUT"), component("_Sort"), port("IN"));

@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import java.io.File;
@@ -7,7 +7,7 @@ import com.jpmorrsn.fbp.components.ReadFile;
 import com.jpmorrsn.fbp.components.WriteFile;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenerateTestData;
+import com.jpmorrsn.fbp.examples.components.GenerateTestData;
 
 
 public class InfQueueAsMain extends Network {

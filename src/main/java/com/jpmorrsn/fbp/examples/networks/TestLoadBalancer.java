@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; // Change as required 
 
 
 import com.jpmorrsn.fbp.components.LoadBalance;
@@ -6,7 +6,7 @@ import com.jpmorrsn.fbp.components.Passthru;
 import com.jpmorrsn.fbp.components.Sort;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.GenerateTestData;
+import com.jpmorrsn.fbp.examples.components.GenerateTestData;
 
 
 public class TestLoadBalancer {

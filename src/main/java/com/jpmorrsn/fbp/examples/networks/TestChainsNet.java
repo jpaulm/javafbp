@@ -1,12 +1,12 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  */
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.components.Discard;
 import com.jpmorrsn.fbp.engine.Network;
-import com.jpmorrsn.fbp.test.components.ChainOps;
+import com.jpmorrsn.fbp.examples.components.ChainOps;
 
 
 public class TestChainsNet extends Network {

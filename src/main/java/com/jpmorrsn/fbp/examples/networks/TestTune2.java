@@ -1,4 +1,4 @@
-package com.jpmorrsn.fbp.test.networks;
+package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
@@ -13,10 +13,10 @@ public class TestTune2 extends Network {
   protected void define() {
     //component("_Read_Tune_File", com.jpmorrsn.fbp.components.ReadFile.class);
     //component("_Text_to_Int_Array", com.jpmorrsn.fbp.components.Text2IntArray.class);
-    component("JB", com.jpmorrsn.fbp.test.components.JingleBells.class);
-    component("JB2", com.jpmorrsn.fbp.test.components.JingleBells2.class);
-    component("JB3", com.jpmorrsn.fbp.test.components.JingleBells3.class);
-    component("JB4", com.jpmorrsn.fbp.test.components.JingleBells4.class);
+    component("JB", com.jpmorrsn.fbp.examples.components.JingleBells.class);
+    component("JB2", com.jpmorrsn.fbp.examples.components.JingleBells2.class);
+    component("JB3", com.jpmorrsn.fbp.examples.components.JingleBells3.class);
+    component("JB4", com.jpmorrsn.fbp.examples.components.JingleBells4.class);
     component("GS", com.jpmorrsn.fbp.components.GenSamples.class);
     component("GS2", com.jpmorrsn.fbp.components.GenSamples.class);
     component("GS3", com.jpmorrsn.fbp.components.GenSamples.class);
