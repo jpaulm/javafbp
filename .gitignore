@@ -13,3 +13,7 @@ hs_err_pid*
 
 # Maven packages/etc
 target
+
+# Eclipse project
+.classpath
+.project
