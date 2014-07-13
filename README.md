@@ -15,7 +15,7 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 Building
 ---
 
-The project requires Maven for building (testing with version 3.2.2). For building the project simply run the followng command:
+The project requires Maven for building (tested with version 3.2.2). For building the project simply run the followng command:
 
     mvn package
 
