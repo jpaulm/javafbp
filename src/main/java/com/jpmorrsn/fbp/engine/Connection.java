@@ -392,7 +392,7 @@ public class Connection implements InputPort {
       op.sender.status = Component.StatusValues.ACTIVE;
       // Component.network.GenTraceLine("Send OK: " + op.sender.getName());
       sender.network.active = true;
-      sender = null;
+      //sender = null;
 
     } catch (InterruptedException ex) {
       return false;
@@ -404,6 +404,7 @@ public class Connection implements InputPort {
       getReceiver().mother.traceLocks("send - unlock " + getReceiver().getName());
     }
     sender.network.sends.getAndIncrement();
+    sender = null;
     return true;
   }
 
@@ -475,5 +476,6 @@ public class Connection implements InputPort {
   public void setDropOldest() {
     dropOldest = true;
   }
+
 
 }
