@@ -17,3 +17,5 @@ target
 # Eclipse project
 .classpath
 .project
+.settings/
+
