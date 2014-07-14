@@ -11,11 +11,24 @@ In computer programming, flow-based programming (FBP) is a programming paradigm 
 
 FBP is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.
 
+Prerequisites
+---
+
+
+The project requires Maven for building (tested with version 3.2.2). You can download the corresponding package from the following URL: 
+https://maven.apache.org/download.cgi 
+
+Windows and Linux users should follow the installation instructions on the Maven website (URL provided above).
+
+OSX users (using Brew, http://brew.sh) can install Maven by executing the following command:
+
+    brew install maven
+
 
 Building
 ---
 
-The project requires Maven for building (tested with version 3.2.2). For building the project simply run the followng command:
+For building the project simply run the followng command:
 
     mvn package
 
