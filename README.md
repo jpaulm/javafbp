@@ -28,7 +28,7 @@ OSX users (using Brew, http://brew.sh) can install Maven by executing the follow
 Building
 ---
 
-For building the project simply run the followng command:
+For building the project simply run the following command:
 
     mvn package
 
