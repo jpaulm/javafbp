@@ -47,5 +47,5 @@ For example:
 Tracing
 ---
 
-To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in JavaFBPProperties to `true`.    
+To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` to `true`.    
 
