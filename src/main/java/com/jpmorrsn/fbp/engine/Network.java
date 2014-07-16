@@ -54,9 +54,9 @@ public abstract class Network extends Component {
 
   /* Following 4 booleans set by properties file */
 
-  private boolean tracing = true;
+  private boolean tracing = false;
 
-  private boolean traceLocks = true;
+  private boolean traceLocks = false;
 
   private boolean forceConsole = false; // for debugging only
 
