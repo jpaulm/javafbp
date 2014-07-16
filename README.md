@@ -34,6 +34,7 @@ For building the project simply run the following command:
 
 As a result a `fbp-1.0-SNAPSHOT.jar` file will be created in the `./target` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
 
+
 For running any of the examples use the following command:
 
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
@@ -41,4 +42,10 @@ For running any of the examples use the following command:
 For example:
 
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    
+
+Tracing
+---
+
+To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in JavaFBPProperties to `true`.    
 
