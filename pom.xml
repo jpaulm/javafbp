@@ -1,12 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jpmorrsn</groupId>
   <artifactId>fbp</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>fbp</name>
+  
+  <name>JavaFBP</name>
+  <description>Java Implementation of Flow-Based Programming (FBP), which is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.</description>
   <url>http://maven.apache.org</url>
+  
+  <licenses>
+    <license>
+      <name>The Artistic License 2.0</name>
+      <url>http://opensource.org/licenses/Artistic-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -15,4 +27,8 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <scm>
+    <url>https://github.com/jpaulm/javafbp</url>
+  </scm>
 </project>
