@@ -44,8 +44,15 @@ For example:
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
     
 
-Tracing
+Tracing and other options
 ---
 
-To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` to `true`.    
+To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` to `true`:
 
+* `tracing` 
+* `tracelocks`
+
+Two other options are also supported in the properties file:
+
+* `deadlocktest` (defaults to true, so you might set it to `false` if debugging) 
+* `forceconsole` (used if immediate console output is required during debugging)
