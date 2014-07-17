@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Example - Chat2 </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="/websocket/favicon.ico">
+        <style>
+            #container {
+                border: 1px #999999 solid;
+                padding: 10px;
+            }
+            p.client {
+                border-bottom: 1px aquamarine solid;
+            }
+            p.server {
+                border-bottom: 1px crimson solid;
+            }
+            input {
+                padding: 5px;
+                width: 250px;
+            }
+            button {
+                padding: 5px;
+            }
+        </style>
+        <script>
+            //var chatClient = new WebSocket("ws://localhost:8080/websocket/chat");
+            var chatClient = new WebSocket("ws://localhost:9003");
+
+            
+            chatClient.onmessage = function(evt) {
+                var p = document.createElement("li");
+                p.setAttribute("class", "server");
+                p.innerHTML = "Server: " + evt.data;
+                var container = document.getElementById("container");
+                container.appendChild(p);
+            }
+
+            function send() {
+            for (i = 0; i < 1; i++) {
+                var input = document.getElementById("message");
+                var p = document.createElement("p");
+                p.setAttribute("class", "client");
+                p.innerHTML = "Client1: " + input.value;
+                var container = document.getElementById("container");
+                container.appendChild(p);
+                chatClient.send("Client2: " + input.value);
+                //input.value = "";
+                //console.log('Send');
+                }
+            }
+            
+         // Listen for socket closes
+        	chatClient.onclose = function(event) {
+        		console.log('Client notified socket has closed',event);
+        	}
+         
+        	window.onbeforeunload = function() {
+        	    chatClient.onclose = function () {}; // disable onclose handler first
+        	    chatClient.close();
+        	}
+        	
+            function closeme() {   
+                 chatClient.close(1000);
+                }                        
+            
+            function stopws() { 
+           	 
+                chatClient.send("@kill");
+                
+            	
+                }
+        </script>
+    </head>
+    <body>
+        <h1>JEE7 WebSocket Example - Chat2</h1>
+        <input type="text" id="message" name="message" />
+        <button type="button" id="send" onclick="send()">Send</button>
+        <!--<button type="button" id="close" onclick="closeme()">Close</button> -->       
+        <button type="button" id="stopws" onclick="stopws()">Stop WS</button>
+        <ul id="container">
+            
+        </ul>
+        
+    </body>
+</html>
