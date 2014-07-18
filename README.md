@@ -25,6 +25,14 @@ OSX users (using Brew, http://brew.sh) can install Maven by executing the follow
     brew install maven
 
 
+IDE Integration
+---
+
+You can generate Eclipse project using the following mvn command:
+
+    mvn eclipse:eclipse
+
+
 Building
 ---
 
