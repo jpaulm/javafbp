@@ -24,8 +24,10 @@
             }
         </style>
         <script>
+        if ("WebSocket" in window)
+  {
             //var chatClient = new WebSocket("ws://localhost:8080/websocket/chat");
-            var chatClient = new WebSocket("ws://localhost:9003");
+            var chatClient = new WebSocket("ws://localhost:9003/websocket/chat");
 
             
             chatClient.onmessage = function(evt) {
@@ -35,9 +37,13 @@
                 var container = document.getElementById("container");
                 container.appendChild(p);
             }
-
+}
+            else {
+            alert("WebSocket NOT supported by your Browser!");
+            }
+            
             function send() {
-            for (i = 0; i < 1; i++) {
+            //for (i = 0; i < 1; i++) {
                 var input = document.getElementById("message");
                 var p = document.createElement("p");
                 p.setAttribute("class", "client");
@@ -47,7 +53,7 @@
                 chatClient.send("Client2: " + input.value);
                 //input.value = "";
                 //console.log('Send');
-                }
+             //   }
             }
             
          // Listen for socket closes
