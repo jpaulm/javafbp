@@ -1,7 +1,7 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2014 All Rights Reserved. 
  */
-package networks;
+package com.jpmorrsn.fbp.websockets.networks;
 
 /* 
  * Useful info:  http://stackoverflow.com/questions/18900187/processing-how-to-send-data-through-websockets-to-javascript-application
@@ -12,9 +12,8 @@ package networks;
 
 import com.jpmorrsn.fbp.engine.Network;
 
-import components.WebSocketReceive;
-import components.WebSocketRespond;
-import components.WebSocketSimProc;
+import com.jpmorrsn.fbp.websockets.components.*;
+
 
 
 /**

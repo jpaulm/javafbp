@@ -1,7 +1,7 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
  */
-package components;
+package com.jpmorrsn.fbp.websockets.components;
 
 import java.util.Random;
 

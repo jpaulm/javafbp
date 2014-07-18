@@ -1,7 +1,7 @@
 /*
  * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2014 All Rights Reserved. 
  */
-package components;
+package com.jpmorrsn.fbp.websockets.components;
 
 /**
  * General component to receive sequence of data chunks from a web socket and convert them
