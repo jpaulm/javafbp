@@ -1,0 +1,81 @@
+<style type="text/css">
+	* { margin: 0; padding: 0; }
+	@font-face { font-family: 'Gentium Book Basic'; font-style: normal; font-weight: 400; src: local('Gentium Book Basic'), local('GentiumBookBasic'), url(http://themes.googleusercontent.com/static/fonts/gentiumbookbasic/v3/IRFxB2matTxrjZt6a3FUnsiUQA3_wO-qQTJfqhvSKS0.woff) format('woff'); }
+	body { color: #444; background: #fff; font-family: 'Gentium Book Basic', Georgia, serif; font-size: 100%; line-height: 1.25; font-weight: 400; text-align: justify; }
+	h1, h2, .h1, .h2 { font-weight: 400; line-height: 1.25; margin-top: .5em; color: #099;}
+	h1, .h1 { font-size: 24px; }
+	h1, .h1 {text-align: center;}
+	h2, .h2 { font-size: 16px; }
+	h3, .h3 { font-size: 12px; }
+	h1+h2 { margin-top: 0; }
+	p, .p, ul, ol { font-size: 10px; }
+	td { font-size: 10px; }
+	pre { font-size: 10px; }
+	code { font-size: 10px; }
+	small, .small { font-size: 6px; }
+	strong, .strong { font-weight: 700; }
+	p, ul, ol { margin-top: 1em; }
+	@media screen and (min-width: 480px) {
+		h1, .h1 { font-size: 40px; }
+		h2, .h2 { font-size: 24px; }
+		h3, .h3 { font-size: 16px; }
+		p, .p, ul, ol { font-size: 20px; }
+		td { font-size: 15px; }
+		pre { font-size: 15px; }
+		code { font-size: 15px; }
+		small, .small { font-size: 16px;}
+	}            
+	@media screen and (min-width: 640px) {
+		h1, .h1 { font-size: 56px; }
+		h2, .h2 { font-size: 40px; } 
+		h3, .h3 { font-size: 24px; }
+		td { font-size: 15px; }
+		pre { font-size: 15px; }
+		code { font-size: 15px; }
+	}
+	.wrap { width: 90%; padding: 0 5%; max-width: 48em; margin: 0 auto; overflow: hidden; }
+	article { margin-top: 2em; }
+	a { color: #099; text-decoration: none; }
+	a:hover { text-decoration: underline; }
+	header { width: 90%; padding: 2em 5% 0; max-width: 48em; margin: 0 auto; overflow: hidden; }
+	header:after { clear: both; content: '.'; display: block; height: 0; visibility: hidden; }
+	.logo { float: left; margin-right: 1em; }
+	header h1, header p { margin: 0; }
+	header a, a.post-title { color: #444; }
+	a.post-title:hover { text-decoration: none; color: #099; }
+	header a:hover { text-decoration: none; }
+	.post img, .photoset, .photoset img, .photoset_row { max-width: 100%; }
+	.post iframe, .video object { width: 100%; max-width: 100%; }
+	.post blockquote { padding-left: 1em; border-left: 1px solid #ddd; }
+	.post ul, .post ol { margin-left: 2em; }
+	.post footer ul, .post footer ol { margin: 0; }
+	.quote blockquote { padding: 0; border: none; font-style: italic; }
+	.quote .source { text-align: right; }
+	.post footer { padding: 0; margin-top: 1em; color: #aaa; font-style: italic; }
+	.post footer a { color: #aaa; }
+	.post footer a:hover { color: #999; }
+	.post footer .source { float: right; margin-right: 0; }
+	.post footer ul li { display: inline-block; margin-right: 1em; }
+	.tags { margin-top: 1em; }
+	.pagination { margin-top: 4em; text-align: center; line-height: 3em; }
+	.pagination:after { clear: both; content: '.'; display: block; height: 0; visibility: hidden; }
+	.pagination a { display: block; height: 3em; padding: 0 1em; border-radius: 0.25em; }
+	.pagination a:hover { background: #eee; text-decoration: none; }
+	.pagination .previous { float: left; }
+	.pagination .next { float: right; }
+	footer.wrap { padding-top: 2em; padding-bottom: 2em; }
+	ul.pages { list-style: none; }
+	ul.pages li { display: inline-block; margin-right: 1em; }
+	ul.pages li a { display: block; height: 3em; line-height: 3em; }
+
+	/* Permalink Notes */
+	aside.notes { margin-top: 4em; }
+	ol.notes { list-style: none; margin-top: 1em; border: 1px solid #ddd; border-radius: 0.25em; }
+	ol.notes, ol.notes a { color: #aaa; }
+	li.note { display: block; line-height: 2em; padding: 0.5em 1em; border-bottom: 1px solid #ddd; }
+	li.note:last-child { border: none; }
+	ol.notes li.note img.avatar { display: block; float: left; width: 2em; height: 2em; margin-right: 1em; border-radius: 0.25em; }
+	.notes .action a { color: #444; }
+	.action { display: block; margin-left: 3em; }
+	.notes blockquote { line-height: 1.25; margin-left: 3em; }
+</style>
