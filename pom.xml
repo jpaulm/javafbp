@@ -40,7 +40,7 @@
     	<version>1.3.0</version>
     </dependency> -->
     <dependency>
-  <groupId>extrajars</groupId>
+  <groupId>extra</groupId>
   <artifactId>java_websocket</artifactId>
   <version>1.3.1</version>
 </dependency>
