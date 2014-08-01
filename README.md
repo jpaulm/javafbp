@@ -52,6 +52,19 @@ For example:
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
     
 
+Picking up Java-WebSocket-1.3.1.jar
+-----
+
+Currently this jar file is in a local repository called `repo`. It seems that this has to be deployed to the user's repository.  The command I used is 
+
+    mvn deploy:deploy-file 
+    -Durl=file://C:\Users\Paul\.m2\repository\repo/ 
+    -Dfile=repo\org\Java-WebSocket\1.3.1\Java-WebSocket-1.3.1.jar 
+    -DgroupId=org 
+    -DartifactId=Java-WebSocket -Dpackaging=jar -Dversion=1.3.1
+    
+Hopefully a cleaner technique will be found soon.    
+
 Tracing and other options
 ---
 
