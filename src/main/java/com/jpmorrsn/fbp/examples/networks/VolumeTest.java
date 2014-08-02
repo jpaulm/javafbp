@@ -42,8 +42,7 @@ public class VolumeTest extends Network {
      * Kept all processors at close to 100%!
      * Apr. 29, 2012
      * 
-     * Dec., 2013 - run time went up to almost 800 secs, consistently - it went up by a factor of 3.4! 
-     * Weird!  something else grabbing CPU?
+     * July 2014 - JavaFBP-2.8 - run time now 155 seconds. Don't know reason for the variation...
      *  
      */
   }
