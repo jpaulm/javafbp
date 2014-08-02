@@ -55,25 +55,23 @@ For example:
 Picking up Java-WebSocket-1.3.1.jar
 -----
 
-Currently this jar file is in a local repository called `repo`. It seems that this has to be deployed to the user's repository.  The command I used is 
+Currently this jar file is in a local repository called `repo`. This has to be deployed to the user's repository.  The command I used (on Windows), with the current directory set to the project directory (in GitHub) is:
 
-    mvn deploy:deploy-file 
-    -Durl=file://C:\Users\Paul\.m2\repository\repo/ 
-    -Dfile=repo\org\Java-WebSocket\1.3.1\Java-WebSocket-1.3.1.jar 
-    -DgroupId=org 
-    -DartifactId=Java-WebSocket -Dpackaging=jar -Dversion=1.3.1
+    mvn deploy:deploy-file -Durl=file://C:\Users\%USERNAME%\.m2\repository\repo\ -Dfile=repo\org\Java-WebSocket\1.3.1\Java-WebSocket-1.3.1.jar  -DgroupId=org -DartifactId=Java-WebSocket -Dpackaging=jar -Dversion=1.3.1
     
 Hopefully a cleaner technique will be found soon.    
 
 Tracing and other options
 ---
 
-To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` to `true`:
+To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` in the user directory to `true`:
 
 * `tracing` 
 * `tracelocks`
 
+These traces will appear in the project directory under the name xxxx-fulltrace.txt, where xxxx is the name of the network being run.  Subnets have their own trace output files. 
+
 Two other options are also supported in the properties file:
 
 * `deadlocktest` (defaults to true, so you might set it to `false` if debugging) 
-* `forceconsole` (used if immediate console output is required during debugging)
+* `forceconsole` (used if immediate console output is required during debugging - normally, console output is sent to a file)
