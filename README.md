@@ -59,7 +59,31 @@ Currently this jar file is in a local repository called `repo`. This has to be d
 
     mvn deploy:deploy-file -Durl=file://C:\Users\%USERNAME%\.m2\repository\repo\ -Dfile=repo\org\Java-WebSocket\1.3.1\Java-WebSocket-1.3.1.jar  -DgroupId=org -DartifactId=Java-WebSocket -Dpackaging=jar -Dversion=1.3.1
     
+For some reason this doesn't seem to work using Windows PowerShell, but it does with `cmd.exe`.
+
 Hopefully a cleaner technique will be found soon.    
+
+Running a test
+----
+
+Here is a simple test that can be run to test that everything is working.
+
+In the project directory, enter
+
+    java -cp target\fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
+    
+This network contains 4 processes: 
+
+* 2 occurrences of GenerateTestData, whose output ports are merged into the input port of 
+* a Sort process - a very simple-minded Sort, which can only handle up to 9,999 information packets - which feeds
+* a text display component, which invokes Java Swing to display the sorted data in a scroll pane. 
+
+At the end of the run, you should see:
+
+    Run complete.  Time: x.xxx seconds
+    Counts: C: 150, D: 153, S: 300, R (non-null): 304, DO: 0
+    
+where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".    
 
 Tracing and other options
 ---
