@@ -74,7 +74,7 @@ In the project directory, enter
     
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
-![MergeandSort](https://github.com/jpaulm/javafbp/MergeandSort.png "Diagram of MergeandSort Network")
+![MergeandSort](https://github.com/jpaulm/javafbp/blob/master/MergeandSort.png "Diagram of MergeandSort Network")
     
 This network contains 4 processes: 
 
