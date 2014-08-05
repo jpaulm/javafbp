@@ -141,7 +141,8 @@ public class Connection implements InputPort {
   synchronized void indicateOneSenderClosed() {
     try {
       getReceiver().mother.traceLocks("indicate1senderclosed - lock " + getReceiver().getName());
-      getReceiver().goLock.lockInterruptibly();
+      //getReceiver().goLock.lockInterruptibly();
+      getReceiver().goLock.lock();
 
       // synchronized (this) {
       if (!isClosed()) {
@@ -159,8 +160,8 @@ public class Connection implements InputPort {
       }
       //   }
 
-    } catch (InterruptedException e) {
-      return;
+    //} catch (InterruptedException e) {
+    //  return;
     } finally {
       getReceiver().goLock.unlock();
       getReceiver().mother.traceLocks("indicate1senderclosed - unlock " + getReceiver().getName());

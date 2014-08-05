@@ -11,10 +11,10 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 
 /** Component to generate a stream of 'n' packets, where 'n' is
- * specified in an InitializationConnection.
+ * specified in an InitializationConnection, to each element of its output array port.
  */
 @ComponentDescription("Generates stream of packets under control of a counter")
-@OutPort(value = "出", optional = true, description = "Generated stream", type = String.class, arrayPort = true, fixedSize = true)
+@OutPort(value = "OUT", optional = true, description = "Generated stream", type = String.class, arrayPort = true, fixedSize = true)
 @InPort(value = "COUNT", description = "Count of packets to be generated", type = String.class)
 public class GenerateOptionalArray extends Component {
 
@@ -30,7 +30,7 @@ public class GenerateOptionalArray extends Component {
 
   @Override
   protected void openPorts() {
-    outPortArray = openOutputArray("出", 4);
+    outPortArray = openOutputArray("OUT", 4);
     count = openInput("COUNT");
   }
 
@@ -60,11 +60,11 @@ public class GenerateOptionalArray extends Component {
         String s = String.format("%1$06d", i) + "abcd";
 
         Packet p = create(s);
-        //  if (outPortArray[k].isConnected()) {
+        if (outPortArray[k].isConnected()) {
         outPortArray[k].send(p);
-        //  } else {
-        //    drop(p);
-        //  }
+          } else {
+            drop(p);
+          }
       }
     }
 

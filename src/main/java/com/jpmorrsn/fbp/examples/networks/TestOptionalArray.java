@@ -16,8 +16,8 @@ public class TestOptionalArray extends Network {
     component("Generate", GenerateOptionalArray.class);
     component("行動", Discard.class);
     component("Discard2", Discard.class);
-    connect("Generate.出", "行動.IN");
-    connect(component("Generate"), port("出[2]"), "Discard2.IN");
+    connect("Generate.OUT", "行動.IN");
+    connect(component("Generate"), port("OUT[2]"), "Discard2.IN");
 
     initialize("100", component("Generate"), port("COUNT"));
   }

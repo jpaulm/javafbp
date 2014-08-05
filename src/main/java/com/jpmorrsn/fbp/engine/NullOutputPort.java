@@ -19,7 +19,8 @@ public class NullOutputPort extends OutputPort
   // The send function.
   @Override
   public void send(final Packet packet) {
-    sender.drop(packet);
+    /*sender.drop(packet);*/
+	 // do nothing - experimental 
   }
 
   @Override

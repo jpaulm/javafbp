@@ -34,21 +34,44 @@ public class Port {
       return;
     }
 
+    String[] sa = {"", ""};
+    if (n.contains("[")){
+    	sa = n.split("\\[");     	
+    }
+    else {
+    	sa[0] = n;
+    	sa[1] = "";
+    }
+    
+    
     //Pattern p = Pattern.compile("^(\\w+)(\\[(\\d+)\\])?$");    
     //Pattern p = Pattern.compile("^([_ \\p{N}\\p{L}]+)(\\[(\\d+)\\])?$");
-    Pattern p = Pattern.compile("^([a-zA-Z][\\d\\-\\_\\.\\[\\]a-zA-Z]*)(\\[(\\d+)\\])?$"); // Allow hyphen (for Humberto), period (for Tom), underscore
+    Pattern p = Pattern.compile("^([a-zA-Z][\\d|\\-|\\_|.|[a-zA-Z]]*)$"); // Allow hyphen (for Humberto), period (for Tom), underscore
     //    and square brackets    (as per latest DrawFBP)
-    Matcher m = p.matcher(n);
+    
+    Matcher m = p.matcher(sa[0]);
+    
     if (!m.matches()) {
       FlowError.complain("Invalid port name: " + n);
     }
-
-    if (m.group(2) != null) {
+    String s1 = m.group(1);
+    
+    
+    if (!(sa[1].equals(""))) {
       if (i > -1) {
         FlowError.complain("Cannot specify element number twice: " + n + ", index:" + i);
       }
-      name = m.group(1);
-      index = Integer.parseInt(m.group(3));
+      if (!(sa[1].endsWith("]")))
+    		  FlowError.complain("Invalid port name: " + n);
+      Pattern q = Pattern.compile("\\d+");
+      sa[1] = sa[1].substring(0,sa[1].length() - 1);
+      Matcher u = q.matcher(sa[1]);
+      
+      if (!u.matches())
+    	  FlowError.complain("Invalid port name: " + n);
+      
+      name = sa[0];
+      index = Integer.parseInt(sa[1]);
     }
     if (index == -1) {
       displayName = name;
