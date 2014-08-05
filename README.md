@@ -11,6 +11,10 @@ In computer programming, flow-based programming (FBP) is a programming paradigm 
 
 FBP is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.
 
+Web sites for FBP: 
+* http://www.jpaulmorrison.com/fbp/
+* https://github.com/flowbased/flowbased.org/wiki
+
 Prerequisites
 ---
 
