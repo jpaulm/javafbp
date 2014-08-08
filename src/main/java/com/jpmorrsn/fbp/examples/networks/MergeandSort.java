@@ -10,7 +10,8 @@ public class MergeandSort extends Network {
 
   @Override
   protected void define() {
-    //component("_Discard", com.jpmorrsn.fbp.components.Discard.class);
+    
+	//component("_Discard", com.jpmorrsn.fbp.components.Discard.class);
     component("_Write_text_to_pane", com.jpmorrsn.fbp.components.ShowText.class);
     component("_Sort", com.jpmorrsn.fbp.components.Sort.class);
     component("_Generate_1st_group", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);

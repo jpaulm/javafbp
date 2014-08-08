@@ -40,9 +40,12 @@ public abstract class SubNet extends Network {
 
       try {
         callDefine();
+        boolean res = true;
         for (Component comp : getComponents().values()) {
-          comp.checkOutputPorts();
+          res &= comp.checkPorts();
         }
+        if (!res)
+      	  FlowError.complain("One or more mandatory connections have been left unconnected: " + getName());
         initiate();
         // activateAll();
         // don't do deadlock testing in subnets - you need to consider the whole net!

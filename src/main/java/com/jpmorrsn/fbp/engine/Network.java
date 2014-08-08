@@ -545,9 +545,12 @@ public abstract class Network extends Component {
      */
     try {
       callDefine();
+      boolean res = true;
       for (Component comp : getComponents().values()) {
-        comp.checkOutputPorts();
+        res &= comp.checkPorts();
       }
+      if (!res)
+    	  FlowError.complain("One or more mandatory connections have been left unconnected: " + getName());
       active = true;
       initiate();
 

@@ -866,18 +866,28 @@ public abstract class Component extends Thread {
 
   protected abstract void openPorts();
 
-  protected void checkOutputPorts() {
+  protected boolean checkPorts() {
+	boolean res = true;
+	for (Map.Entry<String, InputPort> kvp : inputPorts.entrySet()) {
+	      if (kvp.getValue() instanceof NullConnection) {
+	        System.out.println("Input port specified in metadata, but not connected: " +  getName() + "."  + 
+	        kvp.getValue().getName() + "\n");
+	        res = false;
+	      }
+	    }
     for (Map.Entry<String, OutputPort> kvp : outputPorts.entrySet()) {
       if (kvp.getValue() instanceof NullOutputPort) {
-        NullOutputPort no = (NullOutputPort) kvp.getValue();
-        if (no.optional) {
+        NullOutputPort nop = (NullOutputPort) kvp.getValue();
+        if (nop.optional) {
           continue;
         }
 
-        FlowError.complain("Output port specified in metadata, but never used: " + /* getName() + "."  + */
+        System.out.println("Output port specified in metadata, but not connected: " +  getName() + "."  + 
         kvp.getValue().getName());
+        res = false;
       }
     }
+    return res;
   }
 
   /**
