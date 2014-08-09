@@ -868,6 +868,7 @@ public abstract class Component extends Thread {
 
   protected boolean checkPorts() {
 	boolean res = true;
+	/*
 	for (Map.Entry<String, InputPort> kvp : inputPorts.entrySet()) {
 	      if (kvp.getValue() instanceof NullConnection) {
 	        System.out.println("Input port specified in metadata, but not connected: " +  getName() + "."  + 
@@ -875,6 +876,7 @@ public abstract class Component extends Thread {
 	        res = false;
 	      }
 	    }
+	*/
     for (Map.Entry<String, OutputPort> kvp : outputPorts.entrySet()) {
       if (kvp.getValue() instanceof NullOutputPort) {
         NullOutputPort nop = (NullOutputPort) kvp.getValue();
