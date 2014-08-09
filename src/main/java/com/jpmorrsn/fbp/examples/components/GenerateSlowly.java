@@ -2,14 +2,18 @@ package com.jpmorrsn.fbp.examples.components;
 
 
 import com.jpmorrsn.fbp.engine.Component;
+import com.jpmorrsn.fbp.engine.InPort;
+import com.jpmorrsn.fbp.engine.InputPort;
 import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
+import com.jpmorrsn.fbp.engine.Packet;
 
-
+@InPort(value = "CONFIG", optional = true)
 @OutPort("OUT")
 public class GenerateSlowly extends Component {
 
-  private OutputPort outputPort;
+	private InputPort cfgPort;
+	private OutputPort outputPort;
 
   /**
    * @see com.jpmorrsn.fbp.engine.Component#execute()
@@ -19,6 +23,11 @@ public class GenerateSlowly extends Component {
   @Override
   protected void execute() throws Exception {
 
+	long intvl = 1000; 
+	Packet p = cfgPort.receive();  
+	if (p != null) {
+		intvl = Long.parseLong((String)p.getContent());
+	}
     for (int i = 0; i < 100000; i++) {
       String s = Integer.toString(i);
       outputPort.send(create(s));
@@ -34,6 +43,7 @@ public class GenerateSlowly extends Component {
    */
   @Override
   protected void openPorts() {
+	cfgPort = openInput("CONFIG");  
     outputPort = openOutput("OUT");
 
   }

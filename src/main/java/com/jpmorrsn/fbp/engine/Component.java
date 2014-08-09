@@ -214,6 +214,7 @@ public abstract class Component extends Thread {
       ca.fixedSize = ipt.fixedSize();
       ca.name = s;
       ca.type = ipt.type();
+      ca.optional = ipt.optional();
 
     } else {
       NullConnection nc = new NullConnection();
@@ -221,6 +222,7 @@ public abstract class Component extends Thread {
       nc.setReceiver(this);
       nc.type = ipt.type();
       inputPorts.put(s, nc);
+      nc.optional = ipt.optional();
     }
   }
 
@@ -868,15 +870,19 @@ public abstract class Component extends Thread {
 
   protected boolean checkPorts() {
 	boolean res = true;
-	/*
+	
 	for (Map.Entry<String, InputPort> kvp : inputPorts.entrySet()) {
 	      if (kvp.getValue() instanceof NullConnection) {
+	    	  NullConnection nc = (NullConnection) kvp.getValue();
+	          if (nc.optional) {
+	            continue;
+	          }
 	        System.out.println("Input port specified in metadata, but not connected: " +  getName() + "."  + 
 	        kvp.getValue().getName() + "\n");
 	        res = false;
 	      }
 	    }
-	*/
+	
     for (Map.Entry<String, OutputPort> kvp : outputPorts.entrySet()) {
       if (kvp.getValue() instanceof NullOutputPort) {
         NullOutputPort nop = (NullOutputPort) kvp.getValue();

@@ -13,6 +13,8 @@ public class ConnArray implements InputPort {
   String name;
 
   Class type;
+  
+  boolean optional;
 
   /* (non-Javadoc)
    * @see com.jpmorrsn.fbp.engine.InputPort#capacity()

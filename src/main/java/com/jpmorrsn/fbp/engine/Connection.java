@@ -70,6 +70,8 @@ public class Connection implements InputPort {
   private Port port;
 
   Class type;
+  
+  boolean optional;
 
   private boolean dropOldest;
 

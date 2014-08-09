@@ -28,6 +28,8 @@ final class NullConnection implements InputPort {
   protected Component receiver;
 
   Class type;
+  
+  boolean optional;
 
   //private int capacity() {
   //  return 0;

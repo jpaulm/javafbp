@@ -27,7 +27,8 @@ public interface InputPort {
   void close();
 
   boolean isClosed();
-
+  
+  
   /**
    * Receive the next available packet from this InputPort.
    * The thread is suspended if no packets are currently available.

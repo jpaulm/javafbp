@@ -28,5 +28,8 @@ public @interface InPort {
   String description() default "";
 
   Class type() default Object.class; // type of object expected on this input port
+  
+  boolean optional() default false;
+
 
 }
