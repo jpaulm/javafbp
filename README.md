@@ -66,7 +66,7 @@ For example:
 Running JavaFBP Apps using Websockets
 -----
 
-This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118 .  As this has not yet been released to the cntral Maven repository, we have to include and distribute the required jar in a local repository, which of course impacts publication of our own jar into the central Maven repository.
+This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local repository, which of course impacts publication of our own jar into the central Maven repository.
 
 Running a test
 ----
