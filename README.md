@@ -63,16 +63,10 @@ For example:
 
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
-Picking up Java-WebSocket-1.3.1.jar
+Running JavaFBP apps using websockets
 -----
 
-Currently this jar file is in a local repository called `repo`. This has to be deployed to the user's repository.  The command I used (on Windows), with the current directory set to the project directory (in GitHub) is:
-
-    mvn deploy:deploy-file -Durl=file://C:\Users\%USERNAME%\.m2\repository\repo\ -Dfile=repo\org\Java-WebSocket\1.3.1\Java-WebSocket-1.3.1.jar  -DgroupId=org -DartifactId=Java-WebSocket -Dpackaging=jar -Dversion=1.3.1
-    
-For some reason this doesn't seem to work using Windows PowerShell, but it does with `cmd.exe`.
-
-Hopefully a cleaner technique will be found soon.    
+This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118 .  As this has not yet been released to the cntral Maven repository, we have to include and distribute the required jar in a local repository, which of course impacts publication of our own jar into the central Maven repository.
 
 Running a test
 ----
