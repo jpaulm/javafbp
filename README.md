@@ -49,12 +49,19 @@ As a result a `fbp-1.0-SNAPSHOT.jar` file will be created in the `./target` dire
 
 For running any of the examples use the following command:
 
+    mvn exec:java -Dexec.mainClass=<Class name of the network>
+
+For example:
+
+    mvn exec:java -Dexec.mainClass=com.jpmorrsn.fbp.examples.networks.TestIPCounting
+
+Or alternatively you can run `java` command directly and specify the classpath manually:
+
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
 
 For example:
 
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
-    
 
 Picking up Java-WebSocket-1.3.1.jar
 -----
