@@ -63,7 +63,7 @@ For example:
 
     java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
-Running JavaFBP apps using websockets
+Running JavaFBP Apps using Websockets
 -----
 
 This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118 .  As this has not yet been released to the cntral Maven repository, we have to include and distribute the required jar in a local repository, which of course impacts publication of our own jar into the central Maven repository.
