@@ -1,18 +1,5 @@
-*.class
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# don't ignore files in the repo directory
-!mvn-repo
-
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-
-bin
 
 *-fulltrace.txt
 
@@ -24,4 +11,10 @@ target
 .project
 .settings/
 
+# IDEA project
+.idea/
+*.iml
+
+# System's crap
 Thumbs.db
+.DS_Store
