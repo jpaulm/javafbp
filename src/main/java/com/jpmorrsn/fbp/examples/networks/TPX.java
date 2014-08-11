@@ -49,11 +49,11 @@ public class TPX extends Network {
     // non-breaking blanks -> blanks
     initialize("|\\u00a0| ", component("RER0"), port("MASKS"));
 
-    // Chapter 17 ñ page <a href="#refpoml">1</a>   ->  <a href="#refpoml">Chapter 17</a>
-    initialize("|(Chapter\\s+\\d+)\\s+\\ñ\\s+page\\s*\\<a\\s(href=\"#ref\\w+\")\\>1\\<\\/a\\>|\\<a $2\\>$1\\<\\/a\\>",
+    // Chapter 17 ‚Äì page <a href="#refpoml">1</a>   ->  <a href="#refpoml">Chapter 17</a>
+    initialize("|(Chapter\\s+\\d+)\\s+\\‚Äì\\s+page\\s*\\<a\\s(href=\"#ref\\w+\")\\>1\\<\\/a\\>|\\<a $2\\>$1\\<\\/a\\>",
         component("RER1"), port("MASKS"));
 
-    // Chapter 17 (page <a href="#refpoml">1</a>)   ->  <a href="#refpoml">Chapter 17</a>  ... Chapter 26 †(page <a href="#refrel">1</a>)
+    // Chapter 17 (page <a href="#refpoml">1</a>)   ->  <a href="#refpoml">Chapter 17</a>  ... Chapter 26 ¬†(page <a href="#refrel">1</a>)
     initialize("|(Chapter\\s+\\d+)\\s+\\(page\\s*\\<a\\s(href=\"#ref\\w+\")\\>1\\<\\/a\\>\\)|\\<a $2\\>$1\\<\\/a\\>",
         component("RER2"), port("MASKS"));
 
@@ -70,15 +70,15 @@ public class TPX extends Network {
         component("RER32"), port("MASKS"));
 
     //xxxxx - page <a href="#refperform">1<\\/a>   ->  <a href="#refperform">xxxxx<\\/a>
-    initialize("|(\\w+)\\s+\\ñ\\s+page\\s*\\<a\\s(href=\"#ref\\w+\")\\>1\\<\\/a\\>|\\<a $2\\>$1\\<\\/a\\>",
+    initialize("|(\\w+)\\s+\\‚Äì\\s+page\\s*\\<a\\s(href=\"#ref\\w+\")\\>1\\<\\/a\\>|\\<a $2\\>$1\\<\\/a\\>",
         component("RER33"), port("MASKS"));
 
     //<a href="#reftablelookup">1<\\/a>
     //initialize("|<a//s+(href=\"#ref\\w+\")>1<\\/a>|<a $1>click here<\\/a>", component("RER32"), port("MASKS"));
 
-    // initialize("|ì(.+?)î|&ldquo;$1&rdquo;", component("RER4"), port("MASKS"));
-    // initialize("|í|&rsquo;", component("RER5"), port("MASKS"));
-    // initialize("|ñ|&ndash;", component("RER6"), port("MASKS"));
+    // initialize("|‚Äú(.+?)‚Äù|&ldquo;$1&rdquo;", component("RER4"), port("MASKS"));
+    // initialize("|‚Äô|&rsquo;", component("RER5"), port("MASKS"));
+    // initialize("|‚Äì|&ndash;", component("RER6"), port("MASKS"));
   }
 
   public static void main(final String[] argv) throws Exception {
