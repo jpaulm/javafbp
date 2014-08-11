@@ -53,7 +53,7 @@
     <repository>
       <id>local-repo</id>
       <name>Temporary Local Repository</name>
-      <url>file://${project.basedir}/mvn-repo</url>
+      <url>file://${project.basedir}/repo</url>
     </repository>
   </repositories>
   
