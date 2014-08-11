@@ -3,8 +3,12 @@ hs_err_pid*
 
 *-fulltrace.txt
 
+# Gradle
+.gradle
+
 # Maven packages/etc
 target
+build
 
 # Eclipse project
 .classpath
