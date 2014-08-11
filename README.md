@@ -40,8 +40,9 @@ If you already created an Eclipse project you can run:
 
     gradle cleanEclipse Eclipse
 
-It is also recommended to install a Gradle plugin for Eclipse as explain here:
+You need to install a Gradle plugin for Eclipse as explain here:
 https://github.com/spring-projects/eclipse-integration-gradle/
+Then import a generated project in Eclipse, right (ctrl for OSX) click on the project in Eclipse -> Configure -> Convert to Gradle Project. After the conversion you can Right (ctrl for OSX) click on the project -> Gradle -> Task Quick Launcher and type `build`.
 
 
 Building from command line
