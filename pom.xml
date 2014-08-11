@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- POM related values -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jpmorrsn</groupId>
+  <artifactId>fbp</artifactId>
+  <packaging>jar</packaging>
+  
+  <!-- Project related values -->
+  <name>JavaFBP</name>
+  <version>1.1-SNAPSHOT</version>
+  <description>Java Implementation of Flow-Based Programming (FBP), which is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.</description>
+  <url>http://www.jpaulmorrison.com/fbp/software.html#JavaFBP</url>
+  <licenses>
+    <license>
+      <name>The Artistic License 2.0</name>
+      <url>http://opensource.org/licenses/Artistic-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.6</java.version>
+  </properties>
+  <developers>
+    <developer>
+      <id>jpaulm</id>
+      <name>J Paul Rodker Morrison</name>
+      <email>paul.morrison@rogers.com</email>
+      <url>https://github.com/jpaulm</url>
+      <roles>
+        <role>founder</role>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>olobunets</id>
+      <name>Alex Lobunets</name>
+      <email>alexander.lobunets@gmail.com</email>
+      <url>https://github.com/oleksandr</url>
+      <roles>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+  </developers>
+  <scm>
+    <url>https://github.com/jpaulm/javafbp</url>
+  </scm>
+  
+  <!-- This section contains temporary solution for dependencies, which are 
+    not available yet via official repositories -->
+  <repositories>
+    <repository>
+      <id>local-repo</id>
+      <name>Temporary Local Repository</name>
+      <url>file://${project.basedir}/repo</url>
+    </repository>
+  </repositories>
+  
+  <!-- Add here JavaFBP external dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>org</groupId>
+      <artifactId>Java-WebSocket</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+  </dependencies>
+
+</project>
