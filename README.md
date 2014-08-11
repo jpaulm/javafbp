@@ -19,54 +19,54 @@ Prerequisites
 ---
 
 
-The project requires Maven for building (tested with version 3.2.2). You can download the corresponding package from the following URL: 
-https://maven.apache.org/download.cgi 
+The project requires Gradle for building (tested with version 2.0). You can download the corresponding package from the following URL: 
+http://www.gradle.org
 
 Windows and Linux users should follow the installation instructions on the Maven website (URL provided above).
 
 OSX users (using Brew, http://brew.sh) can install Maven by executing the following command:
 
-    brew install maven
+    brew install gradle
 
 
-IDE Integration
+Eclipse IDE Integration
 ---
 
 You can generate Eclipse project using the following mvn command:
 
-    mvn eclipse:eclipse
+    gradle eclipse
+
+If you already created an Eclipse project you can run:
+
+    gradle cleanEclipse Eclipse
+
+It is also recommended to install a Gradle plugin for Eclipse as explain here:
+https://github.com/spring-projects/eclipse-integration-gradle/
 
 
-Building
+Building from command line
 ---
 
 For building the project simply run the following command:
 
-    mvn package
+    gradle build
 
-As a result a `fbp-1.0-SNAPSHOT.jar` file will be created in the `./target` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
-
+As a result a `JavaFBP-1.0.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
 
 For running any of the examples use the following command:
 
-    mvn exec:java -Dexec.mainClass=<Class name of the network>
+    java -cp build/libs/JavaFBP-1.0.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
 
 For example:
 
-    mvn exec:java -Dexec.mainClass=com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    java -cp build/libs/JavaFBP-1.0.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
-Or alternatively you can run `java` command directly and specify the classpath manually:
-
-    java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
-
-For example:
-
-    java -cp target/fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
 Running JavaFBP Apps using Websockets
 -----
 
-This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local repository, which of course impacts publication of our own jar into the central Maven repository.
+This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local `lib` directory, which of course impacts publication of our own jar into the central Maven repository.
+
 
 Running a test
 ----
@@ -76,10 +76,10 @@ Here is a simple test that can be run to test that everything is working.
 In the project directory, enter
 
     java -cp target\fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
-    
+
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
-![MergeandSort](https://github.com/jpaulm/javafbp/blob/master/MergeandSort.png "Diagram of MergeandSort Network")
+![MergeandSort](https://github.com/jpaulm/javafbp/blob/master/docs/MergeandSort.png "Diagram of MergeandSort Network")
     
 This network contains 4 processes: 
 
@@ -95,6 +95,7 @@ At the end of the run, you should see:
     Counts: C: 150, D: 153, S: 300, R (non-null): 304, DO: 0
     
 where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".    
+
 
 Tracing and other options
 ---

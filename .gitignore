@@ -11,6 +11,7 @@ target
 build
 
 # Eclipse project
+bin
 .classpath
 .project
 .settings/
@@ -22,3 +23,4 @@ build
 # System's crap
 Thumbs.db
 .DS_Store
+/bin
