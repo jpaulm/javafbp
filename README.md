@@ -52,15 +52,15 @@ For building the project simply run the following command:
 
     gradle build
 
-As a result a `JavaFBP-1.0.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
+As a result a `javafbp-1.1.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
 
 For running any of the examples use the following command:
 
-    java -cp build/libs/JavaFBP-1.0.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
+    java -cp build/libs/javafbp-1.1.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
 
 For example:
 
-    java -cp build/libs/JavaFBP-1.0.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    java -cp build/libs/javafbp-1.1.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
 
 Running JavaFBP Apps using Websockets
@@ -76,7 +76,7 @@ Here is a simple test that can be run to test that everything is working.
 
 In the project directory, enter
 
-    java -cp target\fbp-1.0-SNAPSHOT.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
+    java -cp build/libs/javafbp-1.1.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
 
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
