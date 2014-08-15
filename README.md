@@ -88,7 +88,7 @@ This network contains 4 processes:
 * a Sort process - a very simple-minded Sort, which can only handle up to 9,999 information packets 
 * a text display component, which invokes Java Swing to display the sorted data in a scroll pane. 
  
-The outputs of the two GenerateTestData processes are meged on a "first come, first served" basis.
+The outputs of the two GenerateTestData processes are merged on a "first come, first served" basis.  During the run you should see a scroll pane with the sorted data scrolling down.
 
 At the end of the run, you should see:
 
