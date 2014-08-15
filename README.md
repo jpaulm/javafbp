@@ -63,12 +63,6 @@ For example:
     java -cp build/libs/javafbp-1.1.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
 
-Running JavaFBP Apps using Websockets
------
-
-This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local `lib` directory, which of course impacts publication of our own jar into the central Maven repository.
-
-
 Running a test
 ----
 
@@ -95,8 +89,18 @@ At the end of the run, you should see:
     Run complete.  Time: x.xxx seconds
     Counts: C: 150, D: 153, S: 300, R (non-null): 304, DO: 0
     
-where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".    
+where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".   
 
+Running JavaFBP apps using Websockets
+-----
+
+This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local `lib` directory, which of course impacts publication of our own jar into the central Maven repository.
+
+You can however run the test server code in com.jpmorrsn.fbp.websockets.networks.TestWebSockets by entering in the project directory
+
+    java -cp "build\libs\javafbp-1.1.jar;lib\Java-WebSocket-1.3.1.jar" com.jpmorrsn.fbp.websockets.networks.TestWebSockets
+    
+(note the double quotes)    
 
 Tracing and other options
 ---
