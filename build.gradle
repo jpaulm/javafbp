@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-version = '1.0'
+version = '2.9'
 
 description = 'Java Implementation of Flow-Based Programming (FBP), which is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.'
 
@@ -22,6 +22,6 @@ dependencies {
 	// This will work when authors of Java-WebSocket will publish 1.3.1
 	// compile 'org.java-websocket:Java-WebSocket:1.3.1'
 	
-	// This is a temporary walkaround for Java-WebSocket
+	// This is a temporary workaround for Java-WebSocket
 	compile files('lib/Java-WebSocket-1.3.1.jar') 
 }
