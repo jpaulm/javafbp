@@ -102,7 +102,7 @@ You can however run the test server code in com.jpmorrsn.fbp.websockets.networks
     
 (note the double quotes).
 
-There is a very simple client script called `chat1` in `com/jpmorrsn/fbp/websockets/script`: open it with web browser while server is running; enter `namelist` in input field; click on `send`. You should see 3 names after a random delay.  Click on `Stop WS` to bring down the server.  An identical script has also been provided called `chat2` to allow testing of multiple clients.
+There is a very simple client script called `chat1` in `com/jpmorrsn/fbp/websockets/script`: change `src\main\java\com\jpmorrsn\fbp\websockets\networks\TestWebSockets.java` to specify the location of your `javafbp` jar file; open `chat1` with your favorite web browser while server is running; enter `complist` in input field; click on `send`. You should see all the entries in the jar file, after a short, random delay.  Click on `Stop WS` to bring down the server.  An identical script has also been provided called `chat2` to allow testing of multiple clients.
 
 If running this test under Eclipse, you can add `Java-WebSocket-1.3.1.jar` to Run/Debug Settings/Launch Configuration for `TestWebSockets`.
 
