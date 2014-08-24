@@ -21,7 +21,7 @@ repositories {
 dependencies {
 	// This will work when authors of Java-WebSocket will publish 1.3.1
 	// compile 'org.java-websocket:Java-WebSocket:1.3.1'
-	
-	// This is a temporary workaround for Java-WebSocket
-	compile files('lib/Java-WebSocket-1.3.1.jar') 
+    // This is a temporary workaround for Java-WebSocket
+	compile files('lib/Java-WebSocket-1.3.1.jar')
+    compile 'org.json:json:20090211'
 }
