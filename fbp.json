@@ -12,6 +12,7 @@
         "FBPComponentTemplate": "src/main/java/com/jpmorrsn/fbp/components/FBPComponentTemplate.java",
         "Gate": "src/main/java/com/jpmorrsn/fbp/components/Gate.java",
         "GenSamples": "src/main/java/com/jpmorrsn/fbp/components/GenSamples.java",
+        "GenerateTestData": "src/main/java/com/jpmorrsn/fbp/components/GenerateTestData.java",
         "Heartbeat": "src/main/java/com/jpmorrsn/fbp/components/Heartbeat.java",
         "Inject": "src/main/java/com/jpmorrsn/fbp/components/Inject.java",
         "Kick": "src/main/java/com/jpmorrsn/fbp/components/Kick.java",

@@ -361,14 +361,12 @@ final public class Runtime {
 
     public static void main(final String[] argv) throws Exception {
 
-        /*
         Definition def = new Definition();
         def.addNode("generate", "GenerateTestData");
         def.addNode("write", "WriteToConsole");
         def.addEdge("generate", "OUT", "write", "IN");
         def.addInitial("generate", "COUNT", "10");
         RuntimeNetwork.startNetwork(def);
-        */
 
         WebSocketImpl.DEBUG = true;
         int port = 3569;
