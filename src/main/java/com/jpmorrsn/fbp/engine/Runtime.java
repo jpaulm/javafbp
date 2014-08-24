@@ -9,6 +9,7 @@ import com.jpmorrsn.fbp.examples.components.GenerateTestData;
 
 import java.io.FileReader;
 import java.io.Reader;
+import java.lang.Boolean;
 import java.lang.Exception;
 import java.lang.Iterable;
 import java.lang.Override;
@@ -128,7 +129,7 @@ final public class Runtime {
             for (InPort port : ComponentLibrary.getInports(componentClass)) {
                 JSONObject portInfo = new JSONObject();
                 portInfo.put("id", port.value());
-                portInfo.put("type", "any"); // TODO: annotate more specifically
+                portInfo.put("type", ComponentLibrary.mapPortType(port.type()));
                 portInfo.put("description", port.description());
                 portInfo.put("addressable", port.arrayPort());
                 portInfo.put("required", !port.optional());
@@ -141,7 +142,7 @@ final public class Runtime {
             for (OutPort port : ComponentLibrary.getOutports(componentClass)) {
                 JSONObject portInfo = new JSONObject();
                 portInfo.put("id", port.value());
-                portInfo.put("type", "any"); // TODO: annotate more specifically
+                portInfo.put("type", ComponentLibrary.mapPortType(port.type()));
                 portInfo.put("description", port.description());
                 portInfo.put("addressable", port.arrayPort());
                 portInfo.put("required", !port.optional());
@@ -151,6 +152,21 @@ final public class Runtime {
 
             return def;
         }
+
+        // Return a FBP type string for a
+        static String mapPortType(Class javaType) {
+            if (javaType == String.class) {
+                return "string";
+            } else if (javaType == Boolean.class) {
+                return "boolean";
+            } else if (javaType == java.util.Hashtable.class) {
+                return "object";
+            } else {
+                // Default
+                return "any";
+            }
+        }
+
     }
 
     private static class Definition {
