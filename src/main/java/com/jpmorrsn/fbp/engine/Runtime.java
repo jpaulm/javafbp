@@ -103,6 +103,14 @@ final public class Runtime {
             }
             return ret;
         }
+        private static String getDescription(Class comp) {
+            String description = "";
+            ComponentDescription a = (ComponentDescription)comp.getAnnotation(ComponentDescription.class);
+            if (a != null) {
+                description = a.value();
+            }
+            return description;
+        }
 
         public JSONObject getComponentInfoJson(String componentName) throws JSONException {
             // Have to instantiate the component to introspect :(
@@ -111,9 +119,9 @@ final public class Runtime {
             // Top-level
             JSONObject def = new JSONObject();
             def.put("name", componentName);
-            // def.putString("description", ""); TODO
+            def.put("description", getDescription(componentClass));
             def.put("subgraph", false); // TODO: support subgraphs
-            // def.putBoolean("icon", ""); // TODO: allow components to specify icon
+            def.put("icon", "coffee"); // TODO: allow components to specify icon
 
             // InPorts
             JSONArray inPorts = new JSONArray();
