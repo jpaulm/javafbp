@@ -73,6 +73,8 @@ final public class Runtime {
         }
         public Map<String, Class> getComponents() { return mComponents; }
 
+        public Class getComponent(String componentName) { return mComponents.get(componentName); }
+
         private static List<InPort> getInports(Class comp) {
             ArrayList<InPort> ret = new ArrayList<InPort>();
             InPort p = (InPort)comp.getAnnotation(InPort.class);
@@ -160,7 +162,7 @@ final public class Runtime {
             public Object data;
         }
 
-        public Map<String, Class> nodes;
+        public Map<String, String> nodes; // id -> className
         public List<Connection> connections;
         public List<IIP> iips;
 
@@ -169,6 +171,34 @@ final public class Runtime {
             connections = new ArrayList<Connection>();
             iips = new ArrayList<IIP>();
         }
+
+        public void addNode(String id, String component) {
+            this.nodes.put(id, component);
+        }
+        public void removeNode(String id, String component) {
+            // FIXME: implement
+        }
+        public void addEdge(final String src, final String _srcPort,
+                            final String tgt, final String _tgtPort) {
+            this.connections.add(new Definition.Connection() {{
+                srcNode=src; srcPort=_srcPort;
+                tgtNode=tgt; tgtPort=_tgtPort;
+            }});
+        }
+        public void removeEdge(String id, String component) {
+            // FIXME: implement
+        }
+        public void addInitial(final String tgt, final String _tgtPort,
+                               final String _data) {
+            this.iips.add(new Definition.IIP() {{
+                tgtNode=tgt; tgtPort=_tgtPort;
+                data = _data;
+            }});
+        }
+        public void removeInitial(String id, String component) {
+            // FIXME: implement
+        }
+
     }
 
     private static class RuntimeNetwork extends Network {
@@ -184,8 +214,11 @@ final public class Runtime {
         protected void define() {
 
             // Add nodes
-            for (Map.Entry<String, Class> entry : mDefinition.nodes.entrySet()) {
-                component(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, String> entry : mDefinition.nodes.entrySet()) {
+                Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(); // TEMP: move out, object lifetime should be that of Runtime
+                System.out.println("addNode: " + entry.getKey() + " " + entry.getValue() + " "); // cls.toString()
+                Class cls = lib.getComponent(entry.getValue());
+                component(entry.getKey(), cls);
             }
 
             // Connect
@@ -196,6 +229,7 @@ final public class Runtime {
 
             // Add IIPs
             for (Definition.IIP iip : mDefinition.iips) {
+                System.out.println("addInitial: " + iip.tgtNode + " " + iip.tgtPort + " " + iip.data);
                 initialize(iip.data, component(iip.tgtNode), port(iip.tgtPort));
             }
 
@@ -210,6 +244,9 @@ final public class Runtime {
 
     public static class Server extends WebSocketServer {
 
+        private Definition mNetworkDefinition = null; // TEMP: move out, object lifetime should be that of Runtime
+        // FIXME: support multiple networks
+
         public Server(int port) throws UnknownHostException {
             super(new InetSocketAddress(port));
         }
@@ -219,19 +256,64 @@ final public class Runtime {
 
         public void onFbpCommand(String protocol, String command, JSONObject payload,
                                  WebSocket socket) throws JSONException {
+
+            // Runtime info
             if (protocol.equals("runtime") && command.equals("getruntime")) {
                 JSONObject p = new JSONObject();
                 p.put("type", "javafbp");
                 p.put("version", "0.4");
-                p.put("capabilities", new JSONArray() {{ put("protocol:component"); }});
+                p.put("capabilities", new JSONArray() {{
+                    put("protocol:component");
+                    put("protocol:graph");
+                    put("protocol:network");
+                }});
                 sendFbpResponse("runtime", "runtime", p, socket);
-            } else if (protocol.equals("component") && command.equals("list")) {
 
+            // Component listing
+            } else if (protocol.equals("component") && command.equals("list")) {
                 Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(); // TEMP: move out, object lifetime should be that of process
                 for (String name : lib.getComponents().keySet()) {
                     JSONObject def = lib.getComponentInfoJson(name);
                     sendFbpResponse("component", "component", def, socket);
                 }
+
+            // Graph manipulation
+            // FIXME: respect 'graph'
+            } else if (protocol.equals("graph") && command.equals("clear")) {
+                mNetworkDefinition = new Definition();
+            } else if (protocol.equals("graph") && command.equals("addnode")) {
+                String id = payload.getString("id");
+                String component = payload.getString("component");
+                mNetworkDefinition.addNode(id, component);
+            } else if (protocol.equals("graph") && command.equals("removenode")) {
+                //mNetworkDefinition.removeNode()
+            } else if (protocol.equals("graph") && command.equals("addedge")) {
+                // FIXME: handle addressable ports
+                JSONObject src = payload.getJSONObject("src");
+                JSONObject tgt = payload.getJSONObject("tgt");
+                mNetworkDefinition.addEdge(src.getString("node"), src.getString("port"),
+                                           tgt.getString("node"), tgt.getString("port")
+                );
+            } else if (protocol.equals("graph") && command.equals("removeedge")) {
+                //mNetworkDefinition.removeEdge() FIXME: implement
+            } else if (protocol.equals("graph") && command.equals("addinitial")) {
+                JSONObject tgt = payload.getJSONObject("tgt");
+                JSONObject src = payload.getJSONObject("src");
+                // FIXME: handle addressable ports
+                mNetworkDefinition.addInitial(tgt.getString("node"), tgt.getString("port"),
+                                              src.getString("data")
+                );
+            } else if (protocol.equals("graph") && command.equals("removeinitial")) {
+                //mNetworkDefinition.removeInitial()
+            } else if (protocol.equals("network") && command.equals("start")) {
+
+                try {
+                    RuntimeNetwork.startNetwork(mNetworkDefinition);
+                } catch (Exception e) {
+                    System.err.println("Unable to start network");
+                    e.printStackTrace();
+                }
+
             } else {
                 System.err.println("Unknown FBP protocol message: " + protocol + ":" + command);
             }
@@ -281,10 +363,10 @@ final public class Runtime {
 
         /*
         Definition def = new Definition();
-        def.nodes.put("Generate", GenerateTestData.class);
-        def.nodes.put("Write", WriteToConsole.class);
-        def.connections.add(new Definition.Connection() {{ srcNode="Generate"; srcPort="OUT"; tgtNode="Write"; tgtPort="IN"; }} );
-        def.iips.add(new Definition.IIP() {{ tgtNode="Generate"; tgtPort="COUNT"; data = "10"; }});
+        def.addNode("generate", "GenerateTestData");
+        def.addNode("write", "WriteToConsole");
+        def.addEdge("generate", "OUT", "write", "IN");
+        def.addInitial("generate", "COUNT", "10");
         RuntimeNetwork.startNetwork(def);
         */
 
