@@ -235,6 +235,36 @@ final public class Runtime {
             iips = new ArrayList<IIP>();
         }
 
+        public void loadFromJson(String json) throws JSONException {
+            JSONTokener tokener = new JSONTokener(json);
+            JSONObject root = new JSONObject(tokener);
+
+            // Nodes
+            JSONObject processes = root.getJSONObject("processes");
+            for (String name : JSONObject.getNames(processes)) {
+                JSONObject node = processes.getJSONObject(name);
+                addNode(name, node.getString("component"));
+            }
+
+            // Connections
+            JSONArray connections = root.getJSONArray("connections");
+            for (int i=0; i<connections.length(); i++) {
+                JSONObject conn = connections.getJSONObject(i);
+                JSONObject src = conn.optJSONObject("src");
+                JSONObject tgt = conn.getJSONObject("tgt");
+                if (src == null) {
+                    addInitial(tgt.getString("process"), tgt.getString("port"),
+                               conn.getString("data")
+                    );
+                } else {
+                    addEdge(src.getString("process"), src.getString("port"),
+                            tgt.getString("process"), tgt.getString("port")
+                    );
+                }
+            }
+
+        }
+
         public void addNode(String id, String component) {
             this.nodes.put(id, component);
         }
@@ -303,14 +333,14 @@ final public class Runtime {
 
             // Connect
             for (Definition.Connection conn : mDefinition.connections) {
-                connect(component(conn.srcNode), port(conn.srcPort),
-                        component(conn.tgtNode), port(conn.tgtPort));
+                connect(component(conn.srcNode), port(conn.srcPort.toUpperCase()),
+                        component(conn.tgtNode), port(conn.tgtPort.toUpperCase()));
             }
 
             // Add IIPs
             for (Definition.IIP iip : mDefinition.iips) {
                 System.out.println("addInitial: " + iip.tgtNode + " " + iip.tgtPort + " " + iip.data);
-                initialize(iip.data, component(iip.tgtNode), port(iip.tgtPort));
+                initialize(iip.data, component(iip.tgtNode), port(iip.tgtPort.toUpperCase()));
             }
 
         }
@@ -566,12 +596,13 @@ final public class Runtime {
 
         String p = "fbp.json"; // XXX: relative to cwd
         Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(p);
-        Definition def = new Definition();
-        def.addNode("generate", "GenerateTestData");
-        def.addNode("write", "WriteToConsole");
-        def.addEdge("generate", "OUT", "write", "IN");
-        def.addInitial("generate", "COUNT", "10");
-        RuntimeNetwork.startNetwork(lib, def);
+
+        if (argv.length == 1) {
+            String graphPath = argv[0];
+            Definition def = new Definition();
+            def.loadFromJson(Runtime.Util.stringFromStream(new FileInputStream(graphPath)));
+            RuntimeNetwork.startNetwork(lib, def);
+        }
 
         FlowhubApi api = FlowhubApi.create();
 
