@@ -13,10 +13,7 @@ import java.lang.Boolean;
 import java.lang.Exception;
 import java.lang.Iterable;
 import java.lang.Override;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.*;
 import java.net.*;
 import org.java_websocket.*;
 import org.java_websocket.handshake.*;
@@ -509,6 +506,35 @@ final public class Runtime {
 
     }
 
+    static public class FlowhubRegistryPingTask extends TimerTask {
+
+        static FlowhubRegistryPingTask setup(FlowhubApi api, String runtimeId) {
+            FlowhubRegistryPingTask task = new FlowhubRegistryPingTask(api, runtimeId);
+            Timer timer = new Timer();
+            final double millisecondsPerMinute = 60e3;
+            final long interval = (long)(10*millisecondsPerMinute);
+            timer.scheduleAtFixedRate(task, (long)0, interval);
+            return task;
+        }
+
+        private FlowhubApi api;
+        private String runtimeId;
+
+        FlowhubRegistryPingTask(FlowhubApi _api, String _runtimeId) {
+            api = _api;
+            runtimeId = _runtimeId;
+        }
+
+        @Override
+        public void run() {
+            try {
+                api.pingRuntime(runtimeId);
+            } catch (Exception e) {
+                // Silently ignore, probably lacking internet access or similar
+            }
+        }
+    }
+
     public static void main(final String[] argv) throws Exception {
 
         Definition def = new Definition();
@@ -520,6 +546,7 @@ final public class Runtime {
 
         FlowhubApi api = FlowhubApi.create();
 
+        // TODO: allow to disable ping on commandline
         // FIXME: allow to specify on commandline
         int port = 3569;
         String host = "localhost";
@@ -538,6 +565,8 @@ final public class Runtime {
             System.out.println("Registering new runtime with Flowhub: " + runtimeId);
             api.registerRuntime(runtimeId, userId, label, address);
         }
+
+        FlowhubRegistryPingTask pinger = FlowhubRegistryPingTask.setup(api, runtimeId);
 
         WebSocketImpl.DEBUG = true;
         Server s = new Server(port);
