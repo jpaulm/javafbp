@@ -38,6 +38,19 @@ final public class Runtime {
             }
         }
 
+        public static abstract class Predicate<Item> {
+            protected abstract boolean apply(Item i);
+        }
+
+        public static <Item> List<Item> filter(List<Item> in, Predicate<Item> f) {
+            List<Item> out = new ArrayList<Item>(in.size());
+            for (Item inObj : in) {
+                if (f.apply(inObj)) {
+                    out.add(inObj);
+                }
+            }
+            return out;
+        }
     }
 
     public static class ComponentLibrary {
@@ -199,8 +212,8 @@ final public class Runtime {
         public void addNode(String id, String component) {
             this.nodes.put(id, component);
         }
-        public void removeNode(String id, String component) {
-            // FIXME: implement
+        public void removeNode(String id) {
+            this.nodes.remove(id);
         }
         public void addEdge(final String src, final String _srcPort,
                             final String tgt, final String _tgtPort) {
@@ -209,8 +222,17 @@ final public class Runtime {
                 tgtNode=tgt; tgtPort=_tgtPort;
             }});
         }
-        public void removeEdge(String id, String component) {
-            // FIXME: implement
+        public void removeEdge(final String src, final String srcPort,
+                               final String tgt, final String tgtPort) {
+            // PERFORMANCE: linear complexity
+            this.connections = Util.filter(this.connections, new Util.Predicate<Connection>() {
+                @Override
+                public boolean apply(Connection in) {
+                    boolean equals = in.srcNode == src && in.srcPort == srcPort
+                            && in.tgtNode == tgt && in.tgtPort == tgtPort;
+                    return !equals;
+                }
+            });
         }
         public void addInitial(final String tgt, final String _tgtPort,
                                final String _data) {
@@ -219,8 +241,15 @@ final public class Runtime {
                 data = _data;
             }});
         }
-        public void removeInitial(String id, String component) {
-            // FIXME: implement
+        public void removeInitial(final String tgt, final String tgtPort) {
+            // PERFORMANCE: linear complexity
+            this.iips = Util.filter(this.iips, new Util.Predicate<IIP>() {
+                @Override
+                public boolean apply(IIP in) {
+                    boolean equals = in.tgtNode == tgt && in.tgtPort == tgtPort;
+                    return !equals;
+                }
+            });
         }
 
     }
@@ -266,6 +295,7 @@ final public class Runtime {
 
     }
 
+    // TODO: support registering with Flowhub.io
     public static class Server extends WebSocketServer {
 
         private Definition mNetworkDefinition = null; // TEMP: move out, object lifetime should be that of Runtime
@@ -303,6 +333,7 @@ final public class Runtime {
 
             // Graph manipulation
             // FIXME: respect 'graph'
+            // FIXME: support subgraphs
             } else if (protocol.equals("graph") && command.equals("clear")) {
                 mNetworkDefinition = new Definition();
             } else if (protocol.equals("graph") && command.equals("addnode")) {
@@ -310,7 +341,10 @@ final public class Runtime {
                 String component = payload.getString("component");
                 mNetworkDefinition.addNode(id, component);
             } else if (protocol.equals("graph") && command.equals("removenode")) {
-                //mNetworkDefinition.removeNode()
+                String id = payload.getString("id");
+                mNetworkDefinition.removeNode(id);
+            } else if (protocol.equals("graph") && command.equals("changenode")) {
+                // Ignoring metadata changes
             } else if (protocol.equals("graph") && command.equals("addedge")) {
                 // FIXME: handle addressable ports
                 JSONObject src = payload.getJSONObject("src");
@@ -319,7 +353,13 @@ final public class Runtime {
                                            tgt.getString("node"), tgt.getString("port")
                 );
             } else if (protocol.equals("graph") && command.equals("removeedge")) {
-                //mNetworkDefinition.removeEdge() FIXME: implement
+                JSONObject src = payload.getJSONObject("src");
+                JSONObject tgt = payload.getJSONObject("tgt");
+                mNetworkDefinition.removeEdge(src.getString("node"), src.getString("port"),
+                        tgt.getString("node"), tgt.getString("port")
+                );
+            } else if (protocol.equals("graph") && command.equals("changeedge")) {
+                // Ignoring metadata changes
             } else if (protocol.equals("graph") && command.equals("addinitial")) {
                 JSONObject tgt = payload.getJSONObject("tgt");
                 JSONObject src = payload.getJSONObject("src");
@@ -328,7 +368,12 @@ final public class Runtime {
                                               src.getString("data")
                 );
             } else if (protocol.equals("graph") && command.equals("removeinitial")) {
-                //mNetworkDefinition.removeInitial()
+                JSONObject tgt = payload.getJSONObject("tgt");
+                mNetworkDefinition.removeInitial(tgt.getString("node"), tgt.getString("port"));
+
+            // Network management
+            // TODO: redirect System.out and System.error to the client
+            // TODO: implement edge data introspection support
             } else if (protocol.equals("network") && command.equals("start")) {
 
                 try {
