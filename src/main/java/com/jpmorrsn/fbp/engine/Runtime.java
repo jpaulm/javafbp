@@ -7,8 +7,14 @@ import com.jpmorrsn.fbp.engine.OutputPort;
 import com.jpmorrsn.fbp.engine.InputPort;
 import com.jpmorrsn.fbp.examples.components.GenerateTestData;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.lang.Boolean;
 import java.lang.Exception;
 import java.lang.Iterable;
@@ -18,6 +24,7 @@ import java.net.*;
 import org.java_websocket.*;
 import org.java_websocket.handshake.*;
 import org.java_websocket.server.*;
+import org.java_websocket.util.Base64;
 import org.json.*;
 
 final public class Runtime {
@@ -48,40 +55,62 @@ final public class Runtime {
             }
             return out;
         }
+
+        public static String stringFromStream(InputStream stream) throws UnsupportedEncodingException, IOException {
+            BufferedReader in= new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+            StringBuilder buf=new StringBuilder();
+            String str;
+            while ((str=in.readLine()) != null) {
+                buf.append(str);
+            }
+            in.close();
+            return buf.toString();
+        }
     }
 
     public static class ComponentLibrary {
 
-        private HashMap<String, Class> mComponents;
+        private HashMap<String, Class> mComponents = new HashMap<String, Class>();
 
-        ComponentLibrary() {
-            mComponents = new HashMap<String, Class>();
+        public ComponentLibrary() {
 
+        }
+        public ComponentLibrary(String fbpPath) throws Exception {
+            InputStream in = new FileInputStream(fbpPath);
+            loadFromJson(Util.stringFromStream(in));
+        }
+
+        public void loadFromJson(String fbpFileContent) throws JSONException {
             JSONObject components = null;
             try {
-                Reader in = new FileReader("fbp.json"); // XXX: relative to cwd
-                JSONTokener tokener = new JSONTokener(in);
+                JSONTokener tokener = new JSONTokener(fbpFileContent);
                 JSONObject root = new JSONObject(tokener);
                 components = root.optJSONObject("components");
             } catch (Exception e) {
-                System.err.println("Unable to parse fbp.jon: " + e.toString());
+                System.err.println("Unable to parse fbp.json: " + e.toString());
             }
 
             if (components != null) {
                 String baseLib = "com.jpmorrsn.fbp.components"; // FIXME: define in fbp.json
                 Iterable<String> keys = new Runtime.Util.JSONObjectKeysIterable(components);
-                for (String name : keys) {
-                    final String className = baseLib + "." + name;
-                    try {
-                        Class c = Class.forName(className);
-                        mComponents.put(name, c);
-                    } catch (Exception e) {
-                        System.err.println("Cannot load component " + name + ": " + e.toString());
-                        e.printStackTrace();
-                    }
+                buildComponentMap(keys, baseLib);
+            }
+        }
+
+        private void buildComponentMap(Iterable<String> componentNames, String baseLib) {
+            for (String name : componentNames) {
+                final String className = baseLib + "." + name;
+                try {
+                    Class c = Class.forName(className);
+                    mComponents.put(name, c);
+                } catch (Exception e) {
+                    System.err.println("Cannot load component " + name + ": " + e.toString());
+                    e.printStackTrace();
                 }
             }
         }
+
+
         public Map<String, Class> getComponents() { return mComponents; }
 
         public Class getComponent(String componentName) { return mComponents.get(componentName); }
@@ -179,7 +208,7 @@ final public class Runtime {
 
     }
 
-    private static class Definition {
+    public static class Definition {
 
         public static class Connection {
             public Connection() {}
@@ -200,7 +229,7 @@ final public class Runtime {
         public List<Connection> connections;
         public List<IIP> iips;
 
-        Definition() {
+        public Definition() {
             nodes = new HashMap();
             connections = new ArrayList<Connection>();
             iips = new ArrayList<IIP>();
@@ -251,12 +280,14 @@ final public class Runtime {
 
     }
 
-    private static class RuntimeNetwork extends Network {
+    public static class RuntimeNetwork extends Network {
 
         static final String copyright = "";
         private Definition mDefinition;
+        private ComponentLibrary mLibrary;
 
-        public RuntimeNetwork(Definition def) {
+        public RuntimeNetwork(ComponentLibrary lib, Definition def) {
+            mLibrary = lib;
             mDefinition = def;
         }
 
@@ -265,9 +296,8 @@ final public class Runtime {
 
             // Add nodes
             for (Map.Entry<String, String> entry : mDefinition.nodes.entrySet()) {
-                Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(); // TEMP: move out, object lifetime should be that of Runtime
                 System.out.println("addNode: " + entry.getKey() + " " + entry.getValue() + " "); // cls.toString()
-                Class cls = lib.getComponent(entry.getValue());
+                Class cls = mLibrary.getComponent(entry.getValue());
                 component(entry.getKey(), cls);
             }
 
@@ -285,8 +315,8 @@ final public class Runtime {
 
         }
 
-        static public void startNetwork(Definition def) throws Exception {
-            Runtime.RuntimeNetwork net = new Runtime.RuntimeNetwork(def);
+        static public void startNetwork(ComponentLibrary lib, Definition def) throws Exception {
+            Runtime.RuntimeNetwork net = new Runtime.RuntimeNetwork(lib, def);
             net.go();
         }
 
@@ -377,12 +407,11 @@ final public class Runtime {
 
         private Definition mNetworkDefinition = null; // TEMP: move out, object lifetime should be that of Runtime
         // FIXME: support multiple networks
+        private ComponentLibrary mLibrary = null;
 
-        public Server(int port) throws UnknownHostException {
+        public Server(int port, ComponentLibrary lib) throws UnknownHostException {
             super(new InetSocketAddress(port));
-        }
-        public Server(InetSocketAddress address) {
-            super(address);
+            mLibrary = lib;
         }
 
         public void onFbpCommand(String protocol, String command, JSONObject payload,
@@ -402,9 +431,8 @@ final public class Runtime {
 
             // Component listing
             } else if (protocol.equals("component") && command.equals("list")) {
-                Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(); // TEMP: move out, object lifetime should be that of process
-                for (String name : lib.getComponents().keySet()) {
-                    JSONObject def = lib.getComponentInfoJson(name);
+                for (String name : mLibrary.getComponents().keySet()) {
+                    JSONObject def = mLibrary.getComponentInfoJson(name);
                     sendFbpResponse("component", "component", def, socket);
                 }
 
@@ -453,9 +481,8 @@ final public class Runtime {
             // TODO: implement edge data introspection support
             // FIXME: execute network in separate thread, not blocking
             } else if (protocol.equals("network") && command.equals("start")) {
-
                 try {
-                    RuntimeNetwork.startNetwork(mNetworkDefinition);
+                    RuntimeNetwork.startNetwork(mLibrary, mNetworkDefinition);
                 } catch (Exception e) {
                     System.err.println("Unable to start network");
                     e.printStackTrace();
@@ -537,12 +564,14 @@ final public class Runtime {
 
     public static void main(final String[] argv) throws Exception {
 
+        String p = "fbp.json"; // XXX: relative to cwd
+        Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(p);
         Definition def = new Definition();
         def.addNode("generate", "GenerateTestData");
         def.addNode("write", "WriteToConsole");
         def.addEdge("generate", "OUT", "write", "IN");
         def.addInitial("generate", "COUNT", "10");
-        RuntimeNetwork.startNetwork(def);
+        RuntimeNetwork.startNetwork(lib, def);
 
         FlowhubApi api = FlowhubApi.create();
 
@@ -569,7 +598,7 @@ final public class Runtime {
         FlowhubRegistryPingTask pinger = FlowhubRegistryPingTask.setup(api, runtimeId);
 
         WebSocketImpl.DEBUG = true;
-        Server s = new Server(port);
+        Server s = new Server(port, lib);
         s.start();
         System.out.println("Listening on port: " + s.getPort());
     }
