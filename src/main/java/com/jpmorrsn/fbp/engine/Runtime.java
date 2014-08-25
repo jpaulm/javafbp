@@ -295,7 +295,87 @@ final public class Runtime {
 
     }
 
-    // TODO: support registering with Flowhub.io
+    public static class FlowhubApi {
+        private String endpoint;
+
+        public static FlowhubApi create() {
+            return new FlowhubApi("http://api.flowhub.io"); // TODO: support HTTPS
+        }
+
+        FlowhubApi(String e) {
+            endpoint = e;
+        }
+
+        // Returns null on failure
+        public String registerRuntime(final String runtimeId, final String userId, final String label, final String address) throws Exception {
+            JSONObject payload = new JSONObject() {{
+                put("id", runtimeId);
+                put("user", userId);
+                put("label", label);
+                put("address", address);
+                put("protocol", "websocket");
+                put("type", "javafbp");
+                put("secret", "9129923"); // TEMP: currently not used
+            }};
+
+            int response = makeRequestSync("PUT", endpoint+"/runtimes/"+runtimeId, payload);
+            if (response == 201 || response == 200) {
+                return runtimeId;
+            } else {
+                return null;
+            }
+        }
+
+        public String pingRuntime(final String runtimeId) throws Exception {
+            int response = makeRequestSync("POST", endpoint+"/runtimes/"+runtimeId, null);
+            if (response == 201 || response == 200) {
+                return runtimeId;
+            } else {
+                return null;
+            }
+        }
+
+        private int makeRequestSync(String method, String url, JSONObject payload) throws Exception {
+            URL obj = new URL(url);
+
+            java.net.HttpURLConnection con = (java.net.HttpURLConnection)obj.openConnection();
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestMethod(method);
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.connect();
+            java.io.DataOutputStream wr = new java.io.DataOutputStream(con.getOutputStream());
+
+            if (payload != null) {
+                wr.writeBytes(payload.toString());
+            }
+            wr.flush();
+            wr.close();
+
+            final int responseCode = con.getResponseCode();
+
+            System.out.println(method + " " + url);
+            if (payload != null) {
+                System.out.println(payload.toString());
+            }
+            System.out.println("Response Code : " + responseCode);
+
+            java.io.InputStream s = (responseCode > 400) ? con.getErrorStream() : con.getInputStream();
+            java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(s));
+            StringBuffer response = new StringBuffer();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            System.out.println(response.toString());
+
+            return responseCode;
+        }
+
+    }
+
     public static class Server extends WebSocketServer {
 
         private Definition mNetworkDefinition = null; // TEMP: move out, object lifetime should be that of Runtime
@@ -374,6 +454,7 @@ final public class Runtime {
             // Network management
             // TODO: redirect System.out and System.error to the client
             // TODO: implement edge data introspection support
+            // FIXME: execute network in separate thread, not blocking
             } else if (protocol.equals("network") && command.equals("start")) {
 
                 try {
@@ -437,8 +518,28 @@ final public class Runtime {
         def.addInitial("generate", "COUNT", "10");
         RuntimeNetwork.startNetwork(def);
 
-        WebSocketImpl.DEBUG = true;
+        FlowhubApi api = FlowhubApi.create();
+
+        // FIXME: allow to specify on commandline
         int port = 3569;
+        String host = "localhost";
+        String label = "First JavaFBP";
+
+        String userId = System.getenv().get("FLOWHUB_USER_ID");
+        if (userId == null) {
+            System.err.println("Missing FLOWHUB_USER_ID envvar");
+            System.exit(1);
+        }
+
+        final String address = "ws://"+host+":"+port;
+        String runtimeId = System.getenv().get("JAVAFBP_RUNTIME_ID");
+        if (runtimeId == null) {
+            runtimeId = java.util.UUID.randomUUID().toString();
+            System.out.println("Registering new runtime with Flowhub: " + runtimeId);
+            api.registerRuntime(runtimeId, userId, label, address);
+        }
+
+        WebSocketImpl.DEBUG = true;
         Server s = new Server(port);
         s.start();
         System.out.println("Listening on port: " + s.getPort());
