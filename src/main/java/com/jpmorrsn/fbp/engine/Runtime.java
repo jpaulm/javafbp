@@ -91,7 +91,8 @@ final public class Runtime {
                 System.err.println("Unable to parse fbp.json: " + e.toString());
             }
 
-            for (String libName : JSONObject.getNames(libs)) {
+            Iterable<String> libNames = new Util.JSONObjectKeysIterable(libs);
+            for (String libName : libNames) {
                 JSONObject lib = libs.getJSONObject(libName);
                 String classPath = lib.getString("_classpath");
                 JSONObject components = lib.optJSONObject("components");
@@ -245,7 +246,8 @@ final public class Runtime {
 
             // Nodes
             JSONObject processes = root.getJSONObject("processes");
-            for (String name : JSONObject.getNames(processes)) {
+            Iterable<String> nodeNames = new Util.JSONObjectKeysIterable(processes);
+            for (String name : nodeNames) {
                 JSONObject node = processes.getJSONObject(name);
                 addNode(name, node.getString("component"));
             }
