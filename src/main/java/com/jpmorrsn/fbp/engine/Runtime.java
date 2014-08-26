@@ -81,30 +81,34 @@ final public class Runtime {
         }
 
         public void loadFromJson(String fbpFileContent) throws JSONException {
-            JSONObject components = null;
+            JSONObject libs = null;
             try {
                 JSONTokener tokener = new JSONTokener(fbpFileContent);
                 JSONObject root = new JSONObject(tokener);
-                components = root.optJSONObject("components");
+                JSONObject rt = root.getJSONObject("javafbp");
+                libs = rt.getJSONObject("libraries");
             } catch (Exception e) {
                 System.err.println("Unable to parse fbp.json: " + e.toString());
             }
 
-            if (components != null) {
-                String baseLib = "com.jpmorrsn.fbp.components"; // FIXME: define in fbp.json
-                Iterable<String> keys = new Runtime.Util.JSONObjectKeysIterable(components);
-                buildComponentMap(keys, baseLib);
+            for (String libName : JSONObject.getNames(libs)) {
+                JSONObject lib = libs.getJSONObject(libName);
+                String classPath = lib.getString("_classpath");
+                JSONObject components = lib.optJSONObject("components");
+                Iterable<String> names = new Runtime.Util.JSONObjectKeysIterable(components);
+                buildComponentMap(libName, names, classPath);
             }
         }
 
-        private void buildComponentMap(Iterable<String> componentNames, String baseLib) {
+        private void buildComponentMap(String libName, Iterable<String> componentNames, String baseLib) {
             for (String name : componentNames) {
+                final String fullName = libName+"/"+name;
                 final String className = baseLib + "." + name;
                 try {
                     Class c = Class.forName(className);
-                    mComponents.put(name, c);
+                    mComponents.put(fullName, c);
                 } catch (Exception e) {
-                    System.err.println("Cannot load component " + name + ": " + e.toString());
+                    System.err.println("Cannot load component " + fullName + ": " + e.toString());
                     e.printStackTrace();
                 }
             }
