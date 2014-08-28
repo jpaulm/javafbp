@@ -608,41 +608,43 @@ final public class Runtime {
         String p = "fbp.json"; // XXX: relative to cwd
         Runtime.ComponentLibrary lib = new Runtime.ComponentLibrary(p);
 
+        // Execute graph mode
         if (argv.length == 1) {
             String graphPath = argv[0];
             Definition def = new Definition();
             def.loadFromJson(Runtime.Util.stringFromStream(new FileInputStream(graphPath)));
             RuntimeNetwork.startNetwork(lib, def);
+
+        // FBP protocol mode
+        } else if (argv.length == 0) {
+            FlowhubApi api = FlowhubApi.create();
+
+            // TODO: allow to disable ping on commandline
+            // FIXME: allow to specify on commandline
+            int port = 3569;
+            String host = "localhost";
+            String label = "First JavaFBP";
+
+            String userId = System.getenv().get("FLOWHUB_USER_ID");
+            if (userId == null) {
+                System.err.println("Warning: Missing FLOWHUB_USER_ID envvar, cannot register");
+            } else {
+                final String address = "ws://"+host+":"+port;
+                String runtimeId = System.getenv().get("JAVAFBP_RUNTIME_ID");
+                if (runtimeId == null) {
+                    runtimeId = java.util.UUID.randomUUID().toString();
+                    System.out.println("Registering new runtime with Flowhub: " + runtimeId);
+                    api.registerRuntime(runtimeId, userId, label, address);
+                }
+
+                FlowhubRegistryPingTask pinger = FlowhubRegistryPingTask.setup(api, runtimeId);
+            }
+            WebSocketImpl.DEBUG = false;
+            Server s = new Server(port, lib);
+            s.start();
+            System.out.println("Listening on port: " + s.getPort());
         }
 
-        FlowhubApi api = FlowhubApi.create();
-
-        // TODO: allow to disable ping on commandline
-        // FIXME: allow to specify on commandline
-        int port = 3569;
-        String host = "localhost";
-        String label = "First JavaFBP";
-
-        String userId = System.getenv().get("FLOWHUB_USER_ID");
-        if (userId == null) {
-            System.err.println("Missing FLOWHUB_USER_ID envvar");
-            System.exit(1);
-        }
-
-        final String address = "ws://"+host+":"+port;
-        String runtimeId = System.getenv().get("JAVAFBP_RUNTIME_ID");
-        if (runtimeId == null) {
-            runtimeId = java.util.UUID.randomUUID().toString();
-            System.out.println("Registering new runtime with Flowhub: " + runtimeId);
-            api.registerRuntime(runtimeId, userId, label, address);
-        }
-
-        FlowhubRegistryPingTask pinger = FlowhubRegistryPingTask.setup(api, runtimeId);
-
-        WebSocketImpl.DEBUG = true;
-        Server s = new Server(port, lib);
-        s.start();
-        System.out.println("Listening on port: " + s.getPort());
     }
 
 }

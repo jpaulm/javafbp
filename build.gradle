@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 
 version = '2.9'
 
@@ -7,6 +8,8 @@ description = 'Java Implementation of Flow-Based Programming (FBP), which is a p
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
+
+mainClassName = "com.jpmorrsn.fbp.engine.Runtime"
 
 jar {
     manifest {
@@ -17,6 +20,12 @@ jar {
 repositories {
 	mavenCentral()
 }
+
+task copyLibs(type: Copy) {
+    from configurations.runtime
+    into new File(buildDir, "lib")
+}
+build.dependsOn copyLibs
 
 dependencies {
 	// This will work when authors of Java-WebSocket will publish 1.3.1
