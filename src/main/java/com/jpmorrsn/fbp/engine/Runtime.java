@@ -297,7 +297,7 @@ final public class Runtime {
             });
         }
         public void addInitial(final String tgt, final String _tgtPort,
-                               final String _data) {
+                               final Object _data) {
             this.iips.add(new Definition.IIP() {{
                 tgtNode=tgt; tgtPort=_tgtPort;
                 data = _data;
@@ -329,24 +329,29 @@ final public class Runtime {
 
         @Override
         protected void define() {
+            final boolean debug = true;
 
             // Add nodes
             for (Map.Entry<String, String> entry : mDefinition.nodes.entrySet()) {
-                System.out.println("addNode: " + entry.getKey() + " " + entry.getValue() + " "); // cls.toString()
+                System.out.println(String.format("%s(%s)", entry.getKey(), entry.getValue())); 
                 Class cls = mLibrary.getComponent(entry.getValue());
                 component(entry.getKey(), cls);
             }
 
             // Connect
             for (Definition.Connection conn : mDefinition.connections) {
-                connect(component(conn.srcNode), port(conn.srcPort.toUpperCase()),
-                        component(conn.tgtNode), port(conn.tgtPort.toUpperCase()));
+                final String srcPort = conn.srcPort.toUpperCase();
+                final String tgtPort = conn.tgtPort.toUpperCase();
+                System.out.println(String.format("%s %s -> %s %s", conn.srcNode, srcPort, tgtPort, conn.tgtNode)); 
+                connect(component(conn.srcNode), port(srcPort),
+                        component(conn.tgtNode), port(tgtPort));
             }
 
             // Add IIPs
             for (Definition.IIP iip : mDefinition.iips) {
-                System.out.println("addInitial: " + iip.tgtNode + " " + iip.tgtPort + " " + iip.data);
-                initialize(iip.data, component(iip.tgtNode), port(iip.tgtPort.toUpperCase()));
+                final String tgtPort = iip.tgtPort.toUpperCase();
+                System.out.println(String.format("'%s' -> %s %s", iip.data.toString(), tgtPort, iip.tgtNode));
+                initialize(iip.data, component(iip.tgtNode), port(tgtPort));
             }
 
         }
