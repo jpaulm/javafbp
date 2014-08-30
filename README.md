@@ -14,6 +14,9 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 Web sites for FBP: 
 * http://www.jpaulmorrison.com/fbp/
 * https://github.com/flowbased/flowbased.org/wiki
+ 
+JavaFBP Syntax and Component API:
+* http://www.jpaulmorrison.com/fbp/jsyntax.htm
 
 Prerequisites
 ---
