@@ -125,3 +125,34 @@ Two other options are also supported in the properties file:
 
 * `deadlocktest` (defaults to true, so you might set it to `false` if debugging) 
 * `forceconsole` (used if immediate console output is required during debugging - normally, console output is sent to a file)
+
+
+Running graphs defined as .json
+--------------------------------
+
+    gradle installApp
+    ./build/install/javafbp/bin/javafbp examples/printTestData.json
+
+Programming JavaFBP using NoFlo UI
+---------------------
+
+    gradle installApp
+
+Get your Flowhub user ID from *Settings* or *Register runtime*
+
+    export FLOWHUB_USER_ID=XX
+    ./build/install/javafbp/bin/javafbp
+
+Run [NoFlo UI](https://github.com/noflo/noflo-ui) built from git master.
+Refresh the list of runtimes and connect to "First JavaFBP project".
+
+Soon the JavaFBP support will be deployed to [app.flowhub.io](http://app.flowhub.io).
+
+
+Android support
+----------------
+
+JavaFBP runs without modification and with full features on Android.
+The [javafbp-android](https://github.com/jonnor/javafbp-android) project
+contains useful components and examples for usage on Android.
+

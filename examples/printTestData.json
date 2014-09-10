@@ -1,0 +1,29 @@
+{
+  "processes": {
+    "gen": {
+      "component": "examples/GenerateTestData"
+    },
+    "out": {
+      "component": "core/WriteToConsole"
+    }
+  },
+  "connections": [
+    {
+      "src": {
+        "process": "gen",
+        "port": "out"
+      },
+      "tgt": {
+        "process": "out",
+        "port": "in"
+      }
+    },
+    {
+      "data": "10",
+      "tgt": {
+        "process": "gen",
+        "port": "count"
+      }
+    }
+  ]
+}
