@@ -47,6 +47,8 @@ You need to install a Gradle plugin for Eclipse as explain here:
 https://github.com/spring-projects/eclipse-integration-gradle/
 Then import a generated project in Eclipse, right (ctrl for OSX) click on the project in Eclipse -> Configure -> Convert to Gradle Project. After the conversion you can Right (ctrl for OSX) click on the project -> Gradle -> Task Quick Launcher and type `build`.
 
+You may have to go to the project Properties and select Java Build Path/Source; remove watever is there and select `JavaFBP/src/main/java`; close Eclipse, and reopen it.
+
 
 Building from command line
 ---
