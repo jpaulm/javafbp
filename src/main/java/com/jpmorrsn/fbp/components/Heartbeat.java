@@ -28,7 +28,8 @@ public class Heartbeat extends Component {
 
   private InputPort interval;
 
-  @Override
+  @SuppressWarnings("rawtypes")
+@Override
   protected void execute() {
     // receive interval in milliseconds
     Packet itvl = interval.receive();

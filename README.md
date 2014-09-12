@@ -55,15 +55,15 @@ For building the project simply run the following command:
 
     gradle build
 
-As a result a `javafbp-2.9.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
+As a result a `javafbp-3.0.1.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
 
 For running any of the examples use the following command:
 
-    java -cp build/libs/javafbp-2.9.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
+    java -cp build/libs/javafbp-3.0.1.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
 
 For example:
 
-    java -cp build/libs/javafbp-2.9.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    java -cp build/libs/javafbp-3.0.1.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
 
 
 Running a test
@@ -73,7 +73,7 @@ Here is a simple test that can be run to test that everything is working.
 
 In the project directory, enter
 
-    java -cp build/libs/javafbp-2.9.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
+    java -cp build/libs/javafbp-3.0.1.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
 
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
@@ -94,20 +94,7 @@ At the end of the run, you should see:
     
 where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".   
 
-Running JavaFBP apps using Websockets
------
 
-This uses an additional jar file: `Java-WebSocket-1.3.1.jar`, see https://github.com/TooTallNate/Java-WebSocket/issues/118.  As this has not yet been released to the central Maven repository, we have to include and distribute the required jar in a local `lib` directory, which of course impacts publication of our own jar into the central Maven repository.
-
-You can however run the test server code in com.jpmorrsn.fbp.websockets.networks.TestWebSockets by entering in the project directory
-
-    java -cp "build\libs\javafbp-2.9.jar;lib\Java-WebSocket-1.3.1.jar" com.jpmorrsn.fbp.websockets.networks.TestWebSockets
-    
-(note the double quotes).
-
-There is a very simple client script called `chat1` in `com/jpmorrsn/fbp/websockets/script`: change `src\main\java\com\jpmorrsn\fbp\websockets\networks\TestWebSockets.java` to specify the location of your `javafbp` jar file; open `chat1` with your favorite web browser while server is running; enter `complist` in input field; click on `send`. You should see all the entries in the jar file, after a short, random delay.  Click on `Stop WS` to bring down the server.  An identical script has also been provided called `chat2` to allow testing of multiple clients.
-
-If running this test under Eclipse, you can add `Java-WebSocket-1.3.1.jar` to Run/Debug Settings/Launch Configuration for `TestWebSockets`.
 
 Tracing and other options
 ---
