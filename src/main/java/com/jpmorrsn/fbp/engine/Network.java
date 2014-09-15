@@ -844,6 +844,7 @@ public abstract class Network extends Component {
     // Messages are added to list, rather than written directly,
     // in case it is not a deadlock
 
+	boolean terminated = true;  
     for (Component comp : getComponents().values()) {
       if (comp instanceof SubNet) {
         // consider components of subnets
@@ -858,6 +859,8 @@ public abstract class Network extends Component {
         String st = comp.getStatus().toString();
         st = (st + "            ").substring(0, 13);
         String cn = comp.getName();
+        if (!(st.trim().equals("TERMINATED")))
+        	terminated = false;
         if (st.trim().equals("SUSP_RECV")) {
           cn = comp.curConn.getName();
         }
@@ -869,7 +872,7 @@ public abstract class Network extends Component {
       }
     }
 
-    return true;
+    return !terminated;
 
   }
 
