@@ -65,7 +65,7 @@ public class SubIn extends Component {
     // inport.close();
     mother.traceFuncs(getName() + ": Releasing input port: " + inport.getName());
 
-    ((Connection) inport).setReceiver(oldReceiver);
+    inport.setReceiver(oldReceiver);
 
   }
 

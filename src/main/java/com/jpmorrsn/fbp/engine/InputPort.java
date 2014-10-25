@@ -63,5 +63,6 @@ public interface InputPort {
    * @param port
    */
   void setPort(Port port);
+  void setReceiver(Component comp);
 
 }

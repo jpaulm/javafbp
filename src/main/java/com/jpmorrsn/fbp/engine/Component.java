@@ -989,14 +989,17 @@ public abstract class Component extends Thread {
               + this.getName());
         }
 
+        
         for (InputPort ip : inputPorts.values()) {
           if (ip instanceof InitializationConnection) {
             InitializationConnection icp = (InitializationConnection) ip;
-            if (!icp.isClosed()) {
-              FlowError.complain("Component deactivated with IIP port not closed: " + getName());
-            }
+            icp.close();
+           // if (!icp.isClosed()) {
+           //  FlowError.complain("Component deactivated with IIP port not closed: " + getName());
+           // }
           }
         }
+         
         mustrun = false;
         selfStarting = false;
 
@@ -1074,7 +1077,7 @@ public abstract class Component extends Thread {
 
     // Get state of all ports
 
-    private InputStates(final HashMap<String, InputPort> inports) throws InterruptedException {
+    InputStates(final HashMap<String, InputPort> inports) throws InterruptedException {
 
       try {
         mother.traceLocks("ist - lock " + getName());

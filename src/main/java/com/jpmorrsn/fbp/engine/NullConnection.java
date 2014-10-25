@@ -59,7 +59,7 @@ final class NullConnection implements InputPort {
     return null;
   }
 
-  void setReceiver(final Component newReceiver) { // added for subnet support 
+  public void setReceiver(final Component newReceiver) { // added for subnet support 
     receiver = newReceiver;
   }
 

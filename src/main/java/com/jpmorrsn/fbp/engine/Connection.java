@@ -415,7 +415,7 @@ public class Connection implements InputPort {
    * Invoked to tell us we have a receiver.
    */
 
-  void setReceiver(final Component newReceiver) {
+  public void setReceiver(final Component newReceiver) {
     // added for subnet support
     if (receiver == null) {
       // called by Component.network.connect()

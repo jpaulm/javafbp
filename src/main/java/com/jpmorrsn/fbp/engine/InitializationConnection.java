@@ -24,7 +24,7 @@ public class InitializationConnection implements InputPort {
    * http://www.jpaulmorrison.com/fbp/artistic2.htm. THERE IS NO WARRANTY; USE
    * THIS PRODUCT AT YOUR OWN RISK.
    */
-  private final Component receiver; // The receiver to deliver to.
+  private Component receiver; // The receiver to deliver to.
 
   // Packet packet;
 
@@ -37,6 +37,8 @@ public class InitializationConnection implements InputPort {
   private Port port;
 
   Class type;
+  
+  private Network traceNetwork; // the network this port is visible in (needed for tracing)  
 
   // Network network;
 
@@ -100,7 +102,7 @@ public class InitializationConnection implements InputPort {
       p = new Packet(content, getReceiver());
       getReceiver().network.receives.getAndIncrement();
       getReceiver().mother.traceFuncs(getName() + ": Received: " + p.toString());
-      close(); // not sure what this will do to subnets, etc.
+      close(); 
     } else {
       p = null;
       // p.setOwner(receiver);
@@ -163,6 +165,23 @@ public class InitializationConnection implements InputPort {
    */
   public void setPort(final Port p) {
     port = p;
+  }
+  
+  /**
+   * Invoked to tell us we have a receiver.
+   */
+
+  public void setReceiver(final Component newReceiver) {
+    // added for subnet support
+    if (receiver == null) {
+      // called by Component.network.connect()
+      receiver = newReceiver;
+      traceNetwork = newReceiver.mother;
+    } else {
+      // always use the same lock for subnet ports
+      newReceiver.goLock = receiver.goLock;
+      receiver = newReceiver;
+    }
   }
 
 }

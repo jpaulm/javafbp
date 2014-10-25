@@ -62,7 +62,7 @@ public class ConnArray implements InputPort {
    * @see com.jpmorrsn.fbp.engine.InputPort#setReceiver(com.jpmorrsn.fbp.engine.Component)
    */
   @SuppressWarnings("unused")
-  private void setReceiver(final Component comp) {
+  public void setReceiver(final Component comp) {
     //
   }
 
