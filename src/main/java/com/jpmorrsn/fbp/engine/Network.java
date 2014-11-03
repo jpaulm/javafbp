@@ -49,8 +49,8 @@ public abstract class Network extends Component {
 
   protected static int PRODUCTIONSIZE = 10;
 
-  //static int defaultCapacity = DEBUGSIZE; // change this when you go to production
-  static int defaultCapacity = PRODUCTIONSIZE; // use this one for production  
+  static int defaultCapacity = DEBUGSIZE; // change this when you go to production
+  //static int defaultCapacity = PRODUCTIONSIZE; // use this one for production  
 
   /* Following 4 booleans set by properties file */
 
