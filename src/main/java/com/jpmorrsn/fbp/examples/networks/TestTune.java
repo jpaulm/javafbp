@@ -16,7 +16,7 @@ public class TestTune extends Network {
     component("_Read_Tune_File", com.jpmorrsn.fbp.components.ReadFile.class);
     component("_Text_to_Int_Array", Text2IntArray.class);
     //component("_Play_Tune", com.jpmorrsn.fbp.components.PlayTune.class);
-    component("Display", com.jpmorrsn.fbp.components.WriteToConsole.class);
+    //component("Display", com.jpmorrsn.fbp.components.WriteToConsole.class);
     component("GenSamples", com.jpmorrsn.fbp.components.GenSamples.class);
     component("SoundMixer", com.jpmorrsn.fbp.components.SoundMixer.class);
 
@@ -24,6 +24,7 @@ public class TestTune extends Network {
     initialize("testdata/tune.txt".replace("/", File.separator), component("_Read_Tune_File"), port("SOURCE"));
     connect(component("_Text_to_Int_Array"), port("OUT"), component("GenSamples"), port("IN"));
     connect("GenSamples.OUT", "SoundMixer.IN");
+    initialize("1", "SoundMixer.GAINS");
 
   }
 

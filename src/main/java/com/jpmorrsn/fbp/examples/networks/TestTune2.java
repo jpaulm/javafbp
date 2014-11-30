@@ -22,7 +22,7 @@ public class TestTune2 extends Network {
     component("GS3", com.jpmorrsn.fbp.components.GenSamples.class);
     component("GS4", com.jpmorrsn.fbp.components.GenSamples.class);
     component("SoundMixer", com.jpmorrsn.fbp.components.SoundMixer.class);
-    component("Display", com.jpmorrsn.fbp.components.WriteToConsole.class);
+    //component("Display", com.jpmorrsn.fbp.components.WriteToConsole.class);
 
     connect(component("JB"), port("OUT"), component("GS"), port("IN"));
     connect(component("JB2"), port("OUT"), component("GS2"), port("IN"));

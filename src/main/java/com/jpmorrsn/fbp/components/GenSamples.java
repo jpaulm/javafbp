@@ -95,7 +95,7 @@ public class GenSamples extends Component {
       }
 
       String s = new Integer(x).toString();
-      traceport.send(create(s));
+      //traceport.send(create(s));
 
       /*
       if (x > 32767) {
