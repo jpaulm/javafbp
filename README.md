@@ -21,7 +21,7 @@ JavaFBP Syntax and Component API:
 JavaFBP-WebSockets
 ---
 
-There is also a small GitHub project called javafbp-websockets, which contains two generalized components supporting WebSockets, and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
+There is also a small GitHub project called `javafbp-websockets`, which contains two generalized components supporting WebSockets, and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
 
 Prerequisites
 ---
