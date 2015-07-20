@@ -17,6 +17,11 @@ Web sites for FBP:
  
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
+ 
+JavaFBP-WebSockets
+---
+
+There is also a small GitHub project called javafbp-websockets, which contains two generalized components supporting WebSockets, and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
 
 Prerequisites
 ---
