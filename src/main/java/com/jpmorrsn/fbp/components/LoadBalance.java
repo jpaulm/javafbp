@@ -1,6 +1,5 @@
 package com.jpmorrsn.fbp.components;
 
-
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.ComponentDescription;
 import com.jpmorrsn.fbp.engine.InPort;
@@ -9,53 +8,60 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
 import com.jpmorrsn.fbp.engine.Packet;
 
-
-/** Component to assign incoming packets to the output port that has the
-* smallest backlog of packets waiting to be processed.
-*/
+/**
+ * Component to assign incoming packets to the output port that has the smallest
+ * backlog of packets waiting to be processed.
+ */
 @ComponentDescription("Sends incoming packets to output array element with smallest backlog")
 @OutPort(value = "OUT", arrayPort = true, description = "Packets being output")
 @InPort(value = "IN", description = "Incoming packets")
 public class LoadBalance extends Component {
 
-  static final String copyright = "Copyright 2007, 2012, J. Paul Morrison.  At your option, you may copy, "
-      + "distribute, or make derivative works under the terms of the Clarified Artistic License, "
-      + "based on the Everything Development Company's Artistic License.  A document describing "
-      + "this License may be found at http://www.jpaulmorrison.com/fbp/artistic2.htm. "
-      + "THERE IS NO WARRANTY; USE THIS PRODUCT AT YOUR OWN RISK.";
+	static final String copyright = "Copyright 2007, 2012, J. Paul Morrison.  At your option, you may copy, "
+			+ "distribute, or make derivative works under the terms of the Clarified Artistic License, "
+			+ "based on the Everything Development Company's Artistic License.  A document describing "
+			+ "this License may be found at http://www.jpaulmorrison.com/fbp/artistic2.htm. "
+			+ "THERE IS NO WARRANTY; USE THIS PRODUCT AT YOUR OWN RISK.";
 
-  private InputPort inport;
+	private InputPort inport;
 
-  private OutputPort[] outportArray;
+	private OutputPort[] outportArray;
 
-  @Override
-  protected void execute() {
+	@Override
+	protected void execute() {
 
-    int no = outportArray.length;
-    int backlog;
-    int sel = -1;
+		int no = outportArray.length;
+		int backlog;
+		int sel = -1;
+		boolean in_substream = false;
 
-    Packet p;
-    while ((p = inport.receive()) != null) {
-      backlog = Integer.MAX_VALUE;
-      for (int i = 0; i < no; i++) {
-        int j = outportArray[i].downstreamCount();
-        if (j < backlog) {
-          backlog = j;
-          sel = i;
-        }
-      }
-      outportArray[sel].send(p);
+		Packet p;
+		while ((p = inport.receive()) != null) {
+			if (!in_substream) {
+				backlog = Integer.MAX_VALUE;
+				for (int i = 0; i < no; i++) {
+					int j = outportArray[i].downstreamCount();
+					if (j < backlog) {
+						backlog = j;
+						sel = i;
+					}
+				}
+				if (p.getType() == Packet.OPEN)
+					in_substream = true;
+			}
+			else if (p.getType() == Packet.CLOSE)
+				in_substream = false;
+			outportArray[sel].send(p);
 
-    }
-  }
+		}
+	}
 
-  @Override
-  protected void openPorts() {
+	@Override
+	protected void openPorts() {
 
-    inport = openInput("IN");
+		inport = openInput("IN");
 
-    outportArray = openOutputArray("OUT");
+		outportArray = openOutputArray("OUT");
 
-  }
+	}
 }
