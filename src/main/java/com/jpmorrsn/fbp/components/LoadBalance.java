@@ -11,6 +11,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 /**
  * Component to assign incoming packets to the output port that has the smallest
  * backlog of packets waiting to be processed.
+ * All the IPs in a substream must go to the same output port array element (logic added Aug. 2, 2015)
  */
 @ComponentDescription("Sends incoming packets to output array element with smallest backlog")
 @OutPort(value = "OUT", arrayPort = true, description = "Packets being output")
@@ -33,11 +34,11 @@ public class LoadBalance extends Component {
 		int no = outportArray.length;
 		int backlog;
 		int sel = -1;
-		boolean in_substream = false;
+		int substream_level = 0;
 
 		Packet p;
 		while ((p = inport.receive()) != null) {
-			if (!in_substream) {
+			if (substream_level == 0) {
 				backlog = Integer.MAX_VALUE;
 				for (int i = 0; i < no; i++) {
 					int j = outportArray[i].downstreamCount();
@@ -46,11 +47,11 @@ public class LoadBalance extends Component {
 						sel = i;
 					}
 				}
-				if (p.getType() == Packet.OPEN)
-					in_substream = true;
 			}
-			else if (p.getType() == Packet.CLOSE)
-				in_substream = false;
+			if (p.getType() == Packet.OPEN)
+				substream_level ++;
+			if (p.getType() == Packet.CLOSE)
+				substream_level --;
 			outportArray[sel].send(p);
 
 		}
