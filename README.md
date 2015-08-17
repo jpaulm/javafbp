@@ -119,7 +119,7 @@ e.g.
     <tracelocks>false</tracelocks>
     </properties> 
 
-These traces will appear in the project directory under the name `xxxx-fulltrace.txt`, where `xxxx` is the name of the network being run.  Subnets have their own trace output files. 
+These traces will appear in the project directory (in GitHub if running Eclipse) under the name `xxxx-fulltrace.txt`, where `xxxx` is the name of the network being run.  Subnets have their own trace output files. 
 
 Two other options are also supported in the properties file:
 
