@@ -110,6 +110,14 @@ To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in
 
 * `tracing` 
 * `tracelocks`
+ 
+e.g.
+
+    <?xml version="1.0"?> 
+    <properties> 
+    <tracing>true</tracing>
+    <tracelocks>false</tracelocks>
+    </properties> 
 
 These traces will appear in the project directory under the name `xxxx-fulltrace.txt`, where `xxxx` is the name of the network being run.  Subnets have their own trace output files. 
 
