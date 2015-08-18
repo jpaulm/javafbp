@@ -76,7 +76,6 @@ public class TPX extends Network {
     //<a href="#reftablelookup">1<\\/a>
     //initialize("|<a//s+(href=\"#ref\\w+\")>1<\\/a>|<a $1>click here<\\/a>", component("RER32"), port("MASKS"));
 
-    // initialize("|“(.+?)”|&ldquo;$1&rdquo;", component("RER4"), port("MASKS"));
     // initialize("|’|&rsquo;", component("RER5"), port("MASKS"));
     // initialize("|–|&ndash;", component("RER6"), port("MASKS"));
   }
