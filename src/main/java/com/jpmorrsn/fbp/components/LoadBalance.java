@@ -42,16 +42,21 @@ public class LoadBalance extends Component {
 				backlog = Integer.MAX_VALUE;
 				for (int i = 0; i < no; i++) {
 					int j = outportArray[i].downstreamCount();
-					if (j < backlog) {
+					if (j <= backlog) {
 						backlog = j;
 						sel = i;
 					}
 				}
+				if (getTracing())
+				    System.out.println("Port " + sel + " selected; backlog: " + backlog);   // for debugging
 			}
 			if (p.getType() == Packet.OPEN)
 				substream_level ++;
-			if (p.getType() == Packet.CLOSE)
+			else if (p.getType() == Packet.CLOSE)
 				substream_level --;
+			//else 
+			//	System.out.println("Data: " + p.getContent());
+			
 			outportArray[sel].send(p);
 
 		}

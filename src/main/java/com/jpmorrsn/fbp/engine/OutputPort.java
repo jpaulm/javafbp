@@ -62,7 +62,7 @@ public class OutputPort {
   }
 
   /**
-   * This method returns the downstream Packet count for a given OutputPort It
+   * This method returns the downstream Packet count for a given OutputPort. It
    * is normally only used by components that do load balancing.
    * 
    * @return int

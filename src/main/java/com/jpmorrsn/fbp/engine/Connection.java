@@ -4,6 +4,9 @@ package com.jpmorrsn.fbp.engine;
 // import java.util.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -194,7 +197,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is drained (closed and empty).
    */
 
-  private synchronized boolean isDrained() {
+  synchronized boolean isDrained() {
     return isClosed() && isEmpty();
   }
 
@@ -202,7 +205,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is empty
    */
 
-  private synchronized boolean isEmpty() {
+  synchronized boolean isEmpty() {
     return usedSlots == 0;
   }
 
@@ -301,6 +304,8 @@ public class Connection implements InputPort {
     getReceiver().network.active = true;
     return packet;
   }
+  
+   
 
   private String getFullName() {
     String s = getName();

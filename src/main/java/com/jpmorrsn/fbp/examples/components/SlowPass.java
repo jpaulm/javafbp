@@ -1,6 +1,8 @@
 package com.jpmorrsn.fbp.examples.components;
 
 
+import java.util.Random;
+
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.ComponentDescription;
 import com.jpmorrsn.fbp.engine.InPort;
@@ -12,7 +14,8 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 /**
  * Pass a stream of packets to an output stream... slowly!
- * 
+ * This is like Passthru, but adds a random delay between the receive and send for each IP - the interval should
+ * range between 0 and 126 milliseconds (inclusive)
  */
 @ComponentDescription("Pass a stream of packets to an output stream... slowly!")
 @OutPort("OUT")
@@ -29,22 +32,26 @@ public class SlowPass extends Component {
 
   private OutputPort outport;
 
-  @Override
-  protected void execute() {
+	@Override
+	protected void execute() {
 
-    // make it a non-looper - for testing
+		Packet p;
 
-    Packet p = inport.receive();
+		Random rnd = new Random();
 
-    try {
-      sleep(100);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+		while (null != (p = inport.receive())) {
 
-    outport.send(p);
-  }
+			try {
+				int intvl = rnd.nextInt(127);
+				sleep(intvl);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			outport.send(p);
+		}
+	}
 
   @Override
   protected void openPorts() {

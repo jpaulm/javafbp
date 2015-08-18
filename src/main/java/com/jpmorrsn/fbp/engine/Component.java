@@ -7,6 +7,8 @@ import java.util.Stack;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+//import com.jpmorrsn.fbp.engine.Component.InputStates;
+
 
 /**
  * All components must extend this class, defining its two abstract methods
@@ -95,7 +97,8 @@ public abstract class Component extends Thread {
   OutputPort curOutPort = null;
 
   protected boolean ignorePacketCountError = false;
-
+  
+ 
   protected Component() {
     super();
     priority = Thread.NORM_PRIORITY;
@@ -826,6 +829,7 @@ public abstract class Component extends Thread {
     return openOutputArray(name, 0);
   }
 
+   
   protected void longWaitStart(final double intvl) { // interval in seconds!
     timeout = new TimeoutHandler(intvl, this);
     addtoTimeouts(timeout);
@@ -856,7 +860,52 @@ public abstract class Component extends Thread {
   protected void longWaitEnd() {
     timeout.dispose(this);
   }
+  
+  /**
+   * This function finds the array element of an input array port which has data, and returns the element number;
+   * if all elements are drained, it returns a value of -1;
+   * for other cases this functions suspends until data arrives at a port array element.
+   * 
+   * */  
 
+	protected int findPortWithData(InputPort[] ports)
+			throws InterruptedException {		
+		mother.traceFuncs(getName() + ": Starting findPortWithData");
+		while (true) {
+			boolean allDrained = true;
+			for (int i = 0; i < ports.length; i++) {
+				//if (((Connection) ports[i]).isClosed()) {
+				//	continue;
+				//}
+				if (!((Connection) ports[i]).isDrained()) {
+					allDrained = false;
+					if (!((Connection) ports[i]).isEmpty()) {
+						mother.traceFuncs(getName() + ": Ending findPortWithData - returned: " + i);
+						return i;
+					}
+				}
+			}
+			if (allDrained) {
+				mother.traceFuncs(getName() + ": Ending findPortWithData - array port drained");
+				return -1;
+			}
+			else {
+
+				try {
+					goLock.lockInterruptibly();
+					status = StatusValues.DORMANT;
+					mother.traceFuncs(getName() + ": Dormant");
+					mother.traceLocks("gpwd - await " + getName());
+					canGo.await();
+				} finally {
+					goLock.unlock();
+					mother.traceLocks("gpwd - unlock " + getName());
+					status = StatusValues.ACTIVE;
+					mother.traceFuncs(getName() + ": Active");
+				}
+			}
+		}
+	}
   /**
    * Components override this method to open their ports. This method is called
    * from the network's main thread, and should only call
@@ -914,6 +963,10 @@ public abstract class Component extends Thread {
     for (InputPort ip : inputPorts.values()) {
       ip.close();
     }
+  }
+  
+  public boolean getTracing() {
+	  return mother.tracing;
   }
 
   @Override

@@ -48,19 +48,17 @@ public class GenSS extends Component {
     outport.send(p);
 
     for (int i = 0; i < ct; i++) {
-
-      if (i % 50 == 4) {
-        p = create(Packet.CLOSE, "");
-        outport.send(p);
-        p = create(Packet.OPEN, "");
-        outport.send(p);
-      }
-
-      int j = ct - i;
-      String s = String.format("%1$06d", j) + "abcd";
+      
+      String s = String.format("%1$06d", ct - i) + "abcd";
 
       p = create(s);
       outport.send(p);
+      if (i % 5 == 5 - 1) {
+          p = create(Packet.CLOSE, "");
+          outport.send(p);
+          p = create(Packet.OPEN, "");
+          outport.send(p);
+        }
 
     }
     p = create(Packet.CLOSE, "");
