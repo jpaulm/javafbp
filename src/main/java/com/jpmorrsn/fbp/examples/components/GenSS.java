@@ -28,45 +28,44 @@ public class GenSS extends Component {
   InputPort count;
 
   @Override
-  protected void execute() {
-    Packet ctp = count.receive();
-    if (ctp == null) {
-      return;
-    }
-    String cti = (String) ctp.getContent();
-    cti = cti.trim();
-    int ct = 0;
-    try {
-      ct = Integer.parseInt(cti);
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-    }
-    drop(ctp);
-    count.close();
+	protected void execute() {
+		Packet ctp = count.receive();
+		if (ctp == null) {
+			return;
+		}
+		String cti = (String) ctp.getContent();
+		cti = cti.trim();
+		int ct = 0;
+		try {
+			ct = Integer.parseInt(cti);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		drop(ctp);
+		count.close();
 
-    Packet p = create(Packet.OPEN, "");
-    outport.send(p);
+		Packet p = create(Packet.OPEN, "");
+		outport.send(p);
 
-    for (int i = 0; i < ct; i++) {
-      
-      String s = String.format("%1$06d", ct - i) + "abcd";
+		for (int i = 0; i < ct; i++) {
 
-      p = create(s);
-      outport.send(p);
-      if (i % 5 == 5 - 1) {
-          p = create(Packet.CLOSE, "");
-          outport.send(p);
-          p = create(Packet.OPEN, "");
-          outport.send(p);
-        }
+			String s = String.format("%1$06d", ct - i) + "abcd";
 
-    }
-    p = create(Packet.CLOSE, "");
-    outport.send(p);
+			p = create(s);
+			outport.send(p);
+			if (i < ct - 1) {
+				if (i % 5 == 5 - 1) {
+					p = create(Packet.CLOSE, "");
+					outport.send(p);
 
-    // output.close();
-    // terminate();
-  }
+					p = create(Packet.OPEN, "");
+					outport.send(p);
+				}
+			}
+		}
+		p = create(Packet.CLOSE, "");
+		outport.send(p);
+	}
 
   @Override
   protected void openPorts() {

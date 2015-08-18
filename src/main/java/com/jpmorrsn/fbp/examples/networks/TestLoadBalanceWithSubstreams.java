@@ -14,7 +14,8 @@ package com.jpmorrsn.fbp.examples.networks;
 	    component("Passthru1", com.jpmorrsn.fbp.components.Passthru.class);
 	    component("Passthru2", com.jpmorrsn.fbp.components.Passthru.class);
 	    component("PassthruF", com.jpmorrsn.fbp.examples.components.SlowPass.class);
-	    component("Show", com.jpmorrsn.fbp.components.WriteToConsole.class);
+	    //component("Show", com.jpmorrsn.fbp.components.WriteToConsole.class);
+	    component("Check", com.jpmorrsn.fbp.examples.components.CheckSequenceWithinSubstreams.class);
 	    
 	    connect(component("GenData"), port("OUT"), component("LoadBalance"), port("IN"), 4);
 	    connect(component("LoadBalance"), port("OUT[0]"), component("Passthru0"), port("IN"), 4);
@@ -42,7 +43,8 @@ package com.jpmorrsn.fbp.examples.networks;
 			connect(component("Passthru2"), port("OUT"), component("PassthruF"),
 					port("IN"), 4);
 		}
-	    connect(component("PassthruF"), port("OUT"), component("Show"), port("IN"), 4);
+	    //connect(component("PassthruF"), port("OUT"), component("Show"), port("IN"), 4);
+	    connect(component("PassthruF"), port("OUT"), component("Check"), port("IN"), 4);
 	    
 	    initialize("400", component("GenData"), port("COUNT"));
 	    

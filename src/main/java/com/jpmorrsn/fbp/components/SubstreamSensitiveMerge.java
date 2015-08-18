@@ -1,10 +1,7 @@
 package com.jpmorrsn.fbp.components;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.ComponentDescription;
-import com.jpmorrsn.fbp.engine.Connection;
 import com.jpmorrsn.fbp.engine.InPort;
 import com.jpmorrsn.fbp.engine.InputPort;
 import com.jpmorrsn.fbp.engine.OutPort;
