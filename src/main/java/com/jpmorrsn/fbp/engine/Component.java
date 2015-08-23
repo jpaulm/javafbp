@@ -868,7 +868,7 @@ public abstract class Component extends Thread {
    * 
    * */  
 
-	protected int findPortWithData(InputPort[] ports)
+	protected int findInputPortElementWithData(InputPort[] ports)
 			throws InterruptedException {		
 		mother.traceFuncs(getName() + ": Starting findPortWithData");
 		while (true) {

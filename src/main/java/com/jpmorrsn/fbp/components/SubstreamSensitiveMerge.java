@@ -37,7 +37,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 		while (true) {
 			if (substream_level == 0) {
 				try {
-					i = findPortWithData(inportArray);
+					i = findInputPortElementWithData(inportArray);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
