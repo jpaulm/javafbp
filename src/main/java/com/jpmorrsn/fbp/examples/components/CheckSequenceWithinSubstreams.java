@@ -32,7 +32,7 @@ package com.jpmorrsn.fbp.examples.components;
 	protected void execute() {
 
 		Packet p;
-		int seq = -2;
+		int seq = -2;		
 		int count = 0;
 
 		while (null != (p = inport.receive())) {
@@ -41,11 +41,16 @@ package com.jpmorrsn.fbp.examples.components;
 					System.out.println("Stream out of sequence - case 1");
 					return;
 				}
-				seq = -1;	
+				seq = -1;
+				count = 5;
 				
 			} else if (p.getType() == Packet.CLOSE) {
 				if (seq < 0) {
 					System.out.println("Stream out of sequence - case 2");
+					return;
+				}
+				if (count != 0) {
+					System.out.println("Wrong number of IPs in substream");
 					return;
 				}
 				seq = -2;	
@@ -55,17 +60,17 @@ package com.jpmorrsn.fbp.examples.components;
 				int i = s.indexOf("abcd");
 				int j = Integer.parseInt(s.substring(0, i));
 				if (seq == -1) {
-					System.out.println("1st of substream " + count + ": " + s);
+					System.out.println("1st of substream " + j + ": " + s);
 					seq = j;
-					count++;
 				}
 				else {
 					if (j != seq - 1) {
 						System.out.println("Stream out of sequence - case 3");
 						return;
 					}
-					seq = j;
+					seq = j;					
 				}
+				count--;
 			}
 
 			if (outport.isConnected())
