@@ -893,9 +893,9 @@ public abstract class Component extends Thread {
 
 				try {
 					goLock.lockInterruptibly();
-					status = StatusValues.DORMANT;
-					mother.traceFuncs(getName() + ": Dormant");
-					mother.traceLocks("gpwd - await " + getName());
+					status = StatusValues.SUSP_RECV;
+					mother.traceFuncs(getName() + ": find IPE with data");
+					mother.traceLocks("fipewd - await " + getName());
 					canGo.await();
 				} finally {
 					goLock.unlock();
