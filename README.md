@@ -3,6 +3,7 @@ JavaFBP
 
 Java Implementation of Flow-Based Programming (FBP)
 
+For JavaFBP support for WebSockets, go to https://github.com/jpaulm/javafbp-websockets
 
 General
 ---
