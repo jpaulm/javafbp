@@ -3,8 +3,6 @@ JavaFBP
 
 Java Implementation of Flow-Based Programming (FBP)
 
-For JavaFBP support for WebSockets, go to https://github.com/jpaulm/javafbp-websockets
-
 General
 ---
 
@@ -31,7 +29,7 @@ Prerequisites
 The project requires Gradle for building (tested with version 2.0). You can download the corresponding package from the following URL: 
 http://www.gradle.org
 
-Windows and Linux users should follow the installation instructions on the Maven website (URL provided above).
+Windows and Linux users should follow the installation instructions on the Maven website.
 
 OSX users (using Brew, http://brew.sh) can install Maven by executing the following command:
 
@@ -79,7 +77,7 @@ For example:
 Running a test
 ----
 
-Here is a simple test that can be run to test that everything is working.
+Here is a simple command-line test that can be run to test that everything is working.
 
 In the project directory, enter
 
