@@ -61,7 +61,7 @@ package com.jpmorrsn.fbp.examples.components;
 				int i = s.indexOf("abcd");
 				int j = Integer.parseInt(s.substring(0, i));
 				if (seq == -1) {
-					System.out.println("1st of substream " + j + ": " + s);
+					//System.out.println("1st of substream " + j + ": " + s);
 					seq = j;
 				}
 				else {

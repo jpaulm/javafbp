@@ -53,7 +53,7 @@ public class GenSS extends Component {
 
 			p = create(s);
 			outport.send(p);
-			if (i < ct - 1) {
+			if (i < ct - 1) {    // prevent empty bracket pair at end
 				if (i % 5 == 5 - 1) {
 					p = create(Packet.CLOSE, "");
 					outport.send(p);
