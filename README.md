@@ -104,7 +104,7 @@ where the counts are respectively: creates, normal drops, sends, non-null receiv
 
 Warning!
 -----
-Care must be taken if combining LoadBalance and SubstreamSensitiveMerge - this should probably be avoided if possible. The problem is described in more detail under #8 .
+Care must be taken if combining LoadBalance and SubstreamSensitiveMerge - this should probably be avoided if possible. The problem is described in more detail under https://github.com/jpaulm/javafbp/issues/8.
 
 
 
