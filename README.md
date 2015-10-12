@@ -102,6 +102,10 @@ At the end of the run, you should see:
     
 where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".   
 
+Warning!
+-----
+Care must be taken if combining LoadBalance and SubstreamSensitiveMerge - this should probably be avoided if possible. The problem is described in more detail under #8 .
+
 
 
 Tracing and other options
