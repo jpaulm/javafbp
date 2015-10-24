@@ -104,7 +104,7 @@ where the counts are respectively: creates, normal drops, sends, non-null receiv
 
 Warning!
 -----
-Care must be taken if combining LoadBalance (with substreams) and SubstreamSensitiveMerge in a divergent-convergent pattern - this pattern is one of the warning signals for deadlocks anyway. The problem is described in more detail under https://github.com/jpaulm/javafbp/issues/8.
+Care must be taken if combining `LoadBalance` (with substreams) and `SubstreamSensitiveMerge` in a divergent-convergent pattern - this pattern is one of the warning signals for deadlocks anyway. The problem is described in more detail under https://github.com/jpaulm/javafbp/issues/8.
 
 Tracing and other options
 ---
