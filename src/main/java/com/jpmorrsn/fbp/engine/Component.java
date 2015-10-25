@@ -59,7 +59,7 @@ public abstract class Component extends Thread {
   // This field maintains the Component status
 
   enum StatusValues {
-    NOT_STARTED, ACTIVE, DORMANT, SUSP_RECV, SUSP_SEND, TERMINATED, LONG_WAIT, ERROR;
+    NOT_STARTED, ACTIVE, DORMANT, SUSP_RECV, SUSP_SEND, TERMINATED, LONG_WAIT, SUSP_FIPE, ERROR;
 
     // private int value;
 
@@ -893,7 +893,7 @@ public abstract class Component extends Thread {
 
 				try {
 					goLock.lockInterruptibly();
-					status = StatusValues.SUSP_RECV;
+					status = StatusValues.SUSP_FIPE;					
 					mother.traceFuncs(getName() + ": find IPE with data");
 					mother.traceLocks("fipewd - await " + getName());
 					canGo.await();

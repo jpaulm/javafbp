@@ -6,8 +6,11 @@ package com.jpmorrsn.fbp.examples.networks;
  * I believe this will work reliably if the longest subtream will fit within the connections on the shortest path
  * between the LoadBalance process and the SubstreamSensitiveMerge.  
  * 
- * If this rule is violated, you can get unpredictable deadlocks.  It is therefore safer to use LoadBalance or 
- * SubstreamSensitiveMerge *in different networks*!
+ * If this rule is violated, you get unpredictable deadlocks.  
+ * This test seems to crash about 1 time in 5 or 6!  SlowPass uses a random
+ * interval between 0 and 500 msecs. 
+ * 
+ * It is therefore safer to use LoadBalance and SubstreamSensitiveMerge in different networks*!
  * 
  * You can test this by changing the capacities marked with arrows.  
  * 
@@ -26,7 +29,7 @@ package com.jpmorrsn.fbp.examples.networks;
 	    component("LoadBalance", com.jpmorrsn.fbp.components.LoadBalance.class);		    
 	    component("Passthru0", com.jpmorrsn.fbp.examples.components.SlowPass.class);
 	    component("Passthru1", com.jpmorrsn.fbp.examples.components.SlowPass.class);
-	    component("Passthru2", com.jpmorrsn.fbp.examples.components.SlowPass.class);
+	    component("Passthru2", com.jpmorrsn.fbp.components.Passthru.class);
 	    component("SlowPass", com.jpmorrsn.fbp.examples.components.SlowPass.class);
 	    component("Show", com.jpmorrsn.fbp.components.WriteToConsole.class);
 	    component("Check", com.jpmorrsn.fbp.examples.components.CheckSequenceWithinSubstreams.class);

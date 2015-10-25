@@ -42,7 +42,7 @@ public class SlowPass extends Component {
 		while (null != (p = inport.receive())) {
 
 			try {
-				long intvl = (long) rnd.nextInt(400);
+				long intvl = (long) rnd.nextInt(500);
 				sleep(intvl);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

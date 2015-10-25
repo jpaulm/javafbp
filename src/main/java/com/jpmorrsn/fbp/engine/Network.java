@@ -867,6 +867,9 @@ public abstract class Network extends Component {
         if (st.trim().equals("SUSP_SEND")) {
           cn = comp.curOutPort.getName();
         }
+        if (st.trim().equals("SUSP_FIPE")) {
+            cn = comp.getName();
+          }
 
         mss.add(String.format("--- %2$s     %1$s", cn, st));
       }
