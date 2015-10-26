@@ -35,9 +35,9 @@ package com.jpmorrsn.fbp.examples.networks;
 	    component("Check", com.jpmorrsn.fbp.examples.components.CheckSequenceWithinSubstreams.class);
 	    
 	    connect(component("GenSS"), port("OUT"), component("LoadBalance"), port("IN"), 4);
-	    connect(component("LoadBalance"), port("OUT[0]"), component("Passthru0"), port("IN"), 1);  // <---
-	    connect(component("LoadBalance"), port("OUT[1]"), component("Passthru1"), port("IN"), 1);  // <---
-	    connect(component("LoadBalance"), port("OUT[2]"), component("Passthru2"), port("IN"), 1);  // <---
+	    connect(component("LoadBalance"), port("OUT[0]"), component("Passthru0"), port("IN"), 7);  // <---
+	    connect(component("LoadBalance"), port("OUT[1]"), component("Passthru1"), port("IN"), 7);  // <---
+	    connect(component("LoadBalance"), port("OUT[2]"), component("Passthru2"), port("IN"), 7);  // <---
 	    
 		if (makeMergeSubstreamSensitive) {
 			component("SubstreamSensitiveMerge",

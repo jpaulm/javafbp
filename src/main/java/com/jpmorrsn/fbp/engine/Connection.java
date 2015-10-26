@@ -388,7 +388,8 @@ public class Connection implements InputPort {
       }
       usedSlots++; // move this to here
       if (getReceiver().getStatus() == Component.StatusValues.DORMANT
-          || getReceiver().getStatus() == Component.StatusValues.NOT_STARTED) {
+          || getReceiver().getStatus() == Component.StatusValues.NOT_STARTED
+          || getReceiver().getStatus() == Component.StatusValues.SUSP_FIPE) {
         getReceiver().activate(); // start or wake up if necessary
       } else {
         notifyAll(); // notify receiver

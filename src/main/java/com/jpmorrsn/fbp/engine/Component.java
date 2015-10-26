@@ -320,7 +320,7 @@ public abstract class Component extends Thread {
       try {
         goLock.lockInterruptibly();
 
-        if (status == StatusValues.DORMANT) {
+        if (status == StatusValues.DORMANT || status == StatusValues.SUSP_FIPE) {
           canGo.signal();
           mother.traceLocks("act - signal " + getName());
         }
