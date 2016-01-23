@@ -12,8 +12,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 /** Component to concatenate two or more streams of packets
 */
-// 3 dummy output ports added for testing purposes - now commented out
-//@OutPorts({@OutPort("OUT"), @OutPort("OUTM"),@OutPort("OUTN"),@OutPort("OUTO")})
+
 @ComponentDescription("Concatenate two or more streams of packets")
 @OutPort("OUT")
 @InPort(value = "IN", arrayPort = true)

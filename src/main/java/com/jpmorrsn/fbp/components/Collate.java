@@ -13,7 +13,11 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 /**
  * Component to collate two or more streams of packets, based on a list of
- * control field lengths
+ * control field lengths held in the CTLFIELDS IIP
+ * 
+ * Control fields in incoming IPs are assumed to be contiguous, starting at byte 0
+ * 
+ * Input streams are assumed to be sorted on the same control fields, in ascending order
  */
 @ComponentDescription("Collate two or more streams, based on a list of control field lengths ")
 @OutPort("OUT")

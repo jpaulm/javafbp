@@ -18,6 +18,8 @@ import com.jpmorrsn.fbp.engine.Packet;
 		/** "Round Robin" Merge - merges an IP from element 0, then one from 1, then one from 2, and so on until
 		 * it cycles back to 0, and so on until the first end of stream 
 		 * This component will just terminate when first receive gets end of stream
+		 * 
+		 * The assumption is that all input streams have the same number of IPs
 		**/
 
 	  static final String copyright = "Copyright 2007, 2015, J. Paul Morrison.  At your option, you may copy, "

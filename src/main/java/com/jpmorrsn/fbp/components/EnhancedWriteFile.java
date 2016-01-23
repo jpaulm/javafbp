@@ -28,7 +28,7 @@ import com.jpmorrsn.fbp.engine.Packet;
  * "must run" so that the output file will be cleared even if no data packets
  * are input.
  * This differs from the old WriteFile in that it uses a 1/2 Mbyte buffer, and only
- * write the buffer out when it is full (or at end of job).
+ * writes the buffer out when it is full (or at end of job).
  */
 @ComponentDescription("Writes a stream of packets to an I/O file")
 @InPorts({ @InPort(value = "IN", description = "Packets to be written", type = String.class),

@@ -1,13 +1,18 @@
 package com.jpmorrsn.fbp.components;
 
 
-/* Sven Steinseifer - 2010 */
-
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.InPort;
 import com.jpmorrsn.fbp.engine.InputPort;
 import com.jpmorrsn.fbp.engine.Packet;
-
+/**
+ *  
+ * @author Sven Steinseifer - 2010
+ *
+ * This component displays the content of incoming IPs; open and close brackets 
+ *  are shown with their level numbers - the first open bracket is shown as OPEN(1)
+ *  
+ */
 
 @InPort("IN")
 public class Output extends Component {
