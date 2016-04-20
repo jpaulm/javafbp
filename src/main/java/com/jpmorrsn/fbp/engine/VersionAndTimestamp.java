@@ -6,9 +6,9 @@ package com.jpmorrsn.fbp.engine;
 
 public final class VersionAndTimestamp {
 
-  private static String version = "JavaFBP - version 3.0.3";
+  private static String version = "JavaFBP - version 3.0.4";
 
-  private static String date = "29 Mar., 2016";
+  private static String date = "19 Apr., 2016";
 
   static String getVersion() {
     return version;
