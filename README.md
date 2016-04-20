@@ -57,9 +57,9 @@ You may have to go to the project Properties and select Java Build Path/Source; 
 Building from command line
 ---
 
-**Latest release: `javafbp-3.0.2`**.
+**Latest release: `javafbp-3.0.3`**.
 
-For building the project simply run the following command:
+The latest jar file can simply be downloaded from the latest release, or it can be rebuilt , by running the following command:
 
     gradle build
 
