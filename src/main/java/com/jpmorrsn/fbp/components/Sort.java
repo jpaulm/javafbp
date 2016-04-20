@@ -32,7 +32,7 @@ public class Sort extends Component {
 
     Packet p;
     int i = 0, j, k, n;
-    Packet[] array = new Packet[9999];
+    Packet[] array = new Packet[999999];
     while ((p = inport.receive()) != null) {
       array[i] = p;
       //System.out.println("in: " + p.getContent());

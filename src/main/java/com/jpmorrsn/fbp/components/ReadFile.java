@@ -43,7 +43,7 @@ public class ReadFile extends Component {
     if (rp == null) {
       return;
     }
-    source.close();
+    //source.close();
 
     String sf = (String) rp.getContent();
     String format = null;
