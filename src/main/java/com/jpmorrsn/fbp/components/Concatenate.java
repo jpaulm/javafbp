@@ -28,7 +28,8 @@ public class Concatenate extends Component {
 
   private OutputPort outport;
 
-  @Override
+  @SuppressWarnings("rawtypes")
+@Override
   protected void execute() {
 
     int no = inportArray.length;

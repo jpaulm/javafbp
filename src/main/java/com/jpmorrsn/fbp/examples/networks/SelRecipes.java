@@ -10,7 +10,7 @@ import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
 
 
-public class CompressLdif extends Network {
+public class SelRecipes extends Network {
 
   static final String copyright = "Copyright 2008, 2012, J. Paul Morrison.  At your option, you may copy, "
       + "distribute, or make derivative works under the terms of the Clarified Artistic License, "
@@ -23,12 +23,12 @@ public class CompressLdif extends Network {
     connect(component("Read", ReadFile.class), port("OUT"), component("StartsWith", StartsWith.class), port("IN"));
     connect(component("StartsWith"), port("ACC"), component("Write", WriteToConsole.class), port("IN"));
     connect(component("StartsWith"), port("REJ"), component("Discard", Discard.class), port("IN"));
-    initialize("testdata/testfile.ldif".replace("/", File.separator), component("Read"), port("SOURCE"));
-    initialize("dn:", component("StartsWith"), port("TEST"));
+    initialize("testdata/recipes.csv".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("\"A\"", component("StartsWith"), port("TEST"));
 
   }
 
   public static void main(final String[] argv) throws Exception {
-    new CompressLdif().go();
+    new SelRecipes().go();
   }
 }

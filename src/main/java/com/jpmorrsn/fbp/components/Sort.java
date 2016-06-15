@@ -12,7 +12,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 /** Sort a stream of Packets to an output stream
 **/
-@ComponentDescription("Sorts up to 9999 packets, based on contents")
+@ComponentDescription("Sorts up to 999999 packets, based on contents")
 @OutPort(value = "OUT", description = "Output port", type = String.class)
 @InPort(value = "IN", description = "Packets to be sorted", type = String.class)
 public class Sort extends Component {

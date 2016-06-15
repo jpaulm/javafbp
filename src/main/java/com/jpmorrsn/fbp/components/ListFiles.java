@@ -45,7 +45,7 @@ public class ListFiles extends Component {
 
   @Override
   protected void execute() {
-	int unProcessedCount = 0;
+	int unProcessedCount = 1;
 	Packet rp = null;
 	
     while (null != (rp = source.receive())) { 
