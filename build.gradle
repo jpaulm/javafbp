@@ -1,13 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
-apply plugin: 'signing'
 
-version = '3.0.4'
-group = 'com.jpaulmorrison'
-archivesBaseName = "javafbp"  
+version = '3.0.5'
 
-description = 'Java Implementation of "Classical" Flow-Based Programming (FBP), which is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.'
+description = 'Java Implementation of Flow-Based Programming (FBP), which is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
@@ -16,85 +12,4 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version
     }
-}
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
-
-
-task writeNewPom << {
-    pom {
-        project {
-            inceptionYear '2016'
-            licenses {
-                license {
-                    name 'GNU Lesser General Public License, Version 3.0'
-                    url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-                    distribution 'repo'
-                }
-            }
-        }
-    }.writeTo("$buildDir/newpom.xml")
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
-      }
-
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
-      }
-
-      pom.project {
-        name 'JavaFBP'
-        packaging 'jar'
-        // optionally artifactId can be defined here 
-        description 'Trying to push JavaFBP from GitHub to the Central Repository.'
-        url 'https://github.com/jpaulm/javafbp'
-
-        scm {
-          connection 'https://github.com/jpaulm'
-          developerConnection 'https://github.com/jpaulm'
-          url 'https://github.com/jpaulm'
-        }
-
-        licenses {
-          license {
-            name 'GNU Lesser General Public License, Version 3.0'
-            url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-          }
-        }
-
-        developers {
-          developer {
-            id 'jpaulmorr'
-            name 'J. Paul Morrison'
-            email 'paul.morrison@rogers.com'
-          }
-        }
-      }
-    }
-  }
 }
