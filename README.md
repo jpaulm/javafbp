@@ -16,6 +16,8 @@ Web sites for FBP:
  
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
+  
+__ Trying to deploy JavaFBP to Maven - slow progress - see issue #11 __
  
 JavaFBP-WebSockets
 ---
