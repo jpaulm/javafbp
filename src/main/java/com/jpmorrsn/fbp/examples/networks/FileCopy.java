@@ -19,8 +19,8 @@ public class FileCopy extends Network {
   @Override
   protected void define() {
     connect(component("Read", ReadFile.class), port("OUT"), component("Write", WriteFile.class), port("IN"));
-    initialize("resources/testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
-    initialize("resources/testdata/output".replace("/", File.separator), component("Write"), port("DESTINATION"));
+    initialize("src/main/resources/testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("src/main/resources/testdata/output".replace("/", File.separator), component("Write"), port("DESTINATION"));
   }
 
   public static void main(final String[] argv) throws Throwable {

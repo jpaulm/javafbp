@@ -21,7 +21,7 @@ public class TestTune extends Network {
     component("SoundMixer", com.jpmorrsn.fbp.components.SoundMixer.class);
 
     connect(component("_Read_Tune_File"), port("OUT"), component("_Text_to_Int_Array"), port("IN"));
-    initialize("resources/testdata/tune.txt".replace("/", File.separator), component("_Read_Tune_File"), port("SOURCE"));
+    initialize("src/main/resources/testdata/tune.txt".replace("/", File.separator), component("_Read_Tune_File"), port("SOURCE"));
     connect(component("_Text_to_Int_Array"), port("OUT"), component("GenSamples"), port("IN"));
     connect("GenSamples.OUT", "SoundMixer.IN");
     initialize("1", "SoundMixer.GAINS");

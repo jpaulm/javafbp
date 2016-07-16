@@ -23,7 +23,7 @@ public class CopyFileToCons extends Network {
     connect(component("Read", ReadFile.class), port("OUT"), component("Dup", DuplicateString.class), port("IN"));
     connect(component("Dup"), port("DUPLICATE"), component("Write", WriteToConsole.class), port("IN"));
     connect(component("Dup"), port("OUT"), component("Disc", Discard.class), port("IN"));
-    initialize("resources/testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("src/main/resources/testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
 
   }
 

@@ -23,8 +23,8 @@ public class TestSelNthItem extends Network {
 
     // The selected number is zero based: 11 will result in twelfth record
     initialize("11", component("Select"), port("NUMBER"));
-    initialize("resources/testdata/21lines.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
-    initialize("resources/testdata/output".replace("/", File.separator), component("Write"), port("DESTINATION"));
+    initialize("src/main/resources/testdata/21lines.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("src/main/resources/testdata/output".replace("/", File.separator), component("Write"), port("DESTINATION"));
   }
 
   public static void main(final String[] argv) throws Exception {

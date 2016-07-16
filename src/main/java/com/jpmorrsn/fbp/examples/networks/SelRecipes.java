@@ -23,7 +23,7 @@ public class SelRecipes extends Network {
     connect(component("Read", ReadFile.class), port("OUT"), component("StartsWith", StartsWith.class), port("IN"));
     connect(component("StartsWith"), port("ACC"), component("Write", WriteToConsole.class), port("IN"));
     connect(component("StartsWith"), port("REJ"), component("Discard", Discard.class), port("IN"));
-    initialize("resources/testdata/recipes.csv".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("src/main/resources/testdata/recipes.csv".replace("/", File.separator), component("Read"), port("SOURCE"));
     initialize("\"A\"", component("StartsWith"), port("TEST"));
 
   }
