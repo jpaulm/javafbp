@@ -99,8 +99,7 @@ public class OutputPort {
    * it!
    * 
    * @param packet
-   *            packet to send
-   * @return true if successful
+   *            packet to send  
    */
 
   public// The send function.

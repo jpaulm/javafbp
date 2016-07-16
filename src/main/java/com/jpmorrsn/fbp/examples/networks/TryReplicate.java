@@ -20,7 +20,7 @@ public class TryReplicate extends Network {
   @Override
   protected void define() {
     connect(component("Read", ReadFile.class), port("OUT"), component("Replicate", ReplString.class), port("IN"));
-    initialize("testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
+    initialize("resources/testdata/testdata.txt".replace("/", File.separator), component("Read"), port("SOURCE"));
 
     connect(component("Replicate"), port("OUT[0]"), component("Write1", WriteToConsole.class), port("IN"));
 

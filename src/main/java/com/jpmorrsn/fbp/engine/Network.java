@@ -1177,7 +1177,6 @@ public abstract class Network extends Component {
    * Use putGlobal to update.
    * 
    * @param s The String key to the global field 
-   * @param o The Object value to be stored at the String key.
    * @return Object containing the entry if one is found, or null, if none is found.
    * 
    */

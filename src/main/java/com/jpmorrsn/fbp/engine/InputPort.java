@@ -50,12 +50,12 @@ public interface InputPort {
   public void setType(Class type);
 
   /**
-   * @return
+   * @return string containing port name
    */
   String getName();
 
   /**
-   * @return
+   * @return Port object
    */
   Port getPort();
 

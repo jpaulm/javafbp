@@ -29,7 +29,7 @@ public class WordCount extends Network {
 	component("Display", WriteToConsole.class);
 	
     connect("Read.OUT", "DeCompose.IN");
-    initialize("testdata/readme.txt".replace("/", File.separator), "Read.SOURCE");
+    initialize("resources/testdata/readme.txt".replace("/", File.separator), "Read.SOURCE");
     connect("DeCompose.OUT","GenerateWordCounts.IN");
     connect("GenerateWordCounts.OUT","Sort.IN");
     connect("Sort.OUT","Display.IN");

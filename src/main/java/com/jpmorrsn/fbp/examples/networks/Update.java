@@ -27,8 +27,8 @@ public class Update extends Network {
     connect(component("Read Master"), port("OUT"), component("Collate"), port("IN[0]"));
     connect(component("Read Details"), port("OUT"), component("Collate"), port("IN[1]"));
     connect(component("Collate"), port("OUT"), component("Display"), port("IN"));
-    initialize("testdata/mfile".replace("/", File.separator), component("Read Master"), port("SOURCE"));
-    initialize("testdata/dfile".replace("/", File.separator), component("Read Details"), port("SOURCE"));
+    initialize("resources/testdata/mfile".replace("/", File.separator), component("Read Master"), port("SOURCE"));
+    initialize("resources/testdata/dfile".replace("/", File.separator), component("Read Details"), port("SOURCE"));
 
     initialize("3, 2, 5", component("Collate"), port("CTLFIELDS"));
 

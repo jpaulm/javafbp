@@ -30,7 +30,7 @@ public class FileViewer extends Network {
     connect(component("Write IN_and MENU_Read user_CMD"), port("CMD"), component("Interpret"), port("IN"));
     connect(component("Read using_given seek_and lines"), port("OUT"), component("Write IN_and MENU_Read user_CMD"),
         port("IN"));
-    initialize("testdata/persons.csv".replace("/", File.separator), component("Read using_given seek_and lines"),
+    initialize("resources/testdata/persons.csv".replace("/", File.separator), component("Read using_given seek_and lines"),
         port("SOURCE"));
 
   }
