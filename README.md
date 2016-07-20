@@ -17,7 +17,7 @@ Web sites for FBP:
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-__ Trying to deploy JavaFBP to Maven - slow progress - see issue #11 __
+**Trying to deploy JavaFBP to Maven - still some questions - see issue #11**
  
 JavaFBP-WebSockets
 ---
@@ -59,7 +59,7 @@ You may have to go to the project Properties and select Java Build Path/Source; 
 Building from command line
 ---
 
-**Latest release: `javafbp-3.0.3`**.
+**Latest release: `javafbp-3.0.5`**.
 
 The latest jar file can simply be downloaded from the latest release, or it can be rebuilt , by running the following command:
 
