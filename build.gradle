@@ -36,10 +36,26 @@ version = '3.0.5'
 group = 'com.jpaulmorrison'
 
 
-description = 'Deploy JavaFBP to Central Respository'
+description = 'Deploy JavaFBP to Central Repository'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
+
+ext {
+    snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
+    releasePublicationRepository = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+    // Credentials for publication repositories (needed only for publishing)
+    // Should be set in ${HOME}/.gradle/gradle.properties
+    ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
+    osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
+}
+
+// Used to generate initial maven-dir layout
+task "create-dirs" { description = "Create default maven directory structure" } << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
 
 jar {
     manifest {
@@ -65,23 +81,41 @@ signing {
     sign configurations.archives
 }
 
+task writeNewPom << {
+    pom {
+        project {
+            groupId 'com.jpaulmorrison'
+            artifactId 'javafbp'
+            version '3.0.5'
+        
+            inceptionYear '2016'
+            licenses {
+                license {
+                    name 'GNU Lesser General Public License, Version 3.0'
+                    url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                }
+            }
+        }
+    }.writeTo("pom.xml")
+}
+
 uploadArchives {
   repositories {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
+      repository(url: releasePublicationRepository) {
+        authentication(userName: ossrhUser, password: ossrhPassword)
       }
 
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
+      snapshotRepository(url: snapshotPublicationRepository) {
+       authentication(userName: ossrhUser, password: ossrhPassword)
       }
 
       pom.project {
         name 'JavaFBP'
-        //description "${parent.project.description}"
-        //groupId "${parent.project.group}"
+        description 'Deploy JavaFBP to Central Repository'
+        groupId 'com.jpaulmorrison'
         packaging 'jar'
         // optionally artifactId can be defined here         
         url 'https://github.com/jpaulm/javafbp'
