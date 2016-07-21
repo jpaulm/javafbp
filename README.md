@@ -6,6 +6,8 @@ Java Implementation of Flow-Based Programming (FBP)
 General
 ---
 
+**Latest release: `javafbp-3.0.5`**.
+
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
 FBP is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.
@@ -17,7 +19,11 @@ Web sites for FBP:
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-**Trying to deploy JavaFBP to Maven - still some questions - see issue #11**
+Promoted to Maven central - http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  Still some issues - see issue #11
+
+Javadoc is on Maven:
+* jar file - http://search.maven.org/remotecontent?filepath=com/jpaulmorrison/javafbp/3.0.5/javafbp-3.0.5-javadoc.jar   
+* can also be browsed at http://jpaulm.github.io/javafbp/
  
 JavaFBP-WebSockets
 ---
@@ -58,8 +64,6 @@ You may have to go to the project Properties and select Java Build Path/Source; 
 
 Building from command line
 ---
-
-**Latest release: `javafbp-3.0.5`**.
 
 The latest jar file can simply be downloaded from the latest release, or it can be rebuilt , by running the following command:
 
