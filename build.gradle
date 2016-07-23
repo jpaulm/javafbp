@@ -36,7 +36,7 @@ version = '3.0.5'
 group = 'com.jpaulmorrison'
 
 
-description = 'Deploy JavaFBP to Central Repository'
+description = 'Java Implementation of "Classical" Flow-Based Programming'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
@@ -114,7 +114,7 @@ uploadArchives {
 
       pom.project {
         name 'JavaFBP'
-        description 'Deploy JavaFBP to Central Repository'
+        description 'Java Implementation of "Classical" Flow-Based Programming'
         groupId 'com.jpaulmorrison'
         packaging 'jar'
         // optionally artifactId can be defined here         
