@@ -96,27 +96,7 @@ task writeNewPom << {
                     url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
                 }
             }
-            <developers>
-    <developer>
-      <id>jpaulm</id>
-      <name>J. Paul Rodker Morrison</name>
-      <email>paul.morrison@rogers.com</email>
-      <url>https://github.com/jpaulm</url>
-      <roles>
-        <role>founder</role>
-        <role>maintainer</role>
-      </roles>
-    </developer>
-    <developer>
-      <id>olobunets</id>
-      <name>Alex Lobunets</name>
-      <email>alexander.lobunets@gmail.com</email>
-      <url>https://github.com/oleksandr</url>
-      <roles>
-        <role>maintainer</role>
-      </roles>
-    </developer>
-</developers>
+   
         }
     }.writeTo("pom.xml")
 }

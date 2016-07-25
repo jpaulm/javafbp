@@ -8,7 +8,13 @@ hs_err_pid*
 
 # Maven packages/etc
 target
-build
+build/libs
+build/poms
+build/tmp
+build/resources
+build/classes
+build/dependency-cache
+build/ivy.xml
 
 # Eclipse project
 bin
