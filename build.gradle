@@ -32,7 +32,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = '3.0.5'
+version = '3.0.6'
 group = 'com.jpaulmorrison'
 
 
@@ -40,6 +40,7 @@ description = 'Java Implementation of "Classical" Flow-Based Programming'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
+
 
 ext {
     snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -95,6 +96,27 @@ task writeNewPom << {
                     url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
                 }
             }
+            <developers>
+    <developer>
+      <id>jpaulm</id>
+      <name>J. Paul Rodker Morrison</name>
+      <email>paul.morrison@rogers.com</email>
+      <url>https://github.com/jpaulm</url>
+      <roles>
+        <role>founder</role>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>olobunets</id>
+      <name>Alex Lobunets</name>
+      <email>alexander.lobunets@gmail.com</email>
+      <url>https://github.com/oleksandr</url>
+      <roles>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+</developers>
         }
     }.writeTo("pom.xml")
 }

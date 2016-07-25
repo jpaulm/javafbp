@@ -1,8 +1,7 @@
 package com.jpmorrsn.fbp.components;
 
-
-/*Component copies incoming packets - delayed until trigger received
- * 
+/*
+ *Component copies incoming packets - delayed until trigger received
  */
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.ComponentDescription;

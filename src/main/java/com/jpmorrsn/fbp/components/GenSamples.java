@@ -17,7 +17,6 @@ import com.jpmorrsn.fbp.engine.Packet;
  */
 @ComponentDescription("Generate arrays of sound samples")
 @InPort("IN")
-// amplitude range will be between +RANGE and -RANGE
 @OutPorts({ @OutPort("OUT"), @OutPort(value = "TRACE", optional = true) })
 // trace if connected
 public class GenSamples extends Component {
