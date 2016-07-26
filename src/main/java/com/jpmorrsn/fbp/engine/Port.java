@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public class Port {
 
 	/**
-	 * This class is used optionally in 'connect' invocations
+	 * This class is used optionally in 'connect' invocations in network definitions
 	 *   
 	 */
 

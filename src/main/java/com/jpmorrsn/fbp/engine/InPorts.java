@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /***
  * 
- * Annotation for describing multiple input ports on a component 
+ * Annotation for component, describing multiple input ports on a component 
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

@@ -1,3 +1,20 @@
+/*
+ * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
+ * Copyright (C) 2009, 2016 J. Paul Morrison
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see the GNU Library General Public License v3
+ * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
+ */
 package com.jpmorrsn.fbp.components;
 
 
@@ -18,12 +35,13 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 
 /**
- * Server side Component to read data from socket, generating a stream of
- * packets. The file name is specified as a String via an
+ * Component to read data from socket, generating a stream of
+ * packets. The port number is specified as a String via an
  * InitializationConnection.
  * 
  * This component reads a stream of packets from a socket, issuing a write of an Ack every 20 packets - this 
  * is a complementary component to WriteToSocket, which issues a read after every 20 packets.
+ * 
  * The idea here is to take advantage of the speed of reading the packets with minimal checking, but 
  * to check synchronization periodically (it made sense when I wrote it!). There are 2 similar components
  * in the C#FBP implementation.
@@ -36,12 +54,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 @InPort(value = "PORT", description = "Port name", type = String.class)
 public class ReadFromSocket extends Component {
 
-  static final String copyright = "Copyright 2007, 2008, 2012, J. Paul Morrison.  At your option, you may copy, "
-      + "distribute, or make derivative works under the terms of the Clarified Artistic License, "
-      + "based on the Everything Development Company's Artistic License.  A document describing "
-      + "this License may be found at http://www.jpaulmorrison.com/fbp/artistic2.htm. "
-      + "THERE IS NO WARRANTY; USE THIS PRODUCT AT YOUR OWN RISK.";
-
+  
   private OutputPort outport;
 
   private InputPort pport;

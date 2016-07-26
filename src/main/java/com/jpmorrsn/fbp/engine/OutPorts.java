@@ -25,6 +25,12 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface OutPorts {
+	
+	/***
+	 * 
+	 * Annotation for component, describing multiple output ports on a component 
+	 *
+	 */
 
   
   OutPort[] value();

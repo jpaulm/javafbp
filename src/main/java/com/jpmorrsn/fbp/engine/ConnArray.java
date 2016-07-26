@@ -20,7 +20,7 @@ package com.jpmorrsn.fbp.engine;
 
 /**
  * This class is an internal control block used while processing a component's annotations; 
- * it is also used for checking 'connect' invocations 
+ * it is also used for checking 'connect' invocations in network definitions
  *   
  */
 

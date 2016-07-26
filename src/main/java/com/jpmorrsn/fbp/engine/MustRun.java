@@ -25,6 +25,12 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustRun {
+	
+	/***
+	 * 
+	 * Annotation for component, specifying "must run" attribute
+	 *
+	 */
 
  
   boolean value() default true;

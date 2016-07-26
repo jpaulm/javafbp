@@ -25,6 +25,14 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InPort {
+	
+	/***
+	 * 
+	 * Annotation for component, describing individual input port - this will be displayed
+	 * by DrawFBP's Display Port Info command 
+	 * 
+	 */
+
 
   
   String value() default ""; // either value or valueList must be present

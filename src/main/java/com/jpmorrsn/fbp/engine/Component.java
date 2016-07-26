@@ -33,6 +33,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * <code>openPorts<code> and <code>execute</code>.
  *
  * There will be an instance of this class for every node in the network.
+ * 
+ * It is also returned by the 'component' method in network definitions.
  */
 
 public abstract class Component extends Thread {

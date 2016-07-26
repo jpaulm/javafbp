@@ -25,6 +25,13 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ComponentDescription {
+	
+	/***
+	 * 
+	 * Annotation for components, describing function of component - this will be displayed
+	 * by DrawFBP's Display Port Info command 
+	 * 
+	 */
 
   
   String value() default "";

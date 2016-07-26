@@ -1,3 +1,21 @@
+/*
+ * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
+ * Copyright (C) 2009, 2016 J. Paul Morrison
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see the GNU Library General Public License v3
+ * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
+ */
+
 package com.jpmorrsn.fbp.components;
 
 
@@ -11,20 +29,16 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 
 /** Replicate a stream of Packets to 'n' output streams, where
-*  each Packet points at a String.
-* Note: this is a specific variant of the general Replicate verb (q.v.)
+*  each Packet contains a String.
+*  
+* Note: this is a specific variant (restricted to Strings) of the general Replicate verb (q.v.)
 **/
 @ComponentDescription("Replicate stream of String packets to multiple output streams")
 @OutPort(value = "OUT", arrayPort = true, description = "Replicated packets", type = String.class)
 @InPort(value = "IN", description = "Incoming packets", type = String.class)
 public class ReplString extends Component {
 
-  static final String copyright = "Copyright 2007, 2012, J. Paul Morrison.  At your option, you may copy, "
-      + "distribute, or make derivative works under the terms of the Clarified Artistic License, "
-      + "based on the Everything Development Company's Artistic License.  A document describing "
-      + "this License may be found at http://www.jpaulmorrison.com/fbp/artistic2.htm. "
-      + "THERE IS NO WARRANTY; USE THIS PRODUCT AT YOUR OWN RISK.";
-
+  
   private InputPort inport;
 
   private OutputPort[] outportArray;

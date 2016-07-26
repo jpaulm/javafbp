@@ -26,6 +26,12 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SelfStarting {
 
+	/***
+	 * 
+	 * Annotation for component, specifying "self-starting" attribute - the process is to "self-start" even if it has 
+	 * input ports
+	 *
+	 */
  
   boolean value() default true;
 }

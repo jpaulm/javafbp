@@ -29,7 +29,11 @@ import java.util.Map;
 
 /**
  * This class implements buffering between Component threads. One is created
- * behind the scenes whenever two ports are connected. This class was founded on
+ * behind the scenes whenever two ports are connected. 
+ * 
+ * It is also returned by the 'connect' method in network definitions.
+ * 
+ * This class was founded on
  * Doug Lea's BoundedBufferVST class from his book _Concurrent Programming in
  * Java_, page 100.
  */
