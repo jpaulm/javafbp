@@ -10,6 +10,7 @@ apply plugin: 'io.codearte.nexus-staging'
 
 
 subprojects {
+       
 
         task javadocJar(type: Jar) {
             classifier = 'javadoc'
@@ -29,6 +30,7 @@ subprojects {
 allprojects {
 apply plugin: 'java'
 apply plugin: 'eclipse'
+//apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -38,9 +40,24 @@ group = 'com.jpaulmorrison'
 
 description = 'Java Implementation of "Classical" Flow-Based Programming'
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
+//publishing {
+ //   publications {
+  //      mavenJava(MavenPublication) {
+   //         from components.java
+ //       }
+ //   }
+//}
+
+if (JavaVersion.current().isJava8Compatible()) {
+    //allprojects {
+        tasks.withType(Javadoc) {
+            options.addBooleanOption('Xdoclint:none', true)
+        }
+  // }
+}
 
 ext {
     snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"

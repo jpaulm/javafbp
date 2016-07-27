@@ -1,10 +1,4 @@
 /*
- * Copied from http://www.java-tips.org/java-se-tips/java.lang/creating-application-specific-exceptions.html 
- * 
- * Thanks!
- */
-
-/*
  * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
  * Copyright (C) 2009, 2016 J. Paul Morrison
  *
@@ -20,7 +14,14 @@
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
+ * 
+ * ====================================================================================
+ * 
+ * Copied from http://www.java-tips.org/java-se-tips/java.lang/creating-application-specific-exceptions.html 
+ * 
+ * Thanks!
  */
+ 
 package com.jpmorrsn.fbp.engine;
 
 

@@ -1,6 +1,21 @@
 /*
- * Copyright (C) J.P. Morrison, Enterprises, Ltd. 2009, 2012 All Rights Reserved. 
+ * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
+ * Copyright (C) 2009, 2016 J. Paul Morrison
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see the GNU Library General Public License v3
+ * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
+
 package com.jpmorrsn.fbp.examples.components;
 
 
@@ -23,6 +38,9 @@ import com.jpmorrsn.fbp.engine.Packet;
  * This component converts the specified format (if one is specified) to Unicode.
  * The IP SEEK specifies an inital seek (file pointer) value and line count.
  * The OUT packet is a Hashtable with keys SEEK for the given file pointer, PAGE for a String array of lines from the file, and NEXT for the final file pointer value.
+ * 
+ * Developed for Appkata project (?)
+ * 
  */
 @ComponentDescription("Send page of lines from a file")
 @OutPort(value = "OUT", description = "SEEK: initial file pointer, PAGE: of lines, NEXT: file pointer", type = Hashtable.class)
@@ -30,12 +48,7 @@ import com.jpmorrsn.fbp.engine.Packet;
     @InPort(value = "SEEK", description = "File pointer, line count required", type = String.class) })
 public class FileReadLines extends Component {
 
-  static final String copyright = "Copyright 2012, J. Paul Morrison.  At your option, you may copy, "
-      + "distribute, or make derivative works under the terms of the Clarified Artistic License, "
-      + "based on the Everything Development Company's Artistic License.  A document describing "
-      + "this License may be found at http://www.jpaulmorrison.com/fbp/artistic2.htm. "
-      + "THERE IS NO WARRANTY; USE THIS PRODUCT AT YOUR OWN RISK.";
-
+ 
   private OutputPort outport;
 
   InputPort source;
