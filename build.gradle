@@ -104,7 +104,7 @@ task writeNewPom << {
         project {
             groupId 'com.jpaulmorrison'
             artifactId 'javafbp'
-            version '3.0.5'
+            version '3.0.6'
         
             inceptionYear '2016'
             licenses {
@@ -138,7 +138,7 @@ uploadArchives {
         packaging 'jar'
         // optionally artifactId can be defined here         
         url 'https://github.com/jpaulm/javafbp'
-        version '3.0.5'
+        version '3.0.6'
 
         scm {
           connection 'scm:git:https://github.com/jpaulm.git'
