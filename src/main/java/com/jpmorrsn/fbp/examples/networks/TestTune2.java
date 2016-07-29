@@ -1,7 +1,33 @@
+/*
+ * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
+ * Copyright (C) 2009, 2016 J. Paul Morrison
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, see the GNU Library General Public License v3
+ * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
+ */
+
 package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.engine.Network;
+
+/**
+ * This is similar to TestTune, but we have added 3 more signals into the SoundMixer component; 
+ * also, the tune file has been hard-wired into a component (JingleBells), and 3 copies for other voices
+ * 
+ *  There is a problem with this: adding the signals together results in higher notes!  Needs to be looked at!
+ *  
+ */
 
 
 public class TestTune2 extends Network {

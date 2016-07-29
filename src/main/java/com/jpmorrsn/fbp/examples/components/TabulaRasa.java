@@ -33,7 +33,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 /**
  * Component to execute a loaded component.  Currently it has to have the same metadata as the 
- * component being executed, except for COMP...
+ * component being executed, except for COMP... We need to make this more flexible...
  * 
  */
 @ComponentDescription("Execute a loaded component")

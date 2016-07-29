@@ -25,9 +25,9 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
 
 
-/** Miscellaneous Mixer Input
+/** Miscellaneous Audio Mixer Input
 **/
-@ComponentDescription("Miscellaneous Mixer Input")
+@ComponentDescription("Miscellaneous Audio Mixer Input")
 @OutPort("OUT")
 public class MixerInput extends Component {
 

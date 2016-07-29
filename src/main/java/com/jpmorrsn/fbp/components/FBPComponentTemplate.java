@@ -1,6 +1,6 @@
 /*
  * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
- * Copyright (C) 2009, 2016 J. Paul Morrison
+ * Copyright (C) 2009, 2016   --  Your name --
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -45,8 +45,7 @@ import com.jpmorrsn.fbp.engine.Packet;
 
 public class FBPComponentTemplate extends Component {
 
-  static final String copyright = "...";
-
+  
   private InputPort inport;
 
   private OutputPort[] outport;
