@@ -28,8 +28,10 @@ import com.jpmorrsn.fbp.engine.Network;
 import com.jpmorrsn.fbp.examples.components.BuildBlob;
 
 
-/* This test tests RegExReplace
+/**
+ *  This test tests RegExReplace
  */
+
 public class TPX extends Network {
 
   static final String copyright = "Copyright 2007, 2008, 2011, ....";

@@ -2,6 +2,7 @@
 hs_err_pid*
 
 *-fulltrace.txt
+output
 
 # Gradle
 .gradle

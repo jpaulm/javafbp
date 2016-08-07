@@ -16,10 +16,10 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks; // Change as required 
+package com.jpmorrsn.fbp.examples.networks; 
 
 
-import com.jpmorrsn.fbp.components.DispIPCounts;
+import com.jpmorrsn.fbp.engine.DispIPCounts;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;
 import com.jpmorrsn.fbp.examples.components.GenerateSlowly;

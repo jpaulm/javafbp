@@ -26,14 +26,16 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
 import com.jpmorrsn.fbp.engine.Packet;
 
+/**
+ * First-come, first-served - sensitive to substreams
+ **/
+
 @ComponentDescription("Merge multiple input streams, first-come, first-served, but sensitive to substreams")
 @InPort(value = "IN", arrayPort = true, description = "Incoming packets")
 @OutPort(value = "OUT", description = "Merged output")
 
 public class SubstreamSensitiveMerge extends Component {
-	/**
-	 * First-come, first-served - sensitive to substreams
-	 **/
+	
 
 	
 	private InputPort[] inportArray;

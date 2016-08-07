@@ -35,6 +35,8 @@ import com.jpmorrsn.fbp.examples.components.JFilter;
 /**
  * Network shown in 3rd DrawFBP Youtube video - https://www.youtube.com/watch?v=-AmzfhV2hIU
  * 
+ * Currently (Aug. 7, 2016) - seems to have bug!  Needs fixing!
+ * 
  */
 
 

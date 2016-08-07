@@ -26,13 +26,18 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
 import com.jpmorrsn.fbp.engine.Packet;
 
-
+/**
+ * 
+ *  "Round Robin" Merge
+ * 
+ */
 	
 	@ComponentDescription("Merge multiple input streams, following Round Robin system")
 	@OutPort(value = "IN", arrayPort = true, description = "Incoming packets")
 	@InPort(value = "OUT", description = "Merged output")
 	
 	public class RRMerge extends Component {
+		
 		/** "Round Robin" Merge - merges an IP from element 0, then one from 1, then one from 2, and so on until
 		 * it cycles back to 0, and so on until the first end of stream 
 		 * 

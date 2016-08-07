@@ -24,12 +24,12 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SelfStarting {
+@interface SelfStarting {
 
 	/***
 	 * 
-	 * Annotation for component, specifying "self-starting" attribute - the process is to "self-start" even if it has 
-	 * input ports
+	 * Package private annotation for component, specifying "self-starting" attribute - the process is to "self-start" even if it has 
+	 * input ports.  This is only used for engine.DispIPCounts.java 
 	 *
 	 */
  

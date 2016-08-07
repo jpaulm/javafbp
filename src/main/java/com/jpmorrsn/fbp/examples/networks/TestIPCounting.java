@@ -19,7 +19,7 @@ package com.jpmorrsn.fbp.examples.networks;
 
 
 import com.jpmorrsn.fbp.components.Discard;
-import com.jpmorrsn.fbp.components.DispIPCounts;
+import com.jpmorrsn.fbp.engine.DispIPCounts;
 import com.jpmorrsn.fbp.components.ReplString;
 import com.jpmorrsn.fbp.components.WriteToConsole;
 import com.jpmorrsn.fbp.engine.Network;

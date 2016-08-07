@@ -17,9 +17,7 @@
  */
  package com.jpmorrsn.fbp.components;
 
-/***
- *Component copies incoming packets - delayed until trigger received
- */
+
 import com.jpmorrsn.fbp.engine.Component;
 import com.jpmorrsn.fbp.engine.ComponentDescription;
 import com.jpmorrsn.fbp.engine.InPort;
@@ -29,6 +27,9 @@ import com.jpmorrsn.fbp.engine.OutPort;
 import com.jpmorrsn.fbp.engine.OutputPort;
 import com.jpmorrsn.fbp.engine.Packet;
 
+/***
+ *Component copies incoming packets - delayed until trigger received
+ */
 
 @ComponentDescription("Copies incoming packets - delayed until trigger received")
 @OutPort("OUT")
