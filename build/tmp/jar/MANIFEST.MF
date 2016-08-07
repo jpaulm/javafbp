@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: JavaFBP
-Implementation-Version: 3.0.6
-
