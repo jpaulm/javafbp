@@ -36,6 +36,7 @@ import com.jpmorrsn.fbp.examples.components.JFilter;
  * Network shown in 3rd DrawFBP Youtube video - https://www.youtube.com/watch?v=-AmzfhV2hIU
  * 
  * Currently (Aug. 7, 2016) - seems to have bug!  Needs fixing!
+ * Fixed (Aug. 10, 2016) - insufficient slots in loop connections :-)
  * 
  */
 
@@ -57,11 +58,11 @@ public class ScanDir extends Network {
 	
     connect("ListFiles.FILES", "JFilter.IN");
     connect("JFilter.OUT", "ReadFile.SOURCE");
-    connect("KickWData.OUT", "ListFiles.SOURCE");
-    connect("ListFiles.DIRS", "Passthru.IN");
-    connect("Passthru.OUT", "ListFiles.SOURCE");
+    connect("KickWData.OUT", "ListFiles.SOURCE", 1000);
+    connect("ListFiles.DIRS", "Passthru.IN", 1000);
+    connect("Passthru.OUT", "ListFiles.SOURCE", 1000);
     connect("ReadFile.OUT", "DeCompose.IN");
-    initialize("C:\\Users\\Paul\\Documents\\GitHub\\drawfbp\\src\\main".replace("/", File.separator), "KickWData.SOURCE");    
+    initialize("src/main".replace("/", File.separator), "KickWData.SOURCE");    
     connect("DeCompose.OUT","GenerateWordCounts.IN");
     connect("GenerateWordCounts.OUT","Sort.IN");
     connect("Sort.OUT","Display.IN");

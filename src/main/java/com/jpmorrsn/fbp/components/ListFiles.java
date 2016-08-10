@@ -54,12 +54,12 @@ public class ListFiles extends Component {
 
   @Override
   protected void execute() {
-	int unProcessedCount = 1;
+	int dirCount = 1;
 	Packet rp = null;
 	
     while (null != (rp = source.receive())) { 
     
-    unProcessedCount--;
+    dirCount--;
 
     String sf = (String) rp.getContent();
       
@@ -74,14 +74,14 @@ public class ListFiles extends Component {
     		  File f2 = new File(s);
     		  if (f2.isDirectory()) {
     			  dirsport.send(create(s));
-    			  unProcessedCount++;
+    			  dirCount++;
     		  }
     		  else    			  
     			  filesport.send(create(s));    			   
     	  }
     	  
       }
-    if (unProcessedCount <= 0) {
+    if (dirCount <= 0) {
     	source.close();
     	return;
     }
