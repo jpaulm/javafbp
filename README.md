@@ -9,7 +9,7 @@ General
 General web site for "classical" FBP: 
 * http://www.jpaulmorrison.com/fbp/
 
-**Latest release of JavaFBP: `javafbp-3.0.7`**.
+**Latest release of JavaFBP: `javafbp-3.0.8`**.
 
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
