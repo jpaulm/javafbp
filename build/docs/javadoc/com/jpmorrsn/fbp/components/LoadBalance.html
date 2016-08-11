@@ -74,7 +74,7 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.classes.inherited.from.class.java.lang.Thread">Nested</a>&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.com.jpmorrsn.fbp.engine.Component">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.com.jpmorrsn.fbp.core.engine.Component">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Thread</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">com.jpmorrsn.fbp.engine.Component</a></li>
+<li><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">com.jpmorrsn.fbp.core.engine.Component</a></li>
 <li>
 <ul class="inheritance">
 <li>com.jpmorrsn.fbp.components.LoadBalance</li>
@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">LoadBalance</span>
-extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">Component</a></pre>
+extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">Component</a></pre>
 <div class="block">Component to assign incoming packets to the output port that has the smallest
  backlog of packets waiting to be processed.
  All the IPs in a substream must go to the same output port array element (logic added Aug. 2, 2015)</div>
@@ -155,10 +155,10 @@ extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="clas
 </a>
 <h3>Field Summary</h3>
 <ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.com.jpmorrsn.fbp.engine.Component">
+<li class="blockList"><a name="fields.inherited.from.class.com.jpmorrsn.fbp.core.engine.Component">
 <!--   -->
 </a>
-<h3>Fields inherited from class&nbsp;com.jpmorrsn.fbp.engine.<a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">Component</a></h3>
+<h3>Fields inherited from class&nbsp;com.jpmorrsn.fbp.core.engine.<a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">Component</a></h3>
 <code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#autoStarting">autoStarting</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#ignorePacketCountError">ignorePacketCountError</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#inputPorts">inputPorts</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#network">network</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#outputPorts">outputPorts</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#selfStarting">selfStarting</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#type">type</a></code></li>
 </ul>
 <ul class="blockList">
@@ -213,11 +213,11 @@ extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="clas
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.com.jpmorrsn.fbp.engine.Component">
+<li class="blockList"><a name="methods.inherited.from.class.com.jpmorrsn.fbp.core.engine.Component">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.jpmorrsn.fbp.engine.<a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">Component</a></h3>
-<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#attach-com.jpmorrsn.fbp.engine.Packet-java.lang.String-com.jpmorrsn.fbp.engine.Packet-">attach</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#buildAnnotations--">buildAnnotations</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#checkPorts--">checkPorts</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#create-int-java.lang.String-">create</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#create-java.lang.Object-">create</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#detach-com.jpmorrsn.fbp.engine.Packet-java.lang.String-com.jpmorrsn.fbp.engine.Packet-">detach</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#drop-com.jpmorrsn.fbp.engine.Packet-">drop</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#findInputPortElementWithData-com.jpmorrsn.fbp.engine.InputPort:A-">findInputPortElementWithData</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getGlobal-java.lang.String-">getGlobal</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getInports--">getInports</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getOutports--">getOutports</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getPacketCount--">getPacketCount</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getStatus--">getStatus</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getTracing--">getTracing</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#longWaitEnd--">longWaitEnd</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#longWaitStart-double-">longWaitStart</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInput-java.lang.String-">openInput</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInputArray-java.lang.String-">openInputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInputArray-java.lang.String-int-">openInputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutput-java.lang.String-">openOutput</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutputArray-java.lang.String-">openOutputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutputArray-java.lang.String-int-">openOutputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#pop--">pop</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#push-com.jpmorrsn.fbp.engine.Packet-">push</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#putGlobal-java.lang.String-java.lang.Object-">putGlobal</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#run--">run</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#stackSize--">stackSize</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#terminate-com.jpmorrsn.fbp.engine.Component.StatusValues-">terminate</a></code></li>
+<h3>Methods inherited from class&nbsp;com.jpmorrsn.fbp.core.engine.<a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">Component</a></h3>
+<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#attach-com.jpmorrsn.fbp.core.engine.Packet-java.lang.String-com.jpmorrsn.fbp.core.engine.Packet-">attach</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#buildAnnotations--">buildAnnotations</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#checkPorts--">checkPorts</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#create-int-java.lang.String-">create</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#create-java.lang.Object-">create</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#detach-com.jpmorrsn.fbp.core.engine.Packet-java.lang.String-com.jpmorrsn.fbp.core.engine.Packet-">detach</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#drop-com.jpmorrsn.fbp.core.engine.Packet-">drop</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#findInputPortElementWithData-com.jpmorrsn.fbp.core.engine.InputPort:A-">findInputPortElementWithData</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getGlobal-java.lang.String-">getGlobal</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getInports--">getInports</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getOutports--">getOutports</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getPacketCount--">getPacketCount</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getStatus--">getStatus</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#getTracing--">getTracing</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#longWaitEnd--">longWaitEnd</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#longWaitStart-double-">longWaitStart</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInput-java.lang.String-">openInput</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInputArray-java.lang.String-">openInputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openInputArray-java.lang.String-int-">openInputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutput-java.lang.String-">openOutput</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutputArray-java.lang.String-">openOutputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openOutputArray-java.lang.String-int-">openOutputArray</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#pop--">pop</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#push-com.jpmorrsn.fbp.core.engine.Packet-">push</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#putGlobal-java.lang.String-java.lang.Object-">putGlobal</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#run--">run</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#stackSize--">stackSize</a>, <a href="../../../../com/jpmorrsn/fbp/engine/Component.html#terminate-com.jpmorrsn.fbp.core.engine.Component.StatusValues-">terminate</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Thread">
@@ -276,7 +276,7 @@ extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="clas
  is called from a private thread.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#execute--">execute</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">Component</a></code></dd>
+<dd><code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#execute--">execute</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">Component</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -296,7 +296,7 @@ extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="clas
  and <code>OutputPort.setType</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openPorts--">openPorts</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.engine">Component</a></code></dd>
+<dd><code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html#openPorts--">openPorts</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="class in com.jpmorrsn.fbp.core.engine">Component</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -353,7 +353,7 @@ extends <a href="../../../../com/jpmorrsn/fbp/engine/Component.html" title="clas
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.classes.inherited.from.class.java.lang.Thread">Nested</a>&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.com.jpmorrsn.fbp.engine.Component">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.com.jpmorrsn.fbp.core.engine.Component">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
