@@ -15,7 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import java.io.File;
@@ -29,10 +29,10 @@ public class TestSelNthItem extends Network {
 
   @Override
   protected void define() {
-    component("Discard", com.jpmorrsn.fbp.core.components.Discard.class);
-    component("Write", com.jpmorrsn.fbp.core.components.WriteFile.class);
-    component("Select", com.jpmorrsn.fbp.core.components.SelNthItem.class);
-    component("Read", com.jpmorrsn.fbp.core.components.ReadFile.class);
+    component("Discard", com.jpmorrsn.fbp.core.components.routing.Discard.class);
+    component("Write", com.jpmorrsn.fbp.core.components.io.WriteFile.class);
+    component("Select", com.jpmorrsn.fbp.core.components.routing.SelNthItem.class);
+    component("Read", com.jpmorrsn.fbp.core.components.io.ReadFile.class);
 
     connect("Read.OUT", "Select.IN");
     connect("Select.ACC", "Write.IN");

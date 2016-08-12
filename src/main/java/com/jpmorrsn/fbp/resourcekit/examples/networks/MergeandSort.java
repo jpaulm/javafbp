@@ -16,10 +16,13 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import com.jpmorrsn.fbp.core.engine.Network;
+import com.jpmorrsn.fbp.core.components.swing.ShowText;
+import com.jpmorrsn.fbp.core.components.routing.Sort;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
 
 /** 
  * Network to Merge and Sort - output is written to Swing pane
@@ -34,11 +37,11 @@ public class MergeandSort extends Network {
   @Override
   protected void define() {
     
-	//component("_Discard", com.jpmorrsn.fbp.core.components.Discard.class);
-    component("_Write_text_to_pane", com.jpmorrsn.fbp.core.components.ShowText.class);
-    component("_Sort", com.jpmorrsn.fbp.core.components.Sort.class);
-    component("_Generate_1st_group", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
-    component("_Generate_2nd_group", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
+	//component("_Discard", com.jpmorrsn.fbp.core.components.routing.Discard.class);
+    component("_Write_text_to_pane", ShowText.class);
+    component("_Sort", Sort.class);
+    component("_Generate_1st_group", GenerateTestData.class);
+    component("_Generate_2nd_group", GenerateTestData.class);
     initialize("100 ", component("_Generate_1st_group"), port("COUNT"));
     connect(component("_Generate_2nd_group"), port("OUT"), component("_Sort"), port("IN"));
     connect(component("_Generate_1st_group"), port("OUT"), component("_Sort"), port("IN"));

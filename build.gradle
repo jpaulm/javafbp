@@ -34,7 +34,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = '4.0.0'
+version = '4.0.1'
 group = 'com.jpaulmorrison'
 
 
@@ -104,7 +104,7 @@ task writeNewPom << {
         project {
             groupId 'com.jpaulmorrison'
             artifactId 'javafbp'
-            version '4.0.0'
+            version '4.0.1'
         
             inceptionYear '2016'
             licenses {
@@ -138,7 +138,7 @@ uploadArchives {
         packaging 'jar'
         // optionally artifactId can be defined here         
         url 'https://github.com/jpaulm/javafbp'
-        version '4.0.0'
+        version '4.0.1'
 
         scm {
           connection 'scm:git:https://github.com/jpaulm.git'

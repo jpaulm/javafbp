@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.subnets;
+package com.jpmorrsn.fbp.resourcekit.examples.subnets;
 
 
 /*
@@ -39,15 +39,15 @@ public class InfiniteQueue extends SubNet {
 
   @Override
   protected void define() {
-    component("__  Write", com.jpmorrsn.fbp.core.components.WriteFile.class);
-    component("__  Read_", com.jpmorrsn.fbp.core.components.ReadFile.class);
+    component("__  Write", com.jpmorrsn.fbp.core.components.io.WriteFile.class);
+    component("__  Read_", com.jpmorrsn.fbp.core.components.io.ReadFile.class);
     component("SUBOUT", SubOut.class);
     initialize("OUT", component("SUBOUT"), port("NAME"));
     component("SUBIN", SubIn.class);
     initialize("IN", component("SUBIN"), port("NAME"));
     component("SUBIN_2", SubIn.class);
     initialize("TEMPFILENAME", component("SUBIN_2"), port("NAME"));
-    component("_ Replicate", com.jpmorrsn.fbp.core.components.ReplString.class);
+    component("_ Replicate", com.jpmorrsn.fbp.core.components.text.ReplString.class);
     connect(component("SUBIN"), port("OUT"), component("__  Write"), port("IN"));
     connect(component("SUBIN_2"), port("OUT"), component("_ Replicate"), port("IN"));
     connect(component("_ Replicate"), port("OUT[0]"), component("__  Write"), port("DESTINATION"));

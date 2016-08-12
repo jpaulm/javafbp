@@ -15,12 +15,12 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
-import com.jpmorrsn.fbp.core.components.ReadFile;
-import com.jpmorrsn.fbp.core.components.Sort;
-import com.jpmorrsn.fbp.core.components.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.io.ReadFile;
+import com.jpmorrsn.fbp.core.components.routing.Sort;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 import com.jpmorrsn.fbp.core.engine.Network;
 import com.jpmorrsn.fbp.core.components.text.Affix;
 import com.jpmorrsn.fbp.core.components.text.DedupeSuccessive;

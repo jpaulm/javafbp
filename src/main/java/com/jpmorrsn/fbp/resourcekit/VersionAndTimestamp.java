@@ -15,23 +15,25 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-
-package com.jpmorrsn.fbp.examples.networks;
-
-
-import com.jpmorrsn.fbp.core.components.TestStack;
-import com.jpmorrsn.fbp.core.engine.Network;
+package com.jpmorrsn.fbp.resourcekit;
 
 
-public class TestStackTest extends Network {
+public final class VersionAndTimestamp {
+	
+	/**
+	 * This class is simply used to record the version number and timestamp of the last update
+	 *   
+	 */
 
-  
-  @Override
-  protected void define() {
-    component("TestStack", TestStack.class);
+  private static String version = "JavaFBP - version 4.0.1";
+
+  private static String date = "12 Aug., 2016";
+
+  static String getVersion() {
+    return version;
   }
 
-  public static void main(final String[] argv) throws Exception {
-    new TestStackTest().go();
+  static String getDate() {
+    return date;
   }
 }

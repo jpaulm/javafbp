@@ -31,15 +31,14 @@ import com.jpmorrsn.fbp.core.engine.Packet;
 
 
 /**
- * Provide measured lines from a stream of words
+ * Provide measured lines from a stream of words - essentially same as routing.ReCompose
  * Bob Corrick December 2011
  */
 @ComponentDescription("Take words IN and deliver OUT a line no longer than MEASURE characters")
 @OutPorts({ @OutPort(value = "OUT") })
 @InPorts({ @InPort("IN"), @InPort("MEASURE") })
 public class WordsToLine extends Component {
-
-  static final String copyright = "...";
+  
 
   private InputPort inport;
 

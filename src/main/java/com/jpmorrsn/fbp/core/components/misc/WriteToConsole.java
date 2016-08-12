@@ -15,68 +15,66 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-
-package com.jpmorrsn.fbp.core.components.test;
+package com.jpmorrsn.fbp.core.components.misc;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
 import com.jpmorrsn.fbp.core.engine.ComponentDescription;
 import com.jpmorrsn.fbp.core.engine.InPort;
 import com.jpmorrsn.fbp.core.engine.InputPort;
+import com.jpmorrsn.fbp.core.engine.MustRun;
 import com.jpmorrsn.fbp.core.engine.OutPort;
 import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/** Component to split an input stream into multiple output streams,
-* where the first 30 packets go to the first output port, the next 30 go
-* to the second and so on.  Each output stream is closed before data starts
-* being sent to the next.  This component is used for testing deadlock behaviour.
-*/
-@ComponentDescription("Splits a stream into multiple output streams")
-@OutPort(value = "OUT", arrayPort = true)
-@InPort("IN")
-public class Splitter1 extends Component {
+/**
+ * Component to write data to the console, using a stream of packets. It is
+ * specified as "must run" so that the output file will be cleared even if no
+ * data packets are input.
+ */
+@ComponentDescription("Write stream of packets to console")
+@InPort(value = "IN", description = "Packets to be displayed", type = String.class)
+@OutPort(value = "OUT", optional = true, description = "Output port, if connected", type = String.class)
+@MustRun
+public class WriteToConsole extends Component {
+
   
   private InputPort inport;
 
-  private OutputPort[] outportArray;
+  private final double _timeout = 5.0; // 5 secs
+
+  private OutputPort outport;
 
   @Override
   protected void execute() {
-
-    int no = outportArray.length;
-    int e = 0;
-    int i = 0;
     Packet p;
 
     while ((p = inport.receive()) != null) {
-
-      outportArray[e].send(p);
-      if (i == 30) {
-        if (e < no - 1) { // if last output stream, don't close it
-          outportArray[e].close();
-          ++e;
-        }
-        i = 0;
+      longWaitStart(_timeout);
+      // sleep(5000L); //force timeout - testing only
+      if (p.getType() == Packet.OPEN) {
+        System.out.println("===> Open Bracket");
+      } else if (p.getType() == Packet.CLOSE) {
+        System.out.println("===> Close Bracket");
       } else {
-        i++;
+        System.out.println((String) p.getContent());
       }
-
-    }
-    while (e < no) {
-      outportArray[e].close();
-      e++;
+      longWaitEnd();
+      if (outport.isConnected()) {
+        outport.send(p);
+      } else {
+        drop(p);
+      }
     }
 
   }
 
   @Override
   protected void openPorts() {
-
     inport = openInput("IN");
 
-    outportArray = openOutputArray("OUT");
+    outport = openOutput("OUT");
 
   }
 }

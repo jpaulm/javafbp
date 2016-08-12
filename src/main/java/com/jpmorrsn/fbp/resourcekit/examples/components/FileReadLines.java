@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.components;
+package com.jpmorrsn.fbp.resourcekit.examples.components;
 
 
 import java.io.RandomAccessFile;

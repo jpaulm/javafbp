@@ -16,10 +16,11 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import com.jpmorrsn.fbp.core.engine.Network;
+import com.jpmorrsn.fbp.core.components.audio.GenSamples;
 
 /**
  * This is similar to TestTune, but we have added 3 more signals into the SoundMixer component; 
@@ -39,16 +40,16 @@ public class TestTune2 extends Network {
   protected void define() {
     //component("_Read_Tune_File", com.jpmorrsn.fbp.core.components.ReadFile.class);
     //component("_Text_to_Int_Array", com.jpmorrsn.fbp.core.components.Text2IntArray.class);
-    component("JB", com.jpmorrsn.fbp.examples.components.JingleBells.class);
-    component("JB2", com.jpmorrsn.fbp.examples.components.JingleBells2.class);
-    component("JB3", com.jpmorrsn.fbp.examples.components.JingleBells3.class);
-    component("JB4", com.jpmorrsn.fbp.examples.components.JingleBells4.class);
-    component("GS", com.jpmorrsn.fbp.core.components.GenSamples.class);
-    component("GS2", com.jpmorrsn.fbp.core.components.GenSamples.class);
-    component("GS3", com.jpmorrsn.fbp.core.components.GenSamples.class);
-    component("GS4", com.jpmorrsn.fbp.core.components.GenSamples.class);
-    component("SoundMixer", com.jpmorrsn.fbp.core.components.SoundMixer.class);
-    //component("Display", com.jpmorrsn.fbp.core.components.WriteToConsole.class);
+    component("JB", com.jpmorrsn.fbp.core.components.audio.JingleBells.class);
+    component("JB2", com.jpmorrsn.fbp.core.components.audio.JingleBells2.class);
+    component("JB3", com.jpmorrsn.fbp.core.components.audio.JingleBells3.class);
+    component("JB4", com.jpmorrsn.fbp.core.components.audio.JingleBells4.class);
+    component("GS", GenSamples.class);
+    component("GS2", GenSamples.class);
+    component("GS3", GenSamples.class);
+    component("GS4", GenSamples.class);
+    component("SoundMixer", com.jpmorrsn.fbp.core.components.audio.SoundMixer.class);
+    //component("Display", com.jpmorrsn.fbp.core.components.misc.WriteToConsole.class);
 
     connect(component("JB"), port("OUT"), component("GS"), port("IN"));
     connect(component("JB2"), port("OUT"), component("GS2"), port("IN"));

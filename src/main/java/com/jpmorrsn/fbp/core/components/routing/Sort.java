@@ -15,6 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
+
 package com.jpmorrsn.fbp.core.components.routing;
 
 
@@ -22,56 +23,66 @@ import com.jpmorrsn.fbp.core.engine.Component;
 import com.jpmorrsn.fbp.core.engine.ComponentDescription;
 import com.jpmorrsn.fbp.core.engine.InPort;
 import com.jpmorrsn.fbp.core.engine.InputPort;
-import com.jpmorrsn.fbp.core.engine.MustRun;
 import com.jpmorrsn.fbp.core.engine.OutPort;
 import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/**
- * Component to write data to the console, using a stream of packets. It is
- * specified as "must run" so that the output file will be cleared even if no
- * data packets are input.
- */
-@ComponentDescription("Write stream of packets to console")
-@InPort(value = "IN", description = "Packets to be displayed", type = String.class)
-@OutPort(value = "OUT", optional = true, description = "Output port, if connected", type = String.class)
-@MustRun
-public class WriteToConsole extends Component {
+/** Sort a stream of up to 999999 Packets to an output stream
+**/
+@ComponentDescription("Sorts up to 999999 packets, based on contents")
+@OutPort(value = "OUT", description = "Output port", type = String.class)
+@InPort(value = "IN", description = "Packets to be sorted", type = String.class)
+public class Sort extends Component {
 
   
   private InputPort inport;
-
-  private final double _timeout = 5.0; // 5 secs
 
   private OutputPort outport;
 
   @Override
   protected void execute() {
-    Packet p;
 
+    Packet p;
+    int i = 0, j, k, n;
+    Packet[] array = new Packet[999999];
     while ((p = inport.receive()) != null) {
-      longWaitStart(_timeout);
-      // sleep(5000L); //force timeout - testing only
-      if (p.getType() == Packet.OPEN) {
-        System.out.println("===> Open Bracket");
-      } else if (p.getType() == Packet.CLOSE) {
-        System.out.println("===> Close Bracket");
-      } else {
-        System.out.println((String) p.getContent());
+      array[i] = p;
+      //System.out.println("in: " + p.getContent());
+      ++i;
+    }
+
+    //network.traceFuncs(this.getName() + ": No. of elements:" + i);
+    j = 0;
+    k = i;
+    n = k; // no. of packets to be sent out
+
+    while (n > 0) {
+      String t = "\uffff";
+
+      for (i = 0; i < k; i++) {
+        if (array[i] != null) {
+
+          String s = (String) array[i].getContent();
+
+          if (s.compareTo(t) < 0) {
+            j = i;
+            t = (String) array[j].getContent();
+          }
+        }
       }
-      longWaitEnd();
-      if (outport.isConnected()) {
-        outport.send(p);
-      } else {
-        drop(p);
-      }
+      //  if (array[j] == null) break;
+      outport.send(array[j]);
+      array[j] = null;
+
+      --n;
     }
 
   }
 
   @Override
   protected void openPorts() {
+
     inport = openInput("IN");
 
     outport = openOutput("OUT");

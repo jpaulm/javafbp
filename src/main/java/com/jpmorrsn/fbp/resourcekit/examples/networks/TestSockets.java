@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 /**
@@ -24,12 +24,12 @@ package com.jpmorrsn.fbp.examples.networks;
  *
  * Not to be confused with WebSockets! 
  */
-import com.jpmorrsn.fbp.core.components.Discard;
-import com.jpmorrsn.fbp.core.components.Passthru;
-import com.jpmorrsn.fbp.core.components.ReadFromSocket;
-import com.jpmorrsn.fbp.core.components.WriteToSocket;
+import com.jpmorrsn.fbp.core.components.routing.Discard;
+import com.jpmorrsn.fbp.core.components.routing.Passthru;
+import com.jpmorrsn.fbp.core.components.io.ReadFromSocket;
+import com.jpmorrsn.fbp.core.components.io.WriteToSocket;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
 
 
 public class TestSockets extends Network {

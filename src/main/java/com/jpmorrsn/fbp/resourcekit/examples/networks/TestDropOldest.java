@@ -16,14 +16,14 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
-import com.jpmorrsn.fbp.core.components.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 import com.jpmorrsn.fbp.core.engine.Connection;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
-import com.jpmorrsn.fbp.examples.components.SlowPass;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
+import com.jpmorrsn.fbp.resourcekit.examples.components.SlowPass;
 
 
 public class TestDropOldest extends Network {

@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.core.engine;
+package com.jpmorrsn.fbp.resourcekit.experimental.components;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;

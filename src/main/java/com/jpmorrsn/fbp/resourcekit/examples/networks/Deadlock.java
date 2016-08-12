@@ -16,15 +16,15 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
-import com.jpmorrsn.fbp.core.components.Concatenate;
-import com.jpmorrsn.fbp.core.components.Discard;
+import com.jpmorrsn.fbp.core.components.routing.ConcatStreams;
+import com.jpmorrsn.fbp.core.components.routing.Discard;
 
-import com.jpmorrsn.fbp.core.components.ReplString;
+import com.jpmorrsn.fbp.core.components.text.ReplString;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
 
 
 /** This network forces a deadlock condition */
@@ -38,13 +38,13 @@ public class Deadlock extends Network {
 
     connect(component("Gen", GenerateTestData.class), port("OUT"), component("ReplString", ReplString.class), port("IN"));
     initialize("10000", component("Gen"), port("COUNT"));
-    connect(component("Concatenate", Concatenate.class), port("OUT"), component("Discard", Discard.class), port("IN"));
+    connect(component("ConcatStreams", ConcatStreams.class), port("OUT"), component("Discard", Discard.class), port("IN"));
 
-    connect(component("ReplString"), port("OUT", 0), component("Concatenate"), port("IN", 0));
+    connect(component("ReplString"), port("OUT", 0), component("ConcatStreams"), port("IN", 0));
 
-    connect(component("ReplString"), port("OUT", 2), component("Concatenate"), port("IN", 1));
+    connect(component("ReplString"), port("OUT", 2), component("ConcatStreams"), port("IN", 1));
 
-    connect(component("ReplString"), port("OUT", 1), component("Concatenate"), port("IN", 2));
+    connect(component("ReplString"), port("OUT", 1), component("ConcatStreams"), port("IN", 2));
   }
 
   public static void main(final String[] argv) throws Exception {

@@ -16,10 +16,10 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks; // Change as required 
+package com.jpmorrsn.fbp.resourcekit.examples.networks; // Change as required 
 
 
-import com.jpmorrsn.fbp.core.components.Passthru;
+import com.jpmorrsn.fbp.core.components.routing.Passthru;
 import com.jpmorrsn.fbp.core.engine.InPort;
 import com.jpmorrsn.fbp.core.engine.OutPort;
 import com.jpmorrsn.fbp.core.engine.SubInSS;

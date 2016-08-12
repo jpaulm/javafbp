@@ -3,6 +3,7 @@ hs_err_pid*
 
 *-fulltrace.txt
 output
+temp.data
 
 # Gradle
 .gradle

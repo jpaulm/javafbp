@@ -15,7 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.core.components.routing;
+package com.jpmorrsn.fbp.core.components.text;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
@@ -27,42 +27,46 @@ import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/** Component to concatenate two or more streams of packets
-*/
-
-@ComponentDescription("Concatenate two or more streams of packets")
+/**
+ * Component to break up input packets into words.
+ */
+@ComponentDescription("Break up input packets into words")
 @OutPort("OUT")
-@InPort(value = "IN", arrayPort = true)
-public class Concatenate extends Component {
+@InPort("IN")
+public class DeCompose extends Component {
 
-  
-
-  private InputPort[] inportArray;
+ 
+  private InputPort inport;
 
   private OutputPort outport;
 
-  @SuppressWarnings("rawtypes")
-@Override
+  @Override
   protected void execute() {
-
-    int no = inportArray.length;
-
     Packet p;
-    for (int i = 0; i < no; i++) {
-      while ((p = inportArray[i].receive()) != null) {
-        outport.send(p);
+    while ((p = inport.receive()) != null) {
+      String s = (String) p.getContent();
+      boolean in_word = false;
+      int word_start = 0;
+      for (int i = 0; i < s.length(); i++) {
+        if (!in_word && !(s.substring(i, i + 1).matches("\\s|\\p{Punct}"))) {  
+          in_word = true;
+          word_start = i;
+        }
+        if (in_word && s.substring(i, i + 1).matches("\\s|\\p{Punct}")) {
+          in_word = false;
+          String t = s.substring(word_start, i);
+          Packet q = create(t);
+          outport.send(q);
+        }
       }
-
+      drop(p);
     }
   }
 
   @Override
   protected void openPorts() {
-
-    inportArray = openInputArray("IN");
-    //		inport.setType(Object.class);
+    inport = openInput("IN");
 
     outport = openOutput("OUT");
-
   }
 }

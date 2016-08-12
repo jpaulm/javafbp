@@ -15,50 +15,55 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.core.components;
+package com.jpmorrsn.fbp.core.components.misc;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
 import com.jpmorrsn.fbp.core.engine.ComponentDescription;
 import com.jpmorrsn.fbp.core.engine.InPort;
 import com.jpmorrsn.fbp.core.engine.InputPort;
+import com.jpmorrsn.fbp.core.engine.MustRun;
 import com.jpmorrsn.fbp.core.engine.OutPort;
+import com.jpmorrsn.fbp.core.engine.OutPorts;
 import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/**
- * Component to inject an IIP String as an IP
- */
-@ComponentDescription("Inject CONST from IIP to the IP OUT")
-@OutPort("OUT")
-@InPort("CONST")
-public class Inject extends Component {
+/** Component to count a stream of packets, and output the result on the COUNT port.
+*/
+@ComponentDescription("Counts stream of packets and outputs result")
+@InPort(value = "IN", description = "Incoming stream", type = String.class)
+@OutPorts({ @OutPort(value = "OUT", description = "Stream being passed through", type = String.class, optional = true),
+    @OutPort(value = "COUNT", description = "Count packet to be output", type = String.class) })
+@MustRun
+public class Counter extends Component {
 
   
+  private OutputPort countPort, outPort;
 
-  private OutputPort outport;
-
-  private InputPort cport;
+  private InputPort inPort;
 
   @Override
   protected void execute() {
-    Packet cp = cport.receive();
-    if (cp == null) {
-      return;
+    int count = 0;
+
+    Packet p;
+    while ((p = inPort.receive()) != null) {
+      count++;
+      if (outPort.isConnected()) {
+        outPort.send(p);
+      } else {
+        drop(p);
+      }
     }
-    cport.close();
-    String c = (String) cp.getContent();
-    drop(cp);
-    Packet pOut = create(c);
-    if (!outport.isClosed()) {
-      outport.send(pOut);
-    }
+    Packet ctp = create(Integer.toString(count));
+    countPort.send(ctp);
   }
 
   @Override
   protected void openPorts() {
-    outport = openOutput("OUT");
-    cport = openInput("CONST");
+    inPort = openInput("IN");
+    outPort = openOutput("OUT");
+    countPort = openOutput("COUNT");
   }
 }

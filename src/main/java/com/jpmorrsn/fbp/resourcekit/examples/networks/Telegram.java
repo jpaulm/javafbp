@@ -16,11 +16,17 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 
 import com.jpmorrsn.fbp.core.engine.Network;
+import com.jpmorrsn.fbp.core.components.io.ReadFile;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.text.LineToWords;
+import com.jpmorrsn.fbp.core.components.text.WordsToLine;
+import com.jpmorrsn.fbp.core.components.misc.Counter;
+import com.jpmorrsn.fbp.core.components.routing.ConcatStreams;
 
 /** 
  * Solution to Telegram problem, described in several FBP documents, inc. the Wikipedia article
@@ -32,12 +38,12 @@ public class Telegram extends Network {
 
   @Override
   protected void define() {
-    component("Read file", com.jpmorrsn.fbp.core.components.ReadFile.class);
-    component("Decompose_to words", com.jpmorrsn.fbp.core.components.text.LineToWords.class);
-    component("Recompose_to lines", com.jpmorrsn.fbp.core.components.text.WordsToLine.class);
-    component("Write lines", com.jpmorrsn.fbp.core.components.WriteToConsole.class);
-    component("Count_words", com.jpmorrsn.fbp.core.components.Counter.class);
-    component("Append_word count", com.jpmorrsn.fbp.core.components.Concatenate.class);
+    component("Read file", ReadFile.class);
+    component("Decompose_to words", LineToWords.class);
+    component("Recompose_to lines", WordsToLine.class);
+    component("Write lines", WriteToConsole.class);
+    component("Count_words", Counter.class);
+    component("Append_word count", ConcatStreams.class);
     connect(component("Read file"), port("OUT"), component("Decompose_to words"), port("IN"));
     initialize("src/main/resources/testdata/readme.txt", component("Read file"), port("SOURCE"));
     initialize("20", component("Recompose_to lines"), port("MEASURE"));

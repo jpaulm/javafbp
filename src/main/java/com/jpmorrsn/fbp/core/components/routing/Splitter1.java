@@ -16,8 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-
-package com.jpmorrsn.fbp.examples.components;
+package com.jpmorrsn.fbp.core.components.routing;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
@@ -29,58 +28,55 @@ import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/** Component to generate a stream of 'n' packets, where 'n' is
-* specified in an InitializationConnection.
+/** Component to split an input stream into multiple output streams,
+* where the first 30 packets go to the first output port, the next 30 go
+* to the second and so on.  Each output stream is closed before data starts
+* being sent to the next.  This component is used for testing deadlock behaviour.
 */
-@ComponentDescription("Generates stream of packets under control of a counter")
-@OutPort(value = "OUT", description = "Generated stream", type = String.class)
-@InPort(value = "COUNT", description = "Count of packets to be generated", type = String.class)
-public class GenerateTestData extends Component {
+@ComponentDescription("Splits a stream into multiple output streams")
+@OutPort(value = "OUT", arrayPort = true)
+@InPort("IN")
+public class Splitter1 extends Component {
+  
+  private InputPort inport;
 
- 
-  private OutputPort outport;
-
-  InputPort count;
+  private OutputPort[] outportArray;
 
   @Override
   protected void execute() {
-    Packet ctp = count.receive();
-    if (ctp == null) {
-      return;
-    }
-    count.close();
 
-    String cti = (String) ctp.getContent();
-    cti = cti.trim();
-    int ct = 0;
-    try {
-      ct = Integer.parseInt(cti);
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-    }
-    drop(ctp);
+    int no = outportArray.length;
+    int e = 0;
+    int i = 0;
+    Packet p;
 
-    for (int i = ct; i > 0; i--) {
-      String s = String.format("%1$06d", i) + "abcd";
+    while ((p = inport.receive()) != null) {
 
-      Packet p = create(s);
-      outport.send(p);
+      outportArray[e].send(p);
+      if (i == 30) {
+        if (e < no - 1) { // if last output stream, don't close it
+          outportArray[e].close();
+          ++e;
+        }
+        i = 0;
+      } else {
+        i++;
+      }
 
     }
-
-  }
-
-  String repeat(final String string, final int ct) {
-    String result = "";
-    for (int i = 0; i < ct; i++) {
-      result = result + string;
+    while (e < no) {
+      outportArray[e].close();
+      e++;
     }
-    return result;
+
   }
 
   @Override
   protected void openPorts() {
-    outport = openOutput("OUT");
-    count = openInput("COUNT");
+
+    inport = openInput("IN");
+
+    outportArray = openOutputArray("OUT");
+
   }
 }

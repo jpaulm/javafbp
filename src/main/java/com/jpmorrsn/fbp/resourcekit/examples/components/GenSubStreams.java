@@ -17,7 +17,7 @@
  */
 
 
-package com.jpmorrsn.fbp.examples.components;
+package com.jpmorrsn.fbp.resourcekit.examples.components;
 
 
 /* Sven Steinseifer - 2010 */

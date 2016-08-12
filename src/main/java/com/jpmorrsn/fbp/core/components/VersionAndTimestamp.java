@@ -1,10 +1,3 @@
-package com.jpmorrsn.fbp.examples.networks;
-
-
-import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
-
-
 /*
  * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
  * Copyright (C) 2009, 2016 J. Paul Morrison
@@ -22,24 +15,25 @@ import com.jpmorrsn.fbp.examples.components.GenerateTestData;
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
+package com.jpmorrsn.fbp.core.components;
 
-public class TestBalloon extends Network {
 
- 
-  @Override
-  protected void define() {
+public final class VersionAndTimestamp {
+	
+	/**
+	 * This class is simply used to record the version number and timestamp of the last update
+	 *   
+	 */
 
-    connect(component("Gene\\ra\"te", GenerateTestData.class), port("OUT"),
-        component("Balloon", com.jpmorrsn.fbp.core.engine.Balloon.class), port("IN"));
+  private static String version = "JavaFBP - version 4.0.1";
 
-    connect(component("Balloon"), port("OUT"),
-        component("Check", com.jpmorrsn.fbp.examples.components.CheckBallooning.class), port("IN"), 1);
+  private static String date = "12 Aug., 2016";
 
-    initialize("200", component("Gene\\ra\"te"), port("COUNT"));
-
+  static String getVersion() {
+    return version;
   }
 
-  public static void main(final String[] argv) throws Exception {
-    new TestBalloon().go();
+  static String getDate() {
+    return date;
   }
 }

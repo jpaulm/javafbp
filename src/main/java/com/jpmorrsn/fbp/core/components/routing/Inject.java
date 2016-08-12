@@ -15,7 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.resourcekit.examples.components;
+package com.jpmorrsn.fbp.core.components.routing;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
@@ -28,45 +28,37 @@ import com.jpmorrsn.fbp.core.engine.Packet;
 
 
 /**
- * Component to break up input packets into words.
+ * Component to inject an IIP String as an IP
  */
-@ComponentDescription("Break up input packets into words")
+@ComponentDescription("Inject CONST from IIP to the IP OUT")
 @OutPort("OUT")
-@InPort("IN")
-public class DeCompose extends Component {
+@InPort("CONST")
+public class Inject extends Component {
 
- 
-  private InputPort inport;
+  
 
   private OutputPort outport;
 
+  private InputPort cport;
+
   @Override
   protected void execute() {
-    Packet p;
-    while ((p = inport.receive()) != null) {
-      String s = (String) p.getContent();
-      boolean in_word = false;
-      int word_start = 0;
-      for (int i = 0; i < s.length(); i++) {
-        if (!in_word && !(s.substring(i, i + 1).matches("\\s|\\p{Punct}"))) {  
-          in_word = true;
-          word_start = i;
-        }
-        if (in_word && s.substring(i, i + 1).matches("\\s|\\p{Punct}")) {
-          in_word = false;
-          String t = s.substring(word_start, i);
-          Packet q = create(t);
-          outport.send(q);
-        }
-      }
-      drop(p);
+    Packet cp = cport.receive();
+    if (cp == null) {
+      return;
+    }
+    cport.close();
+    String c = (String) cp.getContent();
+    drop(cp);
+    Packet pOut = create(c);
+    if (!outport.isClosed()) {
+      outport.send(pOut);
     }
   }
 
   @Override
   protected void openPorts() {
-    inport = openInput("IN");
-
     outport = openOutput("OUT");
+    cport = openInput("CONST");
   }
 }

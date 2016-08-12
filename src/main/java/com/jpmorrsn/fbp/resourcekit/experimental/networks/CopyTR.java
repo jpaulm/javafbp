@@ -18,10 +18,10 @@
 
 package com.jpmorrsn.fbp.resourcekit.experimental.networks;
 
-import com.jpmorrsn.fbp.core.components.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
-import com.jpmorrsn.fbp.examples.components.TabulaRasa;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
+import com.jpmorrsn.fbp.resourcekit.experimental.components.TabulaRasa;
 
 
 public class CopyTR extends Network {

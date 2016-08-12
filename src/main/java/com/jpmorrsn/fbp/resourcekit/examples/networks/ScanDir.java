@@ -23,9 +23,11 @@ import java.io.File;
 
 
 import com.jpmorrsn.fbp.core.components.io.*;
+import com.jpmorrsn.fbp.core.components.text.DeCompose;
 import com.jpmorrsn.fbp.core.components.routing.KickWD;
 import com.jpmorrsn.fbp.core.components.routing.Passthru;
-import com.jpmorrsn.fbp.core.components.routing.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.routing.Sort;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 import com.jpmorrsn.fbp.core.engine.Network;
 
 import com.jpmorrsn.fbp.resourcekit.examples.components.*;

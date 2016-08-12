@@ -1,3 +1,10 @@
+package com.jpmorrsn.fbp.resourcekit.experimental.networks;
+
+
+import com.jpmorrsn.fbp.core.engine.Network;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
+
+
 /*
  * JavaFBP - A Java Implementation of Flow-Based Programming (FBP)
  * Copyright (C) 2009, 2016 J. Paul Morrison
@@ -16,35 +23,23 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+public class TestBalloon extends Network {
 
-import com.jpmorrsn.fbp.core.components.WriteToConsole;
-import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
-import com.jpmorrsn.fbp.examples.components.TabulaRasa;
-
-
-public class CopyTR extends Network {
-
-	/** 
-	 *  Run network using (experimental) TabulaRasa component
-	 *
-	 */
-  
+ 
   @Override
   protected void define() {
 
-    connect(component("Generate", GenerateTestData.class), port("OUT"), component("TabulaRasa", TabulaRasa.class), port("IN"));
+    connect(component("Gene\\ra\"te", GenerateTestData.class), port("OUT"),
+        component("Balloon", com.jpmorrsn.fbp.resourcekit.experimental.components.Balloon.class), port("IN"));
 
-    connect(component("TabulaRasa"), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
+    connect(component("Balloon"), port("OUT"),
+        component("Check", com.jpmorrsn.fbp.resourcekit.examples.components.CheckBallooning.class), port("IN"), 1);
 
-    initialize("2000", component("Generate"), port("COUNT"));
-    
-    initialize("com.jpmorrsn.fbp.core.components.Copy", component("TabulaRasa"), port("COMP"));
+    initialize("200", component("Gene\\ra\"te"), port("COUNT"));
 
   }
 
   public static void main(final String[] argv) throws Exception {
-    new CopyTR().go();
+    new TestBalloon().go();
   }
 }

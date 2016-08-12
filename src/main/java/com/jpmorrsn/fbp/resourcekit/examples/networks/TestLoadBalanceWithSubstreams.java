@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 /*
  * WARNING! 
@@ -36,6 +36,14 @@ package com.jpmorrsn.fbp.examples.networks;
  * 
  */
 	import com.jpmorrsn.fbp.core.engine.Network;
+	import com.jpmorrsn.fbp.resourcekit.examples.components.GenSS;
+	import com.jpmorrsn.fbp.core.components.routing.LoadBalance;
+	import com.jpmorrsn.fbp.resourcekit.examples.components.SlowPass;
+	import com.jpmorrsn.fbp.core.components.routing.Passthru;
+	import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
+	import com.jpmorrsn.fbp.resourcekit.examples.components.CheckSequenceWithinSubstreams;
+	import com.jpmorrsn.fbp.core.components.routing.SubstreamSensitiveMerge;
+	
 
 	public class TestLoadBalanceWithSubstreams extends Network {
 	  
@@ -43,14 +51,14 @@ package com.jpmorrsn.fbp.examples.networks;
 	  protected void define() {
 		boolean makeMergeSubstreamSensitive = true;
 				
-	    component("GenSS", com.jpmorrsn.fbp.examples.components.GenSS.class);
-	    component("LoadBalance", com.jpmorrsn.fbp.core.components.LoadBalance.class);		    
-	    component("Passthru0", com.jpmorrsn.fbp.examples.components.SlowPass.class);
-	    component("Passthru1", com.jpmorrsn.fbp.examples.components.SlowPass.class);
-	    component("Passthru2", com.jpmorrsn.fbp.core.components.Passthru.class);
-	    component("SlowPass", com.jpmorrsn.fbp.examples.components.SlowPass.class);
-	    component("Show", com.jpmorrsn.fbp.core.components.WriteToConsole.class);
-	    component("Check", com.jpmorrsn.fbp.examples.components.CheckSequenceWithinSubstreams.class);
+	    component("GenSS", GenSS.class);
+	    component("LoadBalance", LoadBalance.class);		    
+	    component("Passthru0", SlowPass.class);
+	    component("Passthru1", SlowPass.class);
+	    component("Passthru2", Passthru.class);
+	    component("SlowPass", SlowPass.class);
+	    component("Show", WriteToConsole.class);
+	    component("Check", CheckSequenceWithinSubstreams.class);
 	    
 	    connect(component("GenSS"), port("OUT"), component("LoadBalance"), port("IN"), 4);
 	    connect(component("LoadBalance"), port("OUT[0]"), component("Passthru0"), port("IN"), 7);  // <---
@@ -58,8 +66,7 @@ package com.jpmorrsn.fbp.examples.networks;
 	    connect(component("LoadBalance"), port("OUT[2]"), component("Passthru2"), port("IN"), 7);  // <---
 	    
 		if (makeMergeSubstreamSensitive) {
-			component("SubstreamSensitiveMerge",
-					com.jpmorrsn.fbp.core.components.SubstreamSensitiveMerge.class);
+			component("SubstreamSensitiveMerge", SubstreamSensitiveMerge.class);
 			
 			connect(component("Passthru0"), port("OUT"),
 					component("SubstreamSensitiveMerge"), port("IN[0]"), 2);  // <---

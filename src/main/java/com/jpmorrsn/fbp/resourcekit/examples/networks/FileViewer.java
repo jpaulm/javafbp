@@ -16,20 +16,20 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import java.io.File;
 
-import com.jpmorrsn.fbp.core.components.Inject;
+import com.jpmorrsn.fbp.core.components.routing.Inject;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.FileReadLines;
-import com.jpmorrsn.fbp.examples.components.Interpret;
-import com.jpmorrsn.fbp.examples.components.WriteReadConsole;
+import com.jpmorrsn.fbp.resourcekit.examples.components.FileReadLines;
+import com.jpmorrsn.fbp.resourcekit.examples.components.Interpret;
+import com.jpmorrsn.fbp.resourcekit.examples.components.WriteReadConsole;
 
 
 /** 
- * Network executing first appkata example - not sure if this was ever tested...
+ * Network executing first Appkata example - not sure if this was ever tested...
  * 
  */
 public class FileViewer extends Network {

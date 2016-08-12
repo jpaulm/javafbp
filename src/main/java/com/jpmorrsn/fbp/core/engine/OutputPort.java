@@ -166,7 +166,7 @@ public class OutputPort {
     sender = c;
   }
 
-  Connection getConnection() {
+  public Connection getConnection() {
     return cnxt;
   }
 

@@ -16,7 +16,7 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.core.components;
+package com.jpmorrsn.fbp.core.components.misc;
 
 
 import com.jpmorrsn.fbp.core.engine.*;

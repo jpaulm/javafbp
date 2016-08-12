@@ -15,19 +15,19 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.core.components;
+package com.jpmorrsn.fbp.core.components.text;
 
 
 import com.jpmorrsn.fbp.core.engine.*;
 
 
-/** Component to concatenate all packets in the input stream into 
+/** Component to ConcatStreams all packets in the input stream into 
 * one long String, which is then sent to the output port.
 */
-@ComponentDescription("Concatenate all packets in the input stream into one long String")
+@ComponentDescription("ConcatStreams all packets in the input stream into one long String")
 @OutPort("OUT")
 @InPort(value = "IN", arrayPort = true)
-public class ConcatStr extends Component {
+public class ConcatString extends Component {
 
  
 

@@ -18,12 +18,12 @@
 
  * Sven Steinseifer - 2010 */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
-import com.jpmorrsn.fbp.core.components.Output;
+import com.jpmorrsn.fbp.core.components.routing.Output;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenSubStreams;
+import com.jpmorrsn.fbp.resourcekit.examples.components.GenSubStreams;
 
 
 public class TestNestedSubstreams {

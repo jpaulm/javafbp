@@ -15,10 +15,13 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import com.jpmorrsn.fbp.core.engine.Network;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
+import com.jpmorrsn.fbp.resourcekit.examples.subnets.InfiniteQueue;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 
 
 public class TestInfiniteQueue extends Network {
@@ -27,9 +30,9 @@ public class TestInfiniteQueue extends Network {
 
   @Override
   protected void define() {
-    component("__ Generate", com.jpmorrsn.fbp.examples.components.GenerateTestData.class);
-    component("_ Infinite_  Queue", com.jpmorrsn.fbp.subnets.InfiniteQueue.class);
-    component("__  Display", com.jpmorrsn.fbp.core.components.WriteToConsole.class);
+    component("__ Generate", GenerateTestData.class);
+    component("_ Infinite_  Queue", InfiniteQueue.class);
+    component("__  Display", WriteToConsole.class);
     connect(component("_ Infinite_  Queue"), port("OUT"), component("__  Display"), port("IN"));
     initialize("100", component("__ Generate"), port("COUNT"));
     connect(component("__ Generate"), port("OUT"), component("_ Infinite_  Queue"), port("IN"));

@@ -16,13 +16,13 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import java.io.File;
 
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.Text2IntArray;
+import com.jpmorrsn.fbp.core.components.audio.Text2IntArray;
 
 
 public class TestTune extends Network {
@@ -31,12 +31,12 @@ public class TestTune extends Network {
 
   @Override
   protected void define() {
-    component("_Read_Tune_File", com.jpmorrsn.fbp.core.components.ReadFile.class);
+    component("_Read_Tune_File", com.jpmorrsn.fbp.core.components.io.ReadFile.class);
     component("_Text_to_Int_Array", Text2IntArray.class);
     //component("_Play_Tune", com.jpmorrsn.fbp.core.components.PlayTune.class);
-    //component("Display", com.jpmorrsn.fbp.core.components.WriteToConsole.class);
-    component("GenSamples", com.jpmorrsn.fbp.core.components.GenSamples.class);
-    component("SoundMixer", com.jpmorrsn.fbp.core.components.SoundMixer.class);
+    //component("Display", com.jpmorrsn.fbp.core.components.misc.WriteToConsole.class);
+    component("GenSamples", com.jpmorrsn.fbp.core.components.audio.GenSamples.class);
+    component("SoundMixer", com.jpmorrsn.fbp.core.components.audio.SoundMixer.class);
 
     connect(component("_Read_Tune_File"), port("OUT"), component("_Text_to_Int_Array"), port("IN"));
     initialize("src/main/resources/testdata/tune.txt".replace("/", File.separator), component("_Read_Tune_File"), port("SOURCE"));

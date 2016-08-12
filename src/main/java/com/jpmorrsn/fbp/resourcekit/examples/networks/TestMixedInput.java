@@ -16,12 +16,12 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
-import com.jpmorrsn.fbp.core.components.Concatenate;
-import com.jpmorrsn.fbp.core.components.WriteToConsole;
+import com.jpmorrsn.fbp.core.components.routing.ConcatStreams;
+import com.jpmorrsn.fbp.core.components.misc.WriteToConsole;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.GenerateTestData;
+import com.jpmorrsn.fbp.core.components.misc.GenerateTestData;
 
 public class TestMixedInput extends Network {
 
@@ -34,7 +34,7 @@ public class TestMixedInput extends Network {
     @Override
     protected void define() {
 	connect(component("Generate", GenerateTestData.class), port("OUT"),
-		component("Concat", Concatenate.class), port("IN"));
+		component("Concat", ConcatStreams.class), port("IN"));
 	connect("Concat.OUT", component("Write", WriteToConsole.class),
 		port("IN"));
 	initialize("testing", "Concat.IN[0]");

@@ -31,7 +31,7 @@ import com.jpmorrsn.fbp.core.engine.Packet;
 
 
 /**
- * Provide words from a stream of space-separated records
+ * Provide words from a stream of space-separated records - essentially same as routing.DeCompose
  * Bob Corrick December 2011
  */
 @ComponentDescription("Take space-separated words in a record IN and deliver individual words OUT")
@@ -39,8 +39,7 @@ import com.jpmorrsn.fbp.core.engine.Packet;
 @InPorts({ @InPort("IN") })
 public class LineToWords extends Component {
 
-  static final String copyright = "...";
-
+  
   private InputPort inport;
 
   private OutputPort outport;

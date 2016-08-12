@@ -17,12 +17,12 @@
   
  * Contributed by Bob Corrick - Feb., 2012 - for the AppKatas exercise on the FBP Google Group
  */
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.examples.networks;
 
 
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.Interpret;
-import com.jpmorrsn.fbp.examples.components.WriteReadConsole;
+import com.jpmorrsn.fbp.resourcekit.examples.components.Interpret;
+import com.jpmorrsn.fbp.resourcekit.examples.components.WriteReadConsole;
 
 
 public class WriteReadInterpret extends Network {
@@ -33,7 +33,7 @@ public class WriteReadInterpret extends Network {
   protected void define() {
     component("Interpret", Interpret.class);
     component("Write IN_and MENU_Read user_CMD", WriteReadConsole.class);
-    component("Start", com.jpmorrsn.fbp.core.components.Kick.class);
+    component("Start", com.jpmorrsn.fbp.core.components.routing.Kick.class);
     connect(component("Start"), port("OUT"), component("Write IN_and MENU_Read user_CMD"), port("IN"));
     initialize("First, Next, Previous, Last, Jump to, eXit", component("Write IN_and MENU_Read user_CMD"), port("MENU"));
     connect(component("Write IN_and MENU_Read user_CMD"), port("CMD"), component("Interpret"), port("IN"));

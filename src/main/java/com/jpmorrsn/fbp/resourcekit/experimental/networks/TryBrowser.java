@@ -16,12 +16,12 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks;
+package com.jpmorrsn.fbp.resourcekit.experimental.networks;
 
 
-import com.jpmorrsn.fbp.core.components.Discard;
-import com.jpmorrsn.fbp.core.components.Kick;
-import com.jpmorrsn.fbp.core.components.ShowURL;
+import com.jpmorrsn.fbp.core.components.routing.Discard;
+import com.jpmorrsn.fbp.core.components.routing.Kick;
+import com.jpmorrsn.fbp.resourcekit.experimental.components.ShowURL;
 import com.jpmorrsn.fbp.core.engine.Network;
 
 

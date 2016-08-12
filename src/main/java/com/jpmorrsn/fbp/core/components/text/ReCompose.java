@@ -15,8 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-
-package com.jpmorrsn.fbp.resourcekit.examples.components;
+package com.jpmorrsn.fbp.core.components.text;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
@@ -28,64 +27,64 @@ import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/** Sort a stream of up to 999999 Packets to an output stream
-**/
-@ComponentDescription("Sorts up to 999999 packets, based on contents")
-@OutPort(value = "OUT", description = "Output port", type = String.class)
-@InPort(value = "IN", description = "Packets to be sorted", type = String.class)
-public class Sort extends Component {
+/**
+ * Build output records from words.
+ */
+@ComponentDescription("Build output records from words")
+@OutPort("OUT")
+@InPort("IN")
+public class ReCompose extends Component {
 
   
-  private InputPort inport;
+
+  InputPort inport, size;
 
   private OutputPort outport;
 
   @Override
   protected void execute() {
+    Packet szp = size.receive();
+    if (szp == null) {
+      return;
+    }
+    size.close();
+    String szi = (String) szp.getContent();
+    szi = szi.trim();
+    int sz = 0;
+    try {
+      sz = Integer.parseInt(szi);
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
+    }
+    drop(szp);
 
-    Packet p;
-    int i = 0, j, k, n;
-    Packet[] array = new Packet[999999];
+    String s = "";
+
+    Packet p, op;
     while ((p = inport.receive()) != null) {
-      array[i] = p;
-      //System.out.println("in: " + p.getContent());
-      ++i;
-    }
-
-    //network.traceFuncs(this.getName() + ": No. of elements:" + i);
-    j = 0;
-    k = i;
-    n = k; // no. of packets to be sent out
-
-    while (n > 0) {
-      String t = "\uffff";
-
-      for (i = 0; i < k; i++) {
-        if (array[i] != null) {
-
-          String s = (String) array[i].getContent();
-
-          if (s.compareTo(t) < 0) {
-            j = i;
-            t = (String) array[j].getContent();
-          }
-        }
+      String t = (String) p.getContent();
+      if (s.length() + t.length() > sz) {
+        op = create(s);
+        outport.send(op);
+        s = "";
       }
-      //  if (array[j] == null) break;
-      outport.send(array[j]);
-      array[j] = null;
-
-      --n;
+      s += t;
+      if (s.length() + 1 < sz) {
+        s += " ";
+      }
+      drop(p);
     }
-
+    if (s.length() > 0) {
+      op = create(s);
+      outport.send(op);
+    }
   }
 
   @Override
   protected void openPorts() {
-
     inport = openInput("IN");
+    size = openInput("SIZE");
 
     outport = openOutput("OUT");
-
   }
 }

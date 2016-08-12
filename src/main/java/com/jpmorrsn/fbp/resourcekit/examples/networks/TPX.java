@@ -16,16 +16,16 @@
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
 
-package com.jpmorrsn.fbp.examples.networks; // Change as required 
+package com.jpmorrsn.fbp.resourcekit.examples.networks; // Change as required 
 
 
 import java.io.File;
 
-import com.jpmorrsn.fbp.core.components.ReadFile;
-import com.jpmorrsn.fbp.core.components.RegExReplace;
-import com.jpmorrsn.fbp.core.components.WriteFile;
+import com.jpmorrsn.fbp.core.components.io.ReadFile;
+import com.jpmorrsn.fbp.core.components.text.RegExReplace;
+import com.jpmorrsn.fbp.core.components.io.WriteFile;
 import com.jpmorrsn.fbp.core.engine.Network;
-import com.jpmorrsn.fbp.examples.components.BuildBlob;
+import com.jpmorrsn.fbp.resourcekit.examples.components.BuildBlob;
 
 
 /**

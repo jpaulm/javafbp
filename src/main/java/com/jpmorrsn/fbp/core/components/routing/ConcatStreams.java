@@ -15,7 +15,7 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpmorrsn.fbp.examples.components;
+package com.jpmorrsn.fbp.core.components.routing;
 
 
 import com.jpmorrsn.fbp.core.engine.Component;
@@ -27,64 +27,42 @@ import com.jpmorrsn.fbp.core.engine.OutputPort;
 import com.jpmorrsn.fbp.core.engine.Packet;
 
 
-/**
- * Build output records from words.
- */
-@ComponentDescription("Build output records from words")
+/** Component to ConcatStreams two or more streams of packets
+*/
+
+@ComponentDescription("ConcatStreams two or more streams of packets")
 @OutPort("OUT")
-@InPort("IN")
-public class ReCompose extends Component {
+@InPort(value = "IN", arrayPort = true)
+public class ConcatStreams extends Component {
 
   
 
-  InputPort inport, size;
+  private InputPort[] inportArray;
 
   private OutputPort outport;
 
-  @Override
+  @SuppressWarnings("rawtypes")
+@Override
   protected void execute() {
-    Packet szp = size.receive();
-    if (szp == null) {
-      return;
-    }
-    size.close();
-    String szi = (String) szp.getContent();
-    szi = szi.trim();
-    int sz = 0;
-    try {
-      sz = Integer.parseInt(szi);
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-    }
-    drop(szp);
 
-    String s = "";
+    int no = inportArray.length;
 
-    Packet p, op;
-    while ((p = inport.receive()) != null) {
-      String t = (String) p.getContent();
-      if (s.length() + t.length() > sz) {
-        op = create(s);
-        outport.send(op);
-        s = "";
+    Packet p;
+    for (int i = 0; i < no; i++) {
+      while ((p = inportArray[i].receive()) != null) {
+        outport.send(p);
       }
-      s += t;
-      if (s.length() + 1 < sz) {
-        s += " ";
-      }
-      drop(p);
-    }
-    if (s.length() > 0) {
-      op = create(s);
-      outport.send(op);
+
     }
   }
 
   @Override
   protected void openPorts() {
-    inport = openInput("IN");
-    size = openInput("SIZE");
+
+    inportArray = openInputArray("IN");
+    //		inport.setType(Object.class);
 
     outport = openOutput("OUT");
+
   }
 }
