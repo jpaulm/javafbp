@@ -9,7 +9,7 @@ temp.data
 .gradle
 
 # Maven packages/etc
-target/
+target
 build/libs
 build/poms
 build/tmp
