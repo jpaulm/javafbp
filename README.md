@@ -68,15 +68,17 @@ The latest jar file can simply be downloaded from the latest release, or it can 
 
     gradle build
 
-As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
+As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.resourcekit.examples`). 
+
+**`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
 For running any of the examples use the following command:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.<Class name of the network>
 
 For example:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.TestIPCounting
 
 
 Running a test
@@ -86,7 +88,7 @@ Here is a simple command-line test that can be run to test that everything is wo
 
 In the project directory, enter
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.MergeandSort
 
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
