@@ -11,6 +11,8 @@ General web site for "classical" FBP:
 
 **Latest release of JavaFBP: `javafbp-4.0.1`** 
 
+**For some reason this jar file contains two empty folders: `components` and `engine`, and a non-empty folder (outside `resourcekit`) called `examples` - please ignore!**
+
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
 FBP is a particular form of dataflow programming based on bounded buffers, information packets with defined lifetimes, named ports, and separate definition of connections.
@@ -66,16 +68,30 @@ The latest jar file can simply be downloaded from the latest release, or it can 
 
     gradle build
 
-As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.examples`). 
+As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.resourcekit.examples`). 
+
+**`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
 For running any of the examples use the following command:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.<Class name of the network>
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.<Class name of the network>
 
 For example:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.TestIPCounting
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.TestIPCounting
+    
+Building/viewing Component Attributes List
+--------
 
+A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to build a list of the component attributes for any specified list of JavaFBP component packages.  The bat file, `JavaFBPCompAttrs.bat` can be found in `src/main/resources`.
+
+As delivered on GitHub, it looks like this:
+
+     javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpmorrsn.fbp.core.components.audio com.jpmorrsn.fbp.core.components.io com.jpmorrsn.fbp.core.components.misc com.jpmorrsn.fbp.core.components.routing com.jpmorrsn.fbp.core.components.swing com.jpmorrsn.fbp.core.components.text
+     
+To run it, set your current directory to your `javafbp` folder.   Then enter `src\main\resources\javafbpcompattrs.bat` .  
+
+The result will be on `C:/Temp/JavaFBPCompAttrs.html`, and can be displayed using your favorite browser.  Not all attributes have been filled in as yet, but these will be expanded as time allows.
 
 Running a test
 ----
@@ -84,7 +100,7 @@ Here is a simple command-line test that can be run to test that everything is wo
 
 In the project directory, enter
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.examples.networks.MergeandSort
+    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.MergeandSort
 
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
