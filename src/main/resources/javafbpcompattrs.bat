@@ -1,0 +1,1 @@
+javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpmorrsn.fbp.core.components.audio com.jpmorrsn.fbp.core.components.io com.jpmorrsn.fbp.core.components.misc com.jpmorrsn.fbp.core.components.routing com.jpmorrsn.fbp.core.components.swing com.jpmorrsn.fbp.core.components.text
