@@ -79,7 +79,19 @@ For running any of the examples use the following command:
 For example:
 
     java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.TestIPCounting
+    
+Building/viewing Component Attributes List
+--------
 
+A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to build a list of the component attributes for any specified list of JavaFBP component packages.  The bat file, `JavaFBPCompAttrs.bat` can be found in `src/main/resources`.
+
+As delivered on GitHub, it looks like this:
+
+     javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpmorrsn.fbp.core.components.audio com.jpmorrsn.fbp.core.components.io com.jpmorrsn.fbp.core.components.misc com.jpmorrsn.fbp.core.components.routing com.jpmorrsn.fbp.core.components.swing com.jpmorrsn.fbp.core.components.text
+     
+To run it, set your current directory to your `javafbp` folder.   Then enter `src\main\resources\javafbpcompattrs.bat` .  
+
+The result will be on `C:/Temp/JavaFBPCompAttrs.html`, and can be displayed using your favorite browser.  Not all attributes have been filled in as yet, but these will be expanded as time allows.
 
 Running a test
 ----
