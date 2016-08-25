@@ -35,7 +35,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = '4.0.1'
+version = '4.1.0'
 group = 'com.jpaulmorrison'
 
 
@@ -43,6 +43,12 @@ description = 'Java Implementation of "Classical" Flow-Based Programming'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version
+    }
+}
 
 //publishing {
  //   publications {
@@ -105,7 +111,7 @@ task writeNewPom << {
         project {
             groupId 'com.jpaulmorrison'
             artifactId 'javafbp'
-            version '4.0.1'
+            version '4.1.0'
         
             inceptionYear '2016'
             licenses {
@@ -139,7 +145,7 @@ uploadArchives {
         packaging 'jar'
         // optionally artifactId can be defined here         
         url 'https://github.com/jpaulm/javafbp'
-        version '4.0.1'
+        version '4.1.0'
 
         scm {
           connection 'scm:git:https://github.com/jpaulm.git'
