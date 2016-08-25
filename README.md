@@ -9,9 +9,7 @@ General
 General web site for "classical" FBP: 
 * http://www.jpaulmorrison.com/fbp/
 
-**Latest release of JavaFBP: `javafbp-4.0.1`** 
-
-**For some reason this jar file contains two empty folders: `components` and `engine`, and a non-empty folder (outside `resourcekit`) called `examples` - please ignore!**
+**Latest release of JavaFBP: `javafbp-4.1.0`** 
 
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
@@ -20,9 +18,9 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp . 
+Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  (not yet!)
 
-Javadoc can also be browsed at http://jpaulm.github.io/javafbp/
+Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (not yet!)
  
 JavaFBP-WebSockets
 ---
@@ -54,7 +52,7 @@ If you already created an Eclipse project you can run:
 
     gradle cleanEclipse Eclipse
 
-You need to install a Gradle plugin for Eclipse as explain here:
+You need to install a Gradle plugin for Eclipse as explained here:
 https://github.com/spring-projects/eclipse-integration-gradle/
 Then import a generated project in Eclipse, right (ctrl for OSX) click on the project in Eclipse -> Configure -> Convert to Gradle Project. After the conversion you can Right (ctrl for OSX) click on the project -> Gradle -> Task Quick Launcher and type `build`.
 
@@ -72,15 +70,17 @@ As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` direc
 
 **`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
-For running any of the examples use the following command:
+For running any of the examples `cd` to your `javafbp` folder, and use the following command:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.<Class name of the network>
+    java -cp build/libs/javafbp-x.x.x.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.<Class name of the network>
+    
+use `jpaulmorrison` if version is 4.1.0 or later.    
 
 For example:
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.TestIPCounting
+    java -cp build/libs/javafbp-x.x.x.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.TestIPCounting
     
-To run one of your own classes, add `.;` in front of `build`, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.    
+To run one of your own classes, add `.;` in front of `build/`, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.    
     
 Building/viewing Component Attributes List
 --------
@@ -89,7 +89,7 @@ A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to
 
 As delivered on GitHub, it looks like this:
 
-     javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpmorrsn.fbp.core.components.audio com.jpmorrsn.fbp.core.components.io com.jpmorrsn.fbp.core.components.misc com.jpmorrsn.fbp.core.components.routing com.jpmorrsn.fbp.core.components.swing com.jpmorrsn.fbp.core.components.text
+     javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
      
 To run it, set your current directory to your `javafbp` folder.   Then enter `src\main\resources\javafbpcompattrs.bat` .  
 
@@ -102,7 +102,7 @@ Here is a simple command-line test that can be run to test that everything is wo
 
 In the project directory, enter
 
-    java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.MergeandSort
+    java -cp build/libs/javafbp-x.x.x.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.MergeandSort
 
 Here is a picture of MergeandSort, drawn using DrawFBP:
 
