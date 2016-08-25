@@ -61,7 +61,7 @@ Then import a generated project in Eclipse, right (ctrl for OSX) click on the pr
 You may have to go to the project Properties and select Java Build Path/Source; remove whatever is there and select `JavaFBP/src/main/java`; then close Eclipse, and reopen it.
 
 
-Building from command line
+Building and/or running from command line
 ---
 
 The latest jar file can simply be downloaded from the latest release, or it can be rebuilt , by running the following command:
@@ -79,6 +79,8 @@ For running any of the examples use the following command:
 For example:
 
     java -cp build/libs/javafbp-x.x.x.jar com.jpmorrsn.fbp.resourcekit.examples.networks.TestIPCounting
+    
+To run one of your own classes, add `.;` in front of `build`, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.    
     
 Building/viewing Component Attributes List
 --------
