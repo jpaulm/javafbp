@@ -18,9 +18,9 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  (not yet!)
+Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  (4.1.0 not promoted yet!)
 
-Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (not yet!)
+Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (4.1.0 not promoted yet!)
  
 JavaFBP-WebSockets
 ---
