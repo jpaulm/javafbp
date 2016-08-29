@@ -80,7 +80,9 @@ For example:
 
     java -cp build/libs/javafbp-x.x.x.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.TestIPCounting
     
-To run one of your own classes, add `.;` in front of `build/`, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.    
+To run one of your own classes, add `.;` in front of `build/`, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.  
+
+In *nix, replace the `;` with `:`.
     
 Building/viewing Component Attributes List
 --------
