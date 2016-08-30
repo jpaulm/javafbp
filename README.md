@@ -95,7 +95,7 @@ As delivered on GitHub, it looks like this:
      
 To run it, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output can be redirected to anywhere you like.
 
-The result will be on `C:/Temp/JavaFBPCompAttrs.html`, and can be displayed using your favorite browser.  Not all attributes have been filled in as yet, but these will be expanded as time allows.
+Not all JavaFBP component attributes have been filled in as yet, but these will be expanded as time allows.
 
 Running a test
 ----
