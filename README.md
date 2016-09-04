@@ -89,13 +89,15 @@ Building/viewing Component Attributes List
 
 A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to build a list of the component attributes for any specified list of JavaFBP component packages.  The bat file, `JavaFBPCompAttrs.bat` can be found in `src/main/resources`.
 
-As delivered on GitHub, it looks like this:
+Mke sure you run `gradle build` to have the necessary `JavaFBPCompAttrs.class` file generated.
 
+As delivered on GitHub, the `bat` file looks like this:
 
-      javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
+      javadoc -doclet com.jpaulmorrison.fbp.doclets.JavaFBPCompAttrs -docletpath target/classes -classpath "C:/Program Files/Java/jdk1.8.0_101/lib/tools.jar" -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
 
-     
-To run it, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output will be found in `C:\Temp\JavaFBPCompAttrs.html`.  Then open with your favorite browser.
+The directories to be scanned can be seen following `-sourcepath` and its operand - change to taste, in your copy!
+
+To run the `bat` file, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output will be found in `C:\Temp\JavaFBPCompAttrs.html`.  Open with your favorite browser.
 
 Not all JavaFBP component attributes have been filled in as yet, but these will be expanded as time allows.
 
