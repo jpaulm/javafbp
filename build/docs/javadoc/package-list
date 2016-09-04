@@ -5,6 +5,7 @@ com.jpaulmorrison.fbp.core.components.routing
 com.jpaulmorrison.fbp.core.components.swing
 com.jpaulmorrison.fbp.core.components.text
 com.jpaulmorrison.fbp.core.engine
+com.jpaulmorrison.fbp.doclets
 com.jpaulmorrison.fbp.resourcekit.examples.components
 com.jpaulmorrison.fbp.resourcekit.examples.networks
 com.jpaulmorrison.fbp.resourcekit.examples.subnets
