@@ -91,7 +91,7 @@ A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to
 
 As delivered on GitHub, it looks like this:
 
-      javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text > c:\Temp\JavaFBPCompAttrs.html
+      javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
      
 To run it, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output will be found in `C:\Temp\JavaFBPCompAttrs.html`.  Then open with your favorite browser.
 
