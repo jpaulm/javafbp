@@ -9,7 +9,7 @@ General
 General web site for "classical" FBP: 
 * http://www.jpaulmorrison.com/fbp/
 
-**Latest release of JavaFBP: `javafbp-4.1.0`** (Package qualifier changd from `jpmorrsn` to `jpaulmorrison`)
+**Latest release of JavaFBP: `javafbp-4.1.0`** (Package qualifier changed from `jpmorrsn` to `jpaulmorrison`)
 
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
@@ -91,9 +91,11 @@ A function, `JavaFBPCompAttrs`,  has been added to the JavaFBP GitHub project to
 
 As delivered on GitHub, it looks like this:
 
-    javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text > c:\Temp\JavaFBPCompAttrs.html
+
+      javadoc -doclet doclets.JavaFBPCompAttrs -docletpath src/main/resources -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
+
      
-To run it, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output can be redirected to anywhere you like.
+To run it, set your current directory to your `javafbp` folder.   Then run `src\main\resources\javafbpcompattrs.bat` .  The output will be found in `C:\Temp\JavaFBPCompAttrs.html`.  Then open with your favorite browser.
 
 Not all JavaFBP component attributes have been filled in as yet, but these will be expanded as time allows.
 
