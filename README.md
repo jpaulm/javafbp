@@ -93,7 +93,7 @@ Mke sure you run `gradle build` to have the necessary `JavaFBPCompAttrs.class` f
 
 As delivered on GitHub, the `bat` file looks like this:
 
-      javadoc -doclet com.jpaulmorrison.fbp.doclets.JavaFBPCompAttrs -docletpath target/classes -classpath "C:/Program Files/Java/jdk1.8.0_101/lib/tools.jar" -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
+      javadoc -doclet com.jpaulmorrison.fbp.doclets.JavaFBPCompAttrs -docletpath target/classes -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
 
 The directories to be scanned can be seen following `-sourcepath` and its operand - change to taste, in your copy!
 
