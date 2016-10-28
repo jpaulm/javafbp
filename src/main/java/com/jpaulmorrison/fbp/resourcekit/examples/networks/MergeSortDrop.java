@@ -20,7 +20,7 @@ package com.jpaulmorrison.fbp.resourcekit.examples.networks;
 
 
 import com.jpaulmorrison.fbp.core.components.routing.Discard;
-import com.jpaulmorrison.fbp.core.components.routing.Passthru;
+import com.jpaulmorrison.fbp.resourcekit.examples.components.SlowPass;
 import com.jpaulmorrison.fbp.core.components.routing.Sort;
 import com.jpaulmorrison.fbp.core.engine.Network;
 import com.jpaulmorrison.fbp.core.components.misc.GenerateTestData;
@@ -40,13 +40,13 @@ public class MergeSortDrop extends Network {
     component("_Generate2", GenerateTestData.class);
     component("_Sort", Sort.class);
     component("_Discard", Discard.class);
-    component("Passthru", Passthru.class);
-    component("Passthru2", Passthru.class);
-    connect(component("_Generate2"), port("OUT"), component("Passthru2"), port("IN"));
-    connect(component("_Generate"), port("OUT"), component("Passthru"), port("IN"));
-    connect("Passthru2.OUT", "Passthru.IN");
-    connect("Passthru.OUT", "_Sort.IN");
-    initialize("100", component("_Generate"), port("COUNT"));
+    component("SlowPass", SlowPass.class);
+    component("SlowPass2", SlowPass.class);
+    connect(component("_Generate2"), port("OUT"), component("SlowPass2"), port("IN"));
+    connect(component("_Generate"), port("OUT"), component("SlowPass"), port("IN"));
+    connect("SlowPass2.OUT", "SlowPass.IN");
+    connect("SlowPass.OUT", "_Sort.IN");
+    initialize("50", component("_Generate"), port("COUNT"));
     initialize("100", component("_Generate2"), port("COUNT"));
     connect(component("_Sort"), port("OUT"), component("_Discard"), port("IN"));
 

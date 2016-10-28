@@ -52,8 +52,10 @@ public class SlowPass extends Component {
 
 		Random rnd = new Random();
 
-		while (null != (p = inport.receive())) {
+		// while (null != (p = inport.receive())) {
+		    p = inport.receive();  // make non-looper
 
+		    longWaitStart(1);
 			try {
 				long intvl = (long) rnd.nextInt(500);
 				sleep(intvl);
@@ -61,9 +63,10 @@ public class SlowPass extends Component {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			longWaitEnd();
 
 			outport.send(p);
-		}
+		//}
 	}
 
   @Override

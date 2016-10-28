@@ -20,7 +20,7 @@ package com.jpaulmorrison.fbp.resourcekit.examples.networks;
 
 import com.jpaulmorrison.fbp.core.components.misc.WriteToConsole;
 import com.jpaulmorrison.fbp.core.engine.Network;
-import com.jpaulmorrison.fbp.core.components.misc.Collate;
+import com.jpaulmorrison.fbp.resourcekit.examples.components.SlowPass;
 import com.jpaulmorrison.fbp.core.components.misc.GenerateTestData;
 
 /** 
@@ -34,13 +34,15 @@ public class Copy1 extends Network {
   protected void define() {
     // component("MONITOR", Monitor.class);
 
-    connect(component("Generate", GenerateTestData.class), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
+    connect(component("Generate", GenerateTestData.class), port("OUT"), component("SlowPass", SlowPass.class), port("IN"));
+    connect(component("SlowPass"), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
 
     initialize("100", component("Generate"), port("COUNT"));
 
   }
 
   public static void main(final String[] argv) throws Exception {
-    new Copy1().go();
+	  for (int i = 0; i < 50; i++)
+         new Copy1().go();
   }
 }
