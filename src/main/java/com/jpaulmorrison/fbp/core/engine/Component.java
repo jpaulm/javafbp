@@ -101,7 +101,7 @@ public abstract class Component extends Thread {
 
   ReentrantLock goLock;
 
-  private final Condition canGo;
+  final Condition canGo;
 
   protected Network network;
 
@@ -1166,12 +1166,15 @@ public abstract class Component extends Thread {
               continue;
             }
             Connection c = (Connection) inp;
-               synchronized (c) {
+               c.lock.lock(); 
+                try {
             allDrained &= c.isDrained();
             //allDrained = allDrained && c.usedSlots == 0 && c.senderCount == 0;
             hasData |= !c.isEmpty();
             //hasData = hasData || c.usedSlots > 0;
-              } 
+              } finally {
+            	  c.lock.unlock() ;  
+              }
           } //for
           // if (hasData) {
           //  mother.traceFuncs("hasData " + getName());

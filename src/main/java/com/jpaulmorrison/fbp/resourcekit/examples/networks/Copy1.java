@@ -20,8 +20,7 @@ package com.jpaulmorrison.fbp.resourcekit.examples.networks;
 
 import com.jpaulmorrison.fbp.core.components.misc.WriteToConsole;
 import com.jpaulmorrison.fbp.core.engine.Network;
-import com.jpaulmorrison.fbp.resourcekit.examples.components.SlowPass;
-import com.jpaulmorrison.fbp.core.components.misc.GenerateTestData;
+
 
 /** 
  * Generate 100 test IPs and write them to the console
@@ -34,10 +33,10 @@ public class Copy1 extends Network {
   protected void define() {
     // component("MONITOR", Monitor.class);
 
-    connect(component("Generate", GenerateTestData.class), port("OUT"), component("SlowPass", SlowPass.class), port("IN"));
-    connect(component("SlowPass"), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
+    connect(component("Generate", com.jpaulmorrison.fbp.resourcekit.examples.components.GenerateSlowly.class), port("OUT"), component("Passthru", com.jpaulmorrison.fbp.core.components.routing.Passthru.class), port("IN"));
+    connect(component("Passthru"), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
 
-    initialize("100", component("Generate"), port("COUNT"));
+    //initialize("100", component("Generate"), port("COUNT"));
 
   }
 

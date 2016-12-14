@@ -454,7 +454,8 @@ public class Connection implements InputPort {
 					//synchronized(lock) {
 					    //lock.notifyAll(); // notify receiver
 					notFull.signalAll();  // signals other senders
-					notEmpty.signal();  // signals (single) receiver  
+					notEmpty.signal();  // signals (single) receiver 
+					getReceiver().canGo.signal();
 					//}
 					// other components waiting to send to this connection may
 					// also get
