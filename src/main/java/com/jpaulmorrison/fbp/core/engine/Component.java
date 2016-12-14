@@ -1078,7 +1078,7 @@ public abstract class Component extends Thread {
         }
 
       } // while
-
+      synchronized (this) {
       if (autoOutput != null) {
         //Packet p = create("");
         //autoOutput.send(p);
@@ -1092,6 +1092,7 @@ public abstract class Component extends Thread {
       }
       mother.indicateTerminated(this);
 
+      }
     } catch (ComponentException e) {
       if (e.getValue() > 0) {
         mother.traceFuncs(getName() + " - Component exception: " + e.getValue());
@@ -1131,6 +1132,7 @@ public abstract class Component extends Thread {
       throw new ThreadDeath();
     }
   }
+  
 
   private class InputStates {
 
@@ -1143,10 +1145,19 @@ public abstract class Component extends Thread {
     // Get state of all ports
 
     InputStates(final HashMap<String, InputPort> inports) throws InterruptedException {
-
-      try {
-        mother.traceLocks("ist - lock " + getName());
-        goLock.lockInterruptibly();
+    	/*
+    	for (InputPort inp : inports.values()) {
+            if (!(inp instanceof Connection))  
+              continue;
+             
+            Connection c = (Connection) inp;
+            c.lock.lockInterruptibly();
+            c.lock.wait();
+          } //for
+    	*/
+      //try {
+        //mother.traceLocks("ist - lock " + getName());
+        //goLock.lockInterruptibly();
         while (true) {
           allDrained = true;
           hasData = false;
@@ -1155,12 +1166,12 @@ public abstract class Component extends Thread {
               continue;
             }
             Connection c = (Connection) inp;
-            //  synchronized (c) {
-            //allDrained &= c.isDrained();
-            allDrained = allDrained && c.usedSlots == 0 && c.senderCount == 0;
-            //hasData |= !c.isEmpty();
-            hasData = hasData || c.usedSlots > 0;
-            //  } 
+               synchronized (c) {
+            allDrained &= c.isDrained();
+            //allDrained = allDrained && c.usedSlots == 0 && c.senderCount == 0;
+            hasData |= !c.isEmpty();
+            //hasData = hasData || c.usedSlots > 0;
+              } 
           } //for
           // if (hasData) {
           //  mother.traceFuncs("hasData " + getName());
@@ -1171,29 +1182,45 @@ public abstract class Component extends Thread {
           if (hasData || allDrained) {
             break;
           }
-
-          //          try {
+          mother.traceLocks("ist - lock " + getName());
+          goLock.lockInterruptibly();
+                   try {
           status = StatusValues.DORMANT;
           mother.traceFuncs(getName() + ": Dormant");
           mother.traceLocks("ist - await " + getName());
           canGo.await();
           mother.traceLocks("ist - await ended" + getName());
-          //          } catch (InterruptedException e) {
-          // do nothing
-          //          }
+                     } catch (InterruptedException e) {
+           // do nothing
+                     }
+                   finally {
+                	   goLock.unlock();
+                    
+                	   mother.traceLocks("ist - unlock " + getName());
+                        
+                   }
 
           status = StatusValues.ACTIVE;
           mother.traceFuncs(getName() + ": Active");
         }
       }
 
-      finally {
-        goLock.unlock();
-        mother.traceLocks("ist - unlock " + getName());
-      }
+      //finally {
+       // goLock.unlock();
+      //  mother.traceLocks("ist - unlock " + getName());
+        /*
+        for (InputPort inp : inports.values()) {
+            if (!(inp instanceof Connection)) {
+              continue;
+            }
+            Connection c = (Connection) inp;
+            c.lock.unlock();
+          } //for
+        */
+     // }
 
-    } // while
-  }
+    //} // while
+   }
 
   /**
    * Terminates the component.
@@ -1205,3 +1232,4 @@ public abstract class Component extends Thread {
     interrupt();
   }
 }
+ 

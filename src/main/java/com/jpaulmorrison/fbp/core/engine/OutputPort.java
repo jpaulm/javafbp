@@ -62,14 +62,20 @@ public class OutputPort {
     traceFuncs("Closing");
     if (isConnected() && !isClosed) {
       isClosed = true;
-      synchronized (cnxt) {
+      /*synchronized   (cnxt) */
+      cnxt.lock.lock();
+      try{
         if (!cnxt.isClosed()) {
           cnxt.indicateOneSenderClosed(); // indicate that one sender has
           // terminated
         }
+        
+      } finally {
+    	  traceFuncs("Close finished");
+    	  cnxt.lock.unlock();
       }
     }
-    traceFuncs("Close finished");
+    
   }
 
   /**
@@ -133,9 +139,15 @@ public class OutputPort {
         traceFuncs("Send/closed: " + packet.toString());
         res = false;
       }
-
+   // fire up send method on connection
       traceFuncs("Sending: " + packet.toString());
-      res = cnxt.send(packet, this); // fire up send method on connection
+      try {
+		res = cnxt.send(packet, this);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+      
     }
     if (!res) {
       FlowError.complain("Could not deliver packet to: " + getName());

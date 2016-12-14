@@ -42,7 +42,7 @@ public class Copy1 extends Network {
   }
 
   public static void main(final String[] argv) throws Exception {
-	  for (int i = 0; i < 50; i++)
+	  //for (int i = 0; i < 50; i++)
          new Copy1().go();
   }
 }

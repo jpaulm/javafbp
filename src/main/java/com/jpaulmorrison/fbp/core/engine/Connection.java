@@ -25,6 +25,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -92,6 +94,10 @@ public class Connection implements InputPort {
   boolean optional;
 
   private boolean dropOldest;
+  
+  ReentrantLock lock;
+  Condition notFull;
+  Condition notEmpty;
 
   /**
    * Constructor: make a new connection of a given size
@@ -99,12 +105,15 @@ public class Connection implements InputPort {
   Connection(final int size) {
     array = new Packet[size];
     capacity = size;
+    lock = new ReentrantLock();
+    notFull = lock.newCondition();
+    notEmpty = lock.newCondition();
   }
 
   /**
    * Invoked to tell us we have a(nother) sender.
    */
-  synchronized void bumpSenderCount(/* final OutputPort op */) {
+  /*synchronized*/ void bumpSenderCount(/* final OutputPort op */) {
     senderCount++;
 
   }
@@ -112,7 +121,7 @@ public class Connection implements InputPort {
   /**
    * count = size
    */
-  synchronized int count() {
+  /*synchronized*/ int count() {
     return usedSlots;
   }
 
@@ -140,9 +149,12 @@ public class Connection implements InputPort {
    * from being received from this connection. Need to interrupt sender(s).
    */
 
-  public synchronized void close() {
+  public /*synchronized*/ void close() {
+	  try {
     traceFuncs("Close input connection");
 
+    lock.lock();
+    try {
     if (isClosed()) {
       return;
     }
@@ -151,21 +163,28 @@ public class Connection implements InputPort {
       traceFuncs(usedSlots + " packets on input connection lost");
     }
 
-    notifyAll(); // wakes up any senders waiting for slots
+    lock.notifyAll(); // wakes up any senders waiting for slots
+    } finally{
+    	lock.unlock();
+    }
 
+	  } catch (IllegalMonitorStateException e) {
+		  e.printStackTrace();
+	  }
   }
 
   /**
    * Indicate one sending Component closed
    */
-  synchronized void indicateOneSenderClosed() {
+  /*synchronized*/ void indicateOneSenderClosed() {
+	
     try {
       getReceiver().mother.traceLocks("indicate1senderclosed - lock " + getReceiver().getName());
       //getReceiver().goLock.lockInterruptibly();
       getReceiver().goLock.lock();
 
-      // synchronized (this) {
-      if (!isClosed()) {
+      // /*synchronized*/ (this) {
+      //if (!isClosed())  {
         --senderCount;
 
         if (isDrained()) { // means closed AND empty
@@ -174,18 +193,18 @@ public class Connection implements InputPort {
               || getReceiver().status == Component.StatusValues.NOT_STARTED) {
             getReceiver().activate();
           } else {
-            notifyAll();
+            notEmpty.signal();
           }
-        }
-      }
-      //   }
-
-    //} catch (InterruptedException e) {
-    //  return;
-    } finally {
-      getReceiver().goLock.unlock();
-      getReceiver().mother.traceLocks("indicate1senderclosed - unlock " + getReceiver().getName());
-    }
+       //}
+      } 
+    
+	
+	} finally {
+	      getReceiver().goLock.unlock();
+	      getReceiver().mother.traceLocks("indicate1senderclosed - unlock " + getReceiver().getName());
+	      
+	    }
+	
   }
 
   /**
@@ -204,7 +223,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is closed (not necessarily drained).
    */
 
-  public synchronized boolean isClosed() {
+  public /*synchronized*/ boolean isClosed() {
     return senderCount == 0;
   }
 
@@ -212,7 +231,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is drained (closed and empty).
    */
 
-  synchronized boolean isDrained() {
+  /*synchronized*/ boolean isDrained() {
     return isClosed() && isEmpty();
   }
 
@@ -220,7 +239,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is empty
    */
 
-  synchronized boolean isEmpty() {
+  /*synchronized*/ boolean isEmpty() {
     return usedSlots == 0;
   }
 
@@ -228,7 +247,7 @@ public class Connection implements InputPort {
    * Returns true if this connection is full.
    */
 
-  private synchronized boolean isFull() {
+  private /*synchronized*/ boolean isFull() {
     return usedSlots == capacity;
   }
 
@@ -236,202 +255,251 @@ public class Connection implements InputPort {
    * The receive function. See InputPort.receive.
    */
 
-  @SuppressWarnings("unchecked")
-  public synchronized Packet receive() {
+	@SuppressWarnings("unchecked")
+	public /* synchronized */ Packet receive() {
 
-    traceFuncs("Receiving:");
+		try {
+			traceFuncs("Receiving:");
 
-    //receiver.currentConnection = this;
-    if (isDrained()) {
-      traceFuncs("Recv/close");
-      return null;
-    }
-    getReceiver().network.receives.getAndIncrement();
-    while (isEmpty()) {
+			lock.lock();
+			try {
+				// receiver.currentConnection = this;
+				if (isDrained()) {
+					traceFuncs("Recv/close");
+					return null;
+				}
+				getReceiver().network.receives.getAndIncrement();
+				while (isEmpty()) {
 
-      getReceiver().status = Component.StatusValues.SUSP_RECV;
-      getReceiver().curConn = this;
-      getReceiver().mother.traceFuncs(getReceiver().getName() + ": Recv/susp");
+					getReceiver().status = Component.StatusValues.SUSP_RECV;
+					getReceiver().curConn = this;
+					getReceiver().mother.traceFuncs(
+							getReceiver().getName() + ": Recv/susp");
 
-      try {
-        wait();
-      } catch (InterruptedException e) {
-        // throw new ThreadDeath();
-        close();
-        FlowError.complain(getReceiver().getName() + ": Interrupted");
-        // unreachable
-        return null;
+					try {
+						notEmpty.await();
+					} catch (InterruptedException e) {
+						// throw new ThreadDeath();
+						close();
+						FlowError.complain(
+								getReceiver().getName() + ": Interrupted");
+						// unreachable
+						//lock.unlock();
+						return null;
+					 
+					}
 
-      }
+					getReceiver().status = Component.StatusValues.ACTIVE;
+					getReceiver().mother.traceFuncs(
+							getReceiver().getName() + ": Recv/resume ");
 
-      getReceiver().status = Component.StatusValues.ACTIVE;
-      getReceiver().mother.traceFuncs(getReceiver().getName() + ": Recv/resume ");
+					if (isDrained()) {
+						getReceiver().mother
+								.traceFuncs(getName() + ": Receive drained ");
+						//lock.unlock();
+						return null;
+					}
 
-      if (isDrained()) {
-        getReceiver().mother.traceFuncs(getName() + ": Receive drained ");
-        return null;
-      }
+				}
 
-    }
+				if (isDrained()) {
+					traceFuncs(": Receive drained ");
+					//lock.unlock();
+					return null;
+				}
+				//if (!isFull()) {
+				//if (usedSlots == capacity) {
+					//synchronized(lock) {
+					    //lock.notifyAll(); // notify components waiting to send
+				
+					//}
+				//}
+				Packet packet = array[receivePtr];
+				array[receivePtr] = null;
+				if (capacity == (receivePtr = receivePtr + 1)) {
+					receivePtr = 0;
+				}
+				notFull.signalAll();
+				usedSlots--;
 
-    if (isDrained()) {
-      traceFuncs(": Receive drained ");
-      return null;
-    }
-    //if (isFull()) {
-    if (usedSlots == capacity) {
-      notifyAll(); // notify components waiting to send
-    }
-    Packet packet = array[receivePtr];
-    array[receivePtr] = null;
-    if (capacity == (receivePtr = receivePtr + 1)) {
-      receivePtr = 0;
-    }
-    //notifyAll(); // only needed if it was full
-    usedSlots--;
+				packet.setOwner(getReceiver());
 
-    packet.setOwner(getReceiver());
+				if (null == packet.getContent()) {
+					traceFuncs("Received null packet");
+				} else {
+					traceFuncs("Received: " + packet.toString());
 
-    if (null == packet.getContent()) {
-      traceFuncs("Received null packet");
-    } else {
-      traceFuncs("Received: " + packet.toString());
+					Class c = packet.getContent().getClass();
+					if (!type.isAssignableFrom(c)) {
+						FlowError.complain(getName()
+								+ " received packet containing "
+								+ c.getSimpleName() + " - "
+								+ type.getSimpleName() + " is required");
+					}
+				}
 
-      Class c = packet.getContent().getClass();
-      if (!type.isAssignableFrom(c)) {
-        FlowError.complain(getName() + " received packet containing " + c.getSimpleName() + " - "
-            + type.getSimpleName() + " is required");
-      }
-    }
+				if (IPCount) {
 
-    if (IPCount) {
+					BigInteger bi = getReceiver().network.getIPCounts()
+							.get(getFullName());
+					BigInteger bi2;
+					if (bi == null) {
+						bi2 = BigInteger.valueOf(0);
+					} else {
+						bi2 = bi.add(BigInteger.valueOf(1));
+					}
+					getReceiver().network.getIPCounts().put(getFullName(), bi2);
+				}
 
-      BigInteger bi = getReceiver().network.getIPCounts().get(getFullName());
-      BigInteger bi2;
-      if (bi == null) {
-        bi2 = BigInteger.valueOf(0);
-      } else {
-        bi2 = bi.add(BigInteger.valueOf(1));
-      }
-      getReceiver().network.getIPCounts().put(getFullName(), bi2);
-    }
+				getReceiver().network.active = true;
+				//lock.unlock();
+				return packet;
+			} finally {
+				getReceiver().network.active = true;
+				lock.unlock();
+			}
+		} catch (java.lang.IllegalMonitorStateException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-    getReceiver().network.active = true;
-    return packet;
-  }
-  
-   
-
-  private String getFullName() {
-    String s = getName();
-    Network m = getReceiver().mother;
-    while (true) {
-      s = m.getName() + "." + s;
-      if (!(m instanceof SubNet)) {
-        break;
-      }
-      m = m.mother;
-    }
-    return s;
-  }
+ 
 
   /**
    * The send function. See OutputPort.send.
+ * @throws InterruptedException 
    */
 
-  @SuppressWarnings("unchecked")
-  synchronized boolean send(final Packet packet, final OutputPort op) {
+	@SuppressWarnings("unchecked")
+	/* synchronized */ boolean send(final Packet packet, final OutputPort op)
+			throws InterruptedException {
 
-    sender = op.sender;
+		lock.lockInterruptibly();
 
-    Class c1 = op.type;
-    Class c2 = packet.getContent().getClass();
-    if (c1 != null && !c1.isAssignableFrom(c2)) {
-      FlowError.complain(getName() + " trying to send packet containing " + c2.getSimpleName() + " - should be "
-          + c1.getSimpleName());
-    }
+		try {
 
-    if (isClosed()) {
-      sender.mother.traceFuncs(sender.getName() + ": Send closed ");
-      return false;
-    }
-    //sender.currentConnection = this;
-    //sender.mother.traceFuncs("Sending: " + packet.toString());
-    while (isFull()) {
-      if (dropOldest) {
-        //Packet p = array[receivePtr];
-        array[receivePtr] = null;
-        if (capacity == (receivePtr = receivePtr + 1)) {
-          receivePtr = 0;
-        }
-        //sender.drop(p);
-        sender.network.dropOlds.getAndIncrement();
-        sender.mother.traceFuncs(sender.getName() + ": DropOld ");
-        usedSlots--;
-      } else {
-        sender.curOutPort = op;
-        sender.status = Component.StatusValues.SUSP_SEND;
-        sender.mother.traceFuncs(sender.getName() + ": Send/susp ");
+			sender = op.sender;
 
-        try {
-          wait();
-        } catch (InterruptedException e) {
-          // throw new ThreadDeath();
-          indicateOneSenderClosed();
-          FlowError.complain(sender.getName() + ": interrupted");
-          // unreachable code
-          return false;
-        }
+			Class c1 = op.type;
+			Class c2 = packet.getContent().getClass();
+			if (c1 != null && !c1.isAssignableFrom(c2)) {
+				FlowError.complain(
+						getName() + " trying to send packet containing "
+								+ c2.getSimpleName() + " - should be "
+								+ c1.getSimpleName());
+			}
 
-        sender = op.sender;
-        sender.status = Component.StatusValues.ACTIVE;
-        sender.mother.traceFuncs(sender.getName() + ": Send/resume");
-      }
-    }
+			if (isClosed()) {
+				sender.mother.traceFuncs(sender.getName() + ": Send closed ");
+				return false;
+			}
+			// sender.currentConnection = this;
+			// sender.mother.traceFuncs("Sending: " + packet.toString());
+			while (isFull()) {
+				if (dropOldest) {
+					// Packet p = array[receivePtr];
+					array[receivePtr] = null;
+					if (capacity == (receivePtr = receivePtr + 1)) {
+						receivePtr = 0;
+					}
+					// sender.drop(p);
+					sender.network.dropOlds.getAndIncrement();
+					sender.mother.traceFuncs(sender.getName() + ": DropOld ");
+					usedSlots--;
+				} else {
+					sender.curOutPort = op;
+					sender.status = Component.StatusValues.SUSP_SEND;
+					sender.mother.traceFuncs(sender.getName() + ": Send/susp ");
 
-    if (isClosed()) {
-      sender.mother.traceFuncs(sender.getName() + ": Send/close");
-      return false;
-    }
-    sender.mother.traceLocks("send - lock " + getReceiver().getName());
-    try {
-      getReceiver().goLock.lockInterruptibly();
-      packet.clearOwner();
-      array[sendPtr] = packet;
-      if (capacity == (sendPtr = sendPtr + 1)) {
-        sendPtr = 0;
-      }
-      usedSlots++; // move this to here
-      if (getReceiver().getStatus() == Component.StatusValues.DORMANT
-          || getReceiver().getStatus() == Component.StatusValues.NOT_STARTED
-          || getReceiver().getStatus() == Component.StatusValues.SUSP_FIPE) {
-        getReceiver().activate(); // start or wake up if necessary
-      } else {
-        notifyAll(); // notify receiver
-        // other components waiting to send to this connection may also get
-        // notified,
-        // but this is handled by while statement 
-      }
+					try {
+						 //synchronized (lock) {
+						    notFull.await();
+						 //}
+					} catch (InterruptedException e) {
+						// throw new ThreadDeath();
+						indicateOneSenderClosed();
+						FlowError.complain(sender.getName() + ": interrupted");
+						// unreachable code
+						return false;
+					}
 
-      op.sender.status = Component.StatusValues.ACTIVE;
-      // Component.network.GenTraceLine("Send OK: " + op.sender.getName());
-      sender.network.active = true;
-      //sender = null;
+					sender = op.sender;
+					sender.status = Component.StatusValues.ACTIVE;
+					sender.mother
+							.traceFuncs(sender.getName() + ": Send/resume");
+				}
+			}
 
-    } catch (InterruptedException ex) {
-      return false;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    } finally {
-      getReceiver().goLock.unlock();
-      getReceiver().mother.traceLocks("send - unlock " + getReceiver().getName());
-    }
-    sender.network.sends.getAndIncrement();
-    sender = null;
-    return true;
-  }
+			if (isClosed()) {
+				sender.mother.traceFuncs(sender.getName() + ": Send/close");
+				return false;
+			}
+			sender.mother.traceLocks("send - lock " + getReceiver().getName());
+			try {
+				getReceiver().goLock.lockInterruptibly();
+				packet.clearOwner();
+				array[sendPtr] = packet;
+				if (capacity == (sendPtr = sendPtr + 1)) {
+					sendPtr = 0;
+				}
+				usedSlots++; // move this to here
+				if (getReceiver().getStatus() == Component.StatusValues.DORMANT
+						|| getReceiver()
+								.getStatus() == Component.StatusValues.NOT_STARTED
+						|| getReceiver()
+								.getStatus() == Component.StatusValues.SUSP_FIPE) {
+					getReceiver().activate(); // start or wake up if necessary
+				} else {
+					//synchronized(lock) {
+					    //lock.notifyAll(); // notify receiver
+					notFull.signalAll();  // signals other senders
+					notEmpty.signal();  // signals (single) receiver  
+					//}
+					// other components waiting to send to this connection may
+					// also get
+					// notified,
+					// but this is handled by while statement
+				}
 
+				op.sender.status = Component.StatusValues.ACTIVE;
+				// Component.network.GenTraceLine("Send OK: " +
+				// op.sender.getName());
+				sender.network.active = true;
+				// sender = null;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				getReceiver().goLock.unlock();
+				getReceiver().mother
+						.traceLocks("send - unlock " + getReceiver().getName());
+				lock.unlock();
+			}
+			sender.network.sends.getAndIncrement();
+			sender = null;
+			return true;
+		} catch (java.lang.IllegalMonitorStateException e) {
+			e.printStackTrace();
+			return true;
+
+		}
+	}
+	
+	 private String getFullName() {
+		    String s = getName();
+		    Network m = getReceiver().mother;
+		    while (true) {
+		      s = m.getName() + "." + s;
+		      if (!(m instanceof SubNet)) {
+		        break;
+		      }
+		      m = m.mother;
+		    }
+		    return s;
+		  }
+	
   /**
    * Invoked to tell us we have a receiver.
    */

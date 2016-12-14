@@ -67,7 +67,7 @@ public class GenerateTestData extends Component {
       outport.send(p);
 
     }
-
+  int i = 0;
   }
 
   String repeat(final String string, final int ct) {

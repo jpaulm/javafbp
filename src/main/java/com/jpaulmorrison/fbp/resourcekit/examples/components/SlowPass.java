@@ -57,7 +57,7 @@ public class SlowPass extends Component {
 
 		    longWaitStart(1);
 			try {
-				long intvl = (long) rnd.nextInt(500);
+				long intvl = (long) rnd.nextInt(126);
 				sleep(intvl);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
