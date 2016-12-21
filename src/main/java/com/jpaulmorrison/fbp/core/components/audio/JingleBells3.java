@@ -53,7 +53,7 @@ public class JingleBells3 extends Component {
 
   int notes[] = { D4, D4, D4, D4, D4, D4, D4, B3, B3, C4, D4 };
 
-  int note = 1500;
+  int note = 1000;
 
   int half = note / 2;
 

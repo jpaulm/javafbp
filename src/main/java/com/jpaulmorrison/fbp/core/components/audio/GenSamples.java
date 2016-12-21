@@ -93,7 +93,7 @@ public class GenSamples extends Component {
       if (note == 0) {
         x = 0;
       } else if (!note_ended) {
-        x = (int) (32767.0 * Math.sin(RAD * note * i / sampleRate));
+        x = (int) (20000.0 * Math.sin(RAD * note * i / sampleRate));
         if (note_ending) { // carry on until sign of x changes
           if (Math.signum(x) != Math.signum(savex)) {
             note_ended = true;

@@ -59,7 +59,8 @@ public class TestTune2 extends Network {
     connect("GS2.OUT", "SoundMixer.IN[1]");
     connect("GS3.OUT", "SoundMixer.IN[2]");
     connect("GS4.OUT", "SoundMixer.IN[3]");
-    initialize("6, 3, 2, 1", "SoundMixer.GAINS");
+    //initialize("6, 3, 2, 1", "SoundMixer.GAINS");
+    initialize("6, 0, 0, 0", "SoundMixer.GAINS");
 
   }
 

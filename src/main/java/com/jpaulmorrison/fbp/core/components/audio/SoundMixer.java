@@ -105,7 +105,7 @@ public class SoundMixer extends Component {
           }
 
           if (x < -32767) {
-            x = -32767;
+            x = -32768;
           }
           mainbuf[i] = (byte) (x / 256);
           mainbuf[i + 1] = (byte) (x % 256);

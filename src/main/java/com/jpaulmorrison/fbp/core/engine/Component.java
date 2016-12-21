@@ -1157,6 +1157,11 @@ public abstract class Component extends Thread {
                      try {	
           allDrained = true;
           hasData = false;
+          
+          /*
+           * Only possible external change is senderCount> 0 and state changes from !hasData to hasData (canGo will get signalled)
+           *           
+           */
           for (InputPort inp : inports.values()) {
             if (!(inp instanceof Connection)) {
               continue;
