@@ -58,7 +58,7 @@ public interface InputPort {
    * @param type the class of acceptable packet content
     
   */
-  public void setType(Class type);
+  public void setType(Class<?> type);
 
   /**
    * @return string containing port name

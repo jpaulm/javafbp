@@ -22,9 +22,9 @@ package com.jpaulmorrison.fbp.core.engine;
 // import java.util.*;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.Map;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -50,7 +50,7 @@ public class Connection implements InputPort {
   //Packet packet = null;
 
   // The packets currently in transit.
-  private final Packet[] array;
+  private final Packet<?>[] array;
 
   // Index into array where the next packet sent should go.
   private int sendPtr = 0;
@@ -89,7 +89,7 @@ public class Connection implements InputPort {
 
   private Port port;
 
-  Class type;
+  Class<?> type;
   
   boolean optional;
 
@@ -163,7 +163,7 @@ public class Connection implements InputPort {
       traceFuncs(usedSlots + " packets on input connection lost");
     }
 
-    lock.notifyAll(); // wakes up any senders waiting for slots
+    notFull.signalAll(); // wakes up any senders waiting for slots
     } finally{
     	lock.unlock();
     }
@@ -177,7 +177,7 @@ public class Connection implements InputPort {
    * Indicate one sending Component closed
    */
   /*synchronized*/ void indicateOneSenderClosed() {
-	
+	try {
     try {
       getReceiver().mother.traceLocks("indicate1senderclosed - lock " + getReceiver().getName());
       //getReceiver().goLock.lockInterruptibly();
@@ -204,6 +204,11 @@ public class Connection implements InputPort {
 	      getReceiver().mother.traceLocks("indicate1senderclosed - unlock " + getReceiver().getName());
 	      
 	    }
+	}
+    catch (java.lang.IllegalMonitorStateException e) {
+		e.printStackTrace();
+		return;
+	}
 	
   }
 
@@ -255,8 +260,8 @@ public class Connection implements InputPort {
    * The receive function. See InputPort.receive.
    */
 
-	@SuppressWarnings("unchecked")
-	public /* synchronized */ Packet receive() {
+	
+	public /* synchronized */ Packet<?> receive() {
 
 		try {
 			traceFuncs("Receiving:");
@@ -314,7 +319,7 @@ public class Connection implements InputPort {
 				
 					//}
 				//}
-				Packet packet = array[receivePtr];
+				Packet<?> packet = array[receivePtr];
 				array[receivePtr] = null;
 				if (capacity == (receivePtr = receivePtr + 1)) {
 					receivePtr = 0;
@@ -329,7 +334,7 @@ public class Connection implements InputPort {
 				} else {
 					traceFuncs("Received: " + packet.toString());
 
-					Class c = packet.getContent().getClass();
+					Class<?> c = packet.getContent().getClass();
 					if (!type.isAssignableFrom(c)) {
 						FlowError.complain(getName()
 								+ " received packet containing "
@@ -371,8 +376,8 @@ public class Connection implements InputPort {
  * @throws InterruptedException 
    */
 
-	@SuppressWarnings("unchecked")
-	/* synchronized */ boolean send(final Packet packet, final OutputPort op)
+	
+	/* synchronized */ boolean send(final Packet<?> packet, final OutputPort op)
 			throws InterruptedException {
 
 		lock.lockInterruptibly();
@@ -381,8 +386,8 @@ public class Connection implements InputPort {
 
 			sender = op.sender;
 
-			Class c1 = op.type;
-			Class c2 = packet.getContent().getClass();
+			Class<?> c1 = op.type;
+			Class<?> c2 = packet.getContent().getClass();
 			if (c1 != null && !c1.isAssignableFrom(c2)) {
 				FlowError.complain(
 						getName() + " trying to send packet containing "
@@ -524,7 +529,7 @@ public class Connection implements InputPort {
    * Component.network is ill-formed.
     
   */
-  public void setType(final Class tp) {
+  public void setType(final Class<?> tp) {
 
     if (tp == null) {
       return;

@@ -63,7 +63,7 @@ public class TabulaRasa extends Component {
 		Field inPorts = null;
 		Field outPorts = null;
 		
-		Packet<String> p = compPort.receive();
+		Packet<String> p =  compPort.receive();
 		String compName = p.getContent();
 		drop(p);
 		compPort.close();

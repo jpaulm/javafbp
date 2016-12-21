@@ -23,15 +23,16 @@ public class GenerateSlowly extends Component {
   @Override
   protected void execute() throws Exception {
 
-	long intvl = 1000; 
+	long intvl = 300; 
 	Packet p = cfgPort.receive();  
 	if (p != null) {
 		intvl = Long.parseLong((String)p.getContent());
+		drop(p);
 	}
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 60; i++) {
       String s = Integer.toString(i);
       outputPort.send(create(s));
-      Thread.sleep(1000);
+      Thread.sleep(intvl);
     }
 
   }

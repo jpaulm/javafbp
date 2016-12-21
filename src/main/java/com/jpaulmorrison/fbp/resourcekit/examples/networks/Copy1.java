@@ -36,7 +36,7 @@ public class Copy1 extends Network {
     connect(component("Generate", com.jpaulmorrison.fbp.resourcekit.examples.components.GenerateSlowly.class), port("OUT"), component("Passthru", com.jpaulmorrison.fbp.core.components.routing.Passthru.class), port("IN"));
     connect(component("Passthru"), port("OUT"), component("Write", WriteToConsole.class), port("IN"));
 
-    //initialize("100", component("Generate"), port("COUNT"));
+    initialize("200", component("Generate"), port("CONFIG"));
 
   }
 

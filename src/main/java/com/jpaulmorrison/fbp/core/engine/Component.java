@@ -1145,20 +1145,16 @@ public abstract class Component extends Thread {
     // Get state of all ports
 
     InputStates(final HashMap<String, InputPort> inports) throws InterruptedException {
-    	/*
-    	for (InputPort inp : inports.values()) {
-            if (!(inp instanceof Connection))  
-              continue;
-             
-            Connection c = (Connection) inp;
-            c.lock.lockInterruptibly();
-            c.lock.wait();
-          } //for
-    	*/
+    	 
+    	
+    	 
       //try {
         //mother.traceLocks("ist - lock " + getName());
         //goLock.lockInterruptibly();
         while (true) {
+        	mother.traceLocks("ist - lock " + getName());
+            goLock.lockInterruptibly();
+                     try {	
           allDrained = true;
           hasData = false;
           for (InputPort inp : inports.values()) {
@@ -1166,33 +1162,27 @@ public abstract class Component extends Thread {
               continue;
             }
             Connection c = (Connection) inp;
-               c.lock.lock(); 
-                try {
-            allDrained &= c.isDrained();
+             
+            allDrained &= c.isDrained();  // isDrained means senders all closed AND connection empty
             //allDrained = allDrained && c.usedSlots == 0 && c.senderCount == 0;
             hasData |= !c.isEmpty();
             //hasData = hasData || c.usedSlots > 0;
-              } finally {
-            	  c.lock.unlock() ;  
-              }
+             
           } //for
-          // if (hasData) {
-          //  mother.traceFuncs("hasData " + getName());
-          // }
-          // if (allDrained) {
-          //    mother.traceFuncs("allDrained " + getName());
-          //  }
-          if (hasData || allDrained) {
+          
+          if (hasData || allDrained) {        	  
             break;
           }
-          mother.traceLocks("ist - lock " + getName());
-          goLock.lockInterruptibly();
-                   try {
+          //mother.traceLocks("ist - lock " + getName());
+          //goLock.lockInterruptibly();
+          //         try {
           status = StatusValues.DORMANT;
           mother.traceFuncs(getName() + ": Dormant");
           mother.traceLocks("ist - await " + getName());
           canGo.await();
           mother.traceLocks("ist - await ended" + getName());
+          status = StatusValues.ACTIVE;
+          mother.traceFuncs(getName() + ": Active");
                      } catch (InterruptedException e) {
            // do nothing
                      }
@@ -1203,24 +1193,18 @@ public abstract class Component extends Thread {
                         
                    }
 
-          status = StatusValues.ACTIVE;
-          mother.traceFuncs(getName() + ": Active");
+         
+          
         }
-      }
+      
 
       //finally {
        // goLock.unlock();
       //  mother.traceLocks("ist - unlock " + getName());
-        /*
-        for (InputPort inp : inports.values()) {
-            if (!(inp instanceof Connection)) {
-              continue;
-            }
-            Connection c = (Connection) inp;
-            c.lock.unlock();
-          } //for
-        */
-     // }
+         
+        
+         
+        }
 
     //} // while
    }
