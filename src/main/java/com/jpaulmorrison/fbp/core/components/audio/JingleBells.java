@@ -35,27 +35,18 @@ public class JingleBells extends Component {
  
   OutputPort _outport;
 
-  int C4 = 262;
+  int c = 262;
 
-  int D4 = 294;
+  int d = 294;
 
-  int E4 = 330;
+  int e = 330;
 
-  int F4 = 349;
+  int g = 392;
 
-  int G4 = 392;
 
-  int A4 = 440;
+  int notes[] = { e, e, e, e, e, e, e, g, c, d, e};
 
-  int B4 = 494;
-
-  int C5 = 523;
-
-  int D5 = 587;
-
-  int notes[] = { B4, B4, B4, B4, B4, B4, B4, D5, G4, A4, B4 };
-
-  int note = 1500;
+  int note = 1000;
 
   int half = note / 2;
 

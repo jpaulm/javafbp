@@ -81,7 +81,7 @@ public abstract class Component extends Thread {
     //}
   }
 
-  StatusValues status;
+  volatile StatusValues status;
 
   //  static Network network;
 
@@ -1148,6 +1148,11 @@ public abstract class Component extends Thread {
         mother.traceLocks("ist - lock " + getName());
         goLock.lockInterruptibly();
         while (true) {
+        	
+        	/*
+        	 * In this logic the only thing that can be changed externally is from !hasData to hasData,
+        	 *   in Connection.send(), which will cause a notifyAll() or activate()        	 *  
+        	 */
           allDrained = true;
           hasData = false;
           for (InputPort inp : inports.values()) {

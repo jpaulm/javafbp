@@ -34,23 +34,18 @@ public class JingleBells2 extends Component {
 
   OutputPort _outport;
 
-  int C4 = 262;
+  int c = 262;
 
-  int D4 = 294;
+  int d = 294;
 
-  int E4 = 330;
+  int e = 330;
 
-  int F4 = 349;
+  int g = 392;
 
-  int G4 = 392;
 
-  int A4 = 440;
+  int notes[] = { c,c,c, c,c,c, c,c, c};
 
-  int B4 = 494;
-
-  int notes[] = { G4, G4, G4, G4, G4, G4, G4, G4, D4, D4, G4 };
-
-  int note = 1500;
+  int note = 1000;
 
   int half = note / 2;
 
@@ -58,7 +53,7 @@ public class JingleBells2 extends Component {
 
   int eighth = note / 8;
 
-  int durations[] = { quarter, quarter, half, quarter, quarter, half, quarter, quarter, quarter + eighth, eighth, half };
+  int durations[] = { quarter, quarter, half,  quarter, quarter, half,  half, half,  half };
 
   @Override
   protected void execute() {

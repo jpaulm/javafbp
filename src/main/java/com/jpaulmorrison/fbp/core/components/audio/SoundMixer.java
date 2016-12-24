@@ -82,6 +82,9 @@ public class SoundMixer extends Component {
     while (true) {
       byte[] mainbuf = null;
       int j = 0;
+      
+      // receive from each element then get next set
+      
       for (InputPort element : inport) {
         p = element.receive();
         if (p == null) {
@@ -122,6 +125,7 @@ public class SoundMixer extends Component {
 
       try {
         source.write(mainbuf, 0, mainbuf.length);
+        mainbuf = null;
       } catch (Exception e) {
         System.out.println(e);
       }
