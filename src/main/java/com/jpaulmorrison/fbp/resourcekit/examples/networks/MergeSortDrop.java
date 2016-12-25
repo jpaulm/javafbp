@@ -53,9 +53,9 @@ public class MergeSortDrop extends Network {
   }
 
   public static void main(final String[] argv) throws Exception {
-    // run test 50 times
-    for (int i = 0; i < 50; i++) {
+    
+    //for (int i = 0; i < 50; i++) {
       new MergeSortDrop().go();
-    }
+    //}
   }
 }
