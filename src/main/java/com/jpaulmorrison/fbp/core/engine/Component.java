@@ -1197,7 +1197,7 @@ public abstract class Component extends Thread {
         mother.traceLocks("ist - unlock " + getName());
       }
 
-    } // while
+    } 
   }
 
   /**
