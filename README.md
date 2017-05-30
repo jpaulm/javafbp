@@ -68,7 +68,7 @@ The latest jar file can simply be downloaded from the latest release, or it can 
 
 As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` directory. It will include the JavaFBP core (runtime) and all the examples from the source code (sub-package `com.jpmorrsn.fbp.resourcekit.examples`). 
 
-You should also make sure that the current Java JDK `tools.jar` file is in your project's `lib/` directory.
+**You should also make sure that the current Java JDK `tools.jar` file is listed in your project's classpath.**
 
 **`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
