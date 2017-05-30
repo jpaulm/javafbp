@@ -27,11 +27,11 @@ JavaFBP-WebSockets
 
 There is also a small GitHub project called `javafbp-websockets`, which contains two generalized components supporting WebSockets ( https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API ), and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
 
-Prerequisites
+Prerequisites for rebuilding JavaFBP or derivative
 ---
 
 
-The project requires Gradle for building (tested with version 2.0). You can download the corresponding package from the following URL: 
+The project requires Gradle for (re)building. You can download the corresponding package from the following URL: 
 http://www.gradle.org
 
 Windows and Linux users should follow the installation instructions on the Maven website.
@@ -41,10 +41,10 @@ OSX users (using Brew, http://brew.sh) can install Maven by executing the follow
     brew install gradle
 
 
-Eclipse IDE Integration
+Eclipse IDE Integration with Gradle
 ---
 
-You can generate Eclipse project using the following mvn command:
+You can generate Eclipse project using the following command:
 
     gradle eclipse
 
