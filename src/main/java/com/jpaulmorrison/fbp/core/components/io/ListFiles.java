@@ -19,6 +19,13 @@ package com.jpaulmorrison.fbp.core.components.io;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.util.Date;
 
 import com.jpaulmorrison.fbp.core.engine.Component;
 import com.jpaulmorrison.fbp.core.engine.ComponentDescription;
@@ -72,6 +79,21 @@ public class ListFiles extends Component {
     	  for (int i = 0; i < list.length; i++){    		  
     		  String s = sf + File.separator + list[i];
     		  File f2 = new File(s);
+    		  Path path = Paths.get(s);
+    		  BasicFileAttributes attrs = null;
+    		  try {
+				attrs = Files.readAttributes(path, BasicFileAttributes.class);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		  
+    		  //FileTime ct = attrs.lastModifiedTime();
+    		  long ct = f2.lastModified();
+    		  Date date = new Date(ct);
+    		  
+    		  s += " " + date.toString();
+
     		  if (f2.isDirectory()) {
     			  dirsport.send(create(s));
     			  dirCount++;
