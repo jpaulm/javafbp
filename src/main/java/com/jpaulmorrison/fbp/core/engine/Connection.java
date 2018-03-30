@@ -236,7 +236,7 @@ public class Connection implements InputPort {
    * The receive function. See InputPort.receive.
    */
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public synchronized Packet receive() {
 
     traceFuncs("Receiving:");
