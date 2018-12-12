@@ -21,6 +21,15 @@ JavaFBP Syntax and Component API:
 Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  
 
 Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
+
+Running your JavaFBP project under Eclipse
+---
+
+**Add the current JavaFBP jar file to your Java build path properties for your project.
+
+In your component source, you will need the following import statement:
+
+    import com.jpaulmorrison.fbp.core.engine.*;
  
 JavaFBP-WebSockets
 ---
