@@ -30,6 +30,8 @@ Running your JavaFBP project under Eclipse
 In your component source, you will need the following import statement:
 
     import com.jpaulmorrison.fbp.core.engine.*;
+    
+Note: the **core** level was added in the last repackaging of JavaFBP.
  
 JavaFBP-WebSockets
 ---
