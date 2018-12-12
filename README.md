@@ -25,7 +25,7 @@ Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
 Running your JavaFBP project under Eclipse
 ---
 
-**Add the current JavaFBP jar file to your Java build path properties for your project.**
+**Add the current JavaFBP jar file to the Libraries tab in your project's Java build path properties.**
 
 In your component source, you will need the following import statement:
 
