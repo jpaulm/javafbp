@@ -5,7 +5,7 @@ Java Implementation of "Classical" Flow-Based Programming (FBP)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.jpaulmorrison/javafbp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22)
 
-https://github.com/jpaulm would appreciate feedback - positive or negative! Please let him know how the product can be improved.  Some users may prefer to use DrawFBP to create their diagrams, and generate their networks using this tool (see https://github.com/jpaulm/drawfbp ).
+@jpaulm would appreciate feedback - positive or negative! Please let him know how the product can be improved.  Some users may prefer to use DrawFBP to create their diagrams, and generate their networks using this tool (see https://github.com/jpaulm/drawfbp ).
 
 General
 ---
