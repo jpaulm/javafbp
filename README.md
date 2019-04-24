@@ -3,6 +3,8 @@ JavaFBP
 
 Java Implementation of "Classical" Flow-Based Programming (FBP)
 
+https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22
+
 General
 ---
 
