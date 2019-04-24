@@ -18,7 +18,7 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-For a number of example networks, go to **resourcekit/examples/networks**, or
+For a number of example networks, go to **src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks**, or
 https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks
 
 Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
