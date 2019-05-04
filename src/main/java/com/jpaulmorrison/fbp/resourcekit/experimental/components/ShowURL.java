@@ -56,7 +56,8 @@ public class ShowURL extends Component {
     try {
       // http://forums.sun.com/thread.jspa?threadID=5287628&tstart=195
       //URL url = new URL("http://www.jpaulmorrison.com/fbp/tryform.htm");
-      url = new URL("file://C:/Users/Paul/Documents/Business/tryform.htm"); // works
+      //url = new URL("file://C:/Users/Paul/Documents/Business/tryform.htm"); // works
+      url = new URL("https://api.github.com/users/defunkt");
     } catch (MalformedURLException e) {
       //do nothing
     }

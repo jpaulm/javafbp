@@ -34,8 +34,10 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
  * Select packets starting with specified string.  
  */
 @ComponentDescription("Select packets starting with specified string")
-@OutPorts({ @OutPort("ACC"), @OutPort("REJ") })
-@InPorts({ @InPort("IN"), @InPort("TEST") })
+@OutPorts({ @OutPort(value = "ACC", description = "IPs accepted by filter"), 
+	@OutPort(value = "REJ", description = "IPs rejected by filter") })
+@InPorts({ @InPort(value = "IN", description = "input stream"), 
+	@InPort(value = "TEST", description = "char string being tested against") })
 public class StartsWith extends Component {
 
   
@@ -46,7 +48,7 @@ public class StartsWith extends Component {
   @Override
   protected void execute() {
 
-    Packet testPkt = testport.receive();
+    Packet<?> testPkt = testport.receive();
     if (testPkt == null) {
       return;
     }
@@ -54,7 +56,7 @@ public class StartsWith extends Component {
     testport.close();
     drop(testPkt);
 
-    Packet p = inport.receive();
+    Packet<?> p = inport.receive();
     while (p != null) {
       String content = (String) p.getContent();
       if (content.startsWith(testStr)) {

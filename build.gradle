@@ -97,6 +97,18 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+
+task (listComps, dependsOn: 'classes', type: JavaExec) {
+    main = 'tools.listcomps.ListComponents'
+    classpath = sourceSets.main.runtimeClasspath 
+    
+    args 'jpaulmorr'
+    systemProperty 'simple.message', 'Documents\\GitHub\\javafbp\\build\\libs\\javafbp-4.1.0.jar';
+}
+
+ 
+defaultTasks 'listComps'
+
 artifacts {
     archives javadocJar, sourcesJar
 }

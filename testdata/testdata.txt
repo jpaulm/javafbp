@@ -1,0 +1,23 @@
+Abstract:
+
+Flow-Based Programming (FBP) is a new/old approach to 
+application development, based on processes and data 
+flows. Some of its roots can be traced all the way back 
+to the early days of computing, and yet it offers solutions to many of the most pressing problems facing application development today. Interestingly, an early version of this software and methodology has been in continuous use for over 30 years processing millions of transactions a day for a large bank. 
+FBP views applications as networks of processes 
+communicating by means of streams of data objects 
+travelling across "bounded buffer" connections. 
+Processes access their connections indirectly, via 
+"ports", so components can be black boxes, able to be 
+reused in different arrangements to produce different 
+applications, without having to be changed internally. 
+FBP is thus naturally component-oriented.  It also 
+performs extremely well, frequently resulting in reduced 
+elapsed times compared with conventional methodologies.
+While many of FBP's concepts have been discovered 
+independently, the combination is unique and implies a 
+definite paradigm shift in the way in which applications 
+are developed and, more importantly, maintained.  
+The result has proven its effectiveness by having been 
+in continuous use in a very dynamic and demanding 
+environment for over 3 decades.
