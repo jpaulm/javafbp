@@ -3,13 +3,15 @@ JavaFBP
 
 Java Implementation of "Classical" Flow-Based Programming (FBP)
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.jpaulmorrison/javafbp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22)
+
+@jpaulm would appreciate feedback - positive or negative! Please let him know how the product can be improved.  Some users may prefer to use DrawFBP to create their diagrams, and generate their networks using this tool (see https://github.com/jpaulm/drawfbp ).
+
 General
 ---
 
 General web site for "classical" FBP: 
 * http://www.jpaulmorrison.com/fbp/
-
-**Latest release of JavaFBP: `javafbp-4.1.0`** (Package qualifier changed from `jpmorrsn` to `jpaulmorrison`)
 
 In computer programming, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented.
 
@@ -18,9 +20,21 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
 JavaFBP Syntax and Component API:
 * http://www.jpaulmorrison.com/fbp/jsyntax.htm
   
-Promoted to Maven central - do http://search.maven.org/#search%7Cga%7C1%7Cjavafbp .  
+For a number of example networks, go to **src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks**, or
+https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks
 
 Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
+
+Running your JavaFBP project under Eclipse
+---
+
+**Add the current JavaFBP jar file to the Libraries tab in your project's Java build path properties.**
+
+In your component source, you will need the following import statement:
+
+    import com.jpaulmorrison.fbp.core.engine.*;
+    
+Note: the **core** level was added in the last repackaging of JavaFBP.
  
 JavaFBP-WebSockets
 ---

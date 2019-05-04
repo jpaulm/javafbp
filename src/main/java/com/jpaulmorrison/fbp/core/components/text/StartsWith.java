@@ -34,10 +34,12 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
  * Select packets starting with specified string.  
  */
 @ComponentDescription("Select packets starting with specified string")
+
 @OutPorts({ @OutPort(value = "ACC", description = "IPs accepted by filter"), 
 	@OutPort(value = "REJ", description = "IPs rejected by filter") })
 @InPorts({ @InPort(value = "IN", description = "input stream"), 
 	@InPort(value = "TEST", description = "char string being tested against") })
+
 public class StartsWith extends Component {
 
   
