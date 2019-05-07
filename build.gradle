@@ -103,7 +103,7 @@ task (listComps, dependsOn: 'classes', type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath 
     
     args 'jpaulmorr'
-    systemProperty 'simple.message', 'Documents\\GitHub\\javafbp\\build\\libs\\javafbp-4.1.0.jar';
+    systemProperty 'jarfile', 'C:\\Users\\Paul\\Documents\\GitHub\\javafbp\\build\\libs\\javafbp-4.1.0.jar';
 }
 
  
