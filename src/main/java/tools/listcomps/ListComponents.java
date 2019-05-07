@@ -12,7 +12,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.HashMap;
-
+import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -45,6 +45,10 @@ public class ListComponents {
 	Class<?> outportCls = null;
 	Class<?> inportsCls = null;
 	Class<?> outportsCls = null;
+	
+	boolean inports_started  = false;
+	boolean outports_started  = false;
+	
 	
 	ListComponents(String str) throws MalformedURLException {
 		//try {
@@ -120,7 +124,7 @@ public class ListComponents {
 					
 				} else {
 					System.out.println(
-							"<h" + (hdg_level + 1) + ">" + entry.getName() + "</h" + (hdg_level + 1) + ">"); 
+							"<li>" + entry.getName() + "</li>"); 
 					
 				 
 				//compList.add(entry.getName());
@@ -175,7 +179,7 @@ public class ListComponents {
 		return count - 4;			 
 	}
 	
-	void buildMetadata(Annotation[] annos) {
+	void buildMetadata(Annotation[] annos) {   // do for each class
 		inputPortAttrs.clear();
 		outputPortAttrs.clear();
 		
@@ -183,19 +187,23 @@ public class ListComponents {
 		
 		try {
 
-			
+			LinkedList<Annotation> output_annos = new LinkedList<Annotation>();
 			//Annotation[] annos = javaClass.getAnnotations();
 			for (Annotation a : annos) {
 				if (compdescCls.isInstance(a)) {
 					Method meth = compdescCls.getMethod("value");
 					String compDescr = (String) meth.invoke(a);
 					System.out.println(
-							"<p>    " + compDescr + "</p>"); 
+							"<p>- " + compDescr + "</p>"); 
 				}
 				if (inportCls.isInstance(a)) {
+					
+					
 					getInPortAnnotation(a, inportCls);
+					
 				}
 				if (inportsCls.isInstance(a)) {
+					
 					Method meth = inportsCls.getMethod("value");
 					Object[] oa = (Object[]) meth.invoke(a);
 					for (Object o : oa) {
@@ -203,15 +211,21 @@ public class ListComponents {
 					}
 				}
 				if (outportCls.isInstance(a)) {
-					getOutPortAnnotation(a, outportCls);
+					output_annos.add(a);
+					
 				}
 				if (outportsCls.isInstance(a)) {
+					
 					Method meth = outportsCls.getMethod("value");
 					Object[] oa = (Object[]) meth.invoke(a);
 					for (Object o : oa) {
 						getOutPortAnnotation((Annotation) o, outportCls);
 					}
 				}
+			}
+			for (Annotation a: output_annos) {
+				getOutPortAnnotation(a, outportCls);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -220,6 +234,11 @@ public class ListComponents {
 
 	void getInPortAnnotation(Annotation a, Class<?> inport) {
 		AInPort ipt = new AInPort();
+		if (!inports_started) {
+			System.out.println(
+					"<p>-- Input Ports</p>"); 
+			inports_started  = true;						
+		}
 		try {
 			Method meth = inport.getMethod("value");
 			ipt.value = (String) meth.invoke(a);
@@ -280,6 +299,11 @@ public class ListComponents {
 	}
 
 	AOutPort getOutPortAnnotation(Annotation a, Class<?> outport) {
+		if (!outports_started) {
+			System.out.println(
+					"<p>-- Output Ports</p>"); 
+			outports_started  = true;						
+		}
 		AOutPort opt = new AOutPort();
 		try {
 			Method meth = outport.getMethod("value");
