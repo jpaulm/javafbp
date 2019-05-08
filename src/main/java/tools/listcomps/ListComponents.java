@@ -313,9 +313,9 @@ public class ListComponents {
 						ipt2.type = ipt.type;
 						String u = ""; 
 						if (ipt2.arrayPort)
-							u += ", array";
+							u += ", <i>array</i>";
 						if (ipt2.optional)
-							u += ", opt";
+							u += ", <i>opt</i>";
 						System.out.println("<li>" + ipt2.value + "  " + ipt2.description + u + "</li>");
 					}
 				} else {
@@ -328,18 +328,18 @@ public class ListComponents {
 					ipt2.type = ipt.type;
 					String u = ""; 
 					if (ipt2.arrayPort)
-						u += ", array";
+						u += ", <i>array</i>";
 					if (ipt2.optional)
-						u += ", opt";
+						u += ", <i>opt</i>";
 					System.out.println("<li>" + ipt2.value + "  " + ipt2.description + u + "</li>");
 					}
 			}
 			if (sa.length == 0) {
 				String u = ""; 
 				if (ipt.arrayPort)
-					u += ", array";
+					u += ", <i>array</i>";
 				if (ipt.optional)
-					u += ", opt";
+					u += ", <i>opt</i>";
 				System.out.println("<li>" + ipt.value + "  " + ipt.description + u + "</li>");
 						}
 			
@@ -394,9 +394,9 @@ public class ListComponents {
 						opt2.type = opt.type;
 						String u = ""; 
 						if (opt2.arrayPort)
-							u += ", array";
+							u += ", <i>array</i>";
 						if (opt2.optional)
-							u += ", opt";
+							u += ", <i>opt</i>";
 						System.out.println("<li>" + opt2.value + "  " + opt2.description + u + "</li>");
 					}
 				} else {
@@ -409,18 +409,18 @@ public class ListComponents {
 					opt2.type = opt.type;
 					String u = ""; 
 					if (opt2.arrayPort)
-						u += ", array";
+						u += ", <i>array</i>";
 					if (opt2.optional)
-						u += ", opt";
+						u += ", <i>opt</i>";
 					System.out.println("<li>" + opt2.value + "  " + opt2.description + u + "</li>");
 				}
 			}
 			if (sa.length == 0){
 				String u = ""; 
 				if (opt.arrayPort)
-					u += ", array";
+					u += ", <i>array</i>";
 				if (opt.optional)
-					u += ", opt";
+					u += ", <i>opt</i>";
 				System.out.println("<li>" + opt.value + "  " + opt.description + u + "</li>");
 			}
 
