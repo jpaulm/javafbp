@@ -26,35 +26,19 @@ public class ListComponents {
 	// optionally components...
 
 	String zipName = "C:\\Users\\Paul\\Documents\\GitHub\\javafbp\\build\\libs\\javafbp-4.1.0.jar";
-	//String shortName = zipName.substring(zipName.indexOf("build"));
-	//String shortName = "C:\\Users\\Paul\\" + zipName;
 	
-	//FileOutputStream f = null;	
-	
-	//LinkedList<String> compList = new LinkedList<String>();
 	URLClassLoader classLoader = null;
-	URL[] urls = new URL[1];
-	
-			
-	//classLoader = new URLClassLoader(urls);
-	HashMap<String, AInPort> inputPortAttrs = new HashMap<String, AInPort>();
-	HashMap<String, AOutPort> outputPortAttrs = new HashMap<String, AOutPort>();
+	URL[] urls = new URL[1];		
 	
 	Class<?> compdescCls = null;
 	Class<?> inportCls = null;
 	Class<?> outportCls = null;
 	Class<?> inportsCls = null;
-	Class<?> outportsCls = null;
-	
-	boolean inports_started  = false;
-	boolean outports_started  = false;
+	Class<?> outportsCls = null;	
 	
 	
 	ListComponents(String str) throws MalformedURLException {
-		//try {
-			//f = new FileOutputStream(new File("C:\\Temp\\JavaFBP_Comps.txt"));}
-			//		catch (Exception e){} 
-		
+				
 		if (str != null)
 			zipName = str;
 		System.out.println(zipName);
@@ -101,36 +85,45 @@ public class ListComponents {
 					"<h1>JavaFBP Component List</h1>"); 
 			int hdg_level = 0;
 
+			String t;
+			
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = (ZipEntry) entries.nextElement();
+				t = entry.getName();
 				
-				if (-1 == (entry.getName().indexOf("/core/components/")))
+				if (-1 == (t.indexOf("/core/components/")))
 					continue;
-
+	
 				if (entry.isDirectory()) { // Assume directories are stored
 											// parents first, then children 
-					hdg_level = count_slashes(entry.getName());
+					hdg_level = count_slashes(t);  // number of slashes - 4
+					
+					t = t.substring(0, t.length() - 1);
+					
+					t = t.replace("/", ".");
+					
 					if (hdg_level > 1) {
 						if (ul_cnt > 0)
 							System.out.println("</ul>");
 						System.out.println(
-							"<h" + hdg_level + ">" + entry.getName() + "</h" + hdg_level + ">"); 
+							"<h" + hdg_level + ">" + t + "</h" + hdg_level + ">"); 
 						
  						System.out.println("<ul>");
  						ul_cnt ++;
 					}
 					
-					
-					
+									
 				} else {
+					t = t.replace("/", ".");
 					System.out.println(
-							"<li>" + entry.getName() + "</li>"); 
-					
-				 
-				//compList.add(entry.getName());
+							"<li>" + t + "</li>"); 	
 				
-				String t = entry.getName().substring(0, entry.getName().length() - 6);
-				t = t.replace("/", ".");
+				t = t.substring(0, t.length() - 6);  // drop .class
+				
+				if (t.endsWith("$1"))
+					continue;
+				
+				
 				Class <?> javaClass = null;
 						
 				try {
@@ -149,6 +142,7 @@ public class ListComponents {
 					javaClass = null;
 				} 
 
+				
 				Annotation[] annos = javaClass.getAnnotations();
 				buildMetadata(annos);     // do for each non-directory entry
 				}
@@ -180,42 +174,79 @@ public class ListComponents {
 	}
 	
 	void buildMetadata(Annotation[] annos) {   // do for each class
-		inputPortAttrs.clear();
-		outputPortAttrs.clear();
-		
-		//String s = driver.javaFBPJarFile; 
-		
+				
 		try {
-
-			LinkedList<Annotation> output_annos = new LinkedList<Annotation>();
-			//Annotation[] annos = javaClass.getAnnotations();
+			
+			System.out.println(
+					"<ul>"); 
+			
 			for (Annotation a : annos) {
 				if (compdescCls.isInstance(a)) {
 					Method meth = compdescCls.getMethod("value");
 					String compDescr = (String) meth.invoke(a);
 					System.out.println(
-							"<p>- " + compDescr + "</p>"); 
+							"<p></p><li>Description:  " + compDescr + "</li>"); 					
 				}
-				if (inportCls.isInstance(a)) {
-					
-					
+			}
+			
+			
+			boolean found = false;
+			for (Annotation a : annos) {
+				if (inportCls.isInstance(a)) {					
+					if (!found) {
+						System.out.println(
+								"<p></p><li>- Input Ports</li>"); 
+						System.out.println(
+								"<ul>"); 
+						found = true;
+					} 
 					getInPortAnnotation(a, inportCls);
 					
 				}
-				if (inportsCls.isInstance(a)) {
-					
+			
+				if (inportsCls.isInstance(a)) {					
+					if (!found) {
+						System.out.println(
+								"<p></p><li>- Input Ports</li>"); 
+						System.out.println(
+								"<ul>"); 
+						found = true;
+					} 
 					Method meth = inportsCls.getMethod("value");
 					Object[] oa = (Object[]) meth.invoke(a);
 					for (Object o : oa) {
 						getInPortAnnotation((Annotation) o, inportCls);
 					}
 				}
+			}
+			if (found) {
+				System.out.println(
+					"</ul>");
+			}
+			
+			
+			found = false;
+			for (Annotation a : annos) {
 				if (outportCls.isInstance(a)) {
-					output_annos.add(a);
+					if (!found) {
+						System.out.println(
+								"<p></p><li>- Output Ports</li>"); 
+						System.out.println(
+								"<ul>"); 
+						found = true;
+					} 
+					getOutPortAnnotation(a, outportCls);
 					
 				}
+			
 				if (outportsCls.isInstance(a)) {
-					
+					if (!found) {
+						System.out.println(
+								"<p></p><li>- Output Ports</li>"); 
+						System.out.println(
+								"<ul>"); 
+						found = true;
+					} 
 					Method meth = outportsCls.getMethod("value");
 					Object[] oa = (Object[]) meth.invoke(a);
 					for (Object o : oa) {
@@ -223,22 +254,25 @@ public class ListComponents {
 					}
 				}
 			}
-			for (Annotation a: output_annos) {
-				getOutPortAnnotation(a, outportCls);
-				
-			}
+			if (found) {
+				System.out.println(
+					"</ul>");
+			}			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(
+				"</ul><p></p>");
 	}
 
 	void getInPortAnnotation(Annotation a, Class<?> inport) {
 		AInPort ipt = new AInPort();
-		if (!inports_started) {
-			System.out.println(
-					"<p>-- Input Ports</p>"); 
-			inports_started  = true;						
-		}
+		//if (!inports_started) {			
+		//	inports_started  = true;						
+		//}
 		try {
 			Method meth = inport.getMethod("value");
 			ipt.value = (String) meth.invoke(a);
@@ -272,38 +306,53 @@ public class ListComponents {
 					for (int j = 0; j < i; j++) {
 						AInPort ipt2 = new AInPort();
 						ipt2.value = s.substring(0, s.length() - 1) + j;
-						ipt2.arrayPort = ipt2.arrayPort;
+						ipt2.arrayPort = ipt.arrayPort;
 						ipt2.fixedSize = ipt.fixedSize;
 						ipt2.description = ipt.description;
 						ipt2.optional = ipt.optional;
 						ipt2.type = ipt.type;
-						inputPortAttrs.put(ipt2.value, ipt2);						
+						String u = ""; 
+						if (ipt2.arrayPort)
+							u += ", array";
+						if (ipt2.optional)
+							u += ", opt";
+						System.out.println("<li>" + ipt2.value + "  " + ipt2.description + u + "</li>");
 					}
 				} else {
 					AInPort ipt2 = new AInPort();
 					ipt2.value = s;
-					ipt2.arrayPort = ipt2.arrayPort;
+					ipt2.arrayPort = ipt.arrayPort;
 					ipt2.fixedSize = ipt.fixedSize;
 					ipt2.description = ipt.description;
 					ipt2.optional = ipt.optional;
 					ipt2.type = ipt.type;
-					inputPortAttrs.put(ipt2.value, ipt2);
+					String u = ""; 
+					if (ipt2.arrayPort)
+						u += ", array";
+					if (ipt2.optional)
+						u += ", opt";
+					System.out.println("<li>" + ipt2.value + "  " + ipt2.description + u + "</li>");
 					}
 			}
-			if (sa.length == 0)
-				inputPortAttrs.put(ipt.value, ipt);
-
+			if (sa.length == 0) {
+				String u = ""; 
+				if (ipt.arrayPort)
+					u += ", array";
+				if (ipt.optional)
+					u += ", opt";
+				System.out.println("<li>" + ipt.value + "  " + ipt.description + u + "</li>");
+						}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	AOutPort getOutPortAnnotation(Annotation a, Class<?> outport) {
-		if (!outports_started) {
-			System.out.println(
-					"<p>-- Output Ports</p>"); 
-			outports_started  = true;						
-		}
+		//if (!outports_started) {			
+		//	outports_started  = true;						
+		//}
 		AOutPort opt = new AOutPort();
 		try {
 			Method meth = outport.getMethod("value");
@@ -338,26 +387,42 @@ public class ListComponents {
 					for (int j = 0; j < i; j++) {
 						AOutPort opt2 = new AOutPort();
 						opt2.value = s.substring(0, s.length() - 1) + j;
-						opt2.arrayPort = opt2.arrayPort;
+						opt2.arrayPort = opt.arrayPort;
 						opt2.fixedSize = opt.fixedSize;
 						opt2.optional = opt.optional;
 						opt2.description = opt.description;
 						opt2.type = opt.type;
-						outputPortAttrs.put(opt2.value, opt2);
+						String u = ""; 
+						if (opt2.arrayPort)
+							u += ", array";
+						if (opt2.optional)
+							u += ", opt";
+						System.out.println("<li>" + opt2.value + "  " + opt2.description + u + "</li>");
 					}
 				} else {
 					AOutPort opt2 = new AOutPort();
 					opt2.value = s;
-					opt2.arrayPort = opt2.arrayPort;
+					opt2.arrayPort = opt.arrayPort;
 					opt2.fixedSize = opt.fixedSize;
 					opt2.optional = opt.optional;
 					opt2.description = opt.description;
 					opt2.type = opt.type;
-					outputPortAttrs.put(opt2.value, opt2);
+					String u = ""; 
+					if (opt2.arrayPort)
+						u += ", array";
+					if (opt2.optional)
+						u += ", opt";
+					System.out.println("<li>" + opt2.value + "  " + opt2.description + u + "</li>");
 				}
 			}
-			if (sa.length == 0)
-				outputPortAttrs.put(opt.value, opt);
+			if (sa.length == 0){
+				String u = ""; 
+				if (opt.arrayPort)
+					u += ", array";
+				if (opt.optional)
+					u += ", opt";
+				System.out.println("<li>" + opt.value + "  " + opt.description + u + "</li>");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
