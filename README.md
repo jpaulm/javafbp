@@ -159,7 +159,7 @@ Running a test
 
 Here is a simple command-line test that can be run to test that everything is working.
 
-In the project directory, enter
+Position to the `javafbp` directory; then enter
 
     java -cp build/libs/javafbp-x.x.x.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.MergeandSort
 
