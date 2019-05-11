@@ -102,7 +102,7 @@ In *nix, replace the `;` with `:`.
     
 Building/viewing Component Attributes List
 --------
-you can display the JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
+You can display the JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
 
 Here is a portion of `compList`:
 
