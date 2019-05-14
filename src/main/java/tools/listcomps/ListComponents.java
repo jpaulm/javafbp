@@ -75,8 +75,10 @@ public class ListComponents {
 			e.printStackTrace();
 		}
 		
-
 		
+		System.out.println("<html>");
+		System.out.println("<?xml version=\"1.0\"?> ");
+		System.out.println("<meta charset=\"UTF-8\">");
 			
 
 			entries = zipFile.entries();
@@ -155,6 +157,8 @@ public class ListComponents {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			System.out.println("</html>");
 		} 
 		
 		
