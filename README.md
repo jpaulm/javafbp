@@ -7,9 +7,8 @@ Java Implementation of "Classical" Flow-Based Programming (FBP)
 
 @jpaulm would appreciate feedback - positive or negative! Please let him know how the product can be improved.  Some users may prefer to use DrawFBP to create their diagrams, and generate their networks using this tool (see https://github.com/jpaulm/drawfbp ).
 
-General
----
-
+## General
+ 
 General web site for "classical" FBP: 
 * http://www.jpaulmorrison.com/fbp/
 
@@ -25,10 +24,10 @@ https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fb
 
 Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
 
-Running your JavaFBP project under Eclipse
----
+## Running your JavaFBP project under Eclipse
+ 
 
-**Add the current JavaFBP jar file to the Libraries tab in your project's Java build path properties.**
+**Add the current JavaFBP jar file to the `External Jar Files` tab in your project's `Java build path` properties.**
 
 In your component source, you will need the following import statement:
 
@@ -36,14 +35,11 @@ In your component source, you will need the following import statement:
     
 Note: the **core** level was added in the last repackaging of JavaFBP.
  
-JavaFBP-WebSockets
----
+## JavaFBP-WebSockets
 
 There is also a small GitHub project called `javafbp-websockets`, which contains two generalized components supporting WebSockets ( https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API ), and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
 
-Prerequisites for rebuilding JavaFBP or derivative
----
-
+## Prerequisites for rebuilding JavaFBP or derivative
 
 The project requires Gradle for (re)building. You can download the corresponding package from the following URL: 
 http://www.gradle.org
@@ -55,10 +51,9 @@ OSX users (using Brew, http://brew.sh) can install Maven by executing the follow
     brew install gradle
 
 
-Eclipse IDE Integration with Gradle
----
+## Eclipse IDE Integration with Gradle
 
-You can generate Eclipse project using the following command:
+You can generate an Eclipse project using the following command:
 
     gradle eclipse
 
@@ -73,10 +68,9 @@ Then import a generated project in Eclipse, right (ctrl for OSX) click on the pr
 You may have to go to the project Properties and select Java Build Path/Source; remove whatever is there and select `JavaFBP/src/main/java`; then close Eclipse, and reopen it.
 
 
-Building and/or running from command line
----
+## Building and/or running from command line
 
-The latest jar file can simply be downloaded from the latest release, or it can be rebuilt , by running the following command:
+The latest jar file can simply be downloaded from the latest release in JavaFBP GitHub Releases, or it can be rebuilt , by running the following command:
 
     gradle build
 
@@ -86,22 +80,39 @@ As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` direc
 
 **`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
-For running any of the examples change directory to your `javafbp` folder, and use the following command:
+The generated code shown above is a standard JavaFBP network, and can be executed as described below.
 
-    java -cp "build/libs/javafbp-x.x.x.jar;." com.jpaulmorrison.fbp.resourcekit.examples.networks.<Class name of the network>
-    
-use `jpaulmorrison` if version is 4.1.0 or later.    
+## Running a network
 
-For example:
+### Running on DOS
 
-    java -cp "build/libs/javafbp-x.x.x.jar;." com.jpaulmorrison.fbp.resourcekit.examples.networks.TestIPCounting
-    
-To run one of your own classes, add `;.` after the jar file, and make sure your current directory is set to the one containing the highest qualification level in the chosen package.  
+Essentially, you will have downloaded the JavaFBP jar file earlier, so position to the `bin` directory of your project, and enter the following into the DOS window:
 
-In *nix, replace the `;` with `:`.
-    
-Building/viewing Component Attributes List
---------
+      java -cp "<JavaFBP directory>/javafbp-x.y.z.jar;." <program class name> 
+      
+where `x.y.z` is the version of the jar file you downloaded in **Step0**.  Note the final **;.**.
+
+<program class name> should include the package ID, with periods instead of slashes, and the final `.class` should be dropped.
+
+
+### Running on *nix
+      
+Replace the ';'  in the `-cp` parameter with ":" for *nix.   
+
+### Running in Eclipse
+
+Go to `Properties/Java Build Path` for your project; click on `Add External Jars`, add your JavaFBP jar file to the list, and then hit `Apply' and `OK`.   
+
+Select `Debug` for your project.
+
+
+### Set up some data   
+
+Nearly forgot - we need to give it some data: ReadFile handles any sequential file.  In this case the file reader's IIP names at a CSV file (https://en.wikipedia.org/wiki/Comma-separated_values ), and the selected records will appear in a separate window. 
+
+   
+## Building/viewing Component Attributes List
+ 
 You can display the JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
 
 Here is a portion of `compList`:
@@ -109,8 +120,8 @@ Here is a portion of `compList`:
 ![compList part](docs/compListPart.png)
 
 
-Running a test
-----
+## Checking your setup
+ 
 
 Here is a simple command-line test that can be run to test that everything is working.
 
@@ -137,12 +148,12 @@ At the end of the run, you should see:
     
 where the counts are respectively: creates, normal drops, sends, non-null receives, and drops done by "drop oldest".   
 
-Warning!
------
+## Warning!
+ 
 Care must be taken if combining `LoadBalance` (with substreams) and `SubstreamSensitiveMerge` in a divergent-convergent pattern - this pattern is one of the warning signals for deadlocks anyway. The problem is described in more detail under https://github.com/jpaulm/javafbp/issues/8.
 
-Tracing and other options
----
+## Tracing and other options
+ 
 
 To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` in the user directory to `true`:
 
