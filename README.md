@@ -101,7 +101,7 @@ Replace the ';'  in the `-cp` parameter with ":" for *nix.
 
 ### Running in Eclipse
 
-Go to `Properties/Java Build Path` for your project; click on `Add External Jars`, add your JavaFBP jar file to the list, and then hit `Apply' and `OK`.   
+Go to `Properties/Java Build Path` for your project; click on `Add External Jars`, add your JavaFBP jar file to the list, and then hit `Apply` and `OK`.   
 
 Select `Debug` for your project.
 
