@@ -5,7 +5,8 @@ Java Implementation of "Classical" Flow-Based Programming (FBP)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.jpaulmorrison/javafbp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22)
 
-@jpaulm would appreciate feedback - positive or negative! Please let him know how the product can be improved.  Some users may prefer to use DrawFBP to create their diagrams, and generate their networks using this tool (see https://github.com/jpaulm/drawfbp ).
+This implementation is a kit for building JavaFBP projects - it has no main class itself.  For a number of example networks, go to 
+https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fbp/resourcekit/examples .
 
 ## General
  
@@ -18,11 +19,9 @@ FBP is a particular form of dataflow programming based on bounded buffers, infor
  
 JavaFBP Syntax and Component API:
 * https://jpaulm.github.io/fbp/jsyntax.htm
-  
-For a number of example networks, go to **src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks**, or
-https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fbp/resourcekit/examples/networks
 
-Javadoc can also be browsed at http://jpaulm.github.io/javafbp/  (as of v3.0.8)
+An automatically generated Javadoc can also be browsed at http://jpaulm.github.io/javafbp/ .  Unfortunately this isn't very useful for someone planning to use JavaFBP components, so we have built an FBP-specific Component Attributes List, which can be displayed by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html  - see below.
+
 
 ## Running your JavaFBP project under Eclipse
  
