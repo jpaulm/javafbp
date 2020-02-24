@@ -62,7 +62,7 @@ public class ListFiles extends Component {
   @Override
   protected void execute() {
 	int dirCount = 1;
-	Packet rp = null;
+	Packet<?> rp = null;
 	
     while (null != (rp = source.receive())) { 
     

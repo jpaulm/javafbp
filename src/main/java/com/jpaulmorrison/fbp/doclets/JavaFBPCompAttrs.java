@@ -1,5 +1,12 @@
 package com.jpaulmorrison.fbp.doclets;
 
+import java.io.File;
+
+/**
+ * Has no main method - must be run under javadoc command - see 
+ *   javafbpcompattrs.bat at javafbp root ...
+ */
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -14,9 +21,13 @@ public class JavaFBPCompAttrs {
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//System.out.println("Starting");
 		PrintWriter writer = null;
-		
+		String user = System.getProperty("user.home");
+		String fn = user + "/temp";
+		File file = new File(fn);		
+		file.mkdirs();		
 		try {
-			writer = new PrintWriter("C:\\Temp\\JavaFBPCompAttrs.html", "UTF-8");
+		    file = new File(fn + "/JavaFBPCompAttrs.html");
+			writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,6 +75,7 @@ public class JavaFBPCompAttrs {
 
 		writer.println("</p></body></html>");
 		writer.close();
+		System.out.println("Javadoc written to \"" + file.getAbsolutePath() + "\"");
 		return true;
 	}
 

@@ -1,0 +1,2 @@
+javadoc -doclet com.jpaulmorrison.fbp.doclets.JavaFBPCompAttrs -docletpath target/classes -sourcepath src/main/java  com.jpaulmorrison.fbp.core.components.audio com.jpaulmorrison.fbp.core.components.io com.jpaulmorrison.fbp.core.components.misc com.jpaulmorrison.fbp.core.components.routing com.jpaulmorrison.fbp.core.components.swing com.jpaulmorrison.fbp.core.components.text
+pause

@@ -1,187 +1,243 @@
+// Gradle migrated to v6.2.0
+
+
 buildscript {  
     repositories {
-        mavenCentral()
+        mavenCentral()       
     }
+     
     dependencies {
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.9.0"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"      
+        //classpath 'com.github.rholder:gradle-one-jar:1.0.4'          
+     
     }
 }
+
+
+
+//plugins {
+ //   id 'maven'
+//}
+
+
 apply plugin: 'io.codearte.nexus-staging'
 
-subprojects {
-       
 
-        //task javadocJar(type: Jar) {
-        //    classifier = 'javadoc'
-        //    from javadoc
-        //}
-
-        task sourcesJar(type: Jar) {
-            classifier = 'sources'
-            from sourceSets.main.allSource
-        }
-
-        artifacts {
-            //archives javadocJar, sourcesJar
-            archives sourcesJar
-        }
-    }
 
 allprojects {
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
+apply plugin: 'application'
+//apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
+apply plugin: 'java-library'
+//apply plugin: 'de.marcphilipp.nexus-publish'  // check it out!
 
-version = '4.1.0'
+   
+}
+
+version = '4.1.1'
+
 group = 'com.jpaulmorrison'
 
 
-description = 'Java Implementation of "Classical" Flow-Based Programming'
+              
+
+description = 'Java implementation of Flow-Based Programming (FBP)'
+
+compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-nexusStaging {
-    //packageGroup = "com.jpaulmorrison.javafbp" 
+// mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
+
+nexusStaging {  
     username = ossrhUser
-    password = ossrhPassword
+    password = ossrhPassword       
     
 }
 
-dependencies {
-	compile files('C:/Program Files/Java/jdk1.8.0_101/lib/tools.jar') 
+repositories {
+    mavenCentral()
+}
+
+//dependencies { 	
+//    implementation ('lib/tools.jar')	
+//}
+
+java {
+ withSourcesJar()
+ withJavadocJar()
 }
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version
+        //attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
+        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version,
+        // (don't use archiveVersion here)
+        "Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' ') 
+      
+        // 'Main-Class' : mainClassName
     }
+      
+       
+    //baseName = project.name + '-all'
+    archiveBaseName = project.name
+    from sourceSets.main.output       
+      
+    dependsOn configurations.compileClasspath
+   
+    from {       
+      configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }           
+    }
+    //exclude('com/sun/tools')  ????
+   
 }
 
 
-//if (JavaVersion.current().isJava8Compatible()) {   
-//        tasks.withType(Javadoc) {
- //           options.addBooleanOption('Xdoclint:none', true)
- //       }  
-//}
+if (JavaVersion.current().isJava8Compatible()) {   
+        tasks.withType(Javadoc) {
+            options.addBooleanOption('Xdoclint:none', true)
+        }  
+}
+
+/*
+
+ext {
+    snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
+    releasePublicationRepository = "https://oss.sonatype.org/service/local/"
+   
+
+mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
+ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
+osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
+
+}
+
+*/
 
 ext {
     snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
     releasePublicationRepository = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 
-    // Credentials for publication repositories (needed only for publishing)
-    // Should be set in ${HOME}/.gradle/gradle.properties
-    ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
-    osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
+
+//mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
+ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
+osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
+
+
+
 }
 
 // Used to generate initial maven-dir layout
-task "create-dirs" { description = "Create default maven directory structure" } << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+task "create-dirs" { 
+doLast {
+description = "Create default maven directory structure" 
+//} 
+// {
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
     sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
+}
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version
+
+
+    publishing { 
+  
+  
+    publications {
+        mavenJava(MavenPublication) {
+        
+            groupId = 'com.jpaulmorrison'
+            artifactId = 'javafbp'       
+            version = '4.1.1'
+            from components.java
+           
+                  
+            pom {
+                name = 'JavaFBP'
+                description = 'Java implementation of Flow-Based Programming'
+                 // groupId 'com.jpaulmorrison'
+                 packaging 'jar'
+         
+               url = 'https://github.com/jpaulm/javafbp'
+               
+               
+           
+                
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                    license {
+                        name = 'GNU Lesser General Public License, Version 3.0'
+                       url = 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                     }
+                }
+                
+          developers {
+           developer {
+             id = 'jpaulmorr'
+             name = 'John Paul Rodker Morrison (Software architect/developer)'
+             email = 'jpaulmorr@gmail.com'
+           }
+           
+         }
+        
+      
+        
+        
+                scm {
+          connection = 'scm:git:git:https://github.com/jpaulm.git'
+          developerConnection = 'scm:git:ssh:https://github.com/jpaulm.git'
+          url = 'https://github.com/jpaulm.git'
+        }
+        
+      
+      
+            }
+        }
+    }
+    
+    
+    repositories {
+    
+       
+        maven {
+           
+         
+          
+          url (version.endsWith('SNAPSHOT') ? snapshotPublicationRepository : releasePublicationRepository) 
+          
+         credentials {
+                     username = ossrhUser
+                     password = ossrhPassword   
+                }
+           
+    
     }
 }
 
-//task javadocJar(type: Jar) {
- //   classifier = 'javadoc'
- //   from javadoc
-//}
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-
-task (listComps, dependsOn: 'classes', type: JavaExec) {
-    main = 'tools.listcomps.ListComponents'
-    classpath = sourceSets.main.runtimeClasspath 
-    
-    args 'jpaulmorr'
-    systemProperty 'jarfile', 'C:\\Users\\Paul\\Documents\\GitHub\\javafbp\\build\\libs\\javafbp-4.1.0.jar';
-}
-
- 
-defaultTasks 'listComps'
-
-artifacts {
-    //archives javadocJar, sourcesJar
-    archives sourcesJar
-}
 
 signing {
-    sign configurations.archives
-}
-
-task writeNewPom << {
-    pom {
-        project {
-            groupId 'com.jpaulmorrison'
-            artifactId 'javafbp'
-            version '4.1.0'
-        
-            inceptionYear '2016'
-            licenses {
-                license {
-                    name 'GNU Lesser General Public License, Version 3.0'
-                    url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-                }
-            }
-   
+    required {
+        // signing is required if this is a release version and the artifacts are to be published
+        !version.toString().endsWith('-SNAPSHOT') && tasks.withType(PublishToMavenRepository).find {
+             gradle.taskGraph.hasTask it
         }
-    }.writeTo("pom.xml")
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: releasePublicationRepository) {
-        authentication(userName: ossrhUser, password: ossrhPassword)
-      }
-
-      snapshotRepository(url: snapshotPublicationRepository) {
-       authentication(userName: ossrhUser, password: ossrhPassword)
-      }
-
-      pom.project {
-        name 'JavaFBP'
-        description 'Java Implementation of "Classical" Flow-Based Programming'
-        groupId 'com.jpaulmorrison'
-        packaging 'jar'
-        // optionally artifactId can be defined here         
-        url 'https://github.com/jpaulm/javafbp'
-        version '4.1.0'
-
-        scm {
-          connection 'scm:git:https://github.com/jpaulm.git'
-          developerConnection 'scm:git:https://github.com/jpaulm.git'
-          url 'https://github.com/jpaulm.git'
-        }
-
-        licenses {
-          license {
-            name 'GNU Lesser General Public License, Version 3.0'
-            url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-          }
-        }
-
-        developers {
-          developer {
-            id 'jpaulmorr'
-            name 'John Paul Rodker Morrison (Software architect)'
-            email 'jpaulmorr@gmail.com'
-          }
-        }
-      }
     }
-  }
+    sign publishing.publications
 }
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
+
+} 
