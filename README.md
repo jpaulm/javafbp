@@ -5,8 +5,10 @@ Java Implementation of "Classical" Flow-Based Programming (FBP)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.jpaulmorrison/javafbp.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22)
 
-This implementation is a kit for building JavaFBP projects - it has no main class itself.  For a number of example networks, go to 
+This implementation is a kit for building JavaFBP projects - it has no main class itself.  For a number of sample networks, go to 
 https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fbp/resourcekit/examples .
+
+For your own projects, include the JavaFBP jar file in the Build Path property for the project.
 
 ## General
  
@@ -89,7 +91,7 @@ Essentially, you will have downloaded the JavaFBP jar file earlier, so position 
 
       java -cp "<JavaFBP directory>/javafbp-x.y.z.jar;." <program class name> 
       
-where `x.y.z` is the version of the jar file you downloaded in **Step0**.  Note the final **;.**.
+where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**.
 
 <program class name> should include the package ID, with periods instead of slashes, and the final `.class` should be dropped.
 
