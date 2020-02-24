@@ -114,12 +114,13 @@ Nearly forgot - we need to give it some data: ReadFile handles any sequential fi
    
 ## Building/viewing Component Attributes List
  
-You can display the JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
+You can display the current JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
 
 Here is a portion of `compList`:
 
 ![compList part](docs/compListPart.png)
 
+To rebuild it, execute the `.bat` file `javafbpcompattrs.bat` in your JavaFBP root directory.  The result will be in `<user>/temp/JavaFBPCompAttrs.html`.
 
 ## Checking your setup
  
