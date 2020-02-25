@@ -27,6 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/tools.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_101/lib/tools.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

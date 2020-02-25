@@ -51,7 +51,7 @@ compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-// mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
+mainClassName = 'com.jpaulmorrison.fbp.core.engine.DummyMain'  // 
 
 nexusStaging {  
     username = ossrhUser
@@ -63,23 +63,28 @@ repositories {
     mavenCentral()
 }
 
-//dependencies { 	
-//    implementation ('lib/tools.jar')	
-//}
+sourceSets {
+    main {
+        java {            
+            //exclude 'src/main/java/com/jpaulmorrison/fbp/doclets/*.*'
+            exclude '**/doclets/**'
+        }
+    }
+}
 
 java {
  withSourcesJar()
  withJavadocJar()
 }
 
+
 jar {
     manifest {
         //attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
         attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version,
-        // (don't use archiveVersion here)
-        "Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' ') 
-      
-        // 'Main-Class' : mainClassName
+        // (don't use archiveVersion here - puts wrong version in manifest)
+        "Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' '),       
+         'Main-Class' : mainClassName
     }
       
        
@@ -92,7 +97,7 @@ jar {
     from {       
       configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }           
     }
-    //exclude('com/sun/tools')  ????
+ 
    
 }
 
