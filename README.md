@@ -112,15 +112,6 @@ Select `Debug` for your project.
 Nearly forgot - we need to give it some data: ReadFile handles any sequential file.  In this case the file reader's IIP names at a CSV file (https://en.wikipedia.org/wiki/Comma-separated_values ), and the selected records will appear in a separate window. 
 
    
-## Building/viewing Component Attributes List
- 
-You can display the current JavaFBP components list by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html then `Edit/Find in This Page` (unfortunately you cannot click on the `compList.html` file directly on GitHub).  
-
-Here is a portion of `compList`:
-
-![compList part](docs/compListPart.png)
-
-To rebuild it, execute the `.bat` file `javafbpcompattrs.bat` in your JavaFBP root directory.  The result will be in `<user>/temp/JavaFBPCompAttrs.html`.
 
 ## Checking your setup
  
