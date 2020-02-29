@@ -206,7 +206,7 @@ description = "Create default maven directory structure"
 signing {
     required {
         // signing is required if this is a release version and the artifacts are to be published
-        !archiveVersion.toString().endsWith('-SNAPSHOT') && tasks.withType(PublishToMavenRepository).find {
+        !version.toString().endsWith('-SNAPSHOT') && tasks.withType(PublishToMavenRepository).find {
              gradle.taskGraph.hasTask it
         }
     }
