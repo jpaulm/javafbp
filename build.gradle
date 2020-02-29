@@ -1,4 +1,4 @@
-// Gradle migrated to v6.2.0
+// Gradle migrated to v6.2.1
 
 
 buildscript {  
@@ -51,7 +51,7 @@ compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-mainClassName = 'com.jpaulmorrison.fbp.core.engine.DummyMain'  // 
+mainClassName = 'com.jpaulmorrison.fbp.core.engine.DummyMain'   
 
 nexusStaging {  
     username = ossrhUser
@@ -63,26 +63,18 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        java {            
-            //exclude 'src/main/java/com/jpaulmorrison/fbp/doclets/*.*'
-            exclude '**/doclets/**'
-        }
-    }
-}
-
-java {
- withSourcesJar()
- withJavadocJar()
+	
+java {       
+     withSourcesJar()
+     withJavadocJar()
 }
 
 
 jar {
+    archiveVersion = '4.1.1'
     manifest {
-        //attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
-        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': version,
-        // (don't use archiveVersion here - puts wrong version in manifest)
+       attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
+             
         "Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' '),       
          'Main-Class' : mainClassName
     }
@@ -95,10 +87,10 @@ jar {
     dependsOn configurations.compileClasspath
    
     from {       
-      configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }           
-    }
- 
-   
+      configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }  
+      }
+    
+       
 }
 
 
@@ -108,20 +100,7 @@ if (JavaVersion.current().isJava8Compatible()) {
         }  
 }
 
-/*
 
-ext {
-    snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
-    releasePublicationRepository = "https://oss.sonatype.org/service/local/"
-   
-
-mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
-ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
-osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
-
-}
-
-*/
 
 ext {
     snapshotPublicationRepository = "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -131,7 +110,6 @@ ext {
 //mainClassName = 'com.jpaulmorrison.fbp.core.engine.Network'
 ossrhUser =  project.hasProperty('ossrhUser') ? project.property('ossrhUser') : ""
 osshrPassword = project.hasProperty('osshrPassword') ? project.property('osshrPassword') : ""
-
 
 
 }
@@ -158,6 +136,7 @@ description = "Create default maven directory structure"
             groupId = 'com.jpaulmorrison'
             artifactId = 'javafbp'       
             version = '4.1.1'
+           
             from components.java
            
                   
@@ -174,13 +153,9 @@ description = "Create default maven directory structure"
                 
                 licenses {
                     license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = 'Clarified Artistic License'
+                        url = 'https://spdx.org/licenses/ClArtistic.html'
                     }
-                    license {
-                        name = 'GNU Lesser General Public License, Version 3.0'
-                       url = 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-                     }
                 }
                 
           developers {
@@ -231,7 +206,7 @@ description = "Create default maven directory structure"
 signing {
     required {
         // signing is required if this is a release version and the artifacts are to be published
-        !version.toString().endsWith('-SNAPSHOT') && tasks.withType(PublishToMavenRepository).find {
+        !archiveVersion.toString().endsWith('-SNAPSHOT') && tasks.withType(PublishToMavenRepository).find {
              gradle.taskGraph.hasTask it
         }
     }

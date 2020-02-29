@@ -10,8 +10,8 @@ temp.data
 
 # Maven packages/etc
 target/
-build/libs
-build/poms
+
+
 build/tmp
 build/resources
 build/classes
