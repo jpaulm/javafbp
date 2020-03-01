@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jpaulmorrison</groupId>
+  <artifactId>javafbp</artifactId>
+  <version>4.1.0</version>
+  <name>JavaFBP</name>
+  <description>Java Implementation of "Classical" Flow-Based Programming</description>
+  <url>https://github.com/jpaulm/javafbp</url>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License, Version 3.0</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>jpaulmorr</id>
+      <name>John Paul Rodker Morrison (Software architect)</name>
+      <email>jpaulmorr@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/jpaulm.git</connection>
+    <developerConnection>scm:git:https://github.com/jpaulm.git</developerConnection>
+    <url>https://github.com/jpaulm.git</url>
+  </scm>
+</project>

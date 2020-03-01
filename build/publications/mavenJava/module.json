@@ -1,0 +1,101 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.jpaulmorrison",
+    "module": "javafbp",
+    "version": "4.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.2.1",
+      "buildId": "5m4dwq6hkrdmvf3ybqbv2ze33i"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "javafbp-4.1.1.jar",
+          "url": "javafbp-4.1.1.jar",
+          "size": 256038,
+          "sha512": "252c4139591fc9e23478bc6d6bfa3b8be8062a826ba4054b359ba2a7dd2b08a7607dba15492bbf7b0088f83ac0db79e697f1c7c56930aff89556c9d0e7552163",
+          "sha256": "19d1f2e1d2b31b89f373d683fef4587f73ba4fe781defa9a375e0bec59fc19b5",
+          "sha1": "efcd896adda5454ec0a828a3ffa7572a4b4772b9",
+          "md5": "445006207a282d6cb2cd19c35e7b9a32"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "javafbp-4.1.1.jar",
+          "url": "javafbp-4.1.1.jar",
+          "size": 256038,
+          "sha512": "252c4139591fc9e23478bc6d6bfa3b8be8062a826ba4054b359ba2a7dd2b08a7607dba15492bbf7b0088f83ac0db79e697f1c7c56930aff89556c9d0e7552163",
+          "sha256": "19d1f2e1d2b31b89f373d683fef4587f73ba4fe781defa9a375e0bec59fc19b5",
+          "sha1": "efcd896adda5454ec0a828a3ffa7572a4b4772b9",
+          "md5": "445006207a282d6cb2cd19c35e7b9a32"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "javafbp-4.1.1-sources.jar",
+          "url": "javafbp-4.1.1-sources.jar",
+          "size": 248554,
+          "sha512": "43e349cf70bb37cf924351461bdc9f5cdc53ea6dd8b2dda3237ebda3f6a9705d9f6e659ecab0862fee4dfe124532505e01eb35aa280e50a4761e310d768f6d8e",
+          "sha256": "c3976ccdef8a79df7000063ed19cb05081cfd69200ec5443cbab4e6726b4afc0",
+          "sha1": "529f4b4d9a3f84b7b890e4141b7b05a477ba934f",
+          "md5": "152d6973942acf89318f0d55965a71cf"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "javafbp-4.1.1-javadoc.jar",
+          "url": "javafbp-4.1.1-javadoc.jar",
+          "size": 664784,
+          "sha512": "19e3a90f125be9627ebb0392fe9ddc1caf1c8d817f4b1b63eb7fc803d21b624a3498264a0eb1517a96104305f0cad2a0af168a2d88352176f2e614e63ae80aba",
+          "sha256": "abec84c65758e7c9471bdba8599a5e8561bc01feea3dd16402c5aa5358b27989",
+          "sha1": "262482d0fdbdd27e22bd2bde6abababded097a9a",
+          "md5": "17895c007fdad1f4faed288b3566e6e1"
+        }
+      ]
+    }
+  ]
+}
