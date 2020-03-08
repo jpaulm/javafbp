@@ -47,7 +47,7 @@ public class Counter extends Component {
   protected void execute() {
     int count = 0;
 
-    Packet p;
+    Packet<?> p;
     while ((p = inPort.receive()) != null) {
       count++;
       if (outPort.isConnected()) {
@@ -56,7 +56,7 @@ public class Counter extends Component {
         drop(p);
       }
     }
-    Packet ctp = create(Integer.toString(count));
+    Packet<?> ctp = create(Integer.toString(count));
     countPort.send(ctp);
   }
 

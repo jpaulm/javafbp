@@ -50,7 +50,7 @@ public class ReadEmails extends Component {
 
   @Override
   protected void execute() {
-    Packet rp = source.receive();
+    Packet<?> rp = source.receive();
     if (rp == null) {
       return;
     }
@@ -78,7 +78,7 @@ public class ReadEmails extends Component {
             break;
           }
           t = s.substring(j, k + 1);
-          Packet p = create(u + t);
+          Packet<?> p = create(u + t);
           u = "";
           outport.send(p);
           j = k + 1;

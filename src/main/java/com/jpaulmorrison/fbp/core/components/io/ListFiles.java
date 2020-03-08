@@ -79,14 +79,14 @@ public class ListFiles extends Component {
     	  for (int i = 0; i < list.length; i++){    		  
     		  String s = sf + File.separator + list[i];
     		  File f2 = new File(s);
-    		  Path path = Paths.get(s);
-    		  BasicFileAttributes attrs = null;
-    		  try {
-				attrs = Files.readAttributes(path, BasicFileAttributes.class);
-			} catch (IOException e) {
+    		  //Path path = Paths.get(s);
+    		  //BasicFileAttributes attrs = null;
+    		  //try {
+			///	attrs = Files.readAttributes(path, BasicFileAttributes.class);
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//	e.printStackTrace();
+			//}
     		  
     		  //FileTime ct = attrs.lastModifiedTime();
     		  long ct = f2.lastModified();

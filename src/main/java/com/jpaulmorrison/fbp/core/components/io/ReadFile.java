@@ -52,7 +52,7 @@ public class ReadFile extends Component {
 
   @Override
   protected void execute() {
-    Packet rp = source.receive();
+    Packet<?> rp = source.receive();
     if (rp == null) {
       return;
     }
@@ -79,7 +79,7 @@ public class ReadFile extends Component {
 
       String s;
       while ((s = b.readLine()) != null) {
-        Packet p = create(s);
+        Packet<?> p = create(s);
         if (outport.isClosed()) {
           break;
         }

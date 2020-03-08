@@ -44,7 +44,7 @@ public class GenerateTestData extends Component {
 
   @Override
   protected void execute() {
-    Packet ctp = count.receive();
+    Packet<?> ctp = count.receive();
     if (ctp == null) {
       return;
     }

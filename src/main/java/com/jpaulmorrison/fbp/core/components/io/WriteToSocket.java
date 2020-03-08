@@ -76,7 +76,7 @@ public class WriteToSocket extends Component {
   @Override
   protected void execute() {// Create socket connection
 
-    Packet ptp = pport.receive();
+    Packet<?> ptp = pport.receive();
     if (ptp == null) {
       return;
     }
@@ -109,7 +109,7 @@ public class WriteToSocket extends Component {
       System.exit(1);
     }
 
-    Packet p;
+    Packet<?> p;
 
     int cyclic_count = 0;
 

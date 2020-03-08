@@ -48,7 +48,7 @@ public class WriteToConsole extends Component {
 
   @Override
   protected void execute() {
-    Packet p;
+    Packet<?> p;
 
     while ((p = inport.receive()) != null) {
       longWaitStart(_timeout);

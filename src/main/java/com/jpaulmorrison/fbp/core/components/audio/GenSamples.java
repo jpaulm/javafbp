@@ -60,7 +60,7 @@ public class GenSamples extends Component {
 
     bufferSize = (int) sampleRate * 2; // 2 bytes per sample
     buf = new byte[bufferSize]; //  1 second of play
-    Packet p;
+    Packet<?> p;
 
     while ((p = inport.receive()) != null) {
 

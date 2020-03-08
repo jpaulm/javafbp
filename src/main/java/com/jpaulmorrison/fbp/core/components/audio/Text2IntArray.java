@@ -44,7 +44,7 @@ public class Text2IntArray extends Component {
   @Override
   protected void execute() {
 
-    Packet p;
+    Packet<?> p;
     while ((p = _inport.receive()) != null) {
       String text = (String) p.getContent();
 

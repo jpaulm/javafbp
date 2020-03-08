@@ -69,7 +69,7 @@ public class ReadFromSocket extends Component {
     double _timeout = 10.0; // 10 secs
     int cyclic_count = 0;
 
-    Packet ptp = pport.receive();
+    Packet<?> ptp = pport.receive();
     if (ptp == null) {
       return;
     }
@@ -131,7 +131,7 @@ public class ReadFromSocket extends Component {
         break;
       }
       line = line.substring(5);
-      Packet p = create(line);
+      Packet<?> p = create(line);
       outport.send(p);
       cyclic_count = (cyclic_count + 1) % 10000;
     }

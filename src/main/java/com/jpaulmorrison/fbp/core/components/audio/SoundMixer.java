@@ -54,7 +54,7 @@ public class SoundMixer extends Component {
   @Override
   protected void execute() {
     float[] gains = new float[inport.length];
-    Packet gtp = gainsport.receive();
+    Packet<?> gtp = gainsport.receive();
     gainsport.close();
     if (gtp == null) {
       for (int i = 0; i < gains.length; i++) {
@@ -77,7 +77,7 @@ public class SoundMixer extends Component {
       System.out.println(e);
     }
 
-    Packet p = null;
+    Packet<?> p = null;
 
     while (true) {
       byte[] mainbuf = null;

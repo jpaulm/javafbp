@@ -64,7 +64,7 @@ public class WriteFile extends Component {
 
   @Override
   protected void execute() {
-    Packet dp = destination.receive();
+    Packet<?> dp = destination.receive();
     if (dp == null) {
       return;
     }
@@ -88,7 +88,7 @@ public class WriteFile extends Component {
       }
 
       drop(dp);
-      Packet p;
+      Packet<?> p;
 
       while ((p = inport.receive()) != null) {
         longWaitStart(_timeout);

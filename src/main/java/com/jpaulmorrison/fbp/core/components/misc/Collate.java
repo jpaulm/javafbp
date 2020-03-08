@@ -50,7 +50,7 @@ public class Collate extends Component {
 
   private int low;
 
-  private Packet pArray[];
+  private Packet<?> pArray[];
 
   private int parmct;
 
@@ -59,7 +59,7 @@ public class Collate extends Component {
   @Override
   protected void execute() {
 
-    Packet cfp = ctlfldport.receive();
+    Packet<?> cfp = ctlfldport.receive();
     if (cfp == null) {
       return;
     }
@@ -78,14 +78,14 @@ public class Collate extends Component {
     }
 
     for (int i = 0; i < parmct; i++) {
-      Packet p2 = create(Packet.OPEN, " ");
+      Packet<?> p2 = create(Packet.OPEN, " ");
       outport.send(p2);
     }
 
     int no = inportArray.length;
     int count = no;
     pArray = new Packet[no];
-    Packet p;
+    Packet<?> p;
     for (int i = 0; i < no; i++) {
       p = inportArray[i].receive();
       if (p == null) {
@@ -137,11 +137,11 @@ public class Collate extends Component {
       // if (hold.compareTo(prev) != 0) {
       int level = findLevel();
       for (int i = 0; i < level; i++) {
-        Packet p2 = create(Packet.CLOSE, " ");
+        Packet<?> p2 = create(Packet.CLOSE, " ");
         outport.send(p2);
       }
       for (int i = 0; i < level; i++) {
-        Packet p2 = create(Packet.OPEN, " ");
+        Packet<?> p2 = create(Packet.OPEN, " ");
         outport.send(p2);
       }
 
