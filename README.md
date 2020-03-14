@@ -3,7 +3,7 @@ JavaFBP
 
 Java Implementation of "Classical" Flow-Based Programming (FBP)
 
-Latest release is v4.1.2: the jar file - `javafbp-4.1.2.jar` - can be obtained from the Releases folder, from `build/libs`.  Previous release is on Maven Central:
+Latest release is `v4.1.2`: the jar file - `javafbp-4.1.2.jar` - can be obtained from the Releases folder, from `build/libs`.  It will be available on Maven Central shortly (there will be a short period when the actual version and the shield info do not match):
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.jpaulmorrison/javafbp.svg?label=JavaFBP)](https://search.maven.org/search?q=g:%22com.jpaulmorrison%22%20AND%20a:%22javafbp%22)
 
