@@ -1,5 +1,9 @@
-// Gradle migrated to v6.2.2
+// Gradle migrated to v6.3
 
+//When rebuilding DrawFBP, use parameter 
+//   -Dorg.gradle.internal.publish.checksums.insecure=true
+// or add systemProp.org.gradle.internal.publish.checksums.insecure=true to gradle.properties
+// until this problem is fixed - see https://github.com/gradle/gradle/issues/11308
 
 buildscript {  
     repositories {
