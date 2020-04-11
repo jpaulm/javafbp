@@ -82,7 +82,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\javafbp-4.1.2.jar
+set CLASSPATH=%APP_HOME%\lib\javafbp-4.1.3.jar
 
 @rem Execute javafbp
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JAVAFBP_OPTS%  -classpath "%CLASSPATH%" com.jpaulmorrison.fbp.core.engine.DummyMain %CMD_LINE_ARGS%

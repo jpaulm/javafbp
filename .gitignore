@@ -18,6 +18,8 @@ build/classes
 build/dependency-cache
 build/ivy.xml
 
+build/docs/javadoc
+
 # Eclipse project
 bin
 
