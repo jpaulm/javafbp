@@ -28,6 +28,10 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 
 /**
  * First-come, first-served - sensitive to substreams
+ * The reason for this component is that you do not want its downstream process to receive "overlapping" substreams,
+ *  so incoming substreams cannot simply be merged into one stream; the input ports (actually input port array elements) have to be
+ *  separate, and the component decides which substream to process completely first, then another (probably from a different
+ *  array element), and so on... 
  **/
 
 @ComponentDescription("Merge multiple input streams, first-come, first-served, but sensitive to substreams")
