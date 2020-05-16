@@ -89,6 +89,10 @@ The generated code shown above is a standard JavaFBP network, and can be execute
 
 ## Running a network
 
+### Default connection size
+
+JavaFBP recommends using a small connection size for debugging, and a larger one for production.  Currently this is coded in `Network.java - defaultCapacity` (https://github.com/jpaulm/javafbp/blob/master/src/main/java/com/jpaulmorrison/fbp/core/engine/Network.java) to select the debug size.  This should be changed when going into production.
+
 ### Running on DOS
 
 Essentially, you will have downloaded the JavaFBP jar file earlier, so position to the `bin` directory of your project, and enter the following into the DOS window:
