@@ -26,7 +26,7 @@ JavaFBP Syntax and Component API:
 
 An automatically generated Javadoc can also be browsed at http://jpaulm.github.io/javafbp/ .  Unfortunately this isn't very useful for someone planning to use JavaFBP components, so we have built an FBP-specific Component Attributes List, which can be displayed by clicking on http://htmlpreview.github.io/?https://github.com/jpaulm/javafbp/blob/master/compList.html  - see below.
 
-
+<!--
 ## Running your JavaFBP project under Eclipse
  
 
@@ -37,6 +37,8 @@ In your component source, you will need the following import statement:
     import com.jpaulmorrison.fbp.core.engine.*;
     
 Note: the **core** level was added in the last repackaging of JavaFBP.
+
+-->
  
 ## JavaFBP-WebSockets
 
