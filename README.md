@@ -42,7 +42,7 @@ Note: the **core** level was added in the last repackaging of JavaFBP.
 
 There is also a small GitHub project called `javafbp-websockets`, which contains two generalized components supporting WebSockets ( https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API ), and a simple test component and network - it can be found at https://github.com/jpaulm/javafbp-websockets .
 
-## Prerequisites for rebuilding JavaFBP or derivative
+<!--## Prerequisites for rebuilding JavaFBP or derivative
 
 The project requires Gradle for (re)building. You can download the corresponding package from the following URL: 
 http://www.gradle.org
@@ -82,6 +82,8 @@ As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` direc
 **`resourcekit` is now in the hierarchy, as of version v4.0.1** .
 
 The generated code shown above is a standard JavaFBP network, and can be executed as described below.
+
+-->
 
 ## Running a network
 
