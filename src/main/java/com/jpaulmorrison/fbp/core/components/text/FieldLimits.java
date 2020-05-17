@@ -32,7 +32,7 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 
 /** Provide maximum field lengths from a stream of character-separated records
  */
-@ComponentDescription("Pass through a CSV stream, also output LIMITS of field lengths as CSV")
+@ComponentDescription("Pass through a CSV stream, then afterwards output LIMITS of field lengths as CSV")
 @OutPorts({ @OutPort(value = "OUT"), @OutPort(value = "LIMITS") })
 @InPorts({ @InPort("IN"), @InPort("SEP") })
 public class FieldLimits extends Component {
@@ -48,7 +48,7 @@ public class FieldLimits extends Component {
     String sep = ",";
 
     // Get separator from SEP IIP
-    Packet pSep = sepport.receive();
+    Packet<?> pSep = sepport.receive();
     if (pSep != null) {
       sepport.close();
       sep = (String) pSep.getContent();
@@ -57,7 +57,7 @@ public class FieldLimits extends Component {
 
     // Pass through IN to OUT, keeping greatest field lengths
     int[] nLimits = null;
-    Packet p;
+    Packet<?> p;
     while ((p = inport.receive()) != null) {
       String o = (String) p.getContent();
 
@@ -77,6 +77,9 @@ public class FieldLimits extends Component {
       // Pass through
       outport.send(p);
     }
+    
+    outport.close();
+    
     if (nLimits != null) {
       // Send LIMITS as single CSV record
       String sLimits = "";
@@ -86,7 +89,7 @@ public class FieldLimits extends Component {
           sLimits += sep;
         }
       }
-      Packet pLimits = create(sLimits);
+      Packet<?> pLimits = create(sLimits);
       limitport.send(pLimits);
     }
   }
