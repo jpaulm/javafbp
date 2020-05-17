@@ -34,7 +34,7 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
  */
 @ComponentDescription("Pass through a CSV stream, then afterwards output LIMITS of field lengths as CSV")
 @OutPorts({ @OutPort(value = "OUT"), @OutPort(value = "LIMITS") })
-@InPorts({ @InPort(value = "IN", arrayPort = true), @InPort("SEP") })
+@InPorts({ @InPort("IN"), @InPort("SEP") })
 public class FieldLimits extends Component {
 
  
