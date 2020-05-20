@@ -38,7 +38,7 @@ final class NullConnection implements InputPort {
 
   protected Component receiver;
 
-  Class type;
+  Class<?> type;
   
   boolean optional;
 
@@ -66,7 +66,7 @@ final class NullConnection implements InputPort {
     return true;
   }
 
-  public Packet receive() {
+  public Packet<?> receive() {
     return null;
   }
 
@@ -74,8 +74,8 @@ final class NullConnection implements InputPort {
     receiver = newReceiver;
   }
 
-  @SuppressWarnings("unused")
-  public void setType(final Class tp) {
+ 
+  public void setType(final Class<?> tp) {
     //
   }
 

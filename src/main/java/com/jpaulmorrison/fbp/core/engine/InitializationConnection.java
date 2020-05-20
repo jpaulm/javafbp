@@ -47,7 +47,7 @@ public class InitializationConnection implements InputPort {
 
   private Port port;
 
-  Class type;
+  Class<?> type;
   
   private Network traceNetwork; // the network this port is visible in (needed for tracing)  
 
@@ -106,8 +106,8 @@ public class InitializationConnection implements InputPort {
    * 
    * See InputPort.receive.
    */
-  public Packet receive() {
-    Packet p;
+  public Packet<?> receive() {
+    Packet<?> p;
 
     if (!isClosed()) {
       p = new Packet(content, getReceiver());
@@ -150,8 +150,8 @@ public class InitializationConnection implements InputPort {
   /* (non-Javadoc)
    * @see com.jpaulmorrison.fbp.core.engine.InputPort#setType(java.lang.Class)
    */
-  @SuppressWarnings("unused")
-  public void setType(final Class tp) {
+  
+  public void setType(final Class<?> tp) {
     // TODO Auto-generated method stub
 
   }

@@ -37,7 +37,7 @@ public class SubInSS extends Component {
 
   @Override
   protected void execute() {
-    Packet np = nameport.receive();
+    Packet<?> np = nameport.receive();
     if (np == null) {
       return;
     }
@@ -52,7 +52,7 @@ public class SubInSS extends Component {
     inport = mother.getInports().get(pname);
 
     mother.traceFuncs(getName() + ": Accessing input port: " + inport.getName());
-    Packet p;
+    Packet<?> p;
 
     Component oldReceiver = ((Connection) inport).getReceiver();
     if (inport instanceof InitializationConnection) {

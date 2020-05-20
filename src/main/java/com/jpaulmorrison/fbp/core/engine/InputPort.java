@@ -48,7 +48,7 @@ public interface InputPort {
    * @return next packet, <code>null</code> if none
    **/
 
-  public Packet receive();
+  public Packet<?> receive();
 
   /**
    * Specify the type of packet content that will be accepted from this
@@ -58,7 +58,7 @@ public interface InputPort {
    * @param type the class of acceptable packet content
     
   */
-  public void setType(Class type);
+  public void setType(Class<?> type);
 
   /**
    * @return string containing port name

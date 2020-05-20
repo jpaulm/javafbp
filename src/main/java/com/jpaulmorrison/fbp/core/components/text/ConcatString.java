@@ -41,7 +41,7 @@ public class ConcatString extends Component {
 
     String target = "";
     Packet<String> p;
-    while ((p = inport.receive()) != null) {
+    while ((p = (Packet<String>) inport.receive()) != null) {
       String s = p.getContent();
       target = target + s;
       drop(p);

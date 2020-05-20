@@ -41,7 +41,7 @@ public class SubIn extends Component {
   @Override
   protected void execute() {
 
-    Packet np = nameport.receive();
+    Packet<?> np = nameport.receive();
     if (np == null) {
       return;
     }
@@ -55,7 +55,7 @@ public class SubIn extends Component {
 
     inport = mother.getInports().get(pname);
     mother.traceFuncs(getName() + ": Accessing input port: " + inport.getName());
-    Packet p;
+    Packet<?> p;
     // I think this works!
     Component oldReceiver;
     if (inport instanceof InitializationConnection) {

@@ -32,12 +32,12 @@ final class Chain {
 
  
 
-  final LinkedList<Packet> members;
+  final LinkedList<Packet<?>> members;
 
   protected final String name;
 
   Chain(final String n) {
     name = n;
-    members = new LinkedList<Packet>();
+    members = new LinkedList<Packet<?>>();
   }
 }

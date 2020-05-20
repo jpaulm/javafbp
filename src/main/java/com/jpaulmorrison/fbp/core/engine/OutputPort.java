@@ -40,7 +40,7 @@ public class OutputPort {
 
   boolean optional;
 
-  Class type = null;
+  Class<?> type = null;
 
   Component sender = null; // component sending to this Output Port
 
@@ -114,7 +114,7 @@ public class OutputPort {
    */
 
   public// The send function.
-  void send(final Packet packet) {
+  void send(final Packet<?> packet) {
 
     // Thread t = Thread.currentThread();
     // if (t != packet.owner)

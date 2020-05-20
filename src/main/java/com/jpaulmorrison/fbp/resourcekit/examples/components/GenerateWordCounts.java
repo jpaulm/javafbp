@@ -49,7 +49,7 @@ public class GenerateWordCounts extends Component {
     HashMap<String, Integer> hm = new HashMap<String, Integer>();
     int j;
     Packet<String> p;
-    while ((p = inport.receive()) != null) {
+    while ((p = (Packet<String>) inport.receive()) != null) {
     	String s = (String) p.getContent();
     	Integer i = hm.get(s);    	
     	if (i == null)

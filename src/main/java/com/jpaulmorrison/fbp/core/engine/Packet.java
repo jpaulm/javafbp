@@ -33,7 +33,12 @@ import java.util.Iterator;
 public class Packet<T> implements Serializable {
 
   
-  static public final int OPEN = 1;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+static public final int OPEN = 1;
 
   static public final int CLOSE = 2;
 
@@ -50,7 +55,7 @@ public class Packet<T> implements Serializable {
   private HashMap<String, Object> attrs = null;
 
   // An iteration that has nothing to iterate.               
-  private static Iterator nullIter = new HashMap().values().iterator();
+  private static Iterator<?> nullIter = new HashMap().values().iterator();
 
   @SuppressWarnings("unchecked")
   Packet(final int newType, final String newName, final Thread newOwner) {
@@ -68,16 +73,16 @@ public class Packet<T> implements Serializable {
 
   @Deprecated
   // this function has been moved to Component
-  public void attach(final String name, final Packet subordinate) {
+  public void attach(final String name, final Packet<?> subordinate) {
     if (subordinate == null) {
       FlowError.complain("Null packet reference in 'attach' method call: " + Thread.currentThread().getName());
     }
-    Packet p = this;
+    Packet<?> p = this;
     while (p.owner instanceof Packet) {
       if (p == subordinate) {
         FlowError.complain("Loop in tree structure");
       }
-      p = (Packet) p.owner;
+      p = (Packet<?>) p.owner;
     }
     if (p == subordinate) {
       FlowError.complain("Loop in tree structure");
@@ -119,11 +124,11 @@ public class Packet<T> implements Serializable {
 
   @Deprecated
   // this function has been moved to Component
-  public void detach(final String name, final Packet subordinate) {
+  public void detach(final String name, final Packet<?> subordinate) {
     if (subordinate == null) {
       FlowError.complain("Null packet reference in 'detach' method call: " + Thread.currentThread().getName());
     }
-    Packet root = getRoot();
+    Packet<?> root = getRoot();
     if (root.owner != Thread.currentThread()) {
       FlowError.complain("Packet not owned (directly or indirectly) by current component");
     }
@@ -150,7 +155,7 @@ public class Packet<T> implements Serializable {
 
   /** Get all attributes of this Packet (as Iterator)
   */
-  protected Iterator getAttributes() {
+  protected Iterator<?> getAttributes() {
     if (attrs != null) {
       return attrs.keySet().iterator();
     }
@@ -161,7 +166,7 @@ public class Packet<T> implements Serializable {
   /** Get named chain (as Iterator)
   */
 
-  protected Iterator getChain(final String name) {
+  protected Iterator<?> getChain(final String name) {
     if (chains == null) {
       return nullIter;
     }
@@ -176,7 +181,7 @@ public class Packet<T> implements Serializable {
   /** Get all chains for this Packet (as Iterator)
   */
 
-  protected Iterator getChains() {
+  protected Iterator<?> getChains() {
     if (chains != null) {
       return chains.keySet().iterator();
     }
@@ -207,10 +212,10 @@ public class Packet<T> implements Serializable {
   * bug fixed Mar. 18, 2012
   */
 
-  public Packet getRoot() {
-    Packet p = this;
+  public Packet<?> getRoot() {
+    Packet<?> p = this;
     while (p.owner instanceof Packet) {
-      p = (Packet) p.owner;
+      p = (Packet<?>) p.owner;
     }
     return p;
   }

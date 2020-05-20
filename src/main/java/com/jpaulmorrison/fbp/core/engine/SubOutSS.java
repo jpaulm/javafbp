@@ -33,7 +33,7 @@ public class SubOutSS extends Component {
 
   @Override
   protected void execute()/* throws Throwable*/{
-    Packet np = nameport.receive();
+    Packet<?> np = nameport.receive();
     if (np == null) {
       return;
     }
@@ -44,7 +44,7 @@ public class SubOutSS extends Component {
     outport = mother.getOutports().get(pname);
     mother.traceFuncs(getName() + ": Accessing output port: " + outport.getName());
     outport.setSender(this);
-    Packet p;
+    Packet<?> p;
     p = create(Packet.OPEN, "");
     outport.send(p);
 

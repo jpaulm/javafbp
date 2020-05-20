@@ -27,7 +27,7 @@ public final class VersionAndTimestamp {
 
   private static String version = "JavaFBP - version 4.1.3";
 
-  private static String date = "May 16, 2020";
+  private static String date = "May 20, 2020";
 
   static String getVersion() {
     return version;

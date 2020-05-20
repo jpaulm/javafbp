@@ -35,7 +35,7 @@ public class SubOI extends Component {
 
   @Override
   protected void execute()/* throws Throwable*/{
-    Packet np = nameport.receive();
+    Packet<?> np = nameport.receive();
     if (np == null) {
       return;
     }
@@ -56,7 +56,7 @@ public class SubOI extends Component {
     Component oldReceiver = ((Connection) extinport).getReceiver();
     ((Connection) extinport).setReceiver(this);
 
-    Packet p;
+    Packet<?> p;
     while ((p = inport.receive()) != null) {
       extoutport.send(p);
 

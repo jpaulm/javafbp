@@ -44,7 +44,7 @@ public abstract class SubNet extends Network {
       subEndPort = outputPorts.get("*SUBEND");
       subInPort = inputPorts.get("*CONTROL");
       if (subInPort != null) {
-        Packet p = subInPort.receive();
+        Packet<?> p = subInPort.receive();
         if (p != null) {
           drop(p);
         }

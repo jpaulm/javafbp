@@ -57,12 +57,13 @@ public abstract class Network extends Component {
   
 
   protected static int DEBUGSIZE = 1;
-
   protected static int PRODUCTIONSIZE = 10;
 
-  static int defaultCapacity = DEBUGSIZE; // change this when you go to production
+  //static int defaultCapacity = DEBUGSIZE; // change this when you go to production
   //static int defaultCapacity = PRODUCTIONSIZE; // use this one for production  
 
+  int defaultCapacity = DEBUGSIZE;               // debug value
+  
   /* Following 4 booleans set by properties file */
 
   boolean tracing = false;
@@ -157,7 +158,7 @@ public abstract class Network extends Component {
    * called 'components'
    */
 
-  protected final Component component(final String nme, final Class tpe) {
+  protected final Component component(final String nme, final Class<?> tpe) {
 
     if (getComponent(nme) != null) {
       FlowError.complain("Attempt to redefine component " + nme);
@@ -247,7 +248,7 @@ public abstract class Network extends Component {
       }
     }
 
-    Class tp = null;
+    Class<?> tp = null;
     if (op != null) {
       tp = op.type;
     }
@@ -546,6 +547,16 @@ public abstract class Network extends Component {
     p = properties.get("forceconsole");
     if (p != null && p.equals("true")) {
       forceConsole = true;
+    }
+    p = properties.get("defaultcapacity");
+    if (p != null)  {
+    	try {
+    		network.defaultCapacity = Integer.parseInt(p);
+    	 }
+        catch (NumberFormatException nfe)
+        {
+           System.out.println("Default Capacity - NumberFormatException: " + nfe.getMessage());
+        }
     }
 
     /**
