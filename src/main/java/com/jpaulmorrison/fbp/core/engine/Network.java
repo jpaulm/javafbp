@@ -56,13 +56,11 @@ public abstract class Network extends Component {
 
   
 
-  protected static int DEBUGSIZE = 1;
-  protected static int PRODUCTIONSIZE = 10;
+  protected static int DEBUG_SIZE = 1;
+  protected static int PRODUCTION_SIZE = 10;
 
-  //static int defaultCapacity = DEBUGSIZE; // change this when you go to production
-  //static int defaultCapacity = PRODUCTIONSIZE; // use this one for production  
-
-  int defaultCapacity = DEBUGSIZE;               // debug value
+ 
+  int defaultCapacity = DEBUG_SIZE;               
   
   /* Following 4 booleans set by properties file */
 
@@ -550,7 +548,11 @@ public abstract class Network extends Component {
     }
     p = properties.get("defaultcapacity");
     if (p != null)  {
-    	try {
+    	if (p.equals("PRODUCTION"))
+    		network.defaultCapacity = PRODUCTION_SIZE;
+    	else if (p.equals("DEBUG"))
+    		network.defaultCapacity = DEBUG_SIZE;
+    	else try {
     		network.defaultCapacity = Integer.parseInt(p);
     	 }
         catch (NumberFormatException nfe)
