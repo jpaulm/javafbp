@@ -172,14 +172,14 @@ e.g.
     <defaultcapacity>...</defaultcapacity>    (as of v4.1.3)
     </properties> 
     
+These traces will appear in the project directory (in GitHub if running Eclipse) under the name `xxxx-fulltrace.txt`, where `xxxx` is the name of the network being run.  Subnets have their own trace output files. 
+
 Values for `defaultcapacity` are as follows:
 
 - PRODUCTION (currently 10)
 - DEBUG (currently 1)
 - any number
 - `defaultcapacity` not specified - defaults to DEBUG value
-
-These traces will appear in the project directory (in GitHub if running Eclipse) under the name `xxxx-fulltrace.txt`, where `xxxx` is the name of the network being run.  Subnets have their own trace output files. 
 
 Two other options are also supported in the properties file:
 
