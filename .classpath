@@ -27,5 +27,16 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Paul/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar" sourcepath="C:/Users/Paul/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.groupId" value="com.google.code.gson"/>
+			<attribute name="maven.artifactId" value="gson"/>
+			<attribute name="maven.version" value="2.8.6"/>
+			<attribute name="maven.scope" value="runtime"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Paul/Documents/GitHub/javafbp/build/libs/javafbp-4.1.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
