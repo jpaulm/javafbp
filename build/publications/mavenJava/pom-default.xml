@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jpaulmorrison</groupId>
   <artifactId>javafbp</artifactId>
-  <version>4.1.3</version>
+  <version>4.1.4</version>
   <name>JavaFBP</name>
   <description>Java implementation of Flow-Based Programming</description>
   <url>https://github.com/jpaulm/javafbp</url>
@@ -31,4 +31,12 @@
     <developerConnection>scm:git:ssh:https://github.com/jpaulm.git</developerConnection>
     <url>https://github.com/jpaulm.git</url>
   </scm>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 </project>

@@ -3,7 +3,7 @@
   "component": {
     "group": "com.jpaulmorrison",
     "module": "javafbp",
-    "version": "4.1.3",
+    "version": "4.1.4",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.3",
-      "buildId": "zbb5tewhtzgwxawhnfsnwjw7ye"
+      "buildId": "ojrptculcfbsxhwjy7zwd2o5km"
     }
   },
   "variants": [
@@ -26,13 +26,13 @@
       },
       "files": [
         {
-          "name": "javafbp-4.1.3.jar",
-          "url": "javafbp-4.1.3.jar",
-          "size": 255479,
-          "sha512": "97fd1027fdfaa5cd695c7fcb2cf19840f3abbdacbd688b6651c3f87221dedb7571adaa6ab1a690004143b06195f6d866cd443b4fdad3ce6538385cadfa33f229",
-          "sha256": "48eb4c4f066db1b621f85ced2ccfec8c8870203cd6e70bdf12552e3244d82c52",
-          "sha1": "54c077124ccfbce51e7d0b9cada60c0824fe6c0c",
-          "md5": "701299750128fd5abbdbabe21a6e7906"
+          "name": "javafbp-4.1.4.jar",
+          "url": "javafbp-4.1.4.jar",
+          "size": 502452,
+          "sha512": "e8a43f6f5d3ed14a3be44abeed4899e8b0c1087140629da9445558867305ad7a3a4396f720551f23ad955c46fcb2e6b34f40a73f8e97a5bb30c72ced2c43694a",
+          "sha256": "4a7b122ec48eb946604189370056818d2b039518597e95c0d7a46291723572dc",
+          "sha1": "94cdc625d7bd1dd3b1efb079f9fe9750bb6cd4bf",
+          "md5": "529750aea5975612dfc789864ffdfe35"
         }
       ]
     },
@@ -45,15 +45,24 @@
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime"
       },
+      "dependencies": [
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        }
+      ],
       "files": [
         {
-          "name": "javafbp-4.1.3.jar",
-          "url": "javafbp-4.1.3.jar",
-          "size": 255479,
-          "sha512": "97fd1027fdfaa5cd695c7fcb2cf19840f3abbdacbd688b6651c3f87221dedb7571adaa6ab1a690004143b06195f6d866cd443b4fdad3ce6538385cadfa33f229",
-          "sha256": "48eb4c4f066db1b621f85ced2ccfec8c8870203cd6e70bdf12552e3244d82c52",
-          "sha1": "54c077124ccfbce51e7d0b9cada60c0824fe6c0c",
-          "md5": "701299750128fd5abbdbabe21a6e7906"
+          "name": "javafbp-4.1.4.jar",
+          "url": "javafbp-4.1.4.jar",
+          "size": 502452,
+          "sha512": "e8a43f6f5d3ed14a3be44abeed4899e8b0c1087140629da9445558867305ad7a3a4396f720551f23ad955c46fcb2e6b34f40a73f8e97a5bb30c72ced2c43694a",
+          "sha256": "4a7b122ec48eb946604189370056818d2b039518597e95c0d7a46291723572dc",
+          "sha1": "94cdc625d7bd1dd3b1efb079f9fe9750bb6cd4bf",
+          "md5": "529750aea5975612dfc789864ffdfe35"
         }
       ]
     },
@@ -67,13 +76,13 @@
       },
       "files": [
         {
-          "name": "javafbp-4.1.3-sources.jar",
-          "url": "javafbp-4.1.3-sources.jar",
-          "size": 247580,
-          "sha512": "c500032669031909890febde16fbd6054992375aab9251330aaa9ba37fc43aa50ebe197f26f4506b1361faaabc66307d8f22b37648b3e5ff0e7e205787aa26ea",
-          "sha256": "bbf5452f9cc9eaa91dd5211cec75661f1205b0fd14feb2cdd660e0adf2776c8a",
-          "sha1": "1c5987f6702550df5a71f0114a6423ef6671ede3",
-          "md5": "de55740a673a51212b7193bb9bd39750"
+          "name": "javafbp-4.1.4-sources.jar",
+          "url": "javafbp-4.1.4-sources.jar",
+          "size": 252296,
+          "sha512": "69992f0cc213651ef1d1fc71ffc35dd7d09edb41ccc21fe0fbacbe16476875cf57d0fdd1b69e60abcd32d80e4642fb3410f67c6f49df8d5b58328f448dfb1443",
+          "sha256": "6d3ecbfd1e36268a47f28c7789a38910b57ad746cd8401a38b48d41bd7a7118b",
+          "sha1": "8b1c6ed9b0ee055c7e03433d68c049f5a38a66c1",
+          "md5": "3f0c1922a8dd9e96a3f88b187325ac82"
         }
       ]
     },
@@ -87,13 +96,13 @@
       },
       "files": [
         {
-          "name": "javafbp-4.1.3-javadoc.jar",
-          "url": "javafbp-4.1.3-javadoc.jar",
-          "size": 661640,
-          "sha512": "0d55ff2190e12a91a74b0bafc8d17961075e9f29632b780f02963560d95b2124e7ddf820f09bdbbda48abac073889923f894b2a338be16f39135852f45f2b0fc",
-          "sha256": "b9517ec2b649517a96a185d3243eb0869356ba66e872fa1b8a177577762910e1",
-          "sha1": "6d875ef1e258be8eba66ddb8316cbb86dcc8faf2",
-          "md5": "e1cf08a4d880ffc81cba29da18b066d7"
+          "name": "javafbp-4.1.4-javadoc.jar",
+          "url": "javafbp-4.1.4-javadoc.jar",
+          "size": 674877,
+          "sha512": "18976c8eb21a5e52591f5988f8569515254929b364a6eaeff1dd77b28bed834bb14beeef14370b25a5b223d9431abcd4f617b4a84f2fdf8ecab6478e4d6c51ff",
+          "sha256": "baeb82d26d70e6990e824552bac67a2353ac13fc8bee5fe5ea1a632f884bd66a",
+          "sha1": "0ae851243e99a462640f69bf2552b8b9e1ebb77c",
+          "md5": "212eaef03c9c50bed17757d64324acac"
         }
       ]
     }

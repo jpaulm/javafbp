@@ -1,16 +1,13 @@
 package com.jpaulmorrison.fbp.core.components.jdbc;
 
-import java.io.File;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
+
 import java.sql.*;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import com.google.gson.Gson;
 import com.jpaulmorrison.fbp.core.engine.Component; // Using 'Connection', 'Statement' and 'ResultSet' classes in java.sql package
@@ -71,96 +68,6 @@ public class ReadJDBC extends Component {
 		drop(pp);
 		classPort.close();
 		
-		/*
-		
-		LinkedList<URL> ll = new LinkedList<URL>();
-		
-		URL[] urls = null;
-		
-		File f = null;
-		try {
-
-			f = new  File("C:/Users/Paul/Documents/GitHub/jbdtypes/bin/main/");
-			if (!f.exists())
-				System.out.println("File " + f + " does not exist");
-			ll.add(f.toURI().toURL());	
-			
-			urls = ll.toArray(new URL[ll.size()]);
-
-		} catch (MalformedURLException e) {			
-			urls = null;
-			e.printStackTrace();
-		}
-
-		
-		URLClassLoader loader = null;
-		Class<?> cls = null;
-		if (urls != null) {
-
-			// Create a new class loader with the directory
-			//loader = new URLClassLoader(urls);
-			//		this.getClass().getClassLoader());
-			loader = new URLClassLoader(urls, this.getClass().getClassLoader());
-			//loader = new URLClassLoader(urls, this.getClass().
-			
-			 
-			 * from Block.java
-			
-				while (true) {
-
-					fp = cFile.getParentFile();    
-					if (fp == null)
-						break;
-					//try {
-						classFound = true;
-
-						URL[] urls = driver.buildUrls(fp);
-
-						if (urls == null)
-							tempComp = null;
-						else {
-
-							// Create a new class loader with the directory
-							myURLClassLoader = new URLClassLoader(urls, driver.getClass()
-									.getClassLoader());
-
-							try {
-								tempComp = myURLClassLoader.loadClass(u);
-							} catch (ClassNotFoundException e2) {
-								classFound = false;
-								error = "ClassNotFoundException";
-							} catch (NoClassDefFoundError e2) {
-								classFound = false;
-								error = "NoClassDefFoundError";
-							}
-
-							if (classFound)
-								break;
-							String v = fp.getName();
-							u = v + "." + u;
-							cFile = fp;
-						}
-					//} finally {
-
-					//}
-				} 
-			 * 
-			  
-			
-			
-			objClass = objClass.substring(0, objClass.length() - 6); // drop .class
-			objClass = objClass.replace("\\",  ".");
-			objClass = objClass.replace("/",  ".");
-			
-			try {
-				
-				cls = loader.loadClass(objClass);				
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-*/
 		
 		//Class<?> curClass = cls;
 		Class<?> curClass = Class.forName(objClass);
