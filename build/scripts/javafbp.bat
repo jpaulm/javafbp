@@ -84,6 +84,7 @@ set CMD_LINE_ARGS=%*
 
 set CLASSPATH=%APP_HOME%\lib\javafbp-4.1.4.jar;%APP_HOME%\lib\gson-2.8.6.jar
 
+
 @rem Execute javafbp
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JAVAFBP_OPTS%  -classpath "%CLASSPATH%" com.jpaulmorrison.fbp.core.engine.DummyMain %CMD_LINE_ARGS%
 
