@@ -33,7 +33,7 @@ apply plugin: 'java-library'
    
 }
 
-version = '4.1.4'
+version = '4.1.5'
 
 group = 'com.jpaulmorrison'
 
@@ -63,6 +63,8 @@ repositories {
 
 dependencies { 	
 	implementation ('com.google.code.gson:gson:2.8.6')
+	implementation ('mysql:mysql-connector-java:8.0.21')
+	
  }  
 	
 java {       
@@ -72,7 +74,7 @@ java {
 
 
 jar {
-    archiveVersion = '4.1.4'
+    archiveVersion = '4.1.5'
     manifest {
        attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
              
@@ -136,7 +138,7 @@ description = "Create default maven directory structure"
         
             groupId = 'com.jpaulmorrison'
             artifactId = 'javafbp'       
-            version = '4.1.4'
+            version = '4.1.5'
            
             from components.java
            

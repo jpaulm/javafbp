@@ -32,8 +32,8 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 /** Component to count a stream of packets, and output the result on the COUNT port.
 */
 @ComponentDescription("Counts stream of packets and outputs result")
-@InPort(value = "IN", description = "Incoming stream", type = String.class)
-@OutPorts({ @OutPort(value = "OUT", description = "Stream being passed through", type = String.class, optional = true),
+@InPort(value = "IN", description = "Incoming stream")
+@OutPorts({ @OutPort(value = "OUT", description = "Stream being passed through", optional = true),
     @OutPort(value = "COUNT", description = "Count packet to be output", type = String.class) })
 @MustRun
 public class Counter extends Component {
