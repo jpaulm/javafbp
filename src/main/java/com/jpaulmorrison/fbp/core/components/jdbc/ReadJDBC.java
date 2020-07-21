@@ -81,8 +81,13 @@ public class ReadJDBC extends Component {
 		fldsPort.close();
 
 		Gson gson = new Gson();
-		
-		FieldInfo[] fiArray = gson.fromJson(fldsStr, FieldInfo[].class);
+		FieldInfo[] fiArray = null;
+		try {
+		fiArray = gson.fromJson(fldsStr, FieldInfo[].class);
+		} catch (Exception e){
+			System.out.println("Error parsing JSON string");
+			return;
+		}
 
 		try (
 
@@ -93,7 +98,9 @@ public class ReadJDBC extends Component {
 
 						iipContents[0] + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", user, pswd);
 				
-				Statement stmt = conn.createStatement();) {
+				Statement stmt = conn.createStatement();
+				
+		) {
 		
 			String strSelect = "select * from " + iipContents[1];
 			System.out.println("The SQL statement is: \"" + strSelect + "\"\n"); // Echo
