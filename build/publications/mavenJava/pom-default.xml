@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jpaulmorrison</groupId>
   <artifactId>javafbp</artifactId>
-  <version>4.1.4</version>
+  <version>4.1.5</version>
   <name>JavaFBP</name>
   <description>Java implementation of Flow-Based Programming</description>
   <url>https://github.com/jpaulm/javafbp</url>
@@ -36,6 +36,12 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.6</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.21</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

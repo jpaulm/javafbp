@@ -162,7 +162,7 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 			    	// iterate through fiArray
 			    	String cma = ""; 
 			    	for (int i = 0; i < fiArray.length; i++) {
-			    		String colName = fiArray[i].colName;
+			    		//String colName = fiArray[i].colName;
 						String objField = fiArray[i].objField;
 										
 						//System.out.println("JDBC: " + colName + " " + hmColumns.get(colName));
