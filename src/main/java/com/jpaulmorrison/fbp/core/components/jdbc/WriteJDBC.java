@@ -158,27 +158,38 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 			    		System.out.println("Unexpected class in incoming IP: " + o.getClass());
 			    		continue;
 			    	}
-			    	String sqlInsert = "insert into " + iipContents[1] + " values (";
-			    	// iterate through fiArray
+			    	String sqlInsert = "insert into " + iipContents[1] + "(";
+			    	String sqlValues = " values(";
+			    	// iterate through hmColumns
 			    	String cma = ""; 
-			    	for (int i = 0; i < fiArray.length; i++) {
-			    		//String colName = fiArray[i].colName;
-						String objField = fiArray[i].objField;
-										
-						//System.out.println("JDBC: " + colName + " " + hmColumns.get(colName));
-						
-						//System.out.println("Obj: " + objField + " " + hmFields.get(objField));
-						
-						//String objFType = hmFields.get(objField).toString();
-						
-						Field field = curClass.getDeclaredField(objField);						
-						sqlInsert += cma + "\"" + field.get(o).toString() + "\"";
-						cma = ",";
-			    	} 
-			    	sqlInsert += ")";
+					for (String col : hmColumns.keySet()) {
+						Field field = null;
+						for (int i = 0; i < fiArray.length; i++) {
+							// String colName = fiArray[i].colName;
+							String objField = fiArray[i].objField;
+							if (fiArray[i].colName.equals(col)) {
+								field = curClass.getDeclaredField(objField);
+								break;								
+							}
+						}
+
+							if (field == null) {
+								System.out.println("Table column \"" + col + 
+										"\" not found in Field Info:" +
+										fldsStr);
+								return;										
+							}
+														
+							sqlInsert += cma + col;
+							sqlValues += cma + "\"" + field.get(o).toString() + "\"";
+							cma = ",";						 
+					}
+					sqlInsert += ")";
+			    	sqlValues += ")";
 			    	 //String sqlInsert = "insert into sales values (3001, 'Gone Fishing', 'Kumar', 'CAD11.11', 11)";
-			        System.out.println("The SQL statement is: " + sqlInsert + "\n");  // Echo for debugging
-			        int countInserted = stmt.executeUpdate(sqlInsert);
+			        System.out.println("The SQL statement is: " + sqlInsert + " " +
+			    	 sqlValues + "\n");  // Echo for debugging
+			        int countInserted = stmt.executeUpdate(sqlInsert + " " + sqlValues);
 			        if (countInserted != 1) {
 			        	System.out.println("Couldn't insert record:\n");
 			        	System.out.println("... " + sqlInsert);
