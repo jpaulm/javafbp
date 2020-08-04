@@ -94,7 +94,7 @@ JavaFBP recommends using a small connection size for debugging, and a larger one
  
 ### Running on DOS
 
-Essentially, you will have downloaded the JavaFBP jar file earlier, so position to your project, and enter the following into the DOS window:
+You will have downloaded the JavaFBP jar file earlier, so position to your project, and enter the following into the DOS window:
 
       java -cp "<JavaFBP directory>/javafbp-x.y.z.jar;." <program class name> 
       
@@ -107,6 +107,8 @@ Here is a test command you can run:
 Do a `cd` command to your downloaded JavaFBP project, then enter
  
      java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
+     
+## Currently we have a problem running JavaFBP apps in DOS - they run fine under Eclipse, but the `java` command seems to be having problems!     
 
 ### Running on *nix
       
@@ -118,12 +120,12 @@ Go to `Properties/Java Build Path` for your project; click on `Add External Jars
 
 Select `Debug` for your project.
 
-
+<!--
 ### Set up some data   
 
 Nearly forgot - we need to give it some data: ReadFile handles any sequential file.  In this case the file reader's IIP names at a CSV file (https://en.wikipedia.org/wiki/Comma-separated_values ), and the selected records will appear in a separate window. 
 
-   
+-->   
 
 ## Checking your setup
  
