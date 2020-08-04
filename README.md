@@ -72,7 +72,7 @@ Then import a generated project in Eclipse, right (ctrl for OSX) click on the pr
 
 You may have to go to the project Properties and select Java Build Path/Source; remove whatever is there and select `JavaFBP/src/main/java`; then close Eclipse, and reopen it.
 
-
+<!--
 ## Building and/or running from command line
 
 The latest jar file can simply be downloaded from the latest release in JavaFBP GitHub Releases, or it can be rebuilt , by running the following command:
@@ -86,23 +86,25 @@ As a result a `javafbp-x.x.x.jar` file will be created in the `build/libs` direc
 The generated code shown above is a standard JavaFBP network, and can be executed as described below.
 
 -->
-
 ## Running a network
 
 ### Default connection size
 
-JavaFBP recommends using a small connection size for debugging, and a larger one for production.  Currently this is coded in `Network.java - defaultCapacity` (https://github.com/jpaulm/javafbp/blob/master/src/main/java/com/jpaulmorrison/fbp/core/engine/Network.java) to select the debug size.  This should be changed when going into production.
-
+JavaFBP recommends using a small connection size for debugging, and a larger one for production.  In the latest version of JavaFBP, this is specified in the `<user>.JavaFBPProperties.xml` file - <defaultcapacity> tag.
+ 
 ### Running on DOS
 
-Essentially, you will have downloaded the JavaFBP jar file earlier, so position to the `bin` directory of your project, and enter the following into the DOS window:
+Essentially, you will have downloaded the JavaFBP jar file earlier, so position to your project, and enter the following into the DOS window:
 
       java -cp "<JavaFBP directory>/javafbp-x.y.z.jar;." <program class name> 
       
-where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**.
+where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**... or you can place **.;** in front of the jar file name.
 
-<program class name> should include the package ID, with periods instead of slashes, and the final `.class` should be dropped.
-
+<program class name> must be the fully qualified network name.  
+ 
+Here is a command you can run (replacing `x.y.z` by the latest version number):
+ 
+     java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
 
 ### Running on *nix
       
