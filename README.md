@@ -108,7 +108,7 @@ Do a `cd` command to your downloaded JavaFBP project, then enter
  
      java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
      
-#### Currently we have a problem running JavaFBP apps in DOS - they run fine under Eclipse, but the `java` command seems to be having problems!     
+#### Currently we have a problem running JavaFBP apps in DOS - they run fine under Eclipse, or if all components are in the JavaFBP jar file, but the `java` command seems to be having problems!     
 
 ### Running on *nix
       
