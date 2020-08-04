@@ -94,21 +94,25 @@ JavaFBP recommends using a small connection size for debugging, and a larger one
  
 ### Running on DOS
 
-You will have downloaded the JavaFBP jar file earlier, so position to your project, and enter the following into the DOS window:
+You will have downloaded the JavaFBP jar file earlier, so do a `gradle build` for your project, to make sure the compiled classes (`.class` files) are in the 'bin' directory.
+
+Now position the current directory to your own project, using `cd`, and enter the following into the DOS window:
 
       java -cp "<JavaFBP directory>/javafbp-x.y.z.jar;." <program class name> 
       
 where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**... or you can place **.;** in front of the jar file name.
 
 `Program class name` must be the fully qualified network name.  
+
+You must also make sure that `java` can find any class files that yor main line needs, by specifying the nwecssary jar files, and class directories using the `-cp/-classpath` parameter.
  
-Here is a test command you can run:
+Here is a test command you can run, using networks and components provided by the JavaFBP project:
 
 Do a `cd` command to your downloaded JavaFBP project, then enter
  
      java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
      
-#### Currently we have a problem running JavaFBP apps in DOS - they run fine under Eclipse, or if all components are in the JavaFBP jar file, but the `java` command seems to be having problems!     
+For your own project, you will probably have to add more directories to the `classpath` parameter - remember to provide the whole directory name.
 
 ### Running on *nix
       
