@@ -100,9 +100,11 @@ Essentially, you will have downloaded the JavaFBP jar file earlier, so position 
       
 where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**... or you can place **.;** in front of the jar file name.
 
-<program class name> must be the fully qualified network name.  
+`Program class name` must be the fully qualified network name.  
  
-Here is a command you can run (replacing `x.y.z` by the latest version number):
+Here is a test command you can run:
+
+Do a `cd` command to your downloaded JavaFBP project, then enter
  
      java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
 
