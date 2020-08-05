@@ -206,7 +206,12 @@ public class ReadJDBC extends Component {
 								+ "' " + hmColumns.get(colName) + " (target: '" + objField + "' "
 								+ hmFields.get(objField) + ")");
 					}
+					
+					try {
 					o = meth.invoke(rset, colName);
+					} catch (InvocationTargetException e) {
+						e.printStackTrace();
+					}
 
 					Field fd = curClass.getField(objField);
 					

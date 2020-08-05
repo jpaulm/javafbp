@@ -42,9 +42,9 @@ public class TestInfiniteQueue extends Network {
 
   public static void main(final String[] argv) throws Exception {
     // try this test 50 times!
-    for (int i = 0; i < 50; i++) {
+    //for (int i = 0; i < 50; i++) {
       new TestInfiniteQueue().go();
-    }
+   // }
   }
 
 }
