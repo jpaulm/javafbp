@@ -217,17 +217,18 @@ public class ReadJDBC extends Component {
 					
 					try {
 						fd.set(obj, o);
-					} catch (/*InvocationTargetException*/ Exception e) {
-						//System.out.println("Format mismatch - trying method: '" + getMethodName + "()' on '" + colName
-						//		+ "' " + hmColumns.get(colName) + " (target: '" + objField + "' "
-						//		+ hmFields.get(objField) + ")");
-						//MPrice mp = new MPrice("CAD" +  o);  //fudge
+					} catch (/*InvocationTargetException*/ Exception e) {						
 						String s = hmFields.get(objField).toString();
+						System.out.println("class is " + s);
 						s = s.substring(6);
 						//Object oo = Class.forName(s).newInstance();
 						Constructor<?> cons = Class.forName(s).getConstructor(cArg);
 						Object oo = cons.newInstance((String) o);
+						try {
 						fd.set(obj, oo);
+						} catch (/*InvocationTargetException*/ Exception e2) {	
+							e2.printStackTrace();
+						}
 					
 				}
 				}
