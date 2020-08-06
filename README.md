@@ -12,6 +12,8 @@ https://github.com/jpaulm/javafbp/tree/master/src/main/java/com/jpaulmorrison/fb
 
 For your own projects, include the JavaFBP jar file in the Build Path property for the project.
 
+Note: the `v4.1.6` in the source, `build/libs` and `Releases` has some additional diagnstics in `ReadJDBC` as compared with the Maven version.
+
 ## General
  
 General web site for "classical" FBP: 
