@@ -43,6 +43,8 @@ public class ReadJDBC extends Component {
 	
 	@Override
 	protected void execute() throws Exception {
+		
+		boolean debug = false;
 
 		Packet<?> pp = pswdPort.receive();
 
@@ -82,13 +84,22 @@ public class ReadJDBC extends Component {
 
 		Gson gson = new Gson();
 		FieldInfo[] fiArray = null;
+		if (debug)
+			System.out.println(fldsStr);
 		try {
 		fiArray = gson.fromJson(fldsStr, FieldInfo[].class);
 		} catch (Exception e){
 			System.out.println("Error parsing JSON string");
 			return;
 		}
-
+		if (debug)
+			for (int i = 0; i < fiArray.length; i++) {
+				String colName = fiArray[i].colName;
+				String objField = fiArray[i].objField;
+				System.out.println(colName + ", " + objField);
+			}
+		
+		
 		try (
 
 				// Step 1: Allocate a database 'Connection' object
@@ -165,9 +176,10 @@ public class ReadJDBC extends Component {
 					String colName = fiArray[i].colName;
 					String objField = fiArray[i].objField;
 									
-					//System.out.println("JDBC: " + colName + " " + hmColumns.get(colName));
-					
-					//System.out.println("Obj: " + objField + " " + hmFields.get(objField));
+					if (debug) {
+						System.out.println("JDBC: " + colName + " " + hmColumns.get(colName));					
+						System.out.println("Obj: " + objField + " " + hmFields.get(objField));
+					}
 					
 					String objFType = hmFields.get(objField).toString(); 
 					
@@ -217,9 +229,9 @@ public class ReadJDBC extends Component {
 					
 					try {
 						fd.set(obj, o);
-					} catch (/*InvocationTargetException*/ Exception e) {						
+					} catch (Exception e) {						
 						String s = hmFields.get(objField).toString();
-						System.out.println("class is " + s);
+						//System.out.println("class is " + s); 
 						s = s.substring(6);
 						//Object oo = Class.forName(s).newInstance();
 						Constructor<?> cons = Class.forName(s).getConstructor(cArg);

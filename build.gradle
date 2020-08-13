@@ -74,12 +74,11 @@ java {
 
 
 jar {
-    archiveVersion = '4.1.6'
     manifest {
-       attributes 'Implementation-Title': 'JavaFBP', 'Implementation-Version': archiveVersion,
+       attributes ('Implementation-Title': 'JavaFBP', 'Implementation-Version': project.version,
              
-        "Class-Path": configurations.compileClasspath.collect { it.getName() }.join(' '),       
-         'Main-Class' : mainClassName
+        'Class-Path': configurations.compileClasspath.collect { it.getName() }.join(' '),       
+         'Main-Class' : mainClassName)
     }
       
        
