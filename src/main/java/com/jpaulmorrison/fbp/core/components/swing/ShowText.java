@@ -17,15 +17,17 @@
  */
 package com.jpaulmorrison.fbp.core.components.swing;
 
-
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 
 import com.jpaulmorrison.fbp.core.engine.Component;
 import com.jpaulmorrison.fbp.core.engine.ComponentDescription;
@@ -37,90 +39,92 @@ import com.jpaulmorrison.fbp.core.engine.OutPort;
 import com.jpaulmorrison.fbp.core.engine.OutputPort;
 import com.jpaulmorrison.fbp.core.engine.Packet;
 
-
 /**
- * Component to write data to a Swing pane. The title comes in at another port. It is specified as "must run". 
- * Incoming packets are sent to output port.
+ * Component to write data to a Swing pane. The title comes in at another port.
+ * It is specified as "must run". Incoming packets are sent to output port.
  */
 @ComponentDescription("Displays packets on Swing EditorPane")
 @MustRun
 @InPorts({ @InPort(value = "IN", description = "Packets to be displayed", type = String.class),
-    @InPort(value = "TITLE", description = "Title string", type = String.class) })
+		@InPort(value = "TITLE", description = "Title string", type = String.class) })
 @OutPort(value = "OUT", optional = true, description = "Output port, if connected", type = String.class)
 public class ShowText extends Component {
 
-  
-  private InputPort inport, titleport;
+	private InputPort inport, titleport;
 
-  private JFrame jframe;
+	private JFrame jframe;
 
-  private OutputPort outport;
+	private OutputPort outport;
 
-  private String title = "Data Pane";
+	private String title = "Data Pane";
 
-  private JEditorPane jEditorPane;
+	JTextPane pane = null;
+	DefaultStyledDocument doc = new DefaultStyledDocument();
+	StyleContext sc = new StyleContext();
 
-  @Override
-  protected void execute() {
-    Packet tp = titleport.receive();
-    if (tp != null) {
-      title = (String) tp.getContent();
-      drop(tp);
-      titleport.close();
-    }
+	Style style = sc.getStyle(StyleContext.DEFAULT_STYLE);
 
-    // start up the swing ui in a separate thread ....
-    try {
-      SwingUtilities.invokeAndWait(new Runnable() {
+	@Override
+	protected void execute() {
 
-        public void run() {
-          jframe = new JFrame(title);
-          jEditorPane = new JEditorPane("text/plain", " ");
-          jEditorPane.setEditable(false);
-          JScrollPane scrollPane = new JScrollPane(jEditorPane);
-          jframe.add(scrollPane);
-          jframe.setSize(600, 400);
-          jframe.setVisible(true);
-          jframe.setLocation(100, 50);
-          jframe.addWindowListener(new WindowAdapter() {
+		Packet<?> tp = titleport.receive();
+		if (tp != null) {
+			title = (String) tp.getContent();
+			drop(tp);
+			titleport.close();
+		}
 
-            @SuppressWarnings("unused")
-            @Override
-            public void windowClosing(final WindowEvent ev) {
-              jframe.dispose();
-            }
-          });
-        }
-      });
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    } catch (InvocationTargetException e) {
-      e.printStackTrace();
-    }
+		jframe = new JFrame(title);
+		// pane = new JTextPane("text/plain", "");
 
-    String contents = "";
-    Packet p;
-    while ((p = inport.receive()) != null) {
-      String s = "" + p.getContent();
-      contents += s + "\n";
-      if (outport.isConnected()) {
-        outport.send(p);
-      } else {
-        drop(p);
-      }
-      longWaitStart(5.0); // timeout if over 5 secs
-      jEditorPane.setText(contents);
-      jframe.update(jframe.getGraphics());
-      longWaitEnd();
-    }
-  }
+		pane = new JTextPane(doc);
 
-  @Override
-  protected void openPorts() {
-    inport = openInput("IN");
+		pane.setEditable(false);
 
-    outport = openOutput("OUT");
-    titleport = openInput("TITLE");
+		JScrollPane scrollPane = new JScrollPane(pane);
+		jframe.add(scrollPane);
+		jframe.setSize(600, 400);
+		jframe.setVisible(true);
+		jframe.setLocation(100, 50);
+		jframe.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(final WindowEvent ev) {
+				jframe.dispose();
+			}
+		});
 
-  }
+		Packet<?> p;
+
+		// DefaultStyledDocument doc = new DefaultStyledDocument();
+
+		StyleConstants.setForeground(style, Color.BLUE);
+		StyleConstants.setFontSize(style, 14);
+
+		while ((p = (Packet<?>) inport.receive()) != null) {
+			String s = (String) p.getContent() + '\n';
+			try {
+				doc.insertString(doc.getLength(), s, style);
+				doc.setCharacterAttributes(0, doc.getLength(), style, false);
+			} catch (BadLocationException exc) {
+				exc.printStackTrace();
+			}
+
+			if (outport.isConnected()) {
+				outport.send(p);
+			} else {
+				drop(p);
+			}
+
+		}
+
+	}
+
+	@Override
+	protected void openPorts() {
+		inport = openInput("IN");
+
+		outport = openOutput("OUT");
+		titleport = openInput("TITLE");
+
+	}
 }
