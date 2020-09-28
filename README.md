@@ -1,5 +1,7 @@
-JavaFBP  - Java Implementation of "Classical" Flow-Based Programming (FBP)
+JavaFBP 
 ===
+
+### Java Implementation of "Classical" Flow-Based Programming (FBP)  
 
 General web site on Flow-Based Programming: https://jpaulm.github.io/fbp/ .
 
