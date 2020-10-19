@@ -1,14 +1,32 @@
 package com.jpaulmorrison.fbp.core.components.jdbc;
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
-import java.sql.*;
+/*
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+*/
+
 import java.util.HashMap;
-
+ 
 import com.google.gson.Gson;
 import com.jpaulmorrison.fbp.core.engine.Component; // Using 'Connection', 'Statement' and 'ResultSet' classes in java.sql package
 import com.jpaulmorrison.fbp.core.engine.ComponentDescription;
@@ -72,7 +90,7 @@ public class ReadJDBC extends Component {
 		
 		
 		//Class<?> curClass = cls;
-		Class<?> curClass = Class.forName(objClass);
+		Class<?> dataClass = Class.forName(objClass);
 		
 		String[] iipContents = dbTable.split("!", 2);
 
@@ -100,36 +118,77 @@ public class ReadJDBC extends Component {
 			}
 		
 		
-		try (
+		String userName = System.getProperty("user.name");
+		File f = new File("C:\\Users\\" + userName + "\\.m2\\repository\\mysql\\mysql-connector-java\\8.0.21\\mysql-connector-java-8.0.21.jar");
+		
+		URL[] urls = {f.toURI().toURL()};
+		URLClassLoader ucl = new URLClassLoader(urls);
+		Class<?> conn_cls = ucl.loadClass("java.sql.Connection");
+		Class<?> dm_cls = ucl.loadClass("java.sql.DriverManager");
+		Class<?> stmt_cls = ucl.loadClass("java.sql.Statement");
+		Class<?> rs_cls = ucl.loadClass("java.sql.ResultSet");
+		Class<?> rsmd_cls = ucl.loadClass("java.sql.ResultSetMetaData");
+		//Class<?> se_cls = ucl.loadClass("java.sql.SQLException");
+		
+		Class<?>[] carr = {String.class, String.class, String.class};
+		//Object conn = conn_cls.newInstance();
+		
+		
+		
+		try  
+		{
+				Method gc = dm_cls.getMethod("getConnection", carr);
+				Object conn = gc.invoke(null, iipContents[0] + 
+						"?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", 
+						user, pswd);                         // o1 is a Connection
+				
+				Method cs = conn_cls.getMethod("createStatement");
+				Object stmt = cs.invoke(conn);                   //o2 is a Statement 
+				//@SuppressWarnings("resource")
+				//Statement stmt = (Statement) o2;
 
 				// Step 1: Allocate a database 'Connection' object
-				Connection conn = DriverManager.getConnection(
+				//Connection conn = DriverManager.getConnection(
 						// "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
 						// "root", pswd); // For MySQL only
 
-						iipContents[0] + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", user, pswd);
+				//		iipContents[0] + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", user, pswd);
 				
-				Statement stmt = conn.createStatement();
+				//Statement stmt = conn.createStatement();
 				
-		) {
+				//		) 
+ 
 		
 			String strSelect = "select * from " + iipContents[1];
-			System.out.println("The SQL statement is: \"" + strSelect + "\"\n"); // Echo
-																					// For
-																					// debugging
+			System.out.println("The SQL statement is: \"" + strSelect + "\"\n");  
 			
-			ResultSet rset = stmt.executeQuery(strSelect);
+			Class<?>[] carr2 = {String.class};
+			
+			Method eq = stmt_cls.getMethod("executeQuery", carr2);	
+			
+			Object rset2 = eq.invoke(stmt, strSelect);  // o3 is ResultSet
+			
+			//ResultSet rset = stmt.executeQuery(strSelect);
 
-			ResultSetMetaData rsmd;
+			Object rsmd2;
 			int numberOfColumns = 0;
 			HashMap<String, String> hmColumns = new HashMap<String, String>();
 			try {
-				rsmd = rset.getMetaData();
-				numberOfColumns = rsmd.getColumnCount();
+				Method gmd = rs_cls.getMethod("getMetaData");
+		    	rsmd2 = gmd.invoke(rset2);
+		    	//rsmd = rset.getMetaData();
+		    	Method gcc = rsmd_cls.getMethod("getColumnCount");
+		    	numberOfColumns  = (int) gcc.invoke(rsmd2);
+				//numberOfColumns = rsmd.getColumnCount();
+		    	Method gcn = rsmd_cls.getMethod("getColumnName", int.class);
+		    	Method gct = rsmd_cls.getMethod("getColumnTypeName", int.class);
+		    	
 				for (int i = 1; i <= numberOfColumns; i++) {
-					hmColumns.put(rsmd.getColumnName(i), rsmd.getColumnTypeName(i));
+					String colName  = (String) gcn.invoke(rsmd2, i);
+					String colTypeName  = (String) gct.invoke(rsmd2, i);
+					hmColumns.put(colName, colTypeName);
 				}
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -137,27 +196,29 @@ public class ReadJDBC extends Component {
 			// number of columns should match number of fields in curClass - so
 			// let's test...
 			
-			int n = curClass.getFields().length;
-			if (n != numberOfColumns) {
+			int n2= dataClass.getFields().length;
+			if (n2 != numberOfColumns) {
 				System.out.println(
-						"Number of class fields - " + n + " does not match number of columns - " + numberOfColumns);
+						"Number of class fields - " + n2 + " does not match number of columns - " + numberOfColumns);
 				return;
 			}
 			
 			HashMap<String, Class<?>> hmFields = new HashMap<String, Class<?>>();
 			
-			for (Field fd: curClass.getFields()) {
+			for (Field fd: dataClass.getFields()) {
 				hmFields.put(fd.getName(), fd.getType());
 			}
 
 			// iterate through rows
 
 			int rowCount = 0;
-			while (rset.next()) { // Move the cursor to the next row, return
+			Method next = rs_cls.getMethod("next");
+	    	boolean nxt = (boolean) next.invoke(rset2);
+			while (nxt) { // Move the cursor to the next row, return
 									// false if no more row
 				Object obj = null;
 				try {
-					obj = curClass.newInstance();
+					obj = dataClass.newInstance();
 				} catch (InstantiationException e) {
 					// handle 1
 				} catch (IllegalAccessException e) {
@@ -188,12 +249,12 @@ public class ReadJDBC extends Component {
 								
 					if (objFType.startsWith("class ")) {
 						int k = objFType.lastIndexOf(".");
-						String s = objFType.substring(k + 1);
-						if (s.equals("BigDecimal")) 
-								s = "Decimal";
-						getMethodName = "get" + s;
+						String s2 = objFType.substring(k + 1);
+						if (s2.equals("BigDecimal")) 
+								s2 = "Decimal";
+						getMethodName = "get" + s2;
 						try {
-							ResultSet.class.getMethod(getMethodName, cArg);
+							rs_cls.getMethod(getMethodName, cArg);
 						} catch (NoSuchMethodException e)
 						{
 							getMethodName = "getString";
@@ -212,7 +273,7 @@ public class ReadJDBC extends Component {
 					Object o = null;
 					
 					try {
-						meth = ResultSet.class.getMethod(getMethodName, cArg);
+						meth = rs_cls.getMethod(getMethodName, cArg);
 					} catch (NoSuchMethodException e) {
 						System.out.println("Missing method - trying method: '" + getMethodName + "()' on '" + colName
 								+ "' " + hmColumns.get(colName) + " (target: '" + objField + "' "
@@ -220,21 +281,21 @@ public class ReadJDBC extends Component {
 					}
 					
 					try {
-					o = meth.invoke(rset, colName);
+					o = meth.invoke(rset2, colName);
 					} catch (InvocationTargetException e) {
 						e.printStackTrace();
 					}
 
-					Field fd = curClass.getField(objField);
+					Field fd = dataClass.getField(objField);
 					
 					try {
 						fd.set(obj, o);
 					} catch (Exception e) {						
-						String s = hmFields.get(objField).toString();
+						String s2 = hmFields.get(objField).toString();
 						//System.out.println("class is " + s); 
-						s = s.substring(6);
+						s2 = s2.substring(6);
 						//Object oo = Class.forName(s).newInstance();
-						Constructor<?> cons = Class.forName(s).getConstructor(cArg);
+						Constructor<?> cons = Class.forName(s2).getConstructor(cArg);
 						Object oo = cons.newInstance((String) o);
 						try {
 						fd.set(obj, oo);
@@ -246,22 +307,22 @@ public class ReadJDBC extends Component {
 				}
 				outPort.send(create(obj));
 				++rowCount;
+				nxt = (boolean) next.invoke(rset2);
 			}
 
 			System.out.println("Total number of records = " + rowCount);
 			// outPort.send(create("Total number of records = " + rowCount));
 			 
-		} catch (SQLException ex) {
-			//System.out.println("SQL Exception");
-			ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
 			//System.out.println("Class Not Found Exception");
 			ex.printStackTrace();
-		}
-		catch (InvocationTargetException ex) {
+		} catch (InvocationTargetException ex) {
 			//System.out.println("Class Not Found Exception");
 			ex.printStackTrace();
-		}
+		} catch (Exception ex) {
+			//System.out.println("SQL Exception");
+			ex.printStackTrace();
+		} 
 
 		// Step 5: Close conn and stmt - Done automatically by
 		// try-with-resources (JDK 7)

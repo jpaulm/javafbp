@@ -42,13 +42,13 @@ public class MergeandSort extends Network {
     component("_Sort", Sort.class);
     component("_Generate_1st_group", GenerateTestData.class);
     component("_Generate_2nd_group", GenerateTestData.class);
-    initialize("100 ", component("_Generate_1st_group"), port("COUNT"));
+    initialize("10", component("_Generate_1st_group"), port("COUNT"));
     connect(component("_Generate_2nd_group"), port("OUT"), component("_Sort"), port("IN"));
     connect(component("_Generate_1st_group"), port("OUT"), component("_Sort"), port("IN"));
     //connect(component("_Write_text_to_pane"), port("OUT"), component("_Discard"), port("IN"));
     initialize("Sorted Data", component("_Write_text_to_pane"), port("TITLE"));
     connect(component("_Sort"), port("OUT"), component("_Write_text_to_pane"), port("IN"));
-    initialize("50", component("_Generate_2nd_group"), port("COUNT"));
+    initialize("5", component("_Generate_2nd_group"), port("COUNT"));
 
   }
 
