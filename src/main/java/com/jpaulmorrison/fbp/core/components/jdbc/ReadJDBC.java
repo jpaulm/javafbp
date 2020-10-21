@@ -1,29 +1,15 @@
 package com.jpaulmorrison.fbp.core.components.jdbc;
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-
-/*
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-*/
 
 import java.util.HashMap;
  
@@ -119,8 +105,37 @@ public class ReadJDBC extends Component {
 		
 		
 		String userName = System.getProperty("user.name");
-		File f = new File("C:\\Users\\" + userName + "\\.m2\\repository\\mysql\\mysql-connector-java\\8.0.21\\mysql-connector-java-8.0.21.jar");
 		
+		// Determine latest version of mysql-connector-java
+		
+		String command =
+				  "curl -X GET https://search.maven.org/solrsearch/select?q=a:\"mysql-connector-java\"&rows=20&wt=json";
+		ProcessBuilder processBuilder = new ProcessBuilder(command.split(" "));
+		processBuilder.directory(new File("C:/Users/" + userName + "/workspace/"));
+		Process process = processBuilder.start();
+		InputStream instr = process.getInputStream();
+		String data = "";
+		int i2 = -1;
+		while (-1 != (i2 = instr.read())) {	      
+	            char c = (char) i2;
+	            data += c;
+	         }
+		
+		String s = "\"latestVersion\":\"";
+		int m = data.indexOf(s);
+		data = data.substring(m + s.length());
+		int n = data.indexOf("\"");
+		String v = data.substring(0, n);
+		
+		// Download latest version of mysql-connector-java jar file
+		
+		command = "curl -O http://search.maven.org/remotecontent?filepath=mysql/mysql-connector-java/" + v + "/mysql-connector-java-" + v + ".jar";
+		processBuilder = processBuilder.command(command.split(" "));
+		//processBuilder.directory(new File("C:/Users/" + userName + "/workspace/"));
+		process = processBuilder.start();
+
+		File f = new File("mysql-connector-java-" + v + ".jar");
+						
 		URL[] urls = {f.toURI().toURL()};
 		URLClassLoader ucl = new URLClassLoader(urls);
 		Class<?> conn_cls = ucl.loadClass("java.sql.Connection");
