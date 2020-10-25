@@ -41,6 +41,12 @@ In your component source, you will need the following import statement:
 Note: the **core** level was added in the last repackaging of JavaFBP.
 
 -->
+
+## MySQL Support
+
+Two compnents are available for reading and writing MySQL tables, respectively: `ReadJDBC` and `WriteJDBC` in `core.components.jdbc`.  These dymaically load the most recent MySQL jar file, and use reflection.
+
+If you get a message saying "No suitable driver found", try restarting the MySQL service in `services.msc`.
  
 ## JavaFBP-WebSockets
 
