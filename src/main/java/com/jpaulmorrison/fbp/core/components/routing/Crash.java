@@ -38,7 +38,7 @@ public class Crash extends Component {
   @SuppressWarnings("null")
   @Override
   protected void execute() {
-    Packet p = inport.receive();
+    Packet<?> p = inport.receive();
     Object foo = new Object();
     System.err.println("Foo");
     foo = null;

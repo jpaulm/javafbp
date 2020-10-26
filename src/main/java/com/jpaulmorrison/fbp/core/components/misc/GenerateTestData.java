@@ -63,7 +63,7 @@ public class GenerateTestData extends Component {
     for (int i = ct; i > 0; i--) {
       String s = String.format("%1$06d", i) + "abcd";
 
-      Packet p = create(s);
+      Packet<?> p = create(s);
       outport.send(p);
 
     }

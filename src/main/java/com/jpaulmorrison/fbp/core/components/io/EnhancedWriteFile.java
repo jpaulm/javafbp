@@ -65,7 +65,7 @@ public class EnhancedWriteFile extends Component {
   @Override
   protected void execute() {
     FileOutputStream out = null;
-    Packet dp = destination.receive();
+    Packet<?> dp = destination.receive();
     if (dp == null) {
       return;
     }
@@ -86,7 +86,7 @@ public class EnhancedWriteFile extends Component {
     int bsp = 0;
 
     drop(dp);
-    Packet p;
+    Packet<?> p;
 
     while ((p = inport.receive()) != null) {
       char[] stringArray = ((String) p.getContent()).toCharArray();

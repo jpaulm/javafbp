@@ -45,6 +45,7 @@ public class ReadJDBC extends Component {
 	private InputPort fldsPort;
 
 	
+	
 	@Override
 	protected void execute() throws Exception {
 		
@@ -111,7 +112,7 @@ public class ReadJDBC extends Component {
 		String command =
 				  "curl -X GET https://search.maven.org/solrsearch/select?q=a:\"mysql-connector-java\"&rows=20&wt=json";
 		ProcessBuilder processBuilder = new ProcessBuilder(command.split(" "));
-		processBuilder.directory(new File("C:/Users/" + userName + "/workspace/"));
+		processBuilder.directory(new File("C:/Users/" + userName));
 		Process process = processBuilder.start();
 		InputStream instr = process.getInputStream();
 		String data = "";
@@ -148,36 +149,25 @@ public class ReadJDBC extends Component {
 		Class<?>[] carr = {String.class, String.class, String.class};
 		//Object conn = conn_cls.newInstance();
 		
-		
+		Class<?>[] carr2 = {String.class};
 		
 		try  
 		{
 				Method gc = dm_cls.getMethod("getConnection", carr);
-				Object conn = gc.invoke(null, iipContents[0] + 
-						"?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", 
-						user, pswd);                         // o1 is a Connection
+				String connStr = iipContents[0] + 
+						"?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC";
+				Object conn = gc.invoke(null, connStr, 
+						user, pswd);                         
 				
 				Method cs = conn_cls.getMethod("createStatement");
-				Object stmt = cs.invoke(conn);                   //o2 is a Statement 
-				//@SuppressWarnings("resource")
-				//Statement stmt = (Statement) o2;
-
-				// Step 1: Allocate a database 'Connection' object
-				//Connection conn = DriverManager.getConnection(
-						// "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-						// "root", pswd); // For MySQL only
-
-				//		iipContents[0] + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC", user, pswd);
+				Object stmt = cs.invoke(conn);                   
 				
-				//Statement stmt = conn.createStatement();
-				
-				//		) 
  
 		
 			String strSelect = "select * from " + iipContents[1];
 			System.out.println("The SQL statement is: \"" + strSelect + "\"\n");  
 			
-			Class<?>[] carr2 = {String.class};
+			
 			
 			Method eq = stmt_cls.getMethod("executeQuery", carr2);	
 			
@@ -233,7 +223,8 @@ public class ReadJDBC extends Component {
 									// false if no more row
 				Object obj = null;
 				try {
-					obj = dataClass.newInstance();
+					Constructor<?> cons = dataClass.getConstructor();					
+					obj = cons.newInstance(); 
 				} catch (InstantiationException e) {
 					// handle 1
 				} catch (IllegalAccessException e) {

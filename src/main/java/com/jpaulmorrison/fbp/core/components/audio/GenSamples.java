@@ -105,7 +105,7 @@ public class GenSamples extends Component {
         }
       }
 
-      String s = new Integer(x).toString();
+      //String s = Integer.toString(x);
       //traceport.send(create(s));
 
       /*

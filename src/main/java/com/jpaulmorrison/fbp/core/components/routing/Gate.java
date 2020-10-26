@@ -47,7 +47,7 @@ public class Gate extends Component {
   @Override
   protected void execute() {
     // receive trigger
-    Packet tp = trigger.receive();
+    Packet<?> tp = trigger.receive();
     if (tp == null) {
       return;
     }
@@ -56,7 +56,7 @@ public class Gate extends Component {
 
     System.out.println("got trigger");
 
-    Packet rp = in.receive();
+    Packet<?> rp = in.receive();
     System.out.println("rp = '" + rp + "'");
 
     if (rp == null) {
@@ -66,7 +66,7 @@ public class Gate extends Component {
 
     // pass output
     Object o = rp.getContent();
-    Packet p = create(o);
+    Packet<?> p = create(o);
     out.send(p);
     drop(rp);
     // }

@@ -80,7 +80,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/javafbp-4.1.7.jar:$APP_HOME/lib/gson-2.8.6.jar
+CLASSPATH=$APP_HOME/lib/javafbp-4.1.8.jar:$APP_HOME/lib/gson-2.8.6.jar
 
 
 # Determine the Java command to use to start the JVM.

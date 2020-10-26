@@ -44,7 +44,7 @@ public class Copy extends Component {
 
   @Override
   protected void execute() {
-    Packet p;
+    Packet<?> p;
     while ((p = inport.receive()) != null) {
       outport.send(p);
     }

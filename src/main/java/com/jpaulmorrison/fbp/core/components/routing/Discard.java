@@ -39,7 +39,7 @@ public class Discard extends Component {
 
   @Override
   protected void execute() {
-    Packet p = inport.receive();
+    Packet<?> p = inport.receive();
     // while ((p = inport.receive()) != null) {
     drop(p);
     // }

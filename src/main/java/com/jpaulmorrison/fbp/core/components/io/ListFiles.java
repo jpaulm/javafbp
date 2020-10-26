@@ -19,12 +19,6 @@ package com.jpaulmorrison.fbp.core.components.io;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.util.Date;
 
 import com.jpaulmorrison.fbp.core.engine.Component;
