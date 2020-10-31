@@ -26,14 +26,13 @@ allprojects {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
-//apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'java-library'
    
 }
 
-version = '4.1.9'
+version = '4.1.11'
 
 group = 'com.jpaulmorrison'
 
@@ -62,9 +61,8 @@ repositories {
 
 
 dependencies { 	
-	implementation ('com.google.code.gson:gson:2.8.6')
-	//implementation ('mysql:mysql-connector-java:8.0.21')
-	
+	compileOnly 'com.google.code.gson:gson:2.8.6'
+	compileOnly 'mysql:mysql-connector-java:8.0.22'  
  }  
 	
 java {       
@@ -86,11 +84,11 @@ jar {
     archiveBaseName = project.name
     from sourceSets.main.output       
       
-    dependsOn configurations.compileClasspath
+    //dependsOn configurations.compileClasspath
    
-    from {       
-      configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }  
-      }
+   // from {       
+   //  configurations.compileClasspath.findAll {  it.name.endsWith('jar')  }.collect {   zipTree(it)  }  
+   //  }
     
        
 }
@@ -137,7 +135,7 @@ description = "Create default maven directory structure"
         
             groupId = 'com.jpaulmorrison'
             artifactId = 'javafbp'       
-            version = '4.1.9'
+            version = '4.1.11'
            
             from components.java
            
