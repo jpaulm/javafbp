@@ -118,7 +118,7 @@ Here is a test command you can run, using networks and components provided by th
 
 Do a `cd` command to your downloaded JavaFBP project, then enter
  
-     java -cp .;build/libs/javafbp-x.y.z.jar com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
+     java -cp ".;build/libs/javafbp-x.y.z.jar" com.jpaulmorrison.fbp.resourcekit.examples.networks.Copy1    
      
 For your own project, you will probably have to add more directories to the `classpath` parameter - remember to provide the whole directory name.
 
