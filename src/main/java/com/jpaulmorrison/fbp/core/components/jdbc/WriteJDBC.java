@@ -181,7 +181,8 @@ import com.jpaulmorrison.fbp.core.engine.Packet;
 							}
 														
 							sqlInsert += cma + col;
-							sqlValues += cma + "\"" + field.get(o).toString() + "\"";
+							Object o2 = field.get(o);
+							sqlValues += cma + "\"" + o2 /*.toString() */ + "\"";
 							cma = ",";						 
 					}
 					sqlInsert += ")";
