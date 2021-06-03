@@ -32,7 +32,7 @@ apply plugin: 'java-library'
    
 }
 
-version = '4.1.11'
+version = '4.1.12'
 
 group = 'com.jpaulmorrison'
 
@@ -135,7 +135,7 @@ description = "Create default maven directory structure"
         
             groupId = 'com.jpaulmorrison'
             artifactId = 'javafbp'       
-            version = '4.1.11'
+           version = project.version
            
             from components.java
            

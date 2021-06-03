@@ -15,25 +15,32 @@
  * License along with this library; if not, see the GNU Library General Public License v3
  * at https://www.gnu.org/licenses/lgpl-3.0.en.html for more details.
  */
-package com.jpaulmorrison.fbp.core.engine;
+
+package com.jpaulmorrison.fbp.resourcekit.examples.networks;
 
 
-public final class VersionAndTimestamp {
-	
-	/**
-	 * This class is simply used to record the version number and timestamp of the last update
-	 *   
-	 */
 
-  private static String version = "JavaFBP - version 4.1.12";
 
-  private static String date = "June 3, 2021";
+import com.jpaulmorrison.fbp.core.components.httpurl.LoadURL;
+import com.jpaulmorrison.fbp.core.components.misc.WriteToConsole;
+import com.jpaulmorrison.fbp.core.engine.Network;
 
-  static String getVersion() {
-    return version;
+/**
+ * Read from URL; write to the console 
+ *
+ */
+
+
+public class ReadHTML extends Network {
+
+  @Override
+  protected void define() {
+   connect(component("Load URL", LoadURL.class), port("OUT"), component("Write", WriteToConsole.class), port("IN"), 1);
+   initialize("https://github.com/jpaulm/javafbp/blob/master/README.md", component("Load URL"), port("SOURCE"));
+
   }
 
-  static String getDate() {
-    return date;
+  public static void main(final String[] argv) throws Exception {
+    new ReadHTML().go();
   }
 }
