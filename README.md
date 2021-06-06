@@ -46,6 +46,8 @@ Note: the **core** level was added in the last repackaging of JavaFBP.
 
 Two components are available for reading and writing MySQL tables, respectively: `ReadJDBC` and `WriteJDBC`, in `core.components.jdbc`.  These dynamically load the most recent MySQL jar file, and use reflection to execute SQL services.
 
+If you are looking for an application using these components, it can be found in the [FBP-ETL](https://github.com/jpaulm/fbp-etl) repository. This application of course uses the JavaFBP jar file as a dependency.
+
 If you get a message saying "No suitable driver found", try restarting the MySQL service in `services.msc`.
  
 ## JavaFBP-WebSockets
