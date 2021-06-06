@@ -182,7 +182,7 @@ Care must be taken if combining `LoadBalance` (with substreams) and `SubstreamSe
 ## Tracing and other options
  
 
-To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` in the user directory to `true`:
+To trace JavaFBP services and/or lock usage, set the appropriate parameter(s) in `JavaFBPProperties.xml` in the `<user>` directory to `true`:
 
 * `tracing` 
 * `tracelocks`
