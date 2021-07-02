@@ -1,0 +1,23 @@
+{
+  "name": "javafbps",
+  "version": "4.1.12",
+  "description": "JavaFBP",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpaulm/javafbp.git"
+  },
+  "keywords": [
+    "fbp",
+    "flow-based-programming"
+  ],
+  "author": "J. Paul Morrison",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpaulm/javafbp/issues"
+  },
+  "homepage": "https://github.com/jpaulm/javafbp",
+  "dependencies": {
+    "snyk": "^1.425.4"
+  },
+   "snyk": true
+}

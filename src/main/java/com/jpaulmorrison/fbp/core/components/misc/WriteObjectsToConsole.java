@@ -2,7 +2,11 @@
 package com.jpaulmorrison.fbp.core.components.misc;
 
 	import java.lang.reflect.Field;
-    import com.jpaulmorrison.fbp.core.engine.Component;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.jpaulmorrison.fbp.core.engine.Component;
 	import com.jpaulmorrison.fbp.core.engine.ComponentDescription;
 	import com.jpaulmorrison.fbp.core.engine.InPort;
 	import com.jpaulmorrison.fbp.core.engine.InputPort;
@@ -56,10 +60,13 @@ package com.jpaulmorrison.fbp.core.components.misc;
 		  String str = "";
 		  String delim = "";
 		  Object value = null;
-		  str = o.getClass().getName() + ": {";
-		  for (Field field : o.getClass().getDeclaredFields()) {
+		  Class cls = o.getClass();
+		  str = cls.getName() + ": {";
+		  //for (Field field : cls.getDeclaredFields()) {
+		  for (Field field : getAllModelFields(cls)) {
 			    field.setAccessible(true); // ???
-			    
+			    if (field.getName().equals("this$0"))
+			    	continue;
 				try {
 					value = field.get(o);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -75,6 +82,17 @@ package com.jpaulmorrison.fbp.core.components.misc;
 		  str += "}";
 		  System.out.println(str);
 	  }
+	  
+	  // Thanks, https://stackoverflow.com/users/755804/18446744073709551615 !
+	  
+	  public static List<Field> getAllModelFields(Class aClass) {
+		    List<Field> fields = new ArrayList<>();
+		    do {
+		        Collections.addAll(fields, aClass.getDeclaredFields());
+		        aClass = aClass.getSuperclass();
+		    } while (aClass != null);
+		    return fields;
+		}
 	  
 	  @Override
 	  protected void openPorts() {

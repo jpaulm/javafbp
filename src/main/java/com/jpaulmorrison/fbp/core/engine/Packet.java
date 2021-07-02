@@ -65,6 +65,7 @@ static public final int OPEN = 1;
   }
 
   @SuppressWarnings("unchecked")
+protected
   Packet(final Object newContent, final Thread newOwner) {
     content = (T) newContent;
     setOwner(newOwner);

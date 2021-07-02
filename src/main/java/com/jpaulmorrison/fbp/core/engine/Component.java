@@ -57,7 +57,7 @@ public abstract class Component extends Thread {
    * This is a stack which is made available to each component. 
    */
 
-  private final Stack<Packet> stack = new Stack<Packet>();
+  private final Stack<Packet<Object>> stack = new Stack<Packet<Object>>();
 
   // This is the automatic input port named "*IN"
   private InputPort autoInput;
@@ -85,7 +85,7 @@ public abstract class Component extends Thread {
 
   //  static Network network;
 
-  protected Class type;
+  protected Class<?> type;
 
   private boolean mustrun = false; // set by MustRun annotation
 

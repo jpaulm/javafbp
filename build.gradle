@@ -62,7 +62,7 @@ repositories {
 
 dependencies { 	
 	compileOnly 'com.google.code.gson:gson:2.8.6'
-	compileOnly 'mysql:mysql-connector-java:8.0.22'  
+//	compileOnly 'mysql:mysql-connector-java:8.0.22'  
  }  
 	
 java {       

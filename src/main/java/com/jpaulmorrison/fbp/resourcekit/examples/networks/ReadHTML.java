@@ -22,7 +22,8 @@ package com.jpaulmorrison.fbp.resourcekit.examples.networks;
 
 
 import com.jpaulmorrison.fbp.core.components.httpurl.LoadURL;
-import com.jpaulmorrison.fbp.core.components.misc.WriteToConsole;
+import com.jpaulmorrison.fbp.core.components.misc.WriteObjectsToConsole;
+import com.jpaulmorrison.fbp.core.components.parsexml.ParseXML;
 import com.jpaulmorrison.fbp.core.engine.Network;
 
 /**
@@ -35,8 +36,9 @@ public class ReadHTML extends Network {
 
   @Override
   protected void define() {
-   connect(component("Load URL", LoadURL.class), port("OUT"), component("Write", WriteToConsole.class), port("IN"), 1);
-   initialize("https://github.com/jpaulm/javafbp/blob/master/README.md", component("Load URL"), port("SOURCE"));
+   connect(component("Load URL", LoadURL.class), port("OUT"), component("Parse", ParseXML.class), port("IN"), 1);
+   initialize("https://jpaulm.github.io/fbp/fbp-inspired-vs-real-fbp.html", component("Load URL"), port("SOURCE"));
+   connect(component("Parse"), port("OUT"), component("Write", WriteObjectsToConsole.class), port("IN"), 1);
 
   }
 

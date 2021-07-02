@@ -12,6 +12,7 @@
       <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
     </license>
   </licenses>
+   
   <dependencies>
   	 	<dependency>
   			<groupId>com.google.code.gson</groupId>
@@ -19,11 +20,15 @@
   			<version>2.8.7</version>
   			<scope>compile</scope>
   	</dependency>
+  	
+  	<!-- 
   	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 		<version>8.0.25</version>
 		<scope>provided</scope>
 	</dependency>
+	-->
   </dependencies>
+  
 </project>
