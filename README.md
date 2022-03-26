@@ -114,7 +114,7 @@ where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**... 
 
 `Program class name` must be the fully qualified network name.  
 
-You must also make sure that `java` can find any class files that yor main line needs, by specifying the nwecssary jar files, and class directories using the `-cp/-classpath` parameter.
+You must also make sure that `java` can find any class files that your main line needs, by specifying the nwecssary jar files, and class directories using the `-cp/-classpath` parameter.
  
 Here is a test command you can run, using networks and components provided by the JavaFBP project:
 
