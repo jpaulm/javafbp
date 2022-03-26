@@ -56,20 +56,10 @@ public class Gate extends Component {
 
     System.out.println("got trigger");
 
-    Packet<?> rp = in.receive();
-    System.out.println("rp = '" + rp + "'");
-
-    if (rp == null) {
-      return;
+    Packet<?> rp;
+    while ((rp = in.receive()) != null) {
+      out.send(rp);
     }
-    // in.close();
-
-    // pass output
-    Object o = rp.getContent();
-    Packet<?> p = create(o);
-    out.send(p);
-    drop(rp);
-    // }
   }
 
   @Override
