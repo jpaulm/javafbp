@@ -6,14 +6,10 @@ buildscript {
     }
      
     dependencies {
-<<<<<<< Updated upstream
+
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"      
-        //classpath 'com.github.rholder:gradle-one-jar:1.0.4'          
-     
-=======
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"      
-        //classpath 'com.github.rholder:gradle-one-jar:1.0.4'              
->>>>>>> Stashed changes
+        //classpath 'com.github.rholder:gradle-one-jar:1.0.4'  
+
     }
 }
 

@@ -59,8 +59,9 @@ public class Gate extends Component {
     Packet<?> rp;
     while ((rp = in.receive()) != null) {
         out.send(rp);
-    }    
 
+    }  
+  
   }
 
   @Override
