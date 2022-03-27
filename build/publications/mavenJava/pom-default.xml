@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jpaulmorrison</groupId>
   <artifactId>javafbp</artifactId>
-  <version>4.1.12</version>
+  <version>4.1.13</version>
   <name>JavaFBP</name>
   <description>Java implementation of Flow-Based Programming</description>
   <url>https://github.com/jpaulm/javafbp</url>
