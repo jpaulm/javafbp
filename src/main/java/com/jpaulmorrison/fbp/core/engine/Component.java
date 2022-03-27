@@ -354,9 +354,9 @@ public abstract class Component extends Thread {
    * @param s
    *            java.lang.String
    */
-  public Packet create(final int newType, final String s) {
+  public Packet<?> create(final int newType, final String s) {
     network.creates.getAndIncrement();
-    return new Packet(newType, s, this);
+    return new Packet<Object>(newType, s, this);
   }
 
   /**
@@ -366,9 +366,9 @@ public abstract class Component extends Thread {
    * @param o
    *            java.lang.Object
    */
-  public Packet create(final Object o) {
+  public Packet<?> create(final Object o) {
     network.creates.getAndIncrement();
-    return new Packet(o, this);
+    return new Packet<Object>(o, this);
   }
 
   /**
@@ -377,15 +377,15 @@ public abstract class Component extends Thread {
    * ideally, one should not use this knowledge, but bright people probably
    * will!
    */
-  protected void drop(final Packet p) {
-    Packet q = p;
+  protected void drop(final Packet<?> np) {
+    Packet<?> q = np;
     network.drops.getAndIncrement();
 
-    if (p == null) {
+    if (np == null) {
       FlowError.complain("Null packet reference in 'drop' method call: " + getName());
     }
 
-    if (this != p.owner) {
+    if (this != np.owner) {
       FlowError.complain("Packet not owned by current component, or component has terminated");
     }
 
@@ -396,7 +396,7 @@ public abstract class Component extends Thread {
   /**
    * Push Packet onto stack and clear owner reference. 
    */
-  public void push(final Packet p) {
+  public void push(final Packet<Object> p) {
     if (p == null) {
       FlowError.complain("Null packet reference in 'push' method call: " + getName());
     }
@@ -412,13 +412,13 @@ public abstract class Component extends Thread {
   /**
    * Pop Packet off stack or return null if empty. 
    */
-  public Packet pop() {
+  public Packet<?> pop() {
 
     if (stack.size() == 0) {
       return null;
     }
 
-    Packet p = stack.pop();
+    Packet<Object> p = stack.pop();
     p.setOwner(this);
     return p;
   }
@@ -430,16 +430,16 @@ public abstract class Component extends Thread {
    */
 
   @SuppressWarnings("unchecked")
-  public void attach(final Packet pkt, final String name, final Packet subordinate) {
+  public void attach(final Packet<?> pkt, final String name, final Packet<?> subordinate) {
     if (subordinate == null) {
       FlowError.complain("Null packet reference in 'attach' method call: " + Thread.currentThread().getName());
     }
-    Packet p = pkt;
+    Packet<Object> p = (Packet<Object>) pkt;
     while (p.owner instanceof Packet) {
       if (p == subordinate) {
         FlowError.complain("Loop in tree structure");
       }
-      p = (Packet) p.owner;
+      p = (Packet<Object>) p.owner;
     }
     if (p == subordinate) {
       FlowError.complain("Loop in tree structure");
@@ -467,11 +467,11 @@ public abstract class Component extends Thread {
   /** Detach Packet from named chain
    */
 
-  public void detach(final Packet pkt, final String name, final Packet subordinate) {
+  public void detach(final Packet<?> pkt, final String name, final Packet<?> subordinate) {
     if (subordinate == null) {
       FlowError.complain("Null packet reference in 'detach' method call: " + Thread.currentThread().getName());
     }
-    Packet root = pkt.getRoot();
+    Packet<Object> root = (Packet<Object>) ((Packet<Object>) pkt).getRoot();
     if (root.owner != this) {
       FlowError.complain("Packet not owned (directly or indirectly) by current component");
     }
@@ -1121,6 +1121,7 @@ public abstract class Component extends Thread {
         mother.signalError(e);
       }
       closeAllPorts();
+      e.printStackTrace(System.out);
       throw new ThreadDeath();
 
     } catch (ThreadDeath e) {

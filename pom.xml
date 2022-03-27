@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jpaulmorrison</groupId>
   <artifactId>javafbp</artifactId>
-  <version>4.1.12</version>
+  <version>4.1.13</version>
   <inceptionYear>2016</inceptionYear>
   <licenses>
     <license>
@@ -19,16 +19,8 @@
   			<artifactId>gson</artifactId>
   			<version>2.9.0</version>
   			<scope>compile</scope>
-  	</dependency>
+  	</dependency>  	
   	
-  	<!-- 
-  	<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>8.0.25</version>
-		<scope>provided</scope>
-	</dependency>
-	-->
   </dependencies>
   
 </project>

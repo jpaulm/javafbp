@@ -51,15 +51,16 @@ public class Gate extends Component {
     if (tp == null) {
       return;
     }
-    // trigger.close();
+    trigger.close();
     drop(tp);
 
-    System.out.println("got trigger");
+    //System.out.println("got trigger");
 
     Packet<?> rp;
     while ((rp = in.receive()) != null) {
-      out.send(rp);
-    }
+        out.send(rp);
+    }    
+
   }
 
   @Override
