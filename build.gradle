@@ -25,7 +25,7 @@ allprojects {
     apply plugin: 'java-library'   
 }
 
-version = '4.1.13'
+version = '4.1.14'
 
 group = 'com.jpaulmorrison'
 

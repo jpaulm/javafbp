@@ -67,7 +67,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\javafbp-4.1.13.jar
+set CLASSPATH=%APP_HOME%\lib\javafbp-4.1.14.jar
 
 
 @rem Execute javafbp
