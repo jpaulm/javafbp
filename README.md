@@ -116,7 +116,7 @@ where `x.y.z` is the version of the JavaFBP jar file.  Note the final **;.**... 
 
 You must also make sure that `java` can find any class files that your main line needs, by specifying the necessary jar files, and class directories using the `-cp/-classpath` parameter.
  
-Here is a test command you can run (*changing x.y.z to the current version number*, of course), using networks and components provided by the JavaFBP project:
+Here is a test command you can run (*changing x.y.z to the current version number*, of course), using networks and components provided by the JavaFBP project.  Note that the `bin` folder is not uploaded to GitHub, so you will have to compile any networks to be tested to the `bin` folder (or add them to your own jar file):
 
 Do a `cd` command to your downloaded JavaFBP project, then enter
  
