@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/jpaulm/javafbp",
   "dependencies": {
-    "snyk": "1.1004.0"
+    "snyk": "1.1005.0"
   },
    "snyk": true
 }
