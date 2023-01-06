@@ -55,7 +55,7 @@ repositories {
 
 
 dependencies { 	
-	compileOnly 'com.google.code.gson:gson:2.10'
+	compileOnly 'com.google.code.gson:gson:2.10.1'
 //	compileOnly 'mysql:mysql-connector-java:8.0.22'  
  }  
 	
